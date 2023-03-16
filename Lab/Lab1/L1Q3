@@ -63,21 +63,21 @@ public class Main {
         Acc acc = new Acc();
         acc.setId(1122);
         acc.setBalance(20000.00);
-        acc.getBalance();
+        System.out.println("Balance: " + acc.getBalance()); // Print the balance
         acc.setAnnualInterestRate(4.5);
         acc.withdraw(2500);
-        acc.getBalance();
+        System.out.println("Balance after withdrawal: " + acc.getBalance()); // Print the balance after withdrawal
         acc.deposit(3000);
-        acc.getBalance();
-        acc.getMonthlyInterest();
-        acc.getDateCreated();
-
+        System.out.println("Balance after deposit: " + acc.getBalance()); // Print the balance after deposit
+        System.out.println("Monthly interest: " + acc.getMonthlyInterest()); // Print the monthly interest
+        System.out.println("Date created: " + acc.getDateCreated()); // Print the date created
     }
 }
-
 /*
 Problem faced:
 Result of acc.getBalance() is ignored;
 Result of acc.getDateCreated() is ignored;
 no output
+
+>> USE system.out.println(acc.getBalanced());
 */
