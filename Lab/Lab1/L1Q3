@@ -1,0 +1,83 @@
+import java.util.Date;
+
+class Acc {
+        private int id;
+        private double balance;
+        private double annualInterestRate;
+        private Date dateCreated;
+
+        Acc(){
+            this.id = 0;
+            this.balance = 0;
+            this.annualInterestRate = 0;
+            this.dateCreated = new Date(); //#
+        }
+
+        int getId(){
+            return this.id;
+        }
+
+        double getBalance(){
+            return this.balance;
+        }
+
+        double getAnnualInterestRate(){
+            return this.annualInterestRate;
+        }
+
+        void setId(int id){
+            this.id = id;
+        }
+
+        void setBalance(double balance){
+            this.balance = balance;
+        }
+
+        void setAnnualInterestRate(double annualInterestRate){
+            this.annualInterestRate = annualInterestRate;
+        }
+
+        public Date getDateCreated() {
+            return dateCreated;
+        }
+
+        double getMonthlyInterestRate(){
+            return this.annualInterestRate/12;
+        }
+
+        double getMonthlyInterest(){
+            return this.balance * (this.annualInterestRate/12);
+        }
+
+        void withdraw(double withdraw){
+            this.balance -= withdraw;
+        }
+
+        void deposit(double deposit){
+            this.balance += deposit;
+        }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Acc acc = new Acc();
+        acc.setId(1122);
+        acc.setBalance(20000.00);
+        acc.getBalance();
+        acc.setAnnualInterestRate(4.5);
+        acc.withdraw(2500);
+        acc.getBalance();
+        acc.deposit(3000);
+        acc.getBalance();
+        acc.getMonthlyInterest();
+        acc.getDateCreated();
+
+    }
+}
+
+/*
+Problem faced:
+Result of acc.getBalance() is ignored;
+Result of acc.getDateCreated() is ignored;
+no output
+*/
