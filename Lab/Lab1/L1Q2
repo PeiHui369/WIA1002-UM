@@ -1,0 +1,85 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Main{
+    public static void main (String[] args) throws FileNotFoundException {
+        Scanner sc = new Scanner(new FileInputStream("C:\\Users\\User\\Documents\\text1.txt"));
+        int wordCount = 0;
+        while(sc.hasNextLine()){
+            String line = sc.nextLine();
+            String[] lineArr = line.split(",");
+            for(String word:lineArr){
+                wordCount++;
+                System.out.print(word);
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Main{
+    public static void main (String[] args) throws FileNotFoundException {
+        Scanner sc = new Scanner(new FileInputStream("C:\\Users\\User\\Documents\\text2.txt"));
+        int wordCount = 0;
+        while(sc.hasNextLine()){
+            String line = sc.nextLine();
+            String[] lineArr = line.split(",");
+            for(String word:lineArr){
+                wordCount++;
+                System.out.print(word);
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Main{
+    public static void main (String[] args) throws FileNotFoundException {
+        Scanner sc = new Scanner(new FileInputStream("C:\\Users\\User\\Documents\\text3.txt"));
+        int wordCount = 0;
+        while(sc.hasNextLine()){
+            String line = sc.nextLine();
+            String[] lineArr = line.split(";");
+            for(String word:lineArr){
+                wordCount++;
+                System.out.print(word);
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Main{
+    public static void main (String[] args) throws FileNotFoundException {
+        Scanner sc = new Scanner(new FileInputStream("C:\\Users\\User\\Documents\\text4.txt"));
+        int wordCount = 0;
+        while(sc.hasNextLine()){
+            String line = sc.nextLine();
+            String[] lineArr = line.split("[0-9]+");
+            for(String word:lineArr){
+                wordCount++;
+                System.out.print(word);
+            }
+            System.out.println();
+        }
+    }
+}
