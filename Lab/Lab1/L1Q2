@@ -10,11 +10,12 @@ public class Main{
             String line = sc.nextLine();
             String[] lineArr = line.split(",");
             for(String word:lineArr){
-                wordCount++;
+                wordCount+=word.length();
                 System.out.print(word);
             }
             System.out.println();
         }
+        System.out.println(wordCount);
     }
 }
 
@@ -32,11 +33,12 @@ public class Main{
             String line = sc.nextLine();
             String[] lineArr = line.split(",");
             for(String word:lineArr){
-                wordCount++;
+                wordCount+=word.length();
                 System.out.print(word);
             }
             System.out.println();
         }
+        System.out.println(wordCount);
     }
 }
 
@@ -54,11 +56,12 @@ public class Main{
             String line = sc.nextLine();
             String[] lineArr = line.split(";");
             for(String word:lineArr){
-                wordCount++;
+                wordCount+=word.length();
                 System.out.print(word);
             }
             System.out.println();
         }
+        System.out.println(wordCount);
     }
 }
 
@@ -76,10 +79,11 @@ public class Main{
             String line = sc.nextLine();
             String[] lineArr = line.split("[0-9]+");
             for(String word:lineArr){
-                wordCount++;
+                wordCount+=word.length();
                 System.out.print(word);
             }
             System.out.println();
         }
+        System.out.println(wordCount);
     }
 }
