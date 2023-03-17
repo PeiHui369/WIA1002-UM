@@ -30,3 +30,17 @@ public class MinMaxTwoDArray{
         return max;
     }
 }
+
+/*
+The method signature public static <E extends Comparable<E>> E min(E[][] list) is a generic method that returns the minimum element in a two-dimensional array of type E. The E parameter extends the Comparable<E> interface, which means that the elements in the array must be comparable to determine the minimum element.
+
+Here's how the method works:
+
+It takes a two-dimensional array list of type E.
+It initializes a variable min of type E to the first element in the array.
+It loops through each element in the array using nested loops.
+For each element in the array, it compares it to the current minimum using the compareTo method.
+If the element is less than the current minimum, it updates the minimum to the new element.
+After looping through all elements, it returns the minimum element.
+Here's an example of how to use the min method with a two-dimensional array of integers:
+*/
