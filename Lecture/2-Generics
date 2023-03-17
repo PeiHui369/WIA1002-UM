@@ -98,3 +98,157 @@ public class GenericsExample {
         cats.add(new Cat());
         Cat myCat = cats.get(0); //Have state in <Cat>, therefore no need (Cat) to cast
         
+=====================================================================================
+@ Extends Class & Interface
+
+<Animal.java>
+public class Animal {
+    String name;
+    int age;
+
+    public void eat(){
+        System.out.println("Munch munch munch");
+    }
+}
+
+
+<Printer.java>
+
+//Generics: ability for one class that is flexible for many many different types
+
+public class Printer <T extends Animal>{ //Bounded Generics: extends CLASS/INTERFACE & INTERFACE2 (Only 1 class, put class first before interface)
+    //T will be some type of Animal class
+    //Any method in Animal class is available
+    T thingToPrint;
+
+    public Printer(T thingToPrint){
+        this.thingToPrint = thingToPrint;
+    }
+
+    public void print(){
+        thingToPrint.eat();
+        System.out.println(thingToPrint);
+    }
+}
+
+
+<GenericsExample.java>
+import java.util.ArrayList;
+
+public class GenericsExample {
+    public static void main(String[] args){
+        shout("John");
+        shout(57);
+        shout(new Cat());
+    }
+
+    private static <T> void shout (T thingToShout){
+        System.out.println(thingToShout + "!!!!!");
+    }
+}
+
+
+
+===================================================================================
+@ Pass in multiple type
+
+import java.util.ArrayList;
+
+public class GenericsExample {
+    public static void main(String[] args){
+        shout("John", 74);
+    }
+
+    private static <T, V> void shout (T thingToShout, V otherThingToShout){
+        System.out.println(thingToShout + "!!!!!");
+        System.out.println(otherThingToShout + "!!!!!");
+    }
+}
+
+
+
+=====================================================================================
+@ Multiple Generic Type
+
+public class Printer <T, V>{ 
+    T thingToPrint;
+    V otherThing;
+
+======================================================================================
+@ Return Specified Type
+
+    private static <T, V> T shout (T thingToShout, V otherThingToShout){
+        System.out.println(thingToShout + "!!!!!");
+        System.out.println(otherThingToShout + "!!!!!");
+        return thingToShout;
+    }
+    
+=======================================================================================
+@ Wild Card <?> : Create a method that can take in a list that holds any type of objects and be able to print out that list
+
+-----
+Error:
+import java.util.ArrayList;
+import java.util.List;
+
+public class GenericsExample {
+    public static void main(String[] args){
+        List<Integer> intList = new ArrayList<>();
+        intList.add(3);
+        printList(intList);
+    }
+
+    private static void printList(List<Object> myList){
+        System.out.println();
+    }
+}
+
+// Integer is a subclass of Object
+// A list of Integer is not a subclass of a list of Object
+---
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class GenericsExample {
+    public static void main(String[] args){
+        List<Integer> intList = new ArrayList<>();
+        intList.add(3);
+        printList(intList);
+
+        List<Cat> catList = new ArrayList<>();
+        catList.add(new Cat());
+        printList(catList);
+    }
+
+
+    private static void printList(List<?> myList){ //When don't know what exactly the generic type is
+        System.out.println();
+    }
+}
+
+
+---
+Error:
+import java.util.ArrayList;
+import java.util.List;
+
+public class GenericsExample {
+    public static void main(String[] args){
+        List<Integer> intList = new ArrayList<>();
+        intList.add(3);
+        printList(intList); //Error as Integer does not extends Animal
+
+        List<Cat> catList = new ArrayList<>();
+        catList.add(new Cat());
+        printList(catList);
+    }
+
+
+    private static void printList(List<? extends Animal> myList){ 
+        System.out.println();
+    }
+}
+---
+
+=======================================================================================
