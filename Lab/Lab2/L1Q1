@@ -1,0 +1,33 @@
+//1. Create a generic class called MyGeneric that accepts one parameter. Declare a variable called e for the type parameter. Create a no-arg constructor. Create a constructor that accepts one generic parameter. Create a setter and getter method for the generic type. Create a test program that creates two instances of generic class of type String called strObj and of type Integer called intObj. Set a value for each of these objects. Display these values using the getter method.
+
+<MyGeneric.java>
+public class MyGeneric <E>{
+    E e;
+
+    MyGeneric(){}
+
+    MyGeneric(E e){
+        this.e = e;
+    }
+
+    public E getter(){
+        return this.e;
+    }
+
+    public void setter(E e){
+        this.e = e;
+    }
+}
+
+
+<Test.java>
+public class Test {
+    public static void main (String[] args){
+    MyGeneric<String> strObj = new MyGeneric<>();
+    MyGeneric<Integer> intObj = new MyGeneric<>();
+    strObj.setter("Hi");
+    intObj.setter(6);
+    System.out.println(strObj.getter());
+    System.out.println(intObj.getter());
+}
+}
