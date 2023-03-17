@@ -1,0 +1,100 @@
+<IntegerPrinter.java>
+public class IntegerPrinter {
+    Integer thingToPrint;
+
+    public IntegerPrinter(Integer thingToPrint){
+        this.thingToPrint = thingToPrint;
+    }
+
+    public void print(){
+        System.out.println(thingToPrint);
+    }
+}
+
+/*
+If want to do for other type, e.g. Double, float, String, then need to copy all to a new class and change the word "Integer"
+ public class DoublePrinter {
+    Double thingToPrint;
+
+    public DoublePrinter(Double thingToPrint){
+        this.thingToPrint = thingToPrint;
+    }
+
+    public void print(){
+        System.out.println(thingToPrint);
+    }
+}
+ */
+
+<GenericsExample.java>
+public class GenericsExample {
+    public static void main(String[] args){
+        IntegerPrinter printer = new IntegerPrinter(23);
+        printer.print();
+    }
+}
+
+// Output: 23
+
+=====================================================================================
+@ Using Generics
+<Printer.java>
+
+//Generics: ability for one class that is flexible for many many different types
+
+public class Printer <T>{ //<whateverYouWantToRepresentTypeOfThing>
+    T thingToPrint;
+
+    public Printer(T thingToPrint){
+        this.thingToPrint = thingToPrint;
+    }
+
+    public void print(){
+        System.out.println(thingToPrint);
+    }
+}
+
+<GenericsExample.java>
+public class GenericsExample {
+    public static void main(String[] args){
+        Printer<Integer> printer = new Printer<>(23); //Integer to be used as T type
+        printer.print();
+
+        //To create for Double type
+        Printer<Double> doublePrinter = new Printer<>(33.5);
+        doublePrinter.print();
+    }
+}
+
+//Generics don't work with primitive type: int, double, etc.
+//Generics use wrapper class
+
+====================================================================================
+@ Error
+        ArrayList<Cat> cats = new ArrayList<>();
+        cats.add(new Cat());
+        cats.add(new Dog()); //Error, can only pass in type Cat
+
+        /*Error: Specify Double, can only deal with Double
+        Printer<Double> doublePrinter = new Printer<>("Hey, there!");
+        doublePrinter.print();
+         */
+
+        /*To create an ArrayList that can print any type --> Type safety issue
+        ArrayList<Object> cats = new ArrayList<>();
+
+        cats.add(new Cat());
+        Cat myCat = (Cat)cats.get(0); //Use (Cat) to cast Object to Cat
+
+        cats.add(new Dog());
+        Cat myCat = (Cat)cats.get(0); //Error as it was actually a Dog
+    */
+    
+========================================================================================
+@ Generics:
+        // ability to create classes that can accommodate tons of different types
+        // & the structure and the type safety of knowing exactly which type you're using that class with
+        ArrayList<Cat> cats = new ArrayList<>();
+        cats.add(new Cat());
+        Cat myCat = cats.get(0); //Have state in <Cat>, therefore no need (Cat) to cast
+        
