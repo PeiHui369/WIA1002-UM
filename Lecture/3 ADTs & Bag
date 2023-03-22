@@ -1,0 +1,10 @@
+Bag
+getCurrentSize(): integer
+isEmpty(): boolean
+add(newEntry:T): boolean
+remove() : T
+remove(anEntry:T): boolean
+clear(): void
+getFrequencyOf(anEntry: T): integer
+contains(anEntry: T): boolean
+toArray(): T[]
