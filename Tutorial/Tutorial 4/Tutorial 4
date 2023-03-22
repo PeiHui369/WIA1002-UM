@@ -9,42 +9,61 @@ T4Q1a
         
 T4Q1b
 
-  +-----+      +-----+
-  | 'a' |      | 'z' |
-  +-----+      +-----+
-    node1        node2
-      |            |
-      v            v
-   +----+       +----+
-   |    |       |    |
-   +----+       +----+
+   head           tail
+    |              |
+    v              v
+  [a] -> null -> ... -> [z] -> null
         
 In this representation, the nodes node1 and node2 each contain a single character, 'a' and 'z' respectively. 
 The arrows indicate the references head and tail that point to node1 and node2, respectively. 
 The empty boxes below the nodes represent the remainder of the node structure, which is not shown in this simplified representation.
 
 T4Q1c
-//Create node1 and node2
-Node<Character> node1 = new Node<>('a');
-Node<Character> node2 = new Node<>('z');
-
 //Set node1's next reference to node2
 node1.next = node2;
 
-//Set head and tail to point to node1 & node2 respectively
-Node<Character> head = node1;
-Node<Character> tail = node2;
-
-  +-----+      +-----+
-  | 'a' |      | 'z' |
-  +-----+      +-----+
-    node1        node2
-      |            |
-      v            v
-   +----+       +----+
-   |    |       |    |
-   +----+       +----+
+ head           tail
+    |              |
+    v              v
+  [a] -> [z] -> null -> ... -> null
 
 T4Q1d
-Node<Character> firstNode = new Node<>();
+Node<Character> firstNode = new Node<>('f');
+firstNode.next() = node1;
+head = firstNode;
 
+head           tail
+    |              |
+    v              v
+  [f] -> [a] -> [z] -> null -> ... -> null
+  
+
+T4Q1e
+If we have no information about the status of the linked list, we need to consider the following conditions before adding the firstNode at the beginning of the list:
+If the linked list is empty, then firstNode becomes the head of the list.
+If the linked list is not empty, then we need to set the next reference of firstNode to point to the current head node, and then update the head reference to point to firstNode.
+
+T4Q1f
+1. Create a new node called firstNode
+2. If the linked list is empty:
+     1. Set head to firstNode
+3. If the linked list is not empty:
+     1. Set the next reference of firstNode to point to the current head node
+     2. Set head to firstNode
+
+T4Q1g
+Node<Character> firstNode = new Node<>('f');
+if(head == null){
+        head = firstNode;
+ }else{
+        firstNode.next = head;
+        head = firstNode;
+ }
+ //this code assumes that the head reference is already declared and initialized to null if the linked list is empty.
+
+T4Q1h
+Node.addLast('c')
+Node.add(3,d);
+Node.removeFirst;
+Node.removeLast;
+Node.remove(1);
