@@ -1,0 +1,80 @@
+T3Q1
+Class
+a. Instance Variables
+- Dispenser: numberOfItems, productCost
+- Cash Register: cashOnHand
+- Candy Machine : (4 Dispenser) candies, chips, gum, cookies (1 cash register) cashRegister
+
+b. Methods/Operations
+- Dispenser: sold(int num)
+- Cash Register: cashIn(double price)
+- Candy Machine : setStock(int num), getStock(int num), getPrice(double price), setPrice(double price
+Dispenser: getCount, getProductCose, makeSale, setCost, setNumberOfItems
+Cash Register: acceptAmount, returnChange, getCashOnHand, setCashOnHand
+Candy Machine: showSelection, makeSelection
+
+c. UML Diagram
+Name
+-
+Instance Variable
+-
+Method
+
+[Candy Machine]
+- candy
+- chip
+- gum
+- cookie
+- cRegister
++showSelection()
++makeSelection()
+
+^                             ^
+|                             |
+[Dispenser]                   [CashRegister]
+- cost                        -cashOnHand
+- numberOfItems               +acceptAmount()
++getCount()                   +returnChange()
++getProductCost()             +getCashOnHand()
++makeSale()                   +setCashOnHand()
++setCost()
++setCashOnHand()
+
+T3Q2
+<BidInterface.java>
+public interface BidInterface {
+    //returns name of company making this bid
+    public String getName();
+
+    //returns description of airCond bid for
+    public String getDes();
+
+    //returns capacity bid's AC (Tons)
+    public int getCapacity_tons();
+
+    //returns seasonal efficiency
+    public int getEfficiency_seer();
+
+    //returns cost
+    public double getCost();
+
+    //returns cost of installing
+    public double getCostInstall();
+
+    //returns yearly cost operating
+    public double getCostOperating_year(double hoursOperated, double energyCost); //#need : cost = 12 * tons * energyCosr * hoursOperated / SEER
+}
+
+<BidCollectionInterface.java>
+public interface BidCollectionInterface {
+    //add bid to collection
+    public void addBid(String bidToAdd); //#parameter
+    public String bestYearlyCost(double averageHour, double energyCost); //#Parameter
+    public String bestInitialCost();
+    public void removeAllItems();
+    public int numOfItem();
+    public boolean isEmpty();
+}
+
+
+
