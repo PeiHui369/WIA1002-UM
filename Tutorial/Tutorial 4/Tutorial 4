@@ -61,9 +61,52 @@ if(head == null){
  }
  //this code assumes that the head reference is already declared and initialized to null if the linked list is empty.
 
-T4Q1h
+T4Q1h (?)
 Node.addLast('c')
 Node.add(3,d);
 Node.removeFirst;
 Node.removeLast;
 Node.remove(1);
+
+T4Q2
+public boolean contains(E e){
+       pointerB.next = pointerB;
+       
+       for(int i = 0 ; i>size; i++){
+        if(current.element = e){
+                return true;
+        }
+        
+        Node<E> pointerB = head;
+        return false;
+}
+
+name of the method: contains
+
+/*
+public boolean operationX(E e) {
+    Node<E> current = head;
+    
+    // Traverse the linked list until we find the element e or reach the end
+    while (current != null) {
+        if (current.element.equals(e)) {
+            // If we find the element e, return true to indicate success
+            return true;
+        }
+        current = current.next;
+    }
+    
+    // If we reach the end without finding e, return false to indicate failure
+    return false;
+}
+
+The method takes an element of type 'E' as an argument and returns a boolean value indicating whether the element is present in the linked list or not.
+Inside the method, we initialize a 'current' variable to the head of the linked list.
+We then traverse the linked list using a 'while' loop, checking each node's 'element' value to see if it matches the input element 'e'.
+If we find the element 'e', we return 'true' to indicate success.
+If we reach the end of the linked list without finding 'e', we return 'false' to indicate failure.
+The name of this method is 'operationX', but it is not a descriptive name. It would be better to give the method a name that reflects its functionality, such as 'contains' or 'search'.
+*/
+
+Q1h & Q3
+https://github.com/fyiernzy/UM-WIA1002/tree/main/Tutorial/Tutorial4
