@@ -1,0 +1,58 @@
+<Circle.java>
+
+public class Circle implements Comparable<Circle>{ //!type: circle
+
+    private double radius; //!access modifier: Private
+    public Circle(double radius){ //!access modifier: Public
+        this.radius = radius;
+    }
+
+    //Constructor, !Setter & getter
+    public double getRadius(){
+        return radius;
+    }
+
+    public void setRadius(double radius){
+        this.radius = radius;
+    }
+
+    //Have to override compareTo method as Circle is not a Wrapper Class
+    @Override
+    public int compareTo(Circle o) { //!type: Object -> Circle
+        return Double.compare(radius, o.radius); //###
+    }
+
+    @Override
+    public String toString(){
+        return "Radius of circle: " + radius;
+    }
+}
+
+<FindMax.java>
+public class FindMax {
+    public static void main (String[] args){
+        //!type: INTEGER, STRING
+        Integer[] arr1 = {1,2,3};
+        String[] arr2 = {"red","green","blue"};
+        /*
+        Circle circle1 = new Circle(3);
+        Circle circle2 = new Circle(2.9);
+        Circle circle3 = new Circle(5.9);
+         */
+        Circle[] arr3 = {new Circle(3), new Circle(2.9), new Circle(5.9)}; //#To create object & put in array
+
+        System.out.println(max(arr1));
+        System.out.println(max(arr2));
+        System.out.println(max(arr3));
+
+    }
+    public static <E extends Comparable<E>> E max (E[] list){
+        E maximum = list[0]; //Initialize as first ele
+        for(int i = 1; i<list.length; i++){
+            if(list[i].compareTo(maximum)>0){ //compareTo method
+                maximum = list[i];
+            }
+        }
+        return maximum;
+    }
+}
