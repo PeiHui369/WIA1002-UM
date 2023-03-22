@@ -1,0 +1,25 @@
+public class Container<T> {
+    Container(){};
+
+    private T t;
+
+    void add(T add){
+        this.t = add;
+    }
+
+    public <T> T retrieve(){
+        return (T) t;
+    }
+
+    public static void main(String[] args){
+        Container<Integer> forInt = new Container<>();
+        Container<String> forString = new Container<>();
+        forInt.add(50);
+        forString.add("Java");
+        
+        //Must use String.valueOf?
+        System.out.println(String.valueOf(forInt.retrieve()));
+        System.out.println(String.valueOf(forString.retrieve()));
+        
+    }
+}
