@@ -1,0 +1,30 @@
+@ My (F)
+public class Node<E>{
+    E element;
+    Node<E> next;
+
+    Node(E element, Node<E> next){
+        this.element = element;
+        this.next = next;
+    }
+}
+
+
+@AI
+public class Node<E> {
+    E element;
+    Node<E> next;
+
+    public Node() {
+        this(null, null);
+    }
+
+    public Node(E element, Node<E> next) {
+        this.element = element;
+        this.next = next;
+    }
+}
+
+
+The 'Node' class has two instance variables: 'element' of type 'E' to hold the data stored in the node, and 'next' of type 'Node<E>' to point to the next node in the linked list.
+The class has two constructors. The first constructor is the default constructor that initializes the 'element' and 'next' variables to null. The second constructor takes an 'element' and a 'next' reference as arguments and initializes the instance variables with these values.
