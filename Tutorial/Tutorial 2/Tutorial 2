@@ -1,0 +1,70 @@
+2.
+class MyArray{
+  public static void main (String[] args){
+    Integer[] num = {1,2,3,4,5};
+    String[] name = {"Jane", "Tom", "Bob"};
+    Character[] alphabet = {
+  }
+  
+  public <T> void listAll (T[] arr){
+    for(int i = 0; i<arr.length; i++){
+      System.out.println(arr[i]);
+    }
+  }
+}
+
+3. What is a raw type? Why is a raw type unsafe? Why is the raw type allowed in Java?
+Raw type is a generic class or interface used without specifying a concrete type or without a type parameter.
+Raw types bypass generic type checks, deferring the catch of unsafe code to runtime.
+
+4. What is erasure? Why are Java generics implements using erasure?
+Type erasure is a process in which compiler replaces a generic parameter with actual class or bridge method. 
+In type erasure, compiler ensures that no extra classes are created and there is no runtime overhead.
+
+5.
+public class Duo <A,B>{
+  A first;
+  B second;
+  
+  Duo(A a, B b){
+    this.first = a;
+    this.second = b;
+  }
+}
+
+6. 
+public class Duo <A,B>{
+  A first;
+  B second;
+  
+  Duo(A a, B b){
+    this.first = a;
+    this.second = b;
+  }
+}
+
+public class Main{
+  public static void main(String[] args){
+    Duo<String,Integer> sideShape = new Duo<>();
+    Duo<Double,Double> points = new Duo<>()
+  }
+}
+
+7. 
+public static <?> void allTransportation(ArrayList<?> a, ArrayList<?> b){}
+
+8. 
+public static <?> void allTransportation(ArrayList<?> a){
+  System.out.println(Arrays.deepToString(a.toArray()));
+}
+//System.out.println(a); ?
+
+9. When the compiler encounters a generic class, interface, or method with an unbound type
+parameter, such as <T> or <E>, it replaces all occurrences of the type parameter with what
+type?
+Object
+
+10. When the compiler encounters a generic class, interface, or method with a bound type
+parameter, such as <T extends Number> or <E extends Comparable>, it replaces all
+occurrences of the type parameter with what type?
+
