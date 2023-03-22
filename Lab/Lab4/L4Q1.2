@@ -1,0 +1,29 @@
+@ MF
+public class MyLinkedList<E> { //#LinkedList with Generic Class
+    //PRIVATE instance variable
+    private Node<E> head;
+    private Node<E> tail;
+
+    public MyLinkedList(){} //PUBLIC default constructor
+
+}
+
+//Need to defined Node class separately
+
+@ AI
+public class MyLinkedList<E> {
+    private Node<E> head;
+    private Node<E> tail;
+
+    public MyLinkedList() {
+        head = null;
+        tail = null;
+    }
+
+    // Node class here...
+}
+
+The 'MyLinkedList' class is a generic class that takes a type parameter 'E' to represent the type of elements stored in the linked list.
+The class has two instance variables 'head' and 'tail', which are of type 'Node<E>' and represent the first and last nodes of the linked list.
+The constructor initializes both 'head' and 'tail' to 'null', creating an empty linked list.
+Note that the 'Node' class is not shown here, but it would need to be defined separately. 
