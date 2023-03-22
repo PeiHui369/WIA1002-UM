@@ -1,0 +1,201 @@
+public class Main{
+    public static void main(String[] args){
+        String arr[] = new String[5];
+
+        Telephone telephone1 = new Telephone("03", "79676300");
+        Telephone telephone2 = new Telephone("03", "79676301");
+        Telephone telephone3 = new Telephone("03", "79676302");
+        Telephone telephone4 = new Telephone("03", "79676303");
+        Telephone telephone5 = new Telephone("03", "79676304");
+
+        arr[0] = telephone1.makeFullNumber();
+        arr[1] = telephone2.makeFullNumber();
+        arr[2] = telephone3.makeFullNumber();
+        arr[3] = telephone4.makeFullNumber();
+        arr[4] = telephone5.makeFullNumber();
+
+        for(int i = 0; i<5; i++){
+            System.out.println(arr[i]);
+        }
+    }
+}
+
+/* Alternative shorter way 1
+public static void main (String[] arga){
+Telephone[] telephoneNumber = new Telephone[5];
+int num =79676300;
+for(int i = 0; i<telephoneNumber.length; i++){
+    telephoneNumber[i] = new Tlephone("03", num++);
+}
+for(int i = 0; i<telephoneNumber.length; i++){
+    System.out.println(telephoneNumber[i].makeFullNumber());
+}
+System.out.println("number of telephone objects: " + telephoneNumber[0].getNumberOfTelephoneObject());
+}
+}
+*/
+
+/* Alternative Shorter Way 2
+Telephone[] t = {new Telephone("03", "79676300"), new Telephone("03", "79676301"), new Telephone("03", "79676302"), new Telephone("03", "79676303"),new Telephone("03", "79676304")};
+for(int counter = 0; counter < Telephone.numberOfTelephoneObject; counter++){
+    System.out.println(t[counter].makeFullNumber());
+}
+*/
+
+class Telephone{
+    String areaCode;    //private
+    String number;      //private
+    static int numberOfTelephoneObject; //static
+
+    Telephone(String areaCode, String number){
+        this.areaCode = areaCode;
+        this.number = number;
+    }
+
+    String getAreaCode(){
+        return this.areaCode;
+    }
+
+    String getNumber(){
+        return this.number;
+    }
+
+    void setAreaCode(String areaCode){
+        this.areaCode = areaCode;
+    }
+
+    void setNumber(String number){
+        this.number = number;
+    }
+
+    String makeFullNumber(){
+        return this.areaCode + "-" + this.number;
+    }
+}
+
+//Confuse on Acess Modifier of Instance Variable
+
+
+2.
+(1) Performs Person's tasks
+(2) Invoke Employee's overloaded constructor
+(3) Performs Employee's tasks 
+(4) Performs Faculty's tasks
+
+class Person {
+ public Person() {
+ System.out.println("(1) Performs Person's tasks");
+ }
+}
+
+class Employee extends Person {
+ public Employee() {
+ this("(2) Invoke Employee's overloaded constructor");
+ System.out.println("(3) Performs Employee's tasks ");
+ }
+ 
+ //Will not be print, as no parameter is declared in main method
+ public Employee(String s) {    
+ System.out.println(s);
+ }
+}
+
+//Faculty is a subclass of Employee
+public class Faculty extends Employee { 
+ public Faculty() {
+ System.out.println("(4) Performs Faculty's tasks");
+ }
+ public static void main(String[] args) {
+ new Faculty();
+
+ }
+}
+
+//Key things to check: Main method
+//this: Constructor chaining; Crucial
+
+3.
+a. AB
+
+public class C {
+ public static void main(String[] args) {
+ Object[] o = {new A(), new B()};   //1st ele A, 2nd ele B
+ System.out.print(o[0]);
+ System.out.print(o[1]);
+ }
+ }
+ class A extends B {
+ public String toString() {             // #OVERRIDE# Inheritance, print out A first
+ return "A";
+ }
+ }
+ class B {
+ public String toString() {             //print B
+ return "B";
+ }
+ }
+
+
+4.
+abstract class Vehicle{
+    double maxSpeed;
+    protected double currentSpeed;
+
+    Vehicle(double maxSpeed){
+        this.maxSpeed = maxSpeed;
+    }
+
+    abstract void accelerate();
+
+    double getCurrentSpeed(){
+        return this.currentSpeed;
+    }
+
+    double getMaxSpeed(){
+        return this.maxSpeed;
+    }
+
+    void pedalToTheMetal(){
+        while(this.currentSpeed!=this.maxSpeed){ //while(this.currentSpeed < maxSpeed)
+            accelerate();
+        }
+    }
+}
+
+// Cannot create an instance of Vehicle, as Vehicle is abstract class and there is no full implementation
+
+5.
+<Account.java>
+public interface Account{
+    int deposit(int x);
+    boolean withdraw(int y);
+}
+
+<BankAccount.java>
+public class BankAccount implements Account{
+    int balance;
+    BankAccount(int balance){
+        this.balance = balance;
+    }
+
+    @Override
+    public int deposit(int x) {
+        return this.balance += x;
+    }
+
+    @Override
+    public boolean withdraw(int y) {
+        if((this.balance-y)>=0){
+            this.balance =- y;
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
+
+/*Main method
+BankAccount o = new BankAccount(12);
+System.out.println(o.deposit(12));
+System.out.println(o.withdraw(1));
+*/
