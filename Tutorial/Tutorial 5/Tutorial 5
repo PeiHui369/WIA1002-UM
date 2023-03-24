@@ -1,0 +1,168 @@
+Question 1
+
+public E xyz(int index, E e) {
+    Node<E> current = head;
+    Node<E> temp;
+    if (index < 0) 
+        return null;
+    else if (index >= size - 1) {
+        this.addLast(e);
+        return null;
+    }
+    else if (index == 0) {
+        temp = head;
+        head.element = e;
+        return temp.element;
+    }
+    else {
+        for (int i = 1; i < index; i++) {
+            current = current.next;
+        }
+        temp = current.next;
+        current.next.element = e;
+        return temp.element;
+    }
+}
+
+
+(a) Based on the above source code, explain what the lines of code do from line 10 – 21.
+
+Sure! Here's an explanation of what the lines of code from 10 to 21 do:
+
+Line 10: This is an else-if statement that checks if the given index is 0. If it is, then the following code block is executed.
+Line 11: This creates a new variable 'temp' of type 'Node<E>' to store the current head node.
+Line 12: This updates the 'element' field of the 'head' node to the new element 'e'.
+Line 13: This returns the 'element' field of the old head node 'temp'.
+Line 14: The else block starts here. This means that the given index is not 0, so the code inside the else block will handle it.
+Line 15: This is a for loop that iterates from 'i=1' to 'index-1'. This loop updates the 'current' node to point to the node that comes before the one at the given index.
+Line 16: This updates the 'current' node to point to the next node in the linked list.
+Line 17: This creates a new variable 'temp' of type 'Node<E>' to store the node at the given index.
+Line 18: This updates the 'element' field of the node pointed to by 'current.next' to the new element 'e'.
+Line 19: This returns the 'element' field of the old node at the given index'temp'.
+Line 20: This ends the else block.
+Line 21: This ends the method and returns the 'element' field of the old node at the given index 'temp' or 'null' if the given index is out of bounds.
+
+(b) What is the main purpose of the method xyz()?
+Based on the source code provided, the 'xyz() method' seems to be a method of a linked list implementation that inserts an element 'e' at the given index in the list, and returns the element previously at that index. 
+
+Here's a summary of what the method does:
+If the given index is less than 0, it returns 'null'.
+If the given index is equal to 0, it replaces the head node's element with the new element 'e' and returns the old head node's element.
+If the given index is greater than or equal to the size of the list, it adds the new element 'e' to the end of the list and returns 'null'.
+Otherwise, it iterates through the list to find the node at the given index, replaces its element with the new element 'e' and returns the old element at that index.
+
+Therefore, the main purpose of the 'xyz()' method is to modify a linked list by inserting an element at a given index and returning the element that was previously at that index.
+
+(c) Obviously, there are some bugs in the source code. Debug the code and make it concise and simpler.
+public E insert(int index, E element) {
+    if (index < 0 || index > size) {
+        return null;
+    }
+    if (index == 0) {
+        addFirst(element);
+        return null;
+    }
+    Node<E> prev = getNode(index - 1);
+    Node<E> newNode = new Node<>(element, prev.next);
+    prev.next = newNode;
+    size++;
+    return prev.next.element;
+}
+
+private Node<E> getNode(int index) {
+    if (index < 0 || index >= size) {
+        throw new IndexOutOfBoundsException("Index is out of range.");
+    }
+    Node<E> current = head;
+    for (int i = 0; i < index; i++) {
+        current = current.next;
+    }
+    return current;
+}
+
+Here's an explanation of the changes:
+
+Renamed the method to 'insert()' for clarity.
+Combined the if statements that check if the index is out of bounds into a single if statement that returns 'null' if the index is less than 0 or greater than the size of the list.
+Changed the 'else if' block that handles the case where the index is equal to 'size - 1' to simply add the element to the end of the list using 'addLast()'.
+Changed the 'for' loop that finds the node at the given index to use 'getNode()' as a helper method to simplify the code and avoid duplication.
+Created a new private method 'getNode()' that returns the node at the given index, or throws an 'IndexOutOfBoundsException' if the index is out of range.
+Used 'addFirst()' instead of manipulating the head node directly in the case where the index is 0, to simplify the code and avoid duplication.
+Changed the 'temp' variable to 'newNode' for clarity and to make the code easier to read.
+Moved the 'size++' statement to after the new node is added to the list, to avoid incrementing the size if the index is out of bounds.
+
+Question 2
+else {
+    Node<E> temp = head;
+    for (int i = 0; i < index; i++) {
+        temp = temp.next;
+    }
+    element = temp.element;
+    temp.next.prev = temp.prev;
+    temp.prev.next = temp.next;
+    temp.next = null;
+    temp.prev = null;
+    size--;
+}
+
+else {
+    Node<E> temp = head;
+    for (int i = 0; i < index; i++) {
+        temp = temp.next;
+    }
+    element = temp.element;
+    temp.next.prev = temp.prev;
+    temp.prev.next = temp.next;
+    temp.next = null;
+    temp.prev = null;
+    size--;
+}
+
+This block of code seems to remove a node from a doubly linked list at a given index. Here's what the code does:
+
+The 'temp' variable is initialized to the head of the list.
+A loop iterates over the list 'index' number of times, so that 'temp' is set to the node at the given index.
+The 'element' variable is set to the element of the node being removed.
+The 'prev' and 'next' pointers of the nodes adjacent to the node being removed are updated to remove the reference to the node being removed.
+The 'next' and 'prev' pointers of the node being removed are set to 'null'
+The 'size' variable is decremented to reflect the removal of the node.
+
+Note that the code assumes that the index is valid and does not perform any bounds checking. 
+Additionally, the code does not check if the list is empty or if the index is out of range, which could result in a 'NullPointerException' or 'IndexOutOfBoundsException' being thrown.
+
+(a) Based on the source code above, assume the index given is 3 a)Explain what the lines of code do from line 2-11.
+
+Line 2 initializes a new 'Node<E>' variable 'temp' and sets it equal to the head of the doubly linked list.
+Lines 3 to 5 execute a 'for' loop that iterates 'index' times. In this case, since 'index' is 3, the loop will iterate 3 times. In each iteration, the 'temp' variable is set to the next node in the doubly linked list. This means that after the loop has executed, 'temp' will be pointing to the node at index 3 in the list.
+Line 6 sets the 'element' variable equal to the element stored in the 'temp' node. This variable will be used to return the element that was removed from the list.
+Lines 7 and 8 update the 'prev' and 'next' pointers of the nodes adjacent to the 'temp' node so that they point to each other, effectively removing the 'temp' node from the list.
+Lines 9 and 10 set the 'next' and 'prev' pointers of the temp node to 'null', effectively removing any references to other nodes in the list.
+Line 11 decrements the 'size' variable of the list to reflect the removal of the 'temp'node.
+
+(b) Draw the nodes for lines 7 - 10
+Assuming that the doubly linked list before executing lines 7-10 looks something like this:
+[head] <-> [node1] <-> [node2] <-> [node3] <-> [tail]
+
+And assuming that 'temp' points to 'node3', here's what the list looks like after executing lines 7-10:
+[head] <-> [node1] <-> [node2] <-> [tail]
+
+As you can see, 'node3' has been removed from the list, and the 'prev' and 'next' pointers of 'node2' and 'tail' have been updated to reflect the removal.
+
+Question 3
+A doubly linked list keeps a set of characters. The head, the middle and the tail nodes respectively contains alphabet ‘a’, ‘b’ and ‘c’. These nodes are in successive order. Create a new node that contains alphabet ‘z’. Add this new node at the last location of this linked list. Draw all of these nodes including their correct references. 
+
+Here's what the doubly linked list looks like before adding the new node:
+[head: a] <-> [middle: b] <-> [tail: c]
+
+And here's what the list looks like after adding the new node containing the alphabet 'z' at the last location:
+[head: a] <-> [middle: b] <-> [tail: c] <-> [new node: z]
+
+Each node in the list has two pointers: 'prev' and 'next'. The 'prev' pointer points to the previous node in the list, and the 'next' pointer points to the next node in the list. 
+Here are the specific details for each node in the list:
+
+Node 'a': 'prev' points to 'null', 'next' points to node 'b'.
+Node 'b': 'prev' points to node 'a', next points to node 'c'.
+Node 'c': 'prev' points to node 'b', next points to node 'new node'.
+Node 'new node': 'prev' points to node 'c', next points to 'null'.
+Note that the 'prev' pointer of the 'new node' points to 'c' and the 'next' pointer of 'c' points to the 'new node', which completes the link between the nodes in the doubly linked list.
+
