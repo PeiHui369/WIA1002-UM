@@ -1,0 +1,9 @@
+public E pop(){
+    if(isEmpty()){
+        throw new EmptyStackException();
+    }
+    E ele = stack.get(stack.size()-1);
+    stack.set(stack.size()-1, null); // set the element to null
+    stack.remove(stack.size()-1);
+    return ele;
+}
