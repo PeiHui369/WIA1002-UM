@@ -179,3 +179,6 @@ public final class ArrayBag<T> implements BagInterface<T> {
         return new ArrayBag<T>(newBag.toArray());
     }
 }
+
+//How batchRemove method work for intersection and difference?
+
