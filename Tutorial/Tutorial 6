@@ -1,0 +1,91 @@
+//T6Q1
+//The stack method that returns an element from the stack without removing it is
+//c. peek
+
+//T6Q2
+/*
+OPERATION                   RESULT
+s2.push(s1.pop());          |s1[one,zero] |s2[two]      |s3      |
+s3.push(s1.pop());          |s1[zero]     |s2[two]      |s3[one] |
+s1.pop();                   |s1[]         |s2[two]      |s3[one] |
+s1.push(s2.pop());          |s1[two]      |s2[]         |s3[one] |
+s2.push(s3.pop());          |s1[two]      |s2[one]      |s3[]    |
+s2.push(s1.pop());          |s1[]         |s2[two,one]  |s3[]    |
+ */
+
+//T6Q3
+//Over time, the elements 1, 2, and 3 are pushed onto a stack in that order.
+//For each of the following, indicate (yes or no) whether the sequence could be created by popping operations.
+// If yes, list the sequence of push() and pop() operations that produces the sequence.
+/*
+(a) 1-2-3
+(b) 2-3-1
+(c) 3-2-1
+(d) 1-3-2
+
+(a) Yes, the sequence 1-2-3 can be created by pushing 1, then pushing 2, and then pushing 3 onto the stack, followed by popping 3, then popping 2, and finally popping 1.
+
+(b) Yes, the sequence 2-3-1 can be created by pushing 1, then pushing 2, and then pushing 3 onto the stack, followed by popping 3, then popping 2, and finally popping 1.
+
+(c) Yes, the sequence 3-2-1 can be created by pushing 1, then pushing 2, and then pushing 3 onto the stack, followed by popping 1, then popping 2, and finally popping 3.
+
+(d) No, the sequence 1-3-2 cannot be created using push and pop operations. When element 1 is popped, the stack's top element will be 2, so popping again will give us 2 instead of 3. Therefore, this sequence cannot be created by push and pop operations.
+
+ */
+
+//T6Q4
+/*
+a) a + b * c  => a b c *+
+
+[]
+[a]
+[+a]
+[b+a]
+[*ba]  (* higher precedence than +, so pop + to output and push *) #output: +
+[c*ba]
+[cba] (Reached end of input expression, pop "*" to ensure that all operators are added to output string) #output: *+
+[ba] # c*+
+[a]  # bc*+
+[]   # abc*+
+
+b) a * b - c / d => ab*cd-/
+STACK   | OUTPUT
+[]      |""
+[]      |"a"      //Operand output
+[*]     |"a"      //Operator stack
+[*]     |"ba"
+[-]     |"*ba"    //"*" higher precedence than "-", pop * then push -
+[-]     |"c*ba"
+[/-]    |"c*ba"
+[/-]    |"dc*ba"
+[/]     |"-dc*ba" //"/" higher precedence than "-", leave it on stack and move to next
+[]      |"/-dc*ba"
+Postfix reflect the output (append) : "ab*cd-/"
+
+c) a + (b*c + d)/e => abc * d + e /+
+a + (bc* + d)/e
+a + (bc*d+)/e
+a + (bc*d+e/)
+abc*d+e/+
+ */
+
+//T6Q5
+/*
+a) a b + c *
+STACK   |
+a       |
+ab      |
+a+b     |Pop 'b' & 'a'
+a+b c   |
+a+b*c   |Pop 'c'
+Ans: a+b*c
+
+b) a b c + *
+Ans : a * (b+c)
+
+
+ */
+
+//T6Q6
+//Application of stack: d. all of the above(finding factorial, tower of Hanoi, infix to postfix)
+//Additionally, stacks are used in other applications such as backtracking, graph traversal, and memory management.
