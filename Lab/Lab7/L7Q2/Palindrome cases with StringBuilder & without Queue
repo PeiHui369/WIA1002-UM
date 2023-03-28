@@ -1,0 +1,84 @@
+@ Can we skip queue and directly add the input string to stringbuilder?
+Yes, you can skip the queue and directly add the input string to a StringBuilder. However, in doing so, you would lose the benefits of using a queue to check if the string is a palindrome. Using a queue allows you to compare the first and last characters of the string efficiently, which is important for determining if the string is a palindrome. If you add the input string directly to a StringBuilder, you would have to manually traverse the StringBuilder to compare the first and last characters, which would be less efficient.
+
+@ Explain with code
+Yes, we can skip the queue and directly add the input string to a 'StringBuilder' object. Here's how:
+public static boolean isPalindrome(String input) {
+    // Remove all non-alphabetic characters and convert to lowercase
+    input = input.replaceAll("[^a-z]", "").toLowerCase();
+    
+    // Create a StringBuilder object and append the input string
+    StringBuilder sb = new StringBuilder(input);
+    
+    // Reverse the StringBuilder object
+    sb.reverse();
+    
+    // Compare the original input string with the reversed string
+    return input.equals(sb.toString());
+}
+In this implementation, we use the 'replaceAll' method with the regular expression '[^a-z]' to remove all non-alphabetic characters from the input string and convert it to lowercase. 
+Then, we create a 'StringBuilder' object and append the input string to it. 
+We then use the 'reverse' method to reverse the 'StringBuilder' object. 
+Finally, we compare the original input string with the reversed string using the 'equals' method and return the result.
+
+Note that this implementation assumes that we only want to consider alphabetic characters in determining whether the input string is a palindrome. If we also want to consider digits and other characters, we would need to modify the regular expression accordingly.
+
+@ How to modify
+To modify the program to directly add the input string to a 'StringBuilder' instead of using a 'Queue', you can simply replace the 'Queue' with a 'StringBuilder' and modify the logic accordingly. Here's an example:
+import java.util.Scanner;
+
+public class PalindromeChecker {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String input = sc.nextLine();
+
+        // Convert input to lowercase and remove non-alphabetic characters
+        String cleanInput = input.toLowerCase().replaceAll("[^a-z]", "");
+
+        StringBuilder sb = new StringBuilder(cleanInput);
+        String reversed = sb.reverse().toString();
+
+        if (cleanInput.equals(reversed)) {
+            System.out.println(input + " is a palindrome.");
+        } else {
+            System.out.println(input + " is not a palindrome.");
+        }
+    }
+}
+
+In this modified version, we simply create a 'StringBuilder' object 'sb' initialized with 'cleanInput'. 
+We then call the 'reverse()' method on 'sb' to obtain the reversed string, which we convert to a 'String' using 'toString()'. 
+We then compare 'cleanInput' with 'reversed' to determine if the input is a palindrome.
+
+@ For <PalindromeChecker.java>
+Why do we use Queue here? Where does it show the  benefits of using a queue to compare first and last characters efficiently?
+@ Implementation using a Queue to compare the first & last characters of the input string (without having to iterate through the string from both ends)
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class PalindromeChecker {
+    public static boolean isPalindrome(String input) {
+        Queue<Character> queue = new LinkedList<>();
+        
+        // Add all characters to the queue
+        for (int i = 0; i < input.length(); i++) {
+            char c = Character.toLowerCase(input.charAt(i));
+            if (c >= 'a' && c <= 'z') {
+                queue.add(c);
+            }
+        }
+        
+        // Compare first and last characters in the queue //#
+        while (queue.size() > 1) {
+            char first = queue.remove();
+            char last = queue.removeLast();
+            if (first != last) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+}
+
