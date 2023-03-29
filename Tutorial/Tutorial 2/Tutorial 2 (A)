@@ -1,3 +1,10 @@
+//Generics: <T>
+//Specifically: genericClass <Type> className = new genericClass <Type>();
+//To do generic method for printing: public static <E> void listAll(E[] list){}
+//How to use wildcard, Options of wildcard: unbound, Upper, Lower
+//To do printing for wildcard: public static void print(ArrayList<?> list){}
+
+1.
 public class Container<T>{
   private T t;
   
@@ -22,4 +29,72 @@ public static void main (String[] args){
 }
 
   //How to define generic: <T>
-  //How to give the type when create object
+  //How to give the type when create object: Container<Integer> integerContainer = new Container<Integer>();
+
+2.
+public class MyArray{
+  public static void main(String[] args){
+    Integer[] number = {1,2,3,4,5};
+    String[] name = {"Jane", "Tom", "Bob"};
+    Character[] alphabet = {'a', 'b', 'c'};
+    MyArray.listAll(number);
+    MyArray.listAll(name);
+    MyArray.listAll(alphabet);
+  }
+  public static <E> void listAll(E[] list){
+    for(int i =0; i<list.length; i++){
+      System.out.print(list[i] + " ");
+    }
+    System.out.println();
+ }
+}
+    
+    //Able to display list in 2 different ways: System.out.println() or in genericMethod way
+    
+ 3.
+ When you use generic type without specifying an actual parameter, it is called a raw type.
+ A raw type is unsafe, because some errors cannot be detected by the compiler.
+ The raw type is allowed in Java for backward compatibility.
+ 
+ 4.
+ Generic type information is used by the compiler to check whether the type is used safely.
+ Afterwards the type information is erased.
+ The type information is not available at runtime.
+ This approach enables the generic code to be backward-cmpatible with the legacy code that uses raw types.
+ 
+ 5.
+ //Constructor in generic definition
+ class Duo <A,B>{
+  private A first;
+  private B second;
+  
+  public Duo(A a, B b){ //Constructor
+    first = a;
+    second = b;
+  }
+}
+
+6. 
+Duo<String, Integer> sideShape = new Duo<String, Integer>("Square", 4);
+Duo<Double, Double> points = new Duo<Double,Double>(5.3,2.1);
+//Generic class for 2 types
+
+
+7.
+//Wildcard <?>: Upper, lower, unbounded
+public static <T> void allTransportation(ArrayList<T> list1, ArrayList<? super T>list2)
+or
+public static <T> void allTransportation(ArrayList<? extends T> list1, ArrayList<T>list)
+
+8.
+public static void print(ArrayList<?> list){                  //Wildcard<?>
+  for(int i = 0; i<list.size(); i++){
+    System.out.println(list.get(i);
+  }
+}
+        
+9. Object
+
+10.
+//bounded: bound to Number
+Bound that is applied to the parameter (e.g.: Number, Comparable in the examples)
