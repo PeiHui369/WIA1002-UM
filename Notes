@@ -2,8 +2,60 @@
 
 29/3/23
 //Ask: 
-"this."when use? (normally set yes, but get no); 
-Q4 class & method both MUST need to put <T extends Comparable<T>>?
+"this."when use? (normally set yes, but get no);  //refer to the class
+class Circle {
+	double r
+	
+	
+	Circle(double r){
+		this.r = r;
+	}
+	
+	equals(Circle o){
+		this //pass reference into constructor
+		
+	}
+	
+	
+	main(){
+		Circle a = new Circle();
+		sout(a);
+		
+		a.equals(b);
+	}
+}
+==
+class Circle extends Shape{
+	double r
+	static Shape listOfShape;
+	
+	
+	Circle(double r){
+		this.r = r;
+	}
+	
+	equals(Circle o){
+		this //pass reference into constructor
+		
+	}
+	
+	storeShape(){
+		listOfShape.add(this);
+	}
+	
+	main(){
+		Circle a = new Circle();
+		sout(a);
+		
+		a.equals(b);
+		
+		a.storeShape();
+	}
+}
+---
+
+
+Q4 class & method both MUST need to put <T extends Comparable<T>>? unless generic class to set some variable or method returntype
 Mine:
 public class L2Q4 {
   public static <E extends Comparable<E>> void minMax(E[] list){
