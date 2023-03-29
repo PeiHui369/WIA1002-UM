@@ -4,6 +4,8 @@
 //How to use wildcard, Options of wildcard: unbound, Upper, Lower
 //To do printing for wildcard: public static void print(ArrayList<?> list){}
 
+//Q: abit confuse on Q7
+
 1.
 public class Container<T>{
   private T t;
@@ -85,6 +87,8 @@ Duo<Double, Double> points = new Duo<Double,Double>(5.3,2.1);
 public static <T> void allTransportation(ArrayList<T> list1, ArrayList<? super T>list2)
 or
 public static <T> void allTransportation(ArrayList<? extends T> list1, ArrayList<T>list)
+
+or public static void allTransportation(ArrayList<?> list1, ArrayList<?> list2){}
 
 8.
 public static void print(ArrayList<?> list){                  //Wildcard<?>
