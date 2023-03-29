@@ -9,7 +9,7 @@ public class CompareMax {
         System.out.println(maximum(1,2, 3)); //No need to specify the type in parameters
         System.out.println(maximum("a","b","c"));
     }
-    public static <T extends Comparable<T>> T maximum (T a, T b, T c){ //#
+    public static <T extends Comparable<T>> T maximum (T a, T b, T c){ //#          //^Set max variable, Initialize, Compare with b & c with IF loop respectively and set b if compareTo>0; return MAX
         if(a.compareTo(b) >0){
             if(a.compareTo(c) > 0){
                 return a;
