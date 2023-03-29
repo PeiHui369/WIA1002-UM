@@ -1,0 +1,25 @@
+public class Container<T>{
+  private T t;
+  
+  public void add (T t){
+  this.t = t;
+  }
+  
+  public T retrieve(){
+  return t;
+  }
+}
+
+public static void main (String[] args){
+  Container<Integer> integerContainer = new Container<Integer>();
+  Container<String> stringContainer = new Container<String>();
+  
+  integerContainer.add(50);//auto-boxing
+  stringContainer.add("Java");//no casting needed
+  
+  System.out.println("Integer Vallue: " +integerContainer.retrieve());
+  System.out.println("String value : " + stringContainer.rtrieve());
+}
+
+  //How to define generic: <T>
+  //How to give the type when create object
