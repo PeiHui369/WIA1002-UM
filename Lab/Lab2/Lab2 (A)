@@ -52,4 +52,4 @@ class compareMax{
 
 class CompareMax{
   public static <T extends Comparable<T>> maximum(){
-  T max = 
+  T max 
