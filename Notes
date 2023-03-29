@@ -1,0 +1,13 @@
+//Access modifier for instance variable & methods ***
+
+<ArrayBag.java>
+//How is the construtor function? How to know need to create how many and what parameters?
+
+boolean add(T newEntry)
+- isFull()
+- bag[numberOfEntries++] = newEntry;
+
+@ Remove
+T remove() {return remove((int)(Math.random() * this.numberOfEntries));}
+
+boolean remove(int index){
