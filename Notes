@@ -1,3 +1,42 @@
+//Chatgpt: toArray 2 methods diff? contains 2 if diff?
+
+29/3/23
+//Ask: 
+"this."when use? (normally set yes, but get no); 
+Q4 class & method both MUST need to put <T extends Comparable<T>>?
+Mine:
+public class L2Q4 {
+  public static <E extends Comparable<E>> void minMax(E[] list){
+  
+Given:
+public class question4<T extends Comparable<T>>{
+  public static <T extends Comparable<T>> String minmax(T[] array){
+  
+  
+Q5 MUST use DOUBLE? compareTo method difference between ans & mine?
+Mine: 
+    //Have to override compareTo method as Circle is not a Wrapper Class
+    @Override
+    public int compareTo(Circle o) { //!type: Object -> Circle
+        return Double.compare(radius, o.radius);} //###
+Given:
+@Override
+public int compareTo(Circle o){
+  return this.radius.compareTo(o.radius);
+}
+
+//Chatgpt: How is L2Q3 equals & compareTo method work?
+ @Override
+  public boolean equals (Object o){
+    StorePairGeneric<E> other = (StorePairGeneric<E>) o;
+    return this.first.equals(other.first);
+  }
+  
+  @Override
+  public int compareTo(StorePairGeneric<E> o){
+    return this.first.compareTo(o.first);
+  }
+
 //Access modifier for instance variable & methods ***
 
 <ArrayBag.java>
@@ -7,7 +46,85 @@ boolean add(T newEntry)
 - isFull()
 - bag[numberOfEntries++] = newEntry;
 
-@ Remove
+void clear(){
+  Arrays.fill(bag, null);
+  numberOfEntries = 0;
+}
+
+int getFrequencyOf(T entry){
+  int count = 0;
+  
+  for(int i = 0; i<numberOfEntries; i++){
+    count += ((bag[i]).equals(entry))? 1:0;                         //#
+  }
+  
+  return count;
+}
+
+boolean contains (T entry){
+  return indexOf(entry) >= 0;
+}
+
+T[] toArray(){
+  T[] resultArr = (T[]) new Object [numberOfEntries];
+  System.arraycopy(bag, 0, resultArr, 0, numberOfEntries);
+  return resultArr;
+}
+
+T[] toArra
+/*
+public static void arraycopy(Object source_arr, int sourcePos,
+                            Object dest_arr, int destPos, int len)
+Parameters : 
+source_arr : array to be copied from
+sourcePos : starting position in source array from where to copy
+dest_arr : array to be copied in
+destPos : starting position in destination array, where to copy in
+len : total no. of components to be copied.*/
+
+
+
+---
+[Remove]
 T remove() {return remove((int)(Math.random() * this.numberOfEntries));}
 
-boolean remove(int index){
+boolean remove(T entry){
+  int indexOf(entry);
+  return remove(index) == null? false:true;
+}
+
+---
+
+@ Own
+T remove(int index){
+  if(index<0 || index >= this.bag.length || this.isEmpty()){      //EXCEPTION
+    return null;
+  }
+  
+  T item = bag[index];
+  
+  for(int i = index; i<this.numberOfEntries - 1; i++){
+    bag[i] = bag[i+1];                                            //#
+  }
+  
+  bag[--numberOfEntries] = null;                                  //#
+  
+  return item;
+}
+
+int indexOf(T entry){
+  Object[] es = bag;
+  
+  if(entry == null){                                    //Searching for null: ==
+    for(int i = 0; i<numberOfEntries; i++){
+      if(entry == es[i]){
+        return i;
+      }
+  }else{
+     for(int i = 0; i<numberOfEntries; i++){            //Searching for value: equals()
+      if(entry.equals(es[i])){
+        return i;
+      }
+   }
+   return -1;
+}
