@@ -2,7 +2,7 @@
 
 <MyGeneric.java>
 public class MyGeneric <E>{
-    E e;
+    E e;                                    //^private Instance Variable
 
     MyGeneric(){}
 
@@ -11,7 +11,7 @@ public class MyGeneric <E>{
     }
 
     public E getter(){
-        return this.e;
+        return this.e;                      //^no need "this"
     }
 
     public void setter(E e){
