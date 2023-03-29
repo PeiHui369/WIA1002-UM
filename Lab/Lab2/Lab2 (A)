@@ -1,0 +1,55 @@
+L2Q1
+public class MyGeneric<E>{
+  private E e;
+  
+  MyGeneric(){}
+  
+  MyGeneric(E e){
+    this.e = e;
+  }
+  
+  public void set (E e){
+    this.e = e;
+  }
+  
+  public E get(){
+    return e;
+  }
+  
+  public static void main(String[] args){
+    MyGeneric<String> strObj = new MyGeneric<>();
+    MyGeneric<Integer> intObj = new MyGeneric<>();
+    strObj.set("Java");
+    intObj.set(123);
+    System.out.println(strObj.get());
+    System.out.println(intObj.get());
+  }
+}
+
+L2Q2
+import java.util.*;
+public class MyArray{
+  public static void main(String[] args){
+    System.out.println(CompareMax.maximum(1,2,3));
+  }
+}
+
+class compareMax{
+  public static <T extends Comparable<T>> T maximum (T a, T b, T c){
+  //a is the maximum
+  T max = a;
+  
+  if(b.compareTo(max) > 0){
+    max = b;
+  }
+  
+  if(c.compareTo(max) > 0){
+    max = c;
+  }
+  
+  return max;
+}
+
+class CompareMax{
+  public static <T extends Comparable<T>> maximum(){
+  T max = 
