@@ -1,0 +1,13 @@
+G=(V,E)
+
+@ TERMS
+1. Entities: Node
+2. Edges   : Interaction between entities
+3. Adjacent: 2 vertices share same edge
+4. Path    : p -> q along >=1 edges
+
+@ Directed/ Undirected
+@ Weighted/ Unweighted
+@ Adjacency matrix // Adjacency list
+- Vertice     : Array(less flexible), ArrayList, LinkedList
+- (n)Edges    : (n x n)Matrix
