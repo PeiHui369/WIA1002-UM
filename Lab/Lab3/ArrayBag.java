@@ -168,6 +168,60 @@ public final class ArrayBag<T> implements BagInterface<T> {
     public BagInterface<T> difference(BagInterface<T> anotherBag){
         return batchRemove(anotherBag,true);
     }
+    /*
+    1: A A B A C A
+    2: A B A C B C D
+    
+    for1: A
+    for2: A
+    -remove A
+    1: A B A C A
+    2: B A C B C D
+    
+    for1:A
+    for2:B
+    -continue, loop 2 finish to check if it contains A
+    
+    for1:A
+    for2:A
+    - remove A
+    
+    =====
+    1: A A B A C A
+    2: A B A C B C D
+    for1:
+    for2:
+    Results:
+    
+    if(bag[i] is in difference bag) continue;
+    if(secondBag contains the element from firstBag, bag[i]){
+        int count1 = getFrequencyOfElement(bag[i]);
+        int count2 = secondBag.getFrequencyOfElement(bag[i]);
+        1:4A
+        2: 2A
+        =2 //Add 2A to the final bag
+        
+        1: 1B
+        2: 2B
+        = -1 //No add B to final bag
+        
+        1: 1c
+        2: 2C
+        =-1 //No add C to final bag
+        
+        int finalCount = Math.max(0, count1-count2);
+        for(int i = 0; i<finalCount; i++){
+            differenceBag.add(bag[i]);
+        }
+    }else{
+        int count = getFrequencyOfElement(bag[i]);
+        for(int i = 0; i<count; i++){
+            differenceBag.add(bag[i]);
+        }
+        
+        ====
+        Add bag1 to resultBag, then check if bag2 have same ele in resultBag, then we remove the ele
+        */
 
     public BagInterface<T> batchRemove(BagInterface<T> anotherBag, boolean complement){
         BagInterface<T> newBag = new ArrayBag<T>(numberOfEntries);
