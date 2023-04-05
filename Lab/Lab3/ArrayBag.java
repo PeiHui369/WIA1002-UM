@@ -154,6 +154,15 @@ public final class ArrayBag<T> implements BagInterface<T> {
     public BagInterface<T> intersection(BagInterface<T> anotherBag) {
         return batchRemove(anotherBag, false);
     }
+    
+    /* 
+    a,b,c
+    b,b,d,e
+    return b
+    
+    add Min (entry in bag1, entry in bag2) into result bag
+    */
+    
 
     @Override
     public BagInterface<T> difference(BagInterface<T> anotherBag){
@@ -182,3 +191,21 @@ public final class ArrayBag<T> implements BagInterface<T> {
 
 //How batchRemove method work for intersection and difference?
 
+=====================================================================================================
+public BagInterface<T> intersection(BagInterface<T> aBag){
+    BagInterface<T> intersectionBag = new ArrayBag<T>();
+    ArrayBag<T> newABag = (ArrayBag<T>) aBag;
+    
+    for(int i = 0; i < numberOfEntries; i++){
+        if(intersectionBag.contains(bag[i])){
+            continue;
+        }
+        if(newABag.contains(bag[i])){
+            int count = Math.min(getFrequencyOf(bag[i]), newABag.getFrequencyOf(bag[i]));
+            for(int j = 0; j < count; j++){
+                intersectionBag.add(bag[i]);
+            }
+       }
+    }
+return intersectionBag;
+}
