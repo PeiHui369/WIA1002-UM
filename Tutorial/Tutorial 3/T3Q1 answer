@@ -23,3 +23,43 @@ Machine)
 b. Identify the methods/operations for each of the class (i.e. Dispenser, Cash Register, Candy
 Machine)
 c. Produce a UML class diagram to represent the three classes
+
+a. Identify the Instance Variables for each of the class
+Dispenser: To make the sale, at least one item must be in the dispenser and the customer must know the cost of the product.
+- Product cost: cost
+- Number of items in the dispenser: numberOfItems
+
+Cash Register: The cash register acepts money and returns change. (Only 1 instance variable)
+- cashOnHand
+
+Candy Machine: The class CandyMachine has four dispensers and a cash register. (Name the 4 dispensers by the item they sotre)
+- four dispensers: candy, chip, gum, cookies
+- a cash register: cRegister
+
+
+b. Identify the methods/operation for each of the class
+Candy Machine: show(selection); make(selection)
+Dispenser: show(cost), make(sale)
+Cash Register: accept(money); return(change)
+
+Dispenser:
+show(cost): either printing/retrieving the value of the data member cost
+make(sale): reducing the number of items in the dispenser by 1 (Dispenser has to be nonempty)
+Operation to set the cost & the number of items in the dispenser
+- getCount: Retrieve the number of items in the dispenser
+- getProductCost: Retrieve the cost of the item
+- makeSale: Reduce the number of items in the dispenser by 1
+- setNumberOfItems: Set the number of items in the dispenser
+
+Cash Register:
+accept(money): updating the money in the cash register by adding the money deposited by the customer
+return(change): reducing the money in the cash register by returning the overpaid amound (by the customer) to the customer
+Need to (initially) set the money in the cash register & retrieve the money from the cash register
+- acceptAmount: Update the amount in the cash register
+- returnChange: Return the change
+- getCashOnHand: Retrieve the amount in the cash register
+- setCashOnHand: Set the amount in the cash register
+
+Candy Machine:
+- showSelection: Show the number of products sold by the candy machine
+- makeSelection: Allow the customer to select the product
