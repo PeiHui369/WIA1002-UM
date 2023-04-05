@@ -1,0 +1,59 @@
+public interface BidInterface{
+  /** Returns the name of the company making this bid
+      Precondition: None
+      Postcondition: he name was returned
+      @return The name of the company making this bid. */
+  public String getCompanyName();
+  
+  /** Returns the description of the air conditioner that this bid is for.
+      Precondition: None
+      Postcondition: The description was returned
+      @return The description of the air conditioner. */
+  public String getDescription);
+  
+  /** Return the capacity of this bid's AC in tons (1 ton = 12,000 BTU)
+      Precondition: None
+      Postcondition: The performance was returned
+      @return The cooling capacity of the AC unit in tons. */
+  public double getCapacity();
+  
+  /** Return the seasonal efficiency of this bid's AC (SEER)
+      Precondtion: None
+      Postcondition: The performance was returned
+      @return The efficiency of the AC unit*/
+ public double getSEER();
+ 
+ /** Return the cost of this bid's AC.
+     Precondition: None
+     Postcondition: The AC cost was returned.
+     @return The cost of the unit in dollars. */
+ public double getUnitCost();
+ 
+ /** Returns the cost of installing this bid's AC.
+     Precondition: None
+     Postcondition: The installation cost was returned.
+     @return The cost of installation in dollars. */
+ public double getInstallationCost();
+ 
+ /** Returns the yearl cost of operating this bid's AC.
+     Precondition: None
+     Postcondition: The yearly cost was returned.
+     @param hoursOperated aVERAGE NUMBER OF HOURS THE UNIT OPERATES PER YEAR
+     @param energyCost Cost in dollars per kilowatt hour
+     @return The cost for the year in dollars, cost = 12 * tons * energyCost * hoursOperated/SEER */
+ publicdouble getYearlyCost(double hoursOperated, double energyCost);
+ 
+ } //end BidInterface
+ 
+ 
+  
+  
+  
+  LabTest
+  9am-10am
+  12/4/2023
+  Submit to spectrum link
+  X chatgpt (will give wrg ans)
+  1 ques
+  - Look back at how to do all the loop (how it works)
+  - ***Iteration
