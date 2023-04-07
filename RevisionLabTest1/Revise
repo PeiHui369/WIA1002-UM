@@ -1,0 +1,23 @@
+L2Q3b
+Override the Object equals() method in the StorePair class to compare the first values of two objects for equality.
+
+//CHATGPT
+public boolean equals(Object obj){
+        if(this == obj) {                       //1st check if 2 objects being compared are same object
+            return true;
+        }
+        if(!(obj instanceof StorePair)){        //check if 'obj' is an instanceOf 'StorePair' (if not then false) (must true to cast)
+            return false;
+        }
+        StorePair other = (StorePair)obj;       //cast 'obj' to 'StorePair' and compare the 'first' values of the 2 objects
+        return this.first == other.first;
+    }
+    
+//ANSWER
+@Override
+  public boolean equals (Object o){
+    StorePairGeneric<E> other = (StorePairGeneric<E>) o;
+    return this.first.equals(other.first);
+  }
+    
+    Q3b onwards till Q5, Q5 done but need to see the solution
