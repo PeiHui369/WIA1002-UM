@@ -1,0 +1,102 @@
+
+@ Create
+ArrayList<Type> list = new ArrayList<Type>();
+
+@ Accessing
+list.get(index);
+
+@ Updating
+list.set(index, "ele");
+
+@ Returning Size
+list.size();
+
+@ Adding
+list.add("ele");
+
+@ Inserting
+list.add(index, "ele");
+
+@ Removing an ele
+list.remove(index);
+list.remove(Object);
+
+@ Removing all
+list.clear();
+
+@ Print
+System.out.println(list.toString());
+
+@ Reverse
+for(int i = list.size()-1; i>=0; i--){
+  System.out.print(list.get(i) + " ");
+}
+System.out.println();
+
+- Defined type, follow
+- Reference types: Integer, Double, MyPet
+- No casting needed
+
+@ Declaring Classes
+public class className<E>{}
+
+@ Declaring Interface
+public interface InterfaceName<E>{}
+
+@ Declring Methods
+public static <E> returnType methodName (E parameter)
+@ To invoke
+<actualType> methodName;
+
+@ Bounded
+<E extends GeometricObject>
+
+- Avoid raw type: public static Comparable max (Comparable o1, Comparable o2)
+  Using generic type: public static <E extends Comparable<E>> E max (E o1, E o2)
+
+- Avoid: public static void display (ArrayList<Number> list)
+  Use: public static void display (ArrayList<?> list)
+  // instance of ArrayList<Integer> not an instance of ArrayList<Number>
+  
+@ Wildcard
+<?> unbounded: represents any object type
+<? extends T> Bounded: unknown subtype of T
+<? super T> lower bound: unknown supertype of T
+
+- Constructor: public GenericStack()
+- >1 parameter: <E1, E2, E3>
+- Define class/interface as a subtype of a generic class/interface: public class String implements Comparable <String>
+
+- X E object = new E();
+- X new E[]
+- X static
+- Exception classes X generic
+
+/*
+In Java, wildcards are used in generic type parameters to allow for greater flexibility and reusability in code. There are two types of wildcards: upper-bounded wildcards and lower-bounded wildcards.
+
+Upper-bounded wildcard (? extends T): It allows a generic type parameter to represent any type that is a subtype of the specified type T or T itself. It provides a way to specify that the type being used should be a subtype of a certain type, but it doesn't allow modification of the generic type parameter.
+public void printList(List<? extends Number> list) {
+    // Code to work with a list of any type that extends Number
+}
+
+In this example, list can be a List<Integer>, List<Double>, or any other type that extends Number, allowing for flexibility in the types of lists that can be passed as an argument.
+
+Lower-bounded wildcard (? super T): It allows a generic type parameter to represent any type that is a supertype of the specified type T or T itself. It provides a way to specify that the type being used should be a supertype of a certain type, and it allows for modification of the generic type parameter.
+public void addElement(List<? super Integer> list, Integer element) {
+    // Code to add an element to a list of any type that is a supertype of Integer
+}
+
+In this example, list can be a List<Object>, List<Number>, or any other type that is a supertype of Integer, allowing for flexibility in the types of lists that can be passed as an argument, and also allowing for modification of the list by adding an Integer element.
+
+In summary, the main difference between upper-bounded and lower-bounded wildcards is that upper-bounded wildcards allow for reading from a generic type parameter but not writing to it, while lower-bounded wildcards allow for writing to a generic type parameter but not reading from it.
+
+In Java, a supertype refers to a more general or broader type that is a superclass or an interface that other types can inherit from or implement, respectively. It is a term used in object-oriented programming to describe a type that is higher in the class/interface hierarchy.
+
+Inheritance is a fundamental concept in object-oriented programming, where a class can inherit properties and behavior from a superclass, making it a subclass or derived class. The superclass is considered a supertype because it provides a more general definition of the class, and the subclass inherits and extends it with more specific properties and behavior.
+
+For example, consider a class hierarchy where we have a Vehicle superclass, and Car, Motorcycle, and Truck subclasses that inherit from the Vehicle superclass. In this case, Vehicle is the supertype of Car, Motorcycle, and Truck, as it provides a more general definition of a vehicle that can be shared among these specific types.
+
+Similarly, interfaces in Java can also have supertypes. An interface can extend one or more interfaces, making those interfaces its supertypes. Classes that implement an interface are said to be implementing that interface's supertype(s), as they provide the more specific implementation of the interface's methods.
+
+In summary, a supertype in Java refers to a more general or broader type, either a superclass or an interface, that other types can inherit from or implement, respectively. It provides a higher-level definition that can be shared among multiple specific types.
