@@ -1,0 +1,33 @@
+ @ Must have <E> for all method 
+ public static <E> void listAll(E[] list)
+ 
+ @ 
+ public class A{
+  psvm{
+    A.B(para);            //Static method associated with class itself, so need className.methodName(para) if diff class, same class no need
+    }
+  public static <E> void B(E[] list){}
+}
+
+@
+private InstanceVariable;
+
+@ When accept 2 parameter with type Object and type String
+
+@ To retrieve arrayList
+listName.get(indexNo)
+ 
+@ Invoke method
+SAME CLASS STATIC
+methodName(para)
+
+DIFF CLASS STATIC
+methodClass.methodName(para)
+
+SAME CLASS NOT STATIC
+displayWild a = new displayWild();
+        a.listAll(numOfCars);
+
+DIFF CLASS NOT STATIC
+displayWild a = new displayWild();
+a.listAll(para)
