@@ -73,3 +73,24 @@ Q5
             else if (radius == o.radius) {return 0;}
             else{return 1;}
         }
+
+===========
+Tutorial 1
+Q1
+public static void main(String[] args) {
+        Telephone[] phoneArr = new Telephone[5];
+        int number = 79676300;
+        for(int i = 0; i<5; i++){
+            phoneArr[i] = new Telephone("03", number++);
+        }
+        for(int i = 0; i<numberOfTelephoneObject; i++){
+            System.out.println(phoneArr[i].makeFullNumber());
+            
+Q5
+//interface method abstract
+public interface Account {
+    public abstract int deposit(int add);
+    public abstract boolean withdraw(int out);
+}
+        }
+        }
