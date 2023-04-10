@@ -36,6 +36,7 @@ a.listAll(para)
 ==========================================
 Lab
 
+Q3
 public class StorePairGeneric<T extends Comparable<T>> implements Comparable<StorePairGeneric<T>>{}
 
 //b) Override the Object equals() method in the StorePair class
@@ -52,3 +53,23 @@ public boolean equals (Object o){
     }
     
 - Test program can create in the same class as methods above with psvm
+
+Q4
+public class comparison{
+ public static <T extends Comparable<T>> String minmax(T[] arr){}
+ psvm
+}
+
+Q5
+ static class Circle implements Comparable<Circle> {
+        //Circle not generic class, so not Circle<T>
+        //Circle class uses Comparable interface: implements Comparable<Circle> [Type is Circle, as we want to compare Circle]
+        
+ - don't declare final if unsure
+ 
+ @Override
+        public int compareTo(Circle o) {
+            if(radius < o.radius){return -1;}
+            else if (radius == o.radius) {return 0;}
+            else{return 1;}
+        }
