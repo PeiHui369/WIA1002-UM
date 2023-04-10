@@ -31,3 +31,24 @@ displayWild a = new displayWild();
 DIFF CLASS NOT STATIC
 displayWild a = new displayWild();
 a.listAll(para)
+
+
+==========================================
+Lab
+
+public class StorePairGeneric<T extends Comparable<T>> implements Comparable<StorePairGeneric<T>>{}
+
+//b) Override the Object equals() method in the StorePair class
+public boolean equals (Object o){
+        StorePairGeneric<T> other = (StorePairGeneric<T>) o;
+        return this.first.equals(other.first);
+    }
+
+//c) Have the StorePair class implement the Comparable interface. 
+//c) Override the compareTo()method to compare the first values
+@Override
+    public int compareTo(StorePairGeneric<T> o) {
+        return this.first.compareTo(o.first);
+    }
+    
+- Test program can create in the same class as methods above with psvm
