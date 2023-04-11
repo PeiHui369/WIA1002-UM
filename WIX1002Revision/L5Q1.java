@@ -27,3 +27,13 @@ public class L5Q1 {
 
     }
 }
+
+/*
+Enter number of students: 
+10
+List of scores: [29, 80, 88, 14, 97, 0, 66, 59, 24, 9]
+The highest score: 97
+The lowest score: 0
+The average score: 46
+
+*/
