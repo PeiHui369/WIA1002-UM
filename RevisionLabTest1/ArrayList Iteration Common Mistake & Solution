@@ -555,3 +555,65 @@ Output:
 ```
 
 In this updated solution, we use two separate ArrayLists, `elementsToAdd` and `elementsToRemove`, to collect the elements that need to be added or removed during the iteration. After the iteration is complete, we use `list.removeAll()` to remove elements from `elementsToRemove` list, and `list.addAll()` to add elements from `elementsToAdd` list to the original list. This avoids `ConcurrentModificationException` and allows for modifications to the ArrayList during iteration.
+
+
+>> 3 (Wrong Data Type can still run)
+Here's an example code that demonstrates the error of using the wrong data type in a for-each loop:
+
+```java
+import java.util.ArrayList;
+
+public class WrongDataTypeInForEachLoop {
+
+    public static void main(String[] args) {
+        // Create an ArrayList of integers
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+
+        // Incorrect usage of for-each loop with wrong data type
+        for (int num : list) { // Using int instead of Integer
+            System.out.println(num);
+        }
+    }
+}
+```
+
+Output:
+```
+Error: incompatible types: Integer cannot be converted to int
+```
+
+The error occurs because the elements in the ArrayList are of type `Integer`, but the for-each loop is trying to assign them to a primitive `int` variable, resulting in a compilation error.
+
+To fix this issue, you should use the correct data type in the for-each loop, which should match the type of elements in the ArrayList. In this case, you should use `Integer` instead of `int`, like this:
+
+```java
+import java.util.ArrayList;
+
+public class CorrectDataTypeInForEachLoop {
+
+    public static void main(String[] args) {
+        // Create an ArrayList of integers
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+
+        // Correct usage of for-each loop with correct data type
+        for (Integer num : list) { // Using Integer instead of int
+            System.out.println(num);
+        }
+    }
+}
+```
+
+Output:
+```
+1
+2
+3
+```
+
+Using the correct data type in the for-each loop ensures that the elements from the ArrayList are properly assigned to the loop variable without any compilation errors.
