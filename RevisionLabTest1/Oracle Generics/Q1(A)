@@ -1,0 +1,59 @@
+Write a generic method to count the number of elements in a collection that have a specific property (for example, odd integers, prime numbers, palindromes).
+
+Answer:
+public final class Algorithm {
+    public static <T> int countIf(Collection<T> c, UnaryPredicate<T> p) {
+
+        int count = 0;
+        for (T elem : c)
+            if (p.test(elem))
+                ++count;
+        return count;
+    }
+}
+where the generic UnaryPredicate interface is defined as follows:
+public interface UnaryPredicate<T> {
+    public boolean test(T obj);
+}
+For example, the following program counts the number of odd integers in an integer list:
+import java.util.*;
+
+class OddPredicate implements UnaryPredicate<Integer> {
+    public boolean test(Integer i) { return i % 2 != 0; }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Collection<Integer> ci = Arrays.asList(1, 2, 3, 4);
+        int count = Algorithm.countIf(ci, new OddPredicate());
+        System.out.println("Number of odd integers = " + count);
+    }
+}
+The program prints:
+Number of odd integers = 2
+
+Explanation:
+Sure! Let's break down the code step by step:
+
+1. Generic Method: `countIf(Collection<T> c, UnaryPredicate<T> p)`
+The `countIf` method is a generic method that takes in a collection `c` of type `T` (where `T` is a generic type parameter) and a `UnaryPredicate<T>` `p` (where `UnaryPredicate` is an interface with a generic type parameter `T`).
+
+2. `UnaryPredicate` Interface: `public interface UnaryPredicate<T> { public boolean test(T obj); }`
+The `UnaryPredicate` interface is defined with a single method `test` that takes in an object of type `T` and returns a boolean value. This interface is used to define the property that we want to check for each element in the collection.
+
+3. Implementation of `countIf` Method
+Inside the `countIf` method, we initialize a counter `count` to 0. Then, we iterate over each element `elem` in the collection `c` using a for-each loop.
+
+4. `p.test(elem)` - Checking Property
+For each element `elem`, we call the `test` method on the `UnaryPredicate` object `p` and pass in `elem` as the argument. This method returns a boolean value, indicating whether `elem` satisfies the property defined by the `UnaryPredicate` implementation.
+
+5. Counting Elements that Satisfy the Property
+If the property is satisfied (i.e., `test` returns `true`), we increment the `count` by 1.
+
+6. Returning the Count
+After iterating over all the elements in the collection, we return the final count, which represents the number of elements in the collection that satisfy the given property.
+
+7. Usage in Example
+In the example code, a `Collection<Integer>` is created with values 1, 2, 3, and 4. Then, the `countIf` method is called with this collection and an instance of `OddPredicate` (which implements the `UnaryPredicate` interface) as arguments. The `OddPredicate` implementation checks for odd integers, and the `countIf` method returns the count of odd integers in the collection, which is 2 in this case.
+
+This way, the `countIf` method can be used with different collections and different `UnaryPredicate` implementations to count elements that satisfy various properties, making it a generic and reusable solution.
