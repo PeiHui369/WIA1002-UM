@@ -94,3 +94,22 @@ public interface Account {
 }
         }
         }
+
+======
+Lab1
+Q3
+//static variable?
+private java.util.Date dateCreated;
+Account(){
+        dateCreated = new java.util.Date(); //in all constructor
+    }
+    
+public java.util.Date getDateCreated(){
+        return dateCreated;
+    }
+
+Q4 (REFER ANS)
+    
+    
+    
+    
