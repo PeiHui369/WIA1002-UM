@@ -1,0 +1,11 @@
+Write a generic method to exchange the positions of two different elements in an array.
+
+Answer:
+public final class Algorithm {
+    public static <T> void swap(T[] a, int i, int j) {
+        T temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }
+}
+
