@@ -74,3 +74,53 @@ public static void print(List<? extends Number> list) {
     System.out.println();
 }
 Answer: Yes.
+
+9.
+Will the following class compile? If not, why?
+public class Singleton<T> {
+
+    public static T getInstance() {
+        if (instance == null)
+            instance = new Singleton<T>();
+
+        return instance;
+    }
+
+    private static T instance = null;
+}
+Answer: No. You cannot create a static field of the type parameter T.
+
+10.
+Given the following classes:
+class Shape { /* ... */ }
+class Circle extends Shape { /* ... */ }
+class Rectangle extends Shape { /* ... */ }
+
+class Node<T> { /* ... */ }
+Will the following code compile? If not, why?
+Node<Circle> nc = new Node<>();
+Node<Shape>  ns = nc;
+Answer: No. Because Node<Circle> is not a subtype of Node<Shape>. //Circle is a subtype of Shape
+
+In Java, a subtype is a class or interface that is derived from another class or interface, also known as the superclass or superinterface, respectively. A subtype inherits the properties (fields and methods) of its superclass or superinterface, and can also override or add additional properties.
+
+In the given example, `Circle` and `Rectangle` are subtypes of `Shape`, as they inherit from the `Shape` class. Similarly, `Node<T>` is a generic class, and `Node<Circle>` and `Node<Shape>` are both possible instantiations of the generic class `Node<T>`, where `T` can be replaced with any type. However, `Node<Circle>` is not a subtype of `Node<Shape>`, even though `Circle` is a subtype of `Shape`.
+
+This is because generic types in Java are not covariant, which means that `Node<Circle>` is not considered a subtype of `Node<Shape>`, even though `Circle` is a subtype of `Shape`. This is to ensure type safety, as allowing such assignment could lead to potential type mismatches at runtime.
+
+To define a subtype, you need to create a class or interface that extends or implements another class or interface, respectively. The concept of subtyping is inherent to the Java programming language and is not something that needs to be predefined or explicitly defined in the system. Subtyping is a fundamental principle of object-oriented programming, where classes can inherit from other classes and create a hierarchy of related types.
+
+### A implements/extends B, A is a subtype of B BUT Class<A> is not a subtype of Class<B>
+
+11.
+Consider this class:
+class Node<T> implements Comparable<T> {
+    public int compareTo(T obj) { /* ... */ }
+    // ...
+}
+Will the following code compile? If not, why?
+Node<String> node = new Node<>();
+Comparable<String> comp = node;
+Answer: Yes.
+
+12. //Revise
