@@ -1,0 +1,67 @@
+How do you invoke the following method to find the first integer in a list that is relatively prime to a list of specified integers?
+public static <T>
+    int findFirst(List<T> list, int begin, int end, UnaryPredicate<T> p)
+Note that two integers a and b are relatively prime if gcd(a, b) = 1, where gcd is short for greatest common divisor.
+
+Answer:
+import java.util.*;
+
+public final class Algorithm {
+
+    public static <T>
+        int findFirst(List<T> list, int begin, int end, UnaryPredicate<T> p) {
+
+        for (; begin < end; ++begin)
+            if (p.test(list.get(begin)))
+                return begin;
+        return -1;
+    }
+
+    // x > 0 and y > 0
+    public static int gcd(int x, int y) {
+        for (int r; (r = x % y) != 0; x = y, y = r) { }
+            return y;
+    }
+}
+The generic UnaryPredicate interface is defined as follows:
+public interface UnaryPredicate<T> {
+    public boolean test(T obj);
+}
+The following program tests the findFirst method:
+import java.util.*;
+
+class RelativelyPrimePredicate implements UnaryPredicate<Integer> {
+    public RelativelyPrimePredicate(Collection<Integer> c) {
+        this.c = c;
+    }
+
+    public boolean test(Integer x) {
+        for (Integer i : c)
+            if (Algorithm.gcd(x, i) != 1)
+                return false;
+
+        return c.size() > 0;
+    }
+
+    private Collection<Integer> c;
+}
+
+public class Test {
+    public static void main(String[] args) throws Exception {
+
+        List<Integer> li = Arrays.asList(3, 4, 6, 8, 11, 15, 28, 32);
+        Collection<Integer> c = Arrays.asList(7, 18, 19, 25);
+        UnaryPredicate<Integer> p = new RelativelyPrimePredicate(c);
+
+        int i = ALgorithm.findFirst(li, 0, li.size(), p);
+
+        if (i != -1) {
+            System.out.print(li.get(i) + " is relatively prime to ");
+            for (Integer k : c)
+                System.out.print(k + " ");
+            System.out.println();
+        }
+    }
+}
+The program prints:
+11 is relatively prime to 7 18 19 25
