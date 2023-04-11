@@ -4,10 +4,101 @@ Referred:
 @2
 non-duplicate random value
 i. contains method
+for(int i = 0; i<n; i++){
+            int num = random.nextInt((end-start)+1)+start;
+            //Check if the generated number already exists in the array
+            while(contains(numbers, num)){ //#WHILE to keep checking
+                num = random.nextInt((end-start)+1)+start;
+            }
+            numbers[i] = num;
+        }
+
+ public static boolean contains(int[] arr, int num){
+        for (int j : arr) {
+            if (j == num) {
+                return true;
+            }
+        }
+        return false;
+    }
 ii. HashSet
+ HashSet<Integer> set = new HashSet<Integer>();
+
+        while(set.size()<10){
+            set.add((int)Math.random() *20 + 1);
+        }
+        
+        set.forEach(x->System.out.print(x + " "));
+        
 @5
 BinarySearch & LinearSearch
+  
+    static void linearSearch(int[] array, int n) {
+
+        int loopCount = 0;
+
+        for (int i: array) {
+            if (i == n) { break; }
+            loopCount++;
+        }
+
+        if (loopCount < array.length) {
+            System.out.printf("%d found\nLinear Search - %d loop(s)\n", n, loopCount);
+        }else{
+            System.out.println("Not found");
+        }
+    }
+
+    static void binarySearch(int[] array, int n) {
+        int low = 0, high = array.length-1, mid = 0, loop=0;
+        while (low < high){
+            mid = (low + high)/2;
+            if( n == array[mid]){System.out.println(mid);}
+            else if( n > array[mid]){low = mid+1; } //n is on right side
+            else {high = mid -1;} //n is on left side
+        loop++;
+        }
+        if(mid == n){
+        System.out.println("Binary Search - "+loop+" loop(s)");}
+        else{System.out.println("Not found");}
+    }
 
 Skip:
 @4 (rotate 90 degree 3x3 matrix)
+for(int i = 0, j = matrix.length-1; i < matrix.length; i++, j--) {  
+                matrix2[0][j] = matrix[i][0];                               
+                matrix2[1][j] = matrix[i][1];                               
+                matrix2[2][j] = matrix[i][2];                               
+            }
 @6 Pascal Triangle
+import java.util.Scanner;
+
+public class Main {
+    public int factorial(int i) {
+        if (i == 0)
+            return 1;
+        return i * factorial(i - 1);
+    }
+
+    public static void main(String[] args) {
+        Scanner keyboard = new Scanner(System.in);
+        System.out.print("Enter the number of rows of Pascal Triangle to generate: ");
+        int n = keyboard.nextInt();
+
+        int i, j, k;
+        Main g = new Main();
+        for (i = 0; i < n; i++) {
+
+            for (j = 0; j <= i; j++) {
+                // nCr formula
+                System.out.print(g.factorial(i) / (g.factorial(i - j) * g.factorial(j)));
+            }
+            for (k = n - 1 - i ; k > 0; k--) {
+                System.out.print(0);
+            }
+            
+            // for newline
+            System.out.println();
+        }
+    }
+}
