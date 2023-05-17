@@ -1,0 +1,13 @@
+Write a program that contains a generic method that reverses the order of the elements
+within a stack data structure using recursion. In addition, write the main method to test
+the static method. Two sets of test data should be used in the main method: i) {“Switch”,
+“Motherboard”, “RAM”, “SSD”, “CPU”, “GPU”, “Router”}; and ii) {17, 21, 45, 23, 1, 99,
+16}. No marks will be awarded if the stack and recursion concepts are not applied in the
+program.
+
+- reverse order of ele within a stack using recursion
+- main method to test static method
+- 2 sets of test data:
+i {"Switch", "Motherboard", "RAM", "SSD", "CPU", "GPU", "Router"}
+ii {17, 21, 45, 23, 1, 99, 16}
+
