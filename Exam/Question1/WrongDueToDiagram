@@ -1,0 +1,11 @@
+Write the sequence of the nodes if the tree is traversed with:
+i. inorder traversal
+ii. postorder traversal
+
+i. Inorder traversal visits the left subtree, then the current node, and finally the right subtree.
+13 -> 18 -> 25 -> 27 -> 28 -> 30 -> 33 -> 39 -> 41 -> 42 -> 45 -> 66 -> 70 -> 82
+
+ii. Postorder trqaversal visits the left subtree then the right subtree, and finally the current node.
+18 -> 25 -> 13 -> 28 -> 33 -> 30 -> 41 -> 42 -> 39 -> 27 -> 80 -> 82 -> 66 -> 45
+
+//The sequences provided above assume a depth-first traversal where the left child is visited before the right child
