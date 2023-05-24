@@ -1,0 +1,37 @@
+Implementation of a generic Queue using ArrayList (ArrayListQueue<E>):
+
+import java.util.ArrayList;
+
+public class ArrayListQueue<E> {
+    private ArrayList<E> elements;
+
+    public ArrayListQueue() {
+        elements = new ArrayList<>();
+    }
+
+    public void enqueue(E e) {
+        elements.add(e);
+    }
+
+    public E dequeue() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty.");
+        }
+        return elements.remove(0);
+    }
+
+    public E getElement() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty.");
+        }
+        return elements.get(0);
+    }
+
+    public boolean isEmpty() {
+        return elements.isEmpty();
+    }
+
+    public int size() {
+        return elements.size();
+    }
+}
