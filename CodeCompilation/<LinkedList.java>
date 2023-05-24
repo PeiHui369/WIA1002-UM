@@ -116,4 +116,217 @@ public E remove(int index){
     return current.element;
   }
 }
-   
+
+<T>
+@ contains *
+public boolean contains (E e){
+  return indexOf(element) >= 0;
+}
+
+@ get *
+public E get (int index){
+  checkPositionIndex(index);
+  return node(index).element;
+}
+
+@ getFirst *
+public E getFirst(){
+  final Node<E> h = head;
+  if (h == null) {throw new NoSuchElementException();}
+  return h.element;
+}
+
+@ getLast *
+public E getLast(){
+  final Node<E> t = tail;
+  if (t == null) {throw new NoSuchElementException();}
+  return t.element;
+}
+
+@ indexOf
+public int indexOf(E element){
+  int index = 0;
+  if(element == null) {
+    for(Node<E> node = head; node != null; node = node.next){
+      if(node.element == element){
+        return index;
+      }
+      index++;
+  }else{
+    for(Node<E> node = head; node != null; node = node.next){
+      if(node.element.equals(element)){
+        return index;
+      }
+      index++;
+    }
+  }
+  return -1;
+}
+
+
+@ lastIndexOf
+public int lastIndexOf(E element){
+  int index = -1;
+  int i = 0;
+  if(element == null){
+    for(Node<E> node = head; node != null; node = node.next){
+      if(node.element == element){
+        index = i;
+      }
+      i++;
+    }
+  }else{
+    for(Node<E> node = head; node != null; node = node.next){
+      if(node.element.equals(element)){
+        index = i;
+      }
+      i++:
+    }
+  }
+  return index;
+}
+
+@ set *
+public E (int index, E e){
+  checkPositionIndex(index);
+  Node<E> node = node(index);
+  E oldVal =  node.element;
+  node.element = e;
+  return oldVal;
+}
+
+@ clear
+public void clear(){
+  for(Node<E> current = head; current != null; ){
+    Node<E> pointer = current.next;
+    current.next = null;
+    current.element = null;
+    current = pointer;
+  }
+  head = tail = null;
+  size = 0;
+}
+
+@ print
+public void print(){
+  if(head == null && tail == null) {System.out.println("[ ]");}
+  else{
+    Node<E> node = head;
+    System.out.print("[");
+    for(int i = 0; i<size; i++){
+      System.out.print(node.element + ((i==size-1)? "": ", ");
+      node = node.next;
+    }
+    System.out.println("]");
+  }
+}
+  
+
+@ reverse
+public void reverse(){
+  if(head == null && tail == null) {System.out.println("[ ]");
+  else{
+    String s = head.element + "";
+    for(Node<E> node = head.next; node != null; node = node.next){
+      s = node.element + ", " + s;
+    }
+    System.out.printf("[%s]\n, s);
+ }
+ @
+ public void reverse(){
+  Node<E> prev = null;
+  Node<E> current = head;
+  Node<E> next = null;
+  
+  while (current != null) {
+    next = current.next;
+    current.next = prev;
+    prev = current;
+    current = next;
+  }
+  
+  head = prev;
+}
+
+@ middle value
+public E getMiddleValue(){
+  if(size == 0) {throw new NoSuchElementException();}
+  return node(size>>1).element;
+}
+
+>>ADDITIONAL SELF IMPLEMENT
+//Tells if the argument is the index of a valid position for an interator or an add operation
+private boolean isPositionIndex (int index){
+  return index>=0 && index<=size;
+}
+
+private void checkPositionIndex(int index){
+  if(!isPositionIndex(index)){
+    throw new IndexOutOfBoundsException(outOfBoundsMesg(index));
+  }
+}
+
+private String outOfBoundMsg(int index){
+  return "Index: " + index + ", Size: " + size;
+}
+
+// Return the (non-null) Node at the specified element index
+Node<E> node(int index){
+  Node<E> node = head;
+  for(int i = 0; i<index; i++){
+    node = node.next;
+  }
+  return node;
+}
+
+public int size(){
+  return this.size；
+}
+
+>> TEST
+package Lab4;
+
+public class TestLinkedList {
+	public static void main(String[] args) {
+		MyLinkedList<Character> ls = new MyLinkedList<>();
+		
+		// a.
+		for(char ch = 'a'; ch <= 'e'; ch++)
+			ls.addLast(ch);
+		
+		// b.
+		ls.print();
+		
+		// c.
+		ls.reverse();
+		
+		// d.
+		System.out.println("Number of elements: " + ls.size());
+		
+		// e.
+		System.out.println("First value: " + ls.getFirst());
+		System.out.println("Last value: " + ls.getLast());
+		
+		// f.
+		System.out.println("Middle value: " + ls.getMiddleValue());
+		ls.remove(ls.size() / 2);
+		
+		// g.
+		System.out.printf("Second value = %c, Third value = %c\n", ls.get(1), ls.get(2));
+		
+		// h.
+		System.out.println("LinkedList contains 'c' is " + ls.contains('c'));
+		
+		// i.
+		char[] chars = "java".toCharArray();
+		
+		int i = 0;
+		for(; i < ls.size(); i++)
+			ls.set(i, chars[i]);
+		for(; i < chars.length; i++)
+			ls.addLast(chars[i]);
+		
+		ls.print();
+		
+	}
+}
