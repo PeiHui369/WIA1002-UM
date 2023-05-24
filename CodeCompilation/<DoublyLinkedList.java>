@@ -1,0 +1,168 @@
+@ Node Class
+public class Node<E>{
+  E element;
+  //each node consist of 2 pointers next and prev ("variable of type object")
+  Node<E> next;
+  Node<E> prev;
+  
+  public Node(E element, Node next, Node prev){
+    //set the vlaue & pointers to nodes
+    this.element = element;
+    this.next = next;
+    this.prev = prev;
+  }
+  
+  public Node(E element){
+    this(element, null, null);
+  }
+}
+
+@ Definition
+public class DoublyLinkedList<E>{
+  private Node<E> head;
+  private Node<E> tail;
+  private int size;
+  
+  public DoublyLinkedList(){
+      size = 0;
+      this.head = null;
+      this.tail = null;
+  }
+  
+@ addFirst(E element)
+public void addFirst(E element){
+  Node<E> tmp = new Node(element, head, null);
+  if(head ！= null) {head.prev = tmp;}           //ori head element exist
+  head = tmp;
+  if(tail == null) {tail = tmp;}                //no other element except this new 
+  size++;
+  System.out.println("adding: " + element);
+}
+
+@ addLast(E element)
+public void addLast(E element){
+  Node<E> tmp = new Node(element, null, tail);
+  if(tail != null) {tail.next = tmp;}            
+  tail = tmp;
+  if(head == null) {head = tmp;}
+  size++;
+  System.out.println("adding: " + element);
+}
+
+@ add(int index, E element)
+public void add (int index, E element){
+  //index can only be 0-size()
+  if(index<0 || index>size) {
+    throw new IndexOutOfBoundException();
+  }
+  if(index == 0){
+    addFirst(element);
+  }
+  else if(index == size){
+    addLast(element);
+  }
+  else{
+    /*set from head and begin traverse
+    stop on required position*/
+    Mode<E> temp = head;
+    for(int i=0; i<index; i++){
+      temp = temp.next;
+    }
+    /* create object insert and set pointer of the next pointer 
+    to the temp node and also set pointer of the prev pointer to the temp.prev node
+    */
+    Node<E> insert = new Node(element, temp, temp.prev);
+    //set pointer 'next' of the node temp.prev to new node insert
+    temp.prev.next = insert
+    temp.prev = insert;
+    size++;
+    }
+  }
+  
+@ Traversing forward
+public void iterateForward(){
+  System.out.println("iterating forward..");
+  Node<E> tmp = head;
+  while (tmp != null){
+    System.out.print(tmp.element);
+      System.out.print(" ");
+    tmp = tmp.next;
+  }
+}
+
+@ Traversing backward
+public void iterateBackward(){
+  System.out.println("iterating backward..");
+  Node<E> tmp = tail;
+  while(tmp != null){
+    System.out.println(tmp.element);
+    tmp = tmp.prev;
+  }
+}
+
+@ removeFirst()
+public E removeFirst(){
+  if(size == 0) {throw new NoSuchElementException();}
+  //copy head to node tmp
+  Node<E> tmp = head;
+  //head.next become a head
+  head = head.next;
+  //set pointer of prev of new head to be null
+  head.prev = null;
+  //reduce no. of node
+  size--;
+  System.out.println("deleted: " + tmp.element);
+  return tmp.element;
+}
+
+@ removeLast()
+public E removeLast(){
+  if(size == 0) {throw new NoSuchElementException();}
+  //copy tail to node tmp
+  Node<E> tmp = tail;
+  //tail.prev become a tail
+  tail = tail.prev;
+  //set pointer of next of new tail to be null
+  tail.next = null;
+  //reduce no. of node
+  size--;
+  System.out.println("deleted: " + tmp.element);
+  return tmp.element;
+}
+
+@ remove(int index)
+public E remove(int index){
+  E element = null;
+  if(index<0 || index>=size) {throw new IndexOutOfBoundsException();}
+  if(index==0) {element = removeFirst();}
+  else if(index==size-1) {element = removeLast();}
+  else{
+    Node<E> temp = head;
+    for(int i=0; i<index; i++){
+      temp = temp.next;
+    }
+    element = temp.element;
+    temp.next.prev = temp.prev;
+    temp.prev.next = temp.next;
+    //temp.next.prev: prev here is referring to the prev variable of the next node after index 2, namely, the node at index 3
+    temp.next = null;
+    //temp.prev.next: next here is referring to the next variable of the prev node before index 2, namely, the node at index 1
+    temp.prev = null;
+    size--;
+  }
+  return element;
+}
+    
+@ clear()
+public void clear(){
+  Node<E> temp = head;
+  while(head != null){
+    temp = head.next;
+    head.prev = head.next = null;
+    head = temp;
+  }
+  temp = null;
+  tail.prev = tail.next = null;
+  size = 0;
+}
+
