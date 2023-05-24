@@ -76,3 +76,8 @@ For example, there is an edge between vertices C and D, as indicated by the valu
 
 */
 
+int[][] matrix = {
+    {},
+    {},
+}
+// 2D: Matrix
