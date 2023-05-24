@@ -25,3 +25,7 @@ G     H
 H     I
 I
 
+// Relatively simple/unidirection graph: Use list instead of matrix <- Memory consumption
+// Complex (Self looping, More edges, to and fro): list/ matrix
+// As long as no. of 1 occupy anything >80% -> Matrix (below 80%: list)
+// 0 = nothing -> wasteful of memory
