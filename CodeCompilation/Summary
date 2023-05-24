@@ -1,0 +1,24 @@
+STACK
+- LIFO
+- ArrayList
+- pop(), push(), peek() // top()
+
+
+QUEUE
+- FIFO
+- LinkedList
+- enqueue & dequeue
+
+PRIORITY QUEUE
+- Largest in, first out
+@ offer(E e)
+add element [returns boolean]
+@ remove(Object o)
+add element [boolean]
+@ peek()
+retrieve, but not remove head [E]
+@ poll()
+retrieve & remove head [E]
+@ clear() [void]
+@ size() [int]
+@ contains(Object o) [boolean]
