@@ -1,0 +1,14 @@
+bfs
+Examine layer by layer (Step by step)
+slower (Consider every single option, have benchmarking)
+Can find the shortest path
+- based on vertex
+
+dfs
+Find 1 solution and stop
+quicker (X examine neighbours)
+May trapped in infinite loop (if any node have self looping)
+- based on edges
+
+(time complexity same)
+Space complexity: bfs > dfs
