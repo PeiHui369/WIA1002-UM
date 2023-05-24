@@ -1,0 +1,36 @@
+In the provided code snippet, there are two instances of `PriorityQueue`: `queue1` and `queue2`. 
+One uses the default ordering (using `Comparable`) while the other uses a custom ordering (using `Comparator`). 
+Let's discuss the differences between using a comparator and an iterator, 
+as well as the difference between a priority queue using `Comparable` or `Comparator`.
+
+1. Queue Using Comparator vs. Iterator:
+   - Comparator: In the `PriorityQueue` with a custom comparator (`queue2`), the elements are ordered according to the specified `Comparator` provided during the queue's initialization. 
+   The `Comparator` defines the comparison logic for the elements in the queue. 
+   The `poll()` operation retrieves and removes the element based on the specified order defined by the comparator.
+   
+   - Iterator: The `iterator()` method returns an iterator for the `PriorityQueue`, allowing you to traverse through the elements sequentially. 
+   However, the iterator does not change the order of the elements in the queue or affect their priority.
+   It simply provides a way to access each element in the queue one by one.
+
+2. Priority Queue Using Comparable vs. Comparator:
+   - Comparable: In the `PriorityQueue` without a custom comparator (`queue1`), the elements are ordered based on their natural ordering defined by the `Comparable` interface. 
+   The elements in the queue must implement the `Comparable` interface, which provides the comparison logic for the elements. 
+   The `poll()` operation retrieves and removes the element based on their natural order.
+   - Comparator: In the `PriorityQueue` with a custom comparator (`queue2`), the elements are ordered according to the comparison logic defined by the provided `Comparator`. 
+   This allows you to define a specific ordering for the elements that may be different from their natural ordering. 
+   The `poll()` operation retrieves and removes the element based on the order defined by the comparator.
+
+In summary, using a comparator or iterator in a priority queue serves different purposes:
+- Comparator: Defines the ordering of elements in the queue, allowing you to customize the priority of elements according to your specific requirements.
+- Iterator: Provides a way to traverse through the elements in the queue sequentially, without affecting their priority or order.
+
+Using `Comparable` or `Comparator` in a priority queue determines the basis for the ordering of elements:
+- Comparable: Uses the natural ordering of elements defined by the `compareTo()` method implemented by the elements themselves.
+- Comparator: Uses a custom comparison logic defined by the `compare()` method implemented in a separate `Comparator` class, allowing you to specify a specific ordering independent of the element's implementation of `Comparable`.
+
+@ Queue
+Comparator: defines ordering
+Iterator: Traverse through
+@ Priority Queue
+Comparable: natural ordering
+Comparator: specific ordering
