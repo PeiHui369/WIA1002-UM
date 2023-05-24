@@ -1,0 +1,58 @@
+1. The addEdge method in WeightedGraph.java adds only directed edges. Create an addUndirectedEdge method that creates undirected edges. This method receives two vertices and a weight and return a boolean. 
+
+Directed: A -> B
+Undirected: A -> B and B -> A
+
+public boolean addUndirectedEdge(T v1, T v2, N w){
+  boolean a,b;
+  a = addEdge (v1, v2, w);
+  b = addEdge (v2, v1, w);
+  return (a && b);
+}
+
+2. 
+if(head == null){return false;}
+if(!hasVertex(source) && !hasVertex(destination)){return false;}
+Vertex<T,N> sourceVertex = head;
+//The vertex are stored as a linkedlist in the graph
+while(sourceVertex!=null){
+  //Check whether the currVertex is equal to the provided source
+  if(sourceVertex.vertexInfo.compareTo(source) == 0){
+    //Reaches source vertex, look for destination vertex
+    //Look for destination by going through each of the edge
+    Edge<T,N> currentEdge = sourceVertex.firstEdge;
+    //TODO: Need to check whether first edge is equal to the target destination
+    while(currentEdge!=null){
+      //destination vertex found
+      if(currentEdge.nextEdge.toVertex.vertexInfo.compareTo(destination) == 0){
+        //set the current next edge to current next next edge (skip the next value)
+        current.nextEdge=currentEdge.nextEdge.nextEdge;
+        return true;
+      }
+      
+      
+     previousEdge.nextEdge = currentEdge.nextEdge
+     e1 -> e2 -> e3
+     e2.toVertex === destination
+     e1 -> e3
+     
+public boolean removeEdge(T source, T destination){
+  if (!hasEdge(source, destination)){
+    return false;
+  }
+  Vertex<T,N> temp = head;
+  while(temp!=null){
+    if(temp.vertexInfo.compareTo(source) == 0){
+      //Reached vertex, start
+      
+3.
+addEdge(source, destination, 1); //unweighted
+addEdge(source, destination, null); //unweighted
+
+
+
+
+
+
+
+
