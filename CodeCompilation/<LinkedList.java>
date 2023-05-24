@@ -1,0 +1,119 @@
+
+
+@ Node class
+class Node<E>{
+  E element;          //Contains the element
+  Node<E> next;       //A reference to the next node
+  
+  public Node(E o){
+    element = o;
+  }
+  
+}
+
+@ Adding 3 nodes
+Node<String> head = null;
+Node<String> tail = null;
+head = new Node<>("Chicago");
+tail = head;
+tail.next = new Node<>("Denver");
+tail = tail.next;
+tail.next = new Node<>("Dallas");
+tail = tail.next;
+
+@ Traversing all elements in lists
+Node<E> current = head;
+while(current != null){
+  System.out.println(current.element);
+  current = current.next;               //continuously moving forward
+}
+
+@ addFirst(E e)
+public void addFirst(E e){
+  Node<E> newNode = new Node<>(e);
+  newNode.next = head;              //Create pointer to current head
+  head = newNode;                   //new node created and assigned to new head
+  size++;                           //increase size
+  if(tail == null){                 //no node exist
+    tail = head;
+  }
+}
+
+@ addLast(E e)
+public void addLast(E e){
+  if(tail == null){                 //no node exist
+    head = tail = new Node<>(e);
+  }
+  else{
+    tail.next = new Node<>(e);      //tail.next point to new Node
+    tail = tail.next;               
+  }
+  size++;
+}
+
+@ add(int index, E e)
+public void add(int index, E e){
+  if(index==0){addFirst(e);}            //since requested to add at index 0
+  else if(index >= size){addLast(e);}   //since requested to add at index = size
+  else{
+    Node<E> current = head;             //set head to be a current node
+    for(int i = 1; i<index; i++){       //traverse & stop before requested index
+      current = current.next;
+    }
+    Node<E> temp = current.next;        //hold reference current.next
+    current.next = new Node<>(e);       //current.next point to new node
+    (current.mext).next = temp;         //get the reference from temp
+    size++;
+}
+  
+@ removeFirst()
+public E removeFirst(){
+  if(size == 0){ return null;}          //no node then return null
+  else{
+    Node<E> temp = head;                //copy head to temp node before delete
+    head = head.next;                   //set new head
+    size--;                             //reduce size
+    if(head == null){tail = null;}      //no more nodes
+    return temp.element;
+  }
+}
+
+@ removeLast()
+public E removeLast(){
+  if(size == 0){return null;}
+  else if(size == 1){                    //only 1 node
+    Node<E> temp = head;
+    head = tail = null;                  //reset pointer to null
+    size = 0;
+    return temp.element;                 //to know what we delete
+  }
+  else{
+    Node<E> current = head;
+    for(int i=0; i<size-2; i++){
+      current = current.next;             //Stop 1 node before tail
+    }
+    Node<E> temp = tail;                  //Copy tail to temp b4 delete
+    tail = current;                       //current become tail
+    tail.next = null;                     //reset the next for tail to be null
+    size--;
+    return temp.element;
+  }
+}
+
+@ remove (int index)
+public E remove(int index){
+  if(index < 0 || index >= size){return null;}    //try to delete index of node not in range
+  else if(index == 0){return removeFirst();}      
+  else if(index == size-1){return removeLast();}
+  else{
+    Node<E> previous = head;  
+    for(int i=1; i<index; i++){
+      previous = previous.next;                  //try to strop at previous before index that want to be deleted
+    }
+    Node<E> current = previous.next;             //copy previous.next to current
+    previous.next = current.next;                //set new point to from previous.next to current.next
+    size--;                                     
+    return current.element;
+  }
+}
+   
