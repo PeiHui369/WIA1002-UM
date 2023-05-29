@@ -1,0 +1,218 @@
+Question 1
+public static int f(int n) {
+    if (n == 0)
+        return 1;
+    else
+        return n * f(n-1);
+}
+
+//
+The recursive method `f(n)` calculates the factorial of a given number `n`. However, there is an issue when executing the method with an input of `0`, i.e., `f(0)`.
+
+Let's go through the execution of `f(0)` step by step:
+
+1. The method is called with `n` equal to `0`.
+2. The condition `n == 1` is checked. Since `0` is not equal to `1`, the else block is executed.
+3. The method returns `n * f(n-1)`, which becomes `0 * f(-1)`.
+
+At this point, we encounter a problem because the next recursive call is `f(-1)`. In subsequent recursive calls, the value of `n` keeps decreasing by `1` each time until it reaches a negative value. This leads to an infinite recursion loop, resulting in a `StackOverflowError`.
+
+To fix this issue and make the method work correctly, we need to update the base case condition to check for `n == 0` and return `1` when `n` equals `0`. Here's the updated code:
+
+```java
+public static int f(int n) {
+    if (n == 0)
+        return 1;
+    else
+        return n * f(n-1);
+}
+```
+
+With this fix, when `n` is `0`, the base case will be triggered, and the method will return `1` immediately. This ensures that the factorial calculation works correctly for all positive integers and handles the special case of `0` appropriately.
+
+===
+Question 2
+public static int f(int n) {
+    if (n == 0)
+        return 0;
+    else if (n > 0)
+        return f(n - 1) + n;
+    else
+        return f(n + 1) + n;
+}
+
+---
+The recursive method `f(n)` appears to calculate the sum of all positive integers from `n` to `0`. However, there is a problem when executing the method due to an infinite recursion loop.
+
+Let's walk through the execution of `f(n)` step by step:
+
+1. The method is called with a value of `n`.
+2. The condition `n == 0` is checked. If `n` is equal to `0`, the method should return `0`. However, in this case, the method returns `n` (which is `0`) without proceeding to the else block.
+3. If the method reaches the else block, it executes the statement `return f(n+1) + n`. This implies that the method will call itself with an incremented value of `n` (`n+1`).
+4. Due to the recursive call, the method starts an infinite loop where it continuously calls itself with `n+1`. Since there is no termination condition that will break the loop, it results in an infinite recursion.
+
+As a result, executing the method `f()` will eventually lead to a `StackOverflowError` due to the infinite recursion loop.
+
+To resolve this issue, we need to adjust the termination condition in the base case. Instead of checking `n == 0`, we should check for a specific condition that stops the recursion and returns a value without further recursive calls.
+
+Here's an example of a corrected implementation that calculates the sum of all positive integers from `n` to `0`:
+
+```java
+public static int f(int n) {
+    if (n == 0)
+        return 0;
+    else if (n > 0)
+        return f(n - 1) + n;
+    else
+        return f(n + 1) + n;
+}
+```
+
+In this updated code, if `n` is equal to `0`, the base case is triggered, and the method returns `0`. Additionally, we added an extra condition `n > 0` to handle the case where `n` is negative. In this case, the method recursively calls itself with `n-1` to move closer to `0`.
+
+By properly handling the termination conditions, we avoid the infinite recursion loop and allow the method to calculate the desired sum of positive integers correctly.
+
+===
+Question 3
+public class StringReverser {
+    public static String reverseString(String str) {
+        // Base case: if the string is empty or has only one character, it's already reversed
+        if (str.length() <= 1) {
+            return str;
+        }
+        
+        // Recursive case: reverse the substring starting from the second character and concatenate it with the first character
+        return reverseString(str.substring(1)) + str.charAt(0);
+    }
+    
+    public static void main(String[] args) {
+        String original = "Hello, World!";
+        String reversed = reverseString(original);
+        System.out.println("Original string: " + original);
+        System.out.println("Reversed string: " + reversed);
+    }
+}
+
+---
+In this example, the `reverseString()` method takes a string as an argument and recursively reverses it. 
+The base case checks if the string has zero or one character and returns it as is. 
+In the recursive case, the method recursively calls itself with a substring starting from the second character and concatenates it with the first character of the original string. 
+Finally, in the `main()` method, an example string is reversed using the `reverseString()` method, and both the original and reversed strings are printed.
+
+===
+Question 4
+
+To calculate the sum of numbers from `N` to 1:
+
+public class NumberSumCalculator {
+    public static int calculateSum(int n) {
+        // Base case: when n is 1, return 1
+        if (n == 1) {
+            return 1;
+        }
+
+        // Recursive case: sum n with the sum of numbers from (n-1) to 1
+        return n + calculateSum(n - 1);
+    }
+
+    public static void main(String[] args) {
+        int N = 5;
+        int sum = calculateSum(N);
+        System.out.println("Sum of numbers from " + N + " to 1: " + sum);
+    }
+}
+
+---
+In this code, the `calculateSum()` method takes an integer `n` as input and calculates the sum of numbers from `n` down to 1.
+
+The algorithm consists of two cases:
+
+1. Base case: When `n` is equal to 1, we have reached the smallest number in the series. In this case, we return 1 as the sum of that single number.
+2. Recursive case: For any other positive value of `n`, we add `n` to the sum of the numbers from `(n-1)` down to 1. This is achieved by recursively calling the `calculateSum()` method with `n-1` and adding `n` to the result.
+
+By following this algorithm, we can calculate the sum of numbers from `N` down to 1 recursively.
+
+For example, if we set `N` to 5, the trace of the recursive calls would be as follows:
+
+```
+calculateSum(5)
+    |
+    └── calculateSum(4)
+        |
+        └── calculateSum(3)
+            |
+            └── calculateSum(2)
+                |
+                └── calculateSum(1)
+```
+
+The base case is reached when `n` is 1, and the method returns 1. As the recursion unwinds, the sums are calculated and returned as follows:
+
+```
+calculateSum(5) = 5 + calculateSum(4)
+calculateSum(4) = 4 + calculateSum(3)
+calculateSum(3) = 3 + calculateSum(2)
+calculateSum(2) = 2 + calculateSum(1)
+calculateSum(1) = 1
+```
+===
+Question 5
+
+To print an integer argument as its constituent digits with a space between each digit:
+
+public class DigitPrinter {
+    public static void printDigit(int number) {
+        if (number < 10) {
+            // Base case: if number is a single digit, print it
+            System.out.print(number + " ");
+        } else {
+            // Recursive case: print the digits of number/10, then print the last digit
+            printDigit(number / 10);
+            System.out.print(number % 10 + " ");
+        }
+    }
+
+    public static void main(String[] args) {
+        int number = 4567;
+        System.out.print("Digits of " + number + ": ");
+        printDigit(number);
+    }
+}
+
+---
+In this code, the `printDigit()` method takes an integer `number` as input and prints its constituent digits separated by a space.
+
+The algorithm consists of two cases:
+
+1. Base case: If the `number` is less than 10, it means that it is a single digit. In this case, we simply print the `number`.
+2. Recursive case: For any `number` greater than or equal to 10, we recursively call `printDigit()` with `number/10` to print the digits before the last digit, and then we print the last digit (`number % 10`).
+
+By following this algorithm, we can print the constituent digits of an integer recursively.
+
+For example, when `number` is set to 4567, the method calls will be:
+
+```
+printDigit(4567)
+    |
+    └── printDigit(456)
+        |
+        └── printDigit(45)
+            |
+            └── printDigit(4)
+                |
+                └── printDigit(0)
+```
+
+As the recursion unwinds, the digits are printed:
+
+```
+printDigit(0) prints: 0
+printDigit(4) prints: 4
+printDigit(45) prints: 4 5
+printDigit(456) prints: 4 5 6
+printDigit(4567) prints: 4 5 6 7
+```
+
+The final result is the constituent digits of the input number, 4567, printed with a space separating each digit: "4 5 6 7".
+
+The final result is the sum of the numbers from 5 down to 1, which is 15.
