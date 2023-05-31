@@ -1,0 +1,64 @@
+How to evaluate a postfix expression using a stack? 
+You need to write a program that will accept a string in postfix format and then return the result of that expression for the example given "24*" your program should return 8.
+
+To evaluate a postfix expression using a stack, you can follow these steps:
+
+1. Create an empty stack to store operands.
+2. Iterate through each character in the postfix expression from left to right.
+3. If the character is an operand (a number), convert it to an integer and push it onto the stack.
+4. If the character is an operator (+, -, *, /), pop the top two operands from the stack, perform the operation, and push the result back onto the stack.
+5. After iterating through all the characters, the stack will contain the final result of the postfix expression. Pop the result from the stack and return it.
+
+```java
+import java.util.Stack;
+
+public class PostfixEvaluator {
+
+    public static int evaluatePostfix(String postfix) {
+        Stack<Integer> stack = new Stack<>();
+
+        for (char c : postfix.toCharArray()) {
+            if (Character.isDigit(c)) {
+                int operand = Character.getNumericValue(c);
+                stack.push(operand);
+            } else {
+                int operand2 = stack.pop();
+                int operand1 = stack.pop();
+                int result = performOperation(c, operand1, operand2);
+                stack.push(result);
+            }
+        }
+
+        return stack.pop();
+    }
+
+    private static int performOperation(char operator, int operand1, int operand2) {
+        switch (operator) {
+            case '+':
+                return operand1 + operand2;
+            case '-':
+                return operand1 - operand2;
+            case '*':
+                return operand1 * operand2;
+            case '/':
+                return operand1 / operand2;
+            default:
+                throw new IllegalArgumentException("Invalid operator: " + operator);
+        }
+    }
+
+    public static void main(String[] args) {
+        String postfixExpression = "24*";
+        int result = evaluatePostfix(postfixExpression);
+        System.out.println("Result: " + result); // Output: 8
+    }
+}
+```
+
+In this program, the `evaluatePostfix` method takes a postfix expression as input and returns the result of the expression. It uses a stack (`java.util.Stack`) to store operands.
+
+The method iterates through each character in the postfix expression. If the character is a digit, it converts it to an integer and pushes it onto the stack. If the character is an operator, it pops the top two operands from the stack, performs the operation, and pushes the result back onto the stack.
+
+After iterating through all the characters, the stack will contain the final result of the postfix expression. The method pops the result from the stack and returns it.
+
+In the `main` method, we provide an example postfix expression (`"24*"`) and call the `evaluatePostfix` method to obtain the result (`8`).
