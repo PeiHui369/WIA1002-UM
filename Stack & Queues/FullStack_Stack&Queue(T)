@@ -2,3 +2,118 @@ Q1
 Stack: recursive
 A stack is either empty or it consists of a top & the rest which is a stack by itself
 
+Q2
+@ minimum value
+public void push(int x){
+            if(head == null) {
+                head = new Node(x, x); //val = min where next=null for head
+            }else{
+                head = new Node(x, Math.min(x, head.min), head); //everytime new element pass in will compare with the original min stored in head
+            }
+}
+
+public int getMin(){
+        return head.min;
+}
+
+Q3
+@ Using 2 stacks to Queue
+public void queue(E item){
+        inbox.push(item);
+    }
+
+    public E dequeue(){
+        if(outbox.isEmpty()){
+            while(!inbox.isEmpty()){
+                outbox.push(inbox.pop());
+            }
+        }
+        return outbox.pop();
+    }
+
+Q4
+@ Complexity Analysis of Queue operations
+Queues offer random access to their contents by shifting the first element off the front of the queue. You have to do this repeatedly to access an arbitrary element somewhere in the queue. Therefore, access is O(n).
+Searching for a given value in the queue requires iterating until you find it. So search is O(n).
+Inserting into a queue, by definition, can only happen at the back of the queue, similar to someone getting in line for a delicious Double-Double burger at In 'n Out. Assuming an efficient queue implementation, queue insertion is O(1).
+Deleting from a queue happens at the front of the queue. Assuming an efficient queue implementation, queue deletion is `O(1).
+
+Q5
+@ Why and when should I use Stack or Queue data structures instead of Arrays/Lists?
+Because they help manage your data in more a particular way than arrays and lists. It means that when you're debugging a problem, you won't have to wonder if someone randomly inserted an element into the middle of your list, messing up some invariants.
+
+Arrays and lists are random access. They are very flexible and also easily corruptible. If you want to manage your data as FIFO or LIFO it's best to use those, already implemented, collections.
+
+More practically you should:
+
+Use a queue when you want to get things out in the order that you put them in (FIFO)
+Use a stack when you want to get things out in the reverse order than you put them in (LIFO)
+Use a list when you want to get anything out, regardless of when you put them in (and when you don't want them to automatically be removed).
+
+Q6
+@ balanced Parenthesis
+
+Stack<Character> stack = new Stack<Character>();
+        for(int i = 0; i<s.length(); i++){
+            char c = s.charAt(i);
+            if (c== '[' || c== '(' || c=='{'){
+                stack.push(c);
+            } else if (c == ']') {                            //repeat for ')' and '}'
+                if(stack.isEmpty() || stack.pop() != '['){
+                    return false;
+                }
+            }
+       }
+       return stack.isEmpty();
+ }
+
+Q7
+@ Compare Array-Based vs List-Based implementation of Queues
+I. Queue backed by a singly-linked list. 
+Enqueuing into the linked list can be implemented by appending to the back of the singly-linked list, which takes worst-case time O(1). 
+Dequeuing can be implemented by removing the first element, which also takes worst-case time O(1). 
+This also requires a new allocation per enqueue, which may be slow.
+
+II. Queue backed by a growing circular buffer. 
+Enqueuing into the circular buffer works by inserting something at the next free position in the circular buffer. 
+This works by growing the array if necessary, then inserting the new element. 
+Using a similar analysis for the dynamic array, this takes best-case time O(1), worst-case time O(n), and amortized time O(1). Dequeuing from the buffer works by removing the first element of the circular buffer, which takes time O(1) in the worst case.
+
+To summarise, all of the structures support pushing and popping n elements in O(n) time. The linked list versions have better worst-case behavior, but may have a worse overall runtime because of the number of allocations performed. The array versions are slower in the worst-case, but have better overall performance if the time per operation isn't too important.
+
+Q8
+@ Sort stack using Recursion
+public static void sort(Stack<Integer> stack){
+        if(!stack.isEmpty()){
+            int x = stack.pop();
+            sort(stack);
+            insert(stack,x);
+        }
+    }
+
+    public static void insert(Stack<Integer> stack, int x){
+        if(!stack.isEmpty()){
+            int y = stack.peek();
+            if(x<y){
+                stack.pop();
+                insert(stack, x);
+                stack.push(y);
+            }else{
+                stack.push(x);
+            }
+        }else{
+            stack.push(x);
+        }
+    }
+    
+Q9
+@ Benefits of Circular Queue
+1. In circular queue, memory is utilized. If we delete any element that position is used later.
+2. Circular queue consumes less memory than linear queue because in queue while doing insertion after deletion operation it allocate an extra space the first remaining vacant but in circular queue the first is used as it comes immediate after the last.
+3. In CQ the memory of the deleted process can be used by some other new process.
+4. A standard queue suffers from a rebuffering problem during deque operations. By making the queue circular and linking the head to the tail, this alleviates the problem and allows insertion and deletion in constant time.
+
+Q10
+@ Implement 3 stacks using 1 array
+
+
