@@ -1,0 +1,39 @@
+@ Basic operations of Stack  Data Structure
+You can implement a Stack data structure using an array or linked list but what matters most is that you should implement the basic operations like push, pop, peek, size, isEmpty, etc.
+
+1. Push
+This operation adds an element at the top of the stack. A top is a place where all stack operations take place.
+
+2. Pop
+This operation retrieves the top element after removing it from the stack.
+
+3. isEmpty
+This operation returns true if the stack is empty.
+
+4. peek()
+This operation returns the top element without removing it from the stack, also known as the top
+
+5. size()
+This operation returns the total number of elements in the stack.
+
+One of the gotcha while implementing stack using array in Java is not removing the object reference from the array, which can cause memory leak, as explained in Effective Java. So, don't repeat that mistake, particularly in interviews. 
+
+@ Basic operations of Queue
+Similar to stack, Queue also has some basic options for adding, removing, and querying elements. These are known as enqueue, dequeue, and peek. Though there is no top, instead you have the front and rear end of the queue. elements are inserted at the end of the queue and removed from the front of the queue. 
+
+1. Enqueue()
+This operation adds an element at the end of the queue. It also increases the size by 1.
+
+2. Dequeue()
+This operation removes an element from the start of the queue and decreases the size by 1.
+
+3. isEmpty()
+This function returns true if the queue is empty like size==0
+
+4. peek()
+This function returns the first element of the queue without removing it, also known as the top(). 
+
+5. size()
+This operation returns the total number of elements in the stack.
+
+You can implement Queue using both array and linked list in Java just try both of them. If you are stuck then I also suggest you go through one of these the best data structure and algorithms courses to revise key data structure concepts before interviews. 
