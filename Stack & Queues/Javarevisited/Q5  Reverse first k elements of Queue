@@ -1,0 +1,76 @@
+To reverse the first k elements of a queue, you can use an additional stack to temporarily hold the elements. Here's a solution in Java:
+
+```java
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
+public class QueueReverser {
+
+    public static void reverseFirstKElements(Queue<Integer> queue, int k) {
+        if (k < 0 || k > queue.size()) {
+            throw new IllegalArgumentException("Invalid value of k.");
+        }
+
+        Stack<Integer> stack = new Stack<>();
+
+        // Push the first k elements into the stack
+        for (int i = 0; i < k; i++) {
+            stack.push(queue.poll());
+        }
+
+        // Enqueue the elements from the stack back into the queue
+        while (!stack.isEmpty()) {
+            queue.offer(stack.pop());
+        }
+
+        // Rotate the remaining elements in the queue
+        for (int i = 0; i < queue.size() - k; i++) {
+            queue.offer(queue.poll());
+        }
+    }
+
+    public static void main(String[] args) {
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(1);
+        queue.offer(2);
+        queue.offer(3);
+        queue.offer(4);
+        queue.offer(5);
+
+        System.out.println("Queue before reversing: " + queue);
+
+        int k = 3;
+        reverseFirstKElements(queue, k);
+
+        System.out.println("Queue after reversing first " + k + " elements: " + queue);
+    }
+}
+```
+
+In this solution, the `reverseFirstKElements` method takes a queue of integers and an integer value `k`, representing the number of elements to reverse.
+
+The method first checks if the value of `k` is valid (between 0 and the size of the queue, inclusive). If `k` is invalid, it throws an exception.
+
+It creates a stack to temporarily hold the first `k` elements of the queue.
+
+It uses a loop to dequeue the first `k` elements from the queue and push them into the stack.
+
+Then, it uses another loop to enqueue the elements from the stack back into the queue.
+
+Finally, it rotates the remaining elements in the queue by dequeueing each element and enqueueing it again, `queue.size() - k` times.
+
+In the `main` method, we create a queue with some elements, call the `reverseFirstKElements` method to reverse the first `k` elements (in this case, `k = 3`), and print the queue before and after reversing to verify the result.
+
+------------------------------------
+The code snippet `for(int i = 0; i<queue.size()-k; i++){ queue.offer(queue.poll()); }` is used to rotate the remaining elements in the queue after reversing the first `k` elements.
+
+Let's break down how this code works step by step:
+
+1. The loop is executed `queue.size() - k` times. This ensures that the remaining elements in the queue (elements after the reversed section) are rotated back to their original order.
+
+2. In each iteration of the loop, the following operations are performed:
+   - `queue.offer(queue.poll())`: This operation dequeues an element from the front of the queue using `poll()` and then enqueues it at the rear of the queue using `offer()`. Essentially, it takes the first element and moves it to the end of the queue.
+   - This process continues for `queue.size() - k` iterations, effectively rotating the remaining elements in the queue.
+
+By executing this code, the remaining elements in the queue after reversing the first `k` elements will be rotated back to their original order. This ensures that the overall order of the elements in the queue is preserved.
