@@ -244,5 +244,126 @@ Q12
         }
         return -1;
     }
-    
 
+Q13
+@ Queue using Stack
+public void enqueue(int value) {
+        stack1.push(value);
+    }
+
+    public int dequeue() {
+        if (stack2.isEmpty()) {
+            // Transfer elements from stack1 to stack2
+            while (!stack1.isEmpty()) {
+                stack2.push(stack1.pop());
+            }
+        }
+        return stack2.pop();
+    }
+    
+Q14
+@ Postfix to Prefix
+public static String convertToPostfix(String infix){
+        StringBuilder postfix = new StringBuilder();
+        Stack<Character> stack = new Stack<>();
+
+        for(int i = 0; i<infix.length(); i++){
+            char ch = infix.charAt(i);
+
+            if(Character.isLetterOrDigit(ch)){
+                postfix.append(ch);
+            }else if (ch == '('){
+                stack.push(ch);
+            }else if (ch == ')'){
+                while(!stack.isEmpty() && stack.peek()!='('){
+                    postfix.append(stack.pop());
+                }
+                stack.pop(); //Discard the opening parenthesis
+            }else{
+                while(!stack.isEmpty() && getPrecedence(ch) <= getPrecedence(stack.peek())){
+                    postfix.append(stack.pop());
+                }
+                stack.push(ch);
+            }
+        }
+        while(!stack.isEmpty()){
+            postfix.append(stack.pop());
+        }
+        return postfix.toString();
+    }
+    
+Q15
+
+
+
+@ Prefix, Infix, Postfix
+ public static String convertToPrefix(String postfix){
+        Stack<String> stack = new Stack<>();
+
+        for(int i = 0; i<postfix.length(); i++){
+            char c = postfix.charAt(i);
+
+            if(Character.isLetterOrDigit(c)){
+                stack.push(String.valueOf(c));
+           ###
+    
+- In -> Post
+            }else if (ch == '('){
+                stack.push(ch);
+            }else if (ch == ')'){
+                while(!stack.isEmpty() && stack.peek()!='('){
+                    postfix.append(stack.pop());
+                }
+                stack.pop(); //Discard the opening parenthesis
+            }else{
+                while(!stack.isEmpty() && getPrecedence(ch) <= getPrecedence(stack.peek())){
+                    postfix.append(stack.pop());
+                }
+                stack.push(ch);
+            }
+        }
+        while(!stack.isEmpty()){
+            postfix.append(stack.pop());
+        }
+        return postfix.toString();
+    }
+
+- Post -> Pre
+            }else{
+                String operand2 = stack.pop();
+                String operand1 = stack.pop();
+                String expression = c + operand1 + operand2;//#
+                stack.push(expression);
+            }
+        }
+        return stack.pop();
+    }
+    
+ - Pre -> Post
+           } else {
+                String operand1 = stack.pop();
+                String operand2 = stack.pop();
+                String postfix = operand1 + operand2 + ch;//#
+                stack.push(postfix);
+            }
+        }
+
+        return stack.pop();
+    }
+ 
+- Pre -> In
+            } else {
+                String operand1 = stack.pop();
+                String operand2 = stack.pop();
+                String infix = "(" + operand1 + ch + operand2 + ")"; //#
+                stack.push(infix);
+            }
+        }
+
+        return stack.pop();
+    }           
+ 
+ 
+ 
+ 
+    
