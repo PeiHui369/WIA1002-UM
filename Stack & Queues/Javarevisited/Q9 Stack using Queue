@@ -1,0 +1,91 @@
+To implement a stack using a queue, you can follow the approach of using two queues. Here's the step-by-step procedure:
+
+1. Create two queues, let's call them `queue1` and `queue2`.
+2. For the `push` operation:
+   - Add the new element to the empty `queue1`.
+   - If `queue2` is not empty, enqueue all elements from `queue2` to `queue1`.
+   - Swap the references of `queue1` and `queue2`, so that `queue2` remains empty for the next operation.
+3. For the `pop` operation:
+   - If the stack is empty, throw an exception or return a special value indicating an empty stack.
+   - Dequeue and return the front element from `queue1`.
+4. For the `top` operation:
+   - If the stack is empty, throw an exception or return a special value indicating an empty stack.
+   - Return the front element from `queue1` without dequeuing it.
+5. For the `empty` operation:
+   - Return `true` if both `queue1` and `queue2` are empty; otherwise, return `false`.
+
+Here's the implementation of a stack using queues in Java:
+
+```java
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class StackUsingQueue {
+    private Queue<Integer> queue1;
+    private Queue<Integer> queue2;
+
+    public StackUsingQueue() {
+        queue1 = new LinkedList<>();
+        queue2 = new LinkedList<>();
+    }
+
+    public void push(int value) {
+        queue1.offer(value);
+        while (!queue2.isEmpty()) {
+            queue1.offer(queue2.poll());
+        }
+        Queue<Integer> temp = queue1;
+        queue1 = queue2;
+        queue2 = temp;
+    }
+
+    public int pop() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
+        }
+        return queue2.poll();
+    }
+
+    public int top() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
+        }
+        return queue2.peek();
+    }
+
+    public boolean empty() {
+        return queue1.isEmpty() && queue2.isEmpty();
+    }
+
+    public boolean isEmpty() {
+        return empty();
+    }
+
+    public static void main(String[] args) {
+        StackUsingQueue stack = new StackUsingQueue();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+
+        System.out.println(stack.pop()); // Output: 3
+        System.out.println(stack.top()); // Output: 2
+        System.out.println(stack.empty()); // Output: false
+
+        stack.push(4);
+        System.out.println(stack.pop()); // Output: 4
+        System.out.println(stack.pop()); // Output: 2
+        System.out.println(stack.empty()); // Output: false
+    }
+}
+```
+
+This implementation uses two queues to simulate the behavior of a stack. The `push` operation enqueues elements to one queue, while the `pop` operation dequeues elements from the other queue. The references of the queues are swapped after each `push` operation to maintain the stack property.
+-----------------
+The `push` function in the provided code snippet is implementing the push operation of a stack using two queues. Here's how it works:
+
+1. The new element `value` is added to `queue1` using the `offer` method. This ensures that the new element is enqueued at the rear of `queue1`.
+2. If there are any elements present in `queue2`, they are dequeued from `queue2` using the `poll` method and enqueued to `queue1`. This step is necessary to maintain the order of elements in the stack. By dequeuing and enqueuing the elements from `queue2` to `queue1`, the elements are reversed in order.
+3. After enqueuing all the elements from `queue2` to `queue1`, the references of the queues are swapped. The `temp` variable is used to temporarily hold the reference to `queue1`. By assigning `queue2` to `temp`, `queue2` now refers to the updated contents of `queue1`, effectively making `queue2` act as the stack.
+4. Since `queue1` is empty after the swap, it becomes ready to receive new elements for the next `push` operation.
+
+Overall, this implementation ensures that the elements are pushed into the stack-like order. The most recently added element is always at the top of the stack, and the previously added elements are shifted down accordingly.
