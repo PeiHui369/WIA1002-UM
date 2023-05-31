@@ -1,3 +1,50 @@
+Recursion
+Ques: Mathematically
+- Must always understand Base case (else stack over flow error)
+
+Question1
+StackOverFlow - never reaches the base case, coz n=0. In program, the base case is n=1. So what happens if a recursive method never reaches a base case? The stack will never stop growing.
+The computer, however, limits the stack to a particular height, so that no program eats up too much memory.
+If a program's stack exceeds this size, the computer initiates an exception, which typically would crash the program. 
+(From the operating system's point of view, crashing the program is preferable to allowing a program to eat up too much memory and interfere with other better-behaved programs that may be running.)
+The exception is labeled a StackOverflowError.
+
+Question2
+When the argument passed in to the method is non-negative (n>-1), the stopping condition (n==0) will never be reached. f() becomes an infinite recursive method.
+//infinite eats up memory (memory consumption) 
+
+Question3
+public static String reverse(String str){
+    if ((null==str) || (str.length()<=1)){
+        return str;
+    }
+    return reverse(str.substring(1)) + str.charAt(0);
+}
+
+Question4
+public int sum(int num){
+    int result;
+    if (num == 1){
+        result = 1;
+    }else{
+        result = num + sum(num-1);
+    }
+    return result;
+}
+//if(base case){}
+else(recursive case){}
+
+Question5
+- Add a space between 2 digits
+public void printDigit(int n){
+    if (n>10){
+        printDigit(n/10);
+        System.out.print (n%10 + " ");
+    }
+    else{
+        System.out.print (n%10 + "");
+    }
+
 Question 1
 public static int f(int n) {
     if (n == 0)
