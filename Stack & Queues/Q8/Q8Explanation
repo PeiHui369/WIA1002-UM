@@ -1,0 +1,10 @@
+Answer:
+The idea of the solution is to hold all values in system stack until the stack becomes empty. 
+When the stack becomes empty, insert all held items one by one in sorted order.
+
+
+In this implementation, we have a `StackSorter` class with two methods: `sort` and `insert`. The `sort` method uses recursion to sort the stack. It pops an element from the stack, recursively sorts the remaining elements, and then inserts the popped element back into the stack using the `insert` method.
+
+The `insert` method is a helper method that takes an element `x` and inserts it into the appropriate position in the stack. It compares `x` with the top element `y` of the stack. If `x` is smaller than `y`, it recursively calls `insert` to find the correct position for `x` and then pushes `y` back onto the stack. If `x` is greater than or equal to `y`, it simply pushes `x` onto the stack.
+
+In the `main` method, we create a `Stack` object, push some elements onto the stack, and then call the `sort` method to sort the stack. Finally, we print the stack before and after sorting to verify the result.
