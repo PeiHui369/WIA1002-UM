@@ -1,0 +1,56 @@
+To convert a prefix expression to infix, you can use a stack. Follow these steps:
+
+1. Start scanning the prefix expression from right to left.
+2. For each character encountered, do the following:
+   - If the character is an operand (a letter or a digit), push it to the stack.
+   - If the character is an operator (+, -, *, /), pop two operands from the stack.
+   - Concatenate the two operands with the operator in infix format, enclosing them in parentheses.
+   - Push the resulting infix expression back to the stack.
+3. Repeat steps 2 and 3 until all characters in the prefix expression are processed.
+4. The final infix expression will be the top element in the stack.
+
+Here's an example implementation in Java:
+
+```java
+import java.util.Stack;
+
+public class PrefixToInfix {
+    public static String convertPrefixToInfix(String prefix) {
+        Stack<String> stack = new Stack<>();
+
+        for (int i = prefix.length() - 1; i >= 0; i--) {
+            char ch = prefix.charAt(i);
+
+            if (isOperand(ch)) {
+                stack.push(Character.toString(ch));
+            } else {
+                String operand1 = stack.pop();
+                String operand2 = stack.pop();
+                String infix = "(" + operand1 + ch + operand2 + ")";
+                stack.push(infix);
+            }
+        }
+
+        return stack.pop();
+    }
+
+    private static boolean isOperand(char ch) {
+        return Character.isLetter(ch) || Character.isDigit(ch);
+    }
+
+    public static void main(String[] args) {
+        String prefixExpression = "*-A/BC-/AKL";
+        String infixExpression = convertPrefixToInfix(prefixExpression);
+        System.out.println("Infix expression: " + infixExpression);
+    }
+}
+```
+
+Output:
+```
+Infix expression: ((A-(B/C))*((A/K)-L))
+```
+
+The program follows a similar approach as in the previous example. It defines a helper method `isOperand()` to check if a character is an operand. The `convertPrefixToInfix()` function scans the prefix expression from right to left, performs the conversion operation for each character, and returns the final infix expression.
+
+In the given example, the prefix expression "*-A/BC-/AKL" is converted to the infix expression "((A-(B/C))*((A/K)-L))".
