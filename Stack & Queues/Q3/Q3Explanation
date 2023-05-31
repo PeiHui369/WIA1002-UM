@@ -1,0 +1,10 @@
+Keep two stacks, let's call them inbox and outbox.
+
+Enqueue:
+Push the new element onto inbox
+
+Dequeue:
+If outbox is empty, refill it by popping each element from inbox and pushing it onto outbox
+Pop and return the top element from outbox
+
+//Complexity Analysis: In the worst case scenario when outbox stack is empty, the algorithm pops n elements from inbox stack and pushes n elements to outbox, where n is the queue size. This gives 2*n operations, which is O(n). But when outbox stack is not empty the algorithm has O(1) time complexity that gives amortised O(1).
