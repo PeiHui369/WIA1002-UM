@@ -1,0 +1,19 @@
+Infix, postfix, and prefix are notations used to represent arithmetic expressions. Here's a brief explanation of each notation:
+
+1. Infix Notation:
+   - In infix notation, the operators are written between the operands. It's the most common way humans express arithmetic expressions.
+   - Example: 2 + 3 * 4
+
+2. Postfix Notation (also known as Reverse Polish Notation - RPN):
+   - In postfix notation, the operators are written after the operands.
+   - Example: 2 3 4 * +
+
+   In postfix notation, the evaluation of the expression is performed from left to right. When an operator is encountered, it is applied to the most recently seen operands.
+
+3. Prefix Notation (also known as Polish Notation):
+   - In prefix notation, the operators are written before the operands.
+   - Example: + 2 * 3 4
+
+   In prefix notation, the evaluation of the expression is performed from right to left. When an operator is encountered, it is applied to the most recently seen operands.
+
+The main difference between infix, postfix, and prefix notations is the placement of the operators with respect to the operands. Infix notation requires the use of parentheses to determine the order of operations, while postfix and prefix notations eliminate the need for parentheses by explicitly specifying the order of operations. Postfix and prefix notations are often used in computer algorithms and stack-based evaluation methods due to their simplicity and unambiguous nature.
