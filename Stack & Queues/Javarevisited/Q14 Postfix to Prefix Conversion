@@ -1,0 +1,48 @@
+To convert a postfix expression to prefix format, you can follow these steps:
+
+1. Create an empty stack to store operators.
+2. Scan the postfix expression from left to right.
+   - If the current character is an operand (letter or digit), push it onto the stack.
+   - If the current character is an operator, pop two operands from the stack, concatenate them with the operator in prefix format, and push the resulting string back onto the stack.
+3. After scanning the entire postfix expression, the stack will contain the final prefix expression.
+4. Pop the prefix expression from the stack and return it as the result.
+
+Here's an example implementation in Java:
+
+```java
+import java.util.Stack;
+
+public class PostfixToPrefix {
+    public static String convertToPrefix(String postfix) {
+        Stack<String> stack = new Stack<>();
+
+        for (int i = 0; i < postfix.length(); i++) {
+            char c = postfix.charAt(i);
+
+            if (Character.isLetterOrDigit(c)) {
+                stack.push(String.valueOf(c));
+            } else {
+                String operand2 = stack.pop();
+                String operand1 = stack.pop();
+                String expression = c + operand1 + operand2;
+                stack.push(expression);
+            }
+        }
+
+        return stack.pop();
+    }
+
+    public static void main(String[] args) {
+        String postfixExpression = "AB+CD-*";
+        String prefixExpression = convertToPrefix(postfixExpression);
+        System.out.println("Prefix expression: " + prefixExpression);
+    }
+}
+```
+
+Output:
+```
+Prefix expression: *+AB-CD
+```
+
+The program scans the postfix expression "AB+CD-*" and converts it to the prefix format "*+AB-CD".
