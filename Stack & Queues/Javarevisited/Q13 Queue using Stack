@@ -1,0 +1,79 @@
+To implement a queue using a stack, you can use two stacks. Let's call them "stack1" and "stack2". The main idea is to use one stack for enqueue operations and the other stack for dequeue operations. Here's a step-by-step approach:
+
+1. Create two stacks, "stack1" and "stack2".
+
+2. For enqueue operation:
+   - Push the element onto "stack1".
+
+3. For dequeue operation:
+   - If "stack2" is not empty, pop the top element from "stack2" and return it as the dequeued element.
+   - If "stack2" is empty, transfer all elements from "stack1" to "stack2" by popping elements from "stack1" and pushing them onto "stack2". Then, pop the top element from "stack2" and return it as the dequeued element.
+
+4. To check if the queue is empty:
+   - If both "stack1" and "stack2" are empty, then the queue is empty.
+
+Here's a Java code example that demonstrates the implementation:
+
+```java
+import java.util.Stack;
+
+public class QueueUsingStack {
+    private Stack<Integer> stack1;
+    private Stack<Integer> stack2;
+
+    public QueueUsingStack() {
+        stack1 = new Stack<>();
+        stack2 = new Stack<>();
+    }
+
+    public void enqueue(int value) {
+        stack1.push(value);
+    }
+
+    public int dequeue() {
+        if (stack2.isEmpty()) {
+            // Transfer elements from stack1 to stack2
+            while (!stack1.isEmpty()) {
+                stack2.push(stack1.pop());
+            }
+        }
+        return stack2.pop();
+    }
+
+    public boolean isEmpty() {
+        return stack1.isEmpty() && stack2.isEmpty();
+    }
+
+    public static void main(String[] args) {
+        QueueUsingStack queue = new QueueUsingStack();
+
+        // Enqueue elements
+        queue.enqueue(1);
+        queue.enqueue(2);
+        queue.enqueue(3);
+
+        // Dequeue elements
+        System.out.println(queue.dequeue()); // Output: 1
+        System.out.println(queue.dequeue()); // Output: 2
+
+        // Enqueue more elements
+        queue.enqueue(4);
+        queue.enqueue(5);
+
+        // Dequeue elements
+        System.out.println(queue.dequeue()); // Output: 3
+        System.out.println(queue.dequeue()); // Output: 4
+
+        // Check if the queue is empty
+        System.out.println(queue.isEmpty()); // Output: false
+
+        // Dequeue remaining element
+        System.out.println(queue.dequeue()); // Output: 5
+
+        // Check if the queue is empty
+        System.out.println(queue.isEmpty()); // Output: true
+    }
+}
+```
+
+This implementation allows you to enqueue and dequeue elements from the queue using the `enqueue()` and `dequeue()` methods respectively. The `isEmpty()` method is used to check if the queue is empty.
