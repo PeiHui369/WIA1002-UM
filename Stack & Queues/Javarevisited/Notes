@@ -37,3 +37,212 @@ This function returns the first element of the queue without removing it, also k
 This operation returns the total number of elements in the stack.
 
 You can implement Queue using both array and linked list in Java just try both of them. If you are stuck then I also suggest you go through one of these the best data structure and algorithms courses to revise key data structure concepts before interviews. 
+
+Q2
+@ Implement Stack using Array
+
+Instance variable: int maxSize, int[] stackArray, int top;
+Constructor: 
+public ArrayStack (int capacity){
+        maxSize = capacity;
+        stackArray = new int [maxSize];
+        top = -1;
+    }
+Method:
+- isFull(): top==maxSize-1
+- push(int value): isFull(){}; top++; stackArray[top] = value
+- isEmpty(): top == -1
+- pop(): isEmpty(){}; int poppedValue = stackArray[top]; top--;
+- peek(): isEmpty(){}; stackArray[top]
+
+
+Q3:
+@ Evaluate Postfix Expression Using a Stack
+
+     Stack<Integer> stack = new Stack<>();
+
+        for (char c : postfix.toCharArray()) {
+            if (Character.isDigit(c)) {
+                int operand = Character.getNumericValue(c);
+                stack.push(operand);
+            } else {
+                int operand2 = stack.pop();
+                int operand1 = stack.pop();
+                int result = performOperation(c, operand1, operand2);
+                stack.push(result);
+            }
+        }
+
+        return stack.pop();
+    }
+    
+Q4
+@ Sort stack
+public static void sortStack(Stack<Integer> stack) {
+        Stack<Integer> tempStack = new Stack<>();
+
+        while (!stack.isEmpty()) {
+            int temp = stack.pop();
+
+            while (!tempStack.isEmpty() && tempStack.peek() > temp) { //if ascending: tempStack.peek()<temp
+                stack.push(tempStack.pop());
+            }
+
+            tempStack.push(temp);
+        }
+
+        while (!tempStack.isEmpty()) {
+            stack.push(tempStack.pop());
+        }
+    }
+    
+Q5
+@ Reverse first k elements of Queue
+public static void reverseFirstKElements(Queue<Integer> queue, int k){
+        if(k<0 || k>queue.size()){
+            throw new IllegalArgumentException("Invalid value of k.");
+        }
+        Stack<Integer> stack = new Stack<>();
+
+        //Push the first k elements into the stack
+        for(int i = 0; i<k; i++){
+            stack.push(queue.poll());
+        }
+
+        //Enqueue the elements from the stack back into the queue
+        while(!stack.isEmpty()){
+            queue.offer(stack.pop());
+        }
+
+        //Rotate the remaining elements in the queue (they should be after rotated k elements)
+        for(int i = 0; i<queue.size()-k; i++){
+            queue.offer(queue.poll());
+        }
+    }
+    
+Q6
+@ Generate binary number from 1 to n using queue
+public static void generateBinaryNumbers(int n) {
+        Queue<String> queue = new LinkedList<>();
+        queue.offer("1");
+
+        for (int i = 1; i <= n; i++) {
+            String binaryNumber = queue.poll();
+            System.out.println(binaryNumber);
+
+            queue.offer(binaryNumber + "0");
+            queue.offer(binaryNumber + "1");
+        }
+    }
+
+Q7
+@ Sum 2 linked list using stack [QTA]
+
+Q8
+@ Balanced Parentheses
+public static boolean checkBalancedParentheses(String expression) {
+        Stack<Character> stack = new Stack<>();
+
+        for (char ch : expression.toCharArray()) {
+            if (ch == '(' || ch == '[' || ch == '{') {
+                stack.push(ch);
+            } else if (ch == ')' || ch == ']' || ch == '}') {
+                if (stack.isEmpty()) {
+                    return false;
+                }
+
+                char top = stack.pop();
+                if ((ch == ')' && top != '(') ||
+                    (ch == ']' && top != '[') ||
+                    (ch == '}' && top != '{')) {
+                    return false;
+                }
+            }
+        }
+
+        return stack.isEmpty();
+    }
+    
+Q9
+@ Stack using queue
+public void push(int value) {
+        queue1.offer(value);
+        while (!queue2.isEmpty()) {
+            queue1.offer(queue2.poll());
+        }
+        Queue<Integer> temp = queue1;
+        queue1 = queue2;
+        queue2 = temp;
+    }
+
+pop(): queue2.poll();
+top(): queue2.peek();
+
+Q10
+@ Reversed string using stack
+public static String reverseString(String input){
+        Stack<Character> stack = new Stack<>();
+
+        //Push each character onto the stack
+        for(int i = 0; i<input.length(); i++){
+            stack.push(input.charAt(i));
+        }
+
+        StringBuilder reversedString = new StringBuilder();
+
+        //Pop each character from the stack and append it to the new string
+        while(!stack.isEmpty()){
+            reversedString.append(stack.pop());
+        }
+
+        return reversedString.toString();
+    }
+    
+Q11 Repeat
+
+Q12 
+@ Infix to Postfix using Stack
+ public static String convertToPostfix(String infix) {
+        StringBuilder postfix = new StringBuilder();
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < infix.length(); i++) {
+            char ch = infix.charAt(i);
+
+            if (Character.isLetterOrDigit(ch)) {
+                postfix.append(ch);
+            } else if (ch == '(') {
+                stack.push(ch);
+            } else if (ch == ')') {
+                while (!stack.isEmpty() && stack.peek() != '(') {
+                    postfix.append(stack.pop());
+                }
+                stack.pop(); // Discard the opening parenthesis
+            } else {
+                while (!stack.isEmpty() && getPrecedence(ch) <= getPrecedence(stack.peek())) {
+                    postfix.append(stack.pop());
+                }
+                stack.push(ch);
+            }
+        }
+
+        while (!stack.isEmpty()) {
+            postfix.append(stack.pop());
+        }
+
+        return postfix.toString();
+    }
+
+    private static int getPrecedence(char operator) {
+        switch (operator) {
+            case '+':
+            case '-':
+                return 1;
+            case '*':
+            case '/':
+                return 2;
+        }
+        return -1;
+    }
+    
+
