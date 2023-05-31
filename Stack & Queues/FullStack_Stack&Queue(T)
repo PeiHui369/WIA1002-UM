@@ -1,0 +1,4 @@
+Q1
+Stack: recursive
+A stack is either empty or it consists of a top & the rest which is a stack by itself
+
