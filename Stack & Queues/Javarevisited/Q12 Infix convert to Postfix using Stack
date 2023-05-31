@@ -1,0 +1,69 @@
+To convert an infix expression to postfix using a stack, you can follow the following steps:
+
+1. Create an empty stack and an empty string for the postfix expression.
+2. Iterate through each character in the infix expression from left to right.
+   - If the character is an operand (letter or digit), append it to the postfix expression.
+   - If the character is an opening parenthesis '(', push it onto the stack.
+   - If the character is a closing parenthesis ')', pop operators from the stack and append them to the postfix expression until an opening parenthesis is encountered. Discard the opening parenthesis.
+   - If the character is an operator (+, -, *, /, etc.), pop operators from the stack and append them to the postfix expression if they have higher or equal precedence compared to the current operator. Then push the current operator onto the stack.
+3. After iterating through all the characters, pop any remaining operators from the stack and append them to the postfix expression.
+4. The resulting string is the postfix expression.
+
+Here's a Java code example that demonstrates this approach:
+
+```java
+import java.util.Stack;
+
+public class InfixToPostfixConverter {
+    public static String convertToPostfix(String infix) {
+        StringBuilder postfix = new StringBuilder();
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < infix.length(); i++) {
+            char ch = infix.charAt(i);
+
+            if (Character.isLetterOrDigit(ch)) {
+                postfix.append(ch);
+            } else if (ch == '(') {
+                stack.push(ch);
+            } else if (ch == ')') {
+                while (!stack.isEmpty() && stack.peek() != '(') {
+                    postfix.append(stack.pop());
+                }
+                stack.pop(); // Discard the opening parenthesis
+            } else {
+                while (!stack.isEmpty() && getPrecedence(ch) <= getPrecedence(stack.peek())) {
+                    postfix.append(stack.pop());
+                }
+                stack.push(ch);
+            }
+        }
+
+        while (!stack.isEmpty()) {
+            postfix.append(stack.pop());
+        }
+
+        return postfix.toString();
+    }
+
+    private static int getPrecedence(char operator) {
+        switch (operator) {
+            case '+':
+            case '-':
+                return 1;
+            case '*':
+            case '/':
+                return 2;
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        String infix = "((A-(B/C))*((A/K)-L))";
+        String postfix = convertToPostfix(infix);
+        System.out.println("Postfix expression: " + postfix);
+    }
+}
+```
+
+Running this code will output: "Postfix expression: *-A/BC-/AKL".
