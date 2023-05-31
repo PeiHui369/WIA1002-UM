@@ -1,0 +1,65 @@
+To implement 3 stacks using a single array, you can divide the array into three equal sections and allocate each section to one of the stacks. Here's an example implementation in Java:
+
+```java
+public class ThreeStacks {
+    private int stackSize;
+    private int[] array;
+    private int[] stackPointers;
+
+    public ThreeStacks(int stackSize) {
+        this.stackSize = stackSize;
+        this.array = new int[stackSize * 3]; // Create an array of size 3 * stackSize
+        this.stackPointers = new int[] { 0, 0, 0 }; // Initialize stack pointers for each stack
+    }
+
+    public void push(int stackNum, int value) {
+        int index = stackNum * stackSize + stackPointers[stackNum]; // Calculate the index for the given stack
+        array[index] = value; // Store the value at the calculated index
+        stackPointers[stackNum]++; // Increment the stack pointer for the given stack
+    }
+
+    public int pop(int stackNum) {
+        if (isEmpty(stackNum)) {
+            throw new IllegalArgumentException("Stack " + stackNum + " is empty.");
+        }
+        stackPointers[stackNum]--; // Decrement the stack pointer for the given stack
+        int index = stackNum * stackSize + stackPointers[stackNum]; // Calculate the index for the given stack
+        int value = array[index]; // Get the value at the calculated index
+        array[index] = 0; // Clear the value in the array
+        return value;
+    }
+
+    public int peek(int stackNum) {
+        if (isEmpty(stackNum)) {
+            throw new IllegalArgumentException("Stack " + stackNum + " is empty.");
+        }
+        int index = stackNum * stackSize + stackPointers[stackNum] - 1; // Calculate the index for the top element of the given stack
+        return array[index]; // Return the value at the calculated index
+    }
+
+    public boolean isEmpty(int stackNum) {
+        return stackPointers[stackNum] == 0; // Check if the stack pointer for the given stack is at the base
+    }
+
+    public static void main(String[] args) {
+        ThreeStacks threeStacks = new ThreeStacks(5);
+
+        threeStacks.push(0, 1);
+        threeStacks.push(0, 2);
+        threeStacks.push(1, 10);
+        threeStacks.push(2, 100);
+
+        System.out.println(threeStacks.pop(0)); // Output: 2
+        System.out.println(threeStacks.peek(1)); // Output: 10
+        System.out.println(threeStacks.isEmpty(2)); // Output: false
+    }
+}
+```
+
+In this implementation, the `ThreeStacks` class has an array `array` of size 3 * `stackSize` to store the elements of the three stacks. The stack pointers for each stack are stored in the `stackPointers` array. The `stackSize` parameter passed to the constructor determines the size of each stack.
+
+The `push` method takes a stack number and a value and calculates the appropriate index in the `array` based on the stack number and the current stack pointer. It then stores the value at that index and increments the stack pointer for the given stack.
+
+The `pop` method takes a stack number and decrements the stack pointer for that stack. It then calculates the index of the top element in the stack and retrieves the value from that index. The value in the array is cleared after retrieval.
+
+The `peek` method is similar to `pop` but does not modify the stack
