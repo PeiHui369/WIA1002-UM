@@ -1,0 +1,41 @@
+To reverse a string using a stack, you can follow the following steps:
+
+1. Create an empty stack.
+2. Iterate through each character in the input string.
+3. Push each character onto the stack.
+4. Pop each character from the stack and append it to a new string.
+5. Return the new string as the reversed string.
+
+Here's a Java code example that demonstrates this approach:
+
+```java
+import java.util.Stack;
+
+public class StringReverser {
+    public static String reverseString(String input) {
+        Stack<Character> stack = new Stack<>();
+
+        // Push each character onto the stack
+        for (int i = 0; i < input.length(); i++) {
+            stack.push(input.charAt(i));
+        }
+
+        StringBuilder reversedString = new StringBuilder();
+
+        // Pop each character from the stack and append it to the new string
+        while (!stack.isEmpty()) {
+            reversedString.append(stack.pop());
+        }
+
+        return reversedString.toString();
+    }
+
+    public static void main(String[] args) {
+        String input = "code";
+        String reversed = reverseString(input);
+        System.out.println("Reversed string: " + reversed);
+    }
+}
+```
+
+Running this code will output: "Reversed string: edoc".
