@@ -1,0 +1,35 @@
+public static boolean balancedParenthensies(String s){
+        Stack<Character> stack = new Stack<Character>();
+        for(int i = 0; i<s.length(); i++){
+            char c = s.charAt(i);
+            if (c== '[' || c== '(' || c=='{'){
+                stack.push(c);
+            } else if (c == ']') {
+                if(stack.isEmpty() || stack.pop() != '['){
+                    return false;
+                }
+            } else if (c == ')') {
+                if(stack.isEmpty() || stack.pop() != '('){
+                    return false;
+                }
+            } else if (c == '}') {
+                if(stack.isEmpty() || stack.pop() != '{'){
+                    return false;
+                }
+            }
+        }
+        return stack.isEmpty();
+    }
+
+One of the most important applications of stacks is to check if the parentheses are balanced in a given expression. The compiler generates an error if the parentheses are not matched.
+
+Here are some of the balanced and unbalanced expressions:
+Balanced (a+b)
+Unbalanced (a+b
+
+Algorithm
+1. Declare a character stack which will hold an array of all the opening parenthesis.
+2. Now traverse the expression string exp.
+3. If the current character is a starting bracket (( or { or [) then push it to stack.
+4. If the current character is a closing bracket () or } or ]) then pop from stack and if the popped character is the matching starting bracket then fine else parenthesis are not balanced.
+5. After complete traversal, if there is some starting bracket left in stack then “not balanced”
