@@ -1,0 +1,13 @@
+Answer: Using a linked list store the current minimum value. When you add a new number it looks at the previous min and changes the current min to the current value if the current value is lower. Note, each node stores the min value at or below it so we don't need to recalculate min on pop.
+
+In the `MinStack` class, the stack keeps track of the minimum value by storing it in each node of the stack. Here's how it works:
+
+1. When you push an element onto the stack using the `push` method, the `MinStack` class creates a new node with the given value `x`. If the stack is empty (i.e., `head == null`), the minimum value for that node is set to `x` itself since it's the only element in the stack.
+
+2. If the stack is not empty, the `push` method creates a new node with the given value `x` and the minimum value as the minimum between `x` and the current minimum value stored in the `head` node. The new node becomes the new `head` of the stack.
+
+3. When you pop an element from the stack using the `pop` method, the `head` is updated to the next node in the stack, effectively removing the top element.
+
+4. To retrieve the minimum value in the stack, you can use the `getMin` method, which simply returns the `min` value stored in the `head` node. Since the `min` value is updated whenever a new minimum value is pushed onto the stack, the `getMin` method will always return the current minimum value in the stack.
+
+By updating the `min` value in each node whenever a new minimum value is pushed onto the stack, the `MinStack` class can efficiently keep track of the minimum value at any given time.
