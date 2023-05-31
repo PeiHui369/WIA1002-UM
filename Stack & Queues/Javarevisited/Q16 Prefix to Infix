@@ -23,6 +23,10 @@ public class PrefixToInfix {
 
             if (isOperand(ch)) {
                 stack.push(Character.toString(ch));
+                /*
+                if(Character.isLetterOrDigit(c)){
+                stack.push(String.valueOf(c));
+                */
             } else {
                 String operand1 = stack.pop();
                 String operand2 = stack.pop();
@@ -34,6 +38,7 @@ public class PrefixToInfix {
         return stack.pop();
     }
 
+//can remove if use /**/
     private static boolean isOperand(char ch) {
         return Character.isLetter(ch) || Character.isDigit(ch);
     }
