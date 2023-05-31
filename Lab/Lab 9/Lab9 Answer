@@ -1,0 +1,45 @@
+
+Question1
+public static void main (String[] args){
+  System.out.println(substritueAI("flabbergasted"));
+  System.out.println(substritueAI("Astronaut"));
+}
+
+public static String substituteAI (String str){
+  //Base Case:
+  if (str.length()==0){
+    return str;
+  }
+  
+  //Recursive Case:
+  else if (str.charAt(0) == ('a')){
+    return 'i' + substituteAI(str.substring(1));
+  }else{
+    return str.charAt(0) + substituteAI(str.substring(1));
+  }
+  
+Question2
+public class Recursion{
+
+    public static void permuteString (String beginningString, String endingString){
+        if (endingString.length() <= 1) {
+            System.out.println (beginningString + endingString);
+        }
+        else{
+            for(int i = 0; i<endingString.length(); i++){
+                String newString = endingString.substring(0,i) + endingString.substring(i+1);
+                permuteString(beginningString + endingString.charAt(i), newString);
+            }
+        }
+        
+        public static void main (String[] args){
+            permuteString ("", "ABC");
+         }
+ }
+ 
+ Question3
+ public static long exponent (int x, int m){
+    if (m==0) {return 1;}
+    if (m==1) {return x;}
+    return x * exponent (x,m-1);
+ }
