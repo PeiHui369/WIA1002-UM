@@ -1,0 +1,55 @@
+To check if parentheses are balanced in an expression, you can use a stack data structure. Here's an algorithm to solve this problem:
+
+1. Initialize an empty stack.
+2. Iterate through each character in the expression.
+   - If the current character is an opening parenthesis ('(', '[', or '{'), push it onto the stack.
+   - If the current character is a closing parenthesis (')', ']', or '}'), check if the stack is empty. If it is, return false, as there is no corresponding opening parenthesis for the current closing parenthesis.
+   - If the stack is not empty, pop the top element from the stack and compare it with the current closing parenthesis. If they do not match, return false.
+3. After iterating through all the characters, check if the stack is empty. If it is, return true, indicating that the parentheses are balanced. Otherwise, return false.
+
+Here's the implementation of this algorithm in Java:
+
+```java
+import java.util.Stack;
+
+public class BalancedParenthesesChecker {
+    public static boolean checkBalancedParentheses(String expression) {
+        Stack<Character> stack = new Stack<>();
+
+        for (char ch : expression.toCharArray()) {
+            if (ch == '(' || ch == '[' || ch == '{') {
+                stack.push(ch);
+            } else if (ch == ')' || ch == ']' || ch == '}') {
+                if (stack.isEmpty()) {
+                    return false;
+                }
+
+                char top = stack.pop();
+                if ((ch == ')' && top != '(') ||
+                    (ch == ']' && top != '[') ||
+                    (ch == '}' && top != '{')) {
+                    return false;
+                }
+            }
+        }
+
+        return stack.isEmpty();
+    }
+
+    public static void main(String[] args) {
+        String expression1 = "{(2 + 3) * [4 - 5]}";
+        String expression2 = "(2 + 3) * [4 - 5)}";
+
+        System.out.println(expression1 + " is balanced: " + checkBalancedParentheses(expression1));
+        System.out.println(expression2 + " is balanced: " + checkBalancedParentheses(expression2));
+    }
+}
+```
+
+Output:
+```
+{(2 + 3) * [4 - 5]} is balanced: true
+(2 + 3) * [4 - 5)} is balanced: false
+```
+
+In the `checkBalancedParentheses` method, we check if the given expression has balanced parentheses. The main method demonstrates the usage of this method by checking the balance of two expressions.
