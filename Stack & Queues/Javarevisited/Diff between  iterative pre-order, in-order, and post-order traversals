@@ -1,0 +1,21 @@
+The main difference between iterative pre-order, in-order, and post-order traversals lies in the order in which the nodes of a binary tree are visited.
+
+1. Iterative Pre-order Traversal:
+   - In pre-order traversal, the root node is visited first, followed by the left subtree, and then the right subtree.
+   - The iterative approach for pre-order traversal uses a stack to keep track of the nodes to be visited.
+   - In each iteration, the current node is processed, and then its right child is pushed onto the stack (if not null). Next, the left child is processed (if not null).
+   - The process continues until the stack becomes empty, and all nodes have been visited.
+
+2. Iterative In-order Traversal:
+   - In in-order traversal, the left subtree is visited first, followed by the root node, and then the right subtree.
+   - The iterative approach for in-order traversal also uses a stack to keep track of the nodes to be visited.
+   - Initially, the leftmost node of the tree is pushed onto the stack. In each iteration, the current node is processed (printed or saved), and then its right child is pushed onto the stack (if not null). Finally, the left child is processed (if not null).
+   - The process continues until the stack becomes empty, and all nodes have been visited.
+
+3. Iterative Post-order Traversal:
+   - In post-order traversal, the left subtree is visited first, followed by the right subtree, and then the root node.
+   - The iterative approach for post-order traversal also uses a stack, but with a slight variation compared to pre-order and in-order traversals.
+   - In each iteration, the current node is processed and then pushed onto a second stack. First, the left child is pushed onto the stack (if not null), and then the right child is pushed onto the stack (if not null).
+   - The process continues until the stack becomes empty, and all nodes have been visited. After that, the nodes are popped from the second stack and processed in the order they were pushed, resulting in the post-order traversal.
+
+In summary, the main difference between iterative pre-order, in-order, and post-order traversals is the order in which the nodes are processed and the specific steps taken to traverse the binary tree. Pre-order visits the root first, in-order visits the root in the middle, and post-order visits the root last. Each traversal has a distinct ordering of the left and right subtrees.
