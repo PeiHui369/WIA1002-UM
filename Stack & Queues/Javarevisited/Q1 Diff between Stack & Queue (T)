@@ -1,0 +1,36 @@
+Stack & Queue
+- secondary data structures: build using array or linked list
+- Stack: to solve recursive problems
+- Queue: used for ordered processing
+
+@ Similarity
+i. Build on top of basic data structures (array/ linked list)
+- can be bounded (array for bounded stack) & unbounded (linked list for unbounded queue)
+ii. java.util.Stack class & Queue interface in Java Collection API
+
+Stack
+1. LIFO (Last In First Out): item inserted last is retrieved first
+- need to work with the most recently added entry
+2. 
+push(): add
+pop(): retrieve & remove
+3. Elements/Objects added at TOP of Stack
+4. Natural recursive data structure
+- implementing pre-order, post-order, in-order traversal of binary tree
+5. Reversing a String in Java
+- you can reverse a String by simply putting each character from String into Stack and once you finished, start popping them up. Since Stack is LIFO data structure, you will retrieve letters in reverse order.
+
+
+Queue
+1. FIFO (First In First Out): object first inserted is first consumed
+- elements are processed in the order they are generated
+2. Key operation
+offer(): add
+poll(): retrieve from head
+3. Adding: enqueue; Removing: dequeue
+Head (front): deletion
+Tail (rear): insertion
+4. Sequential data structure
+- Provide order in processing (PRODUCER-CONSUMER PATTERN)
+- Producer-consumer problem: producer produces & consumer consumes
+- understan BlockingQueue: a relatively new concurrent utility, which can simplify producer-consumer designs in concurrent programs.
