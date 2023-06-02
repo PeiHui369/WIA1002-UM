@@ -11,7 +11,7 @@ The idea is to implement the queue’s enqueue operation so that the first enter
 import java.util.Stack;
  
 // Implement a queue using two stacks
-class Queue<T> {@
+class Queue<T> {
     private Stack<T> s1, s2;
  
     // Constructor
