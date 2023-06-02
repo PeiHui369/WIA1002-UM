@@ -1,0 +1,339 @@
+#<Stack Implementation>
+@ Array
+class Stack{
+  private int arr[];
+  private int top;
+  private int capacity;
+  
+  Stack(int size){
+    arr = new int [size];
+    capacity = size;
+    top = -1;
+  }
+  
+  1. push(int x){
+        if(isFull()) {return;}
+        arr[++top] = x;
+     }
+     
+   2. pop(){
+        if(isEmpty()) {return;}
+        return arr[top--];
+      }
+      
+    3. peek(){
+          if(isEmpty()) {return;}
+          return arr[top];
+        }
+        
+    4. size() {return top+1;}
+    
+    5. isEmpty() {return top == -1;}
+    
+    6. isFull() {return top == capacity-1;}
+      
+@ LinkedList
+
+class Node  {
+    int data;
+    Node next;
+}
+
+class Stack {
+    private Node top;
+    private int nodesCount;
+    
+    public Stack()  {
+        this.top = null;
+        this.nodesCount = 0;
+    }
+    
+    1. push(int x){
+      Node node = new Node();
+      if(node==null) {return;}
+      node.data = x;
+      node.next = top;
+      top = node;
+      this.nodesCount += 1;
+      }
+      
+      2. isEmpty() {return top == null;}
+      
+      3. peek(){
+      if (isEmpty()){return;}
+      return top.data;
+      }
+      
+      4. pop(){
+      if (isEmpty()) {return;}
+      int top = peek();
+      this.nodesCount -= 1;
+      this.top = (this.top).next;
+      return top;
+      }
+      
+      5. size() {return this.nodesCount;}
+}
+      
+@ 2Queue
+class Stack<T>
+{
+  Queue<T> q1, q2;
+  
+  public Stack()
+  {
+    q1 = new ArrayDequeue<>();
+    q2 = new ArrayDequeue<>();
+  }
+  
+  1. add(T data){
+          while (!q1.isEmpty())
+          {
+              q2.add(q1.peek());
+              q1.poll();
+          }
+          q1.add(data);
+          while (!q2.isEmpty())
+          {
+              q1.add(q2.peek());
+              q2.poll();
+          }
+      }
+      @@
+      add(T data) {q1.add(data);}
+    
+    2. T poll(){
+        if (q1.isEmpty()) {return;}
+            T front = q1.peek();
+            q1.poll();
+            return front;
+       }
+       @@
+       T poll(){
+          if (q1.isEmpty()) {return;}
+          T front = null;
+          
+          while (!q1.isEmpty()){
+              if(q1.size() == 1) {front = q1.peek();}
+              else {q2.add (q1.peek();}
+              q1.poll();
+          }
+          
+          while (!q2.isEmpty()) {
+              q1.add(q2.peek());
+              q2.poll();
+          }
+          
+          return front;
+      }
+
+@ 1Queue
+class Stack<T>
+{
+    Queue<T> q;
+    
+    public Stack()  {
+        q = new ArrayDequeue<>();
+    }
+    
+    1. add(T data)  {
+           q.add(data);
+        }
+        
+     2. reverseQueue() {            //#
+          //base case
+          if(q.isEmpty()){ return;}
+          T front = q.peek();
+          q.poll();
+          reverseQueue();
+          q.add(front);
+        }
+        
+      3. poll() {
+              if(q.isEmpty()) {return;}
+              reverseQueue();
+              T front = q.peek();
+              q.poll();
+              reverseQueue();
+              return front;
+          }
+ 
+#Implement Queue Using Stack
+@ 2stacks
+class Queue<T>{
+    private Stack<T> s1, s2;
+    
+    Queue(){
+        s1 = new Stack<>();
+        s2 = new Stack<>();
+    }
+    
+    1. void enqueue (T data){
+          while (!s1.isEmpty()) {s2.push(s1.pop());}
+          s1.push(data);
+          while (!s2.isEmpty()) {s1.push(S2.pop());}
+       }
+       @@
+       void enqueue (T data){
+          s1.push(data);
+       }
+       
+     2. T dequeue() {
+            if (s1.isEmpty()) {return;}
+            return s1.pop();
+        }
+        @@
+        T dequeue() {
+            if(s1.isEmpty() && s2.isEmpty()) {return;}
+            if(s2.isEmpty()) {
+                while (!s1.isEmpty()){
+                    s2.push(s1.pop());
+                 }
+             }
+             return s2.pop();
+         }
+        
+@ 1stack
+class Queue<T> {
+    Queue() {
+        s = new Stack<>();
+    }
+    
+    1. void enqueue (T data) {s.push(data);}
+    
+    2. T dequeue() {
+          if (s.isEmpty()) {return;}
+          T top = s.pop();
+          if (s.isEmpty()) {return top;}
+          T item = dequeue();
+          s.push(top)
+          return item;
+       }
+       
+# Minimum Element
+@ 2 stacks
+class MinStack{
+    private Stack<Integer> s;
+    private Stack<Integer> aux;
+    
+    public MinStack(){
+        s = new Stack<>();
+        aux = new Stack<>();
+    }
+    
+    1. void push(int val){
+            s.push(val;)
+            if (aux.isEmpty()) {aux.push(val);}
+            else{
+                if (aux.peek() >= val) {aux.push(val);}
+            }
+        }
+        
+     2. int pop () {
+            if (isEmpty()) {return;}
+            int top = s.pop();
+            if (top == aux.peek()) {aux.pop();}
+            return top;
+        }
+        
+     3. int top() {return s.peek();}
+     
+     4. int size() {return s.size();}
+     
+     5. boolean isEmpty() {return s.isEmpty();}
+     
+     6. int getMin() {
+            if (aux.isEmpty()) {return;}
+            return aux.peek();
+        }
+
+@ 1 stack
+class MinStack { 
+    private Stack<Integer> s = new Stack<>();
+    private int min;
+    1. void push (int val)
+            if(s.empty()) {
+                s.push(val);
+                min = val;
+             }
+             else if (val > min){
+                 s.push(val);
+             }
+             else {
+                 s.push(2*val - min);
+                 min = val;
+             }
+         }
+     
+     2. void pop()
+            if(s.empty()) {return;}
+            int top = s.peek();
+            if(top < min){
+                min = 2*min - top;
+            }
+            s.pop();
+        }
+        
+      3. int getMin(){
+              return min;
+          }
+        
+# Implement 2 stacks in 1 array
+class Stack {
+    private int[] arr;
+    private int capacity;
+    private int top1, top2;
+    
+    public Stack (int n) {
+            capacity = n;
+            arr = new int [n];
+            top1 = -1;
+            top2 = n;
+     }
+     
+     1. void pushFirst(int key){
+            if (top1 + 1 == top2) {return;}
+            top1++;
+            arr[top1] = key;
+        }
+     
+     2. void pushSecond(int key){
+            if (top1 + 1 == top2) {return;}
+            top2--;
+            arr[top2] == key;
+        }
+        
+     3. int popFirst(){
+            if (top1 < 0) {return;}
+            int top = arr[top1];
+            top1--;
+            return top;
+         }
+     
+     4. int popSecond(){
+            if(top2 >= capacity) {return;}
+            int top = arr[top2];
+            top2++;
+            return top;
+        }
+        
+
+
+
+
+
+        
+        
+    
+       
+       
+            
+    
+          
+         
+      
+      
+      
+      
+      
+      
