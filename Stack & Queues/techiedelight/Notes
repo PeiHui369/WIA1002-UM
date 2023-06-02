@@ -1,3 +1,20 @@
+r: Repeated question (solution is directly taken, no code tracing)
+X: for the moment it is out of topic
+R: Revise, does not understand clearly
+[QTA]: Couldn't understand concept, might have issue with solution provided
+
+start from Q7
+d: Code tracing done
+D: Code tracing done + Understand concept clearly
+P: Own solution succesfully run
+
+# Only 1 type
+#<> A collection of similar type question
+
+==============================================================================
+/X/
+Recursion: 7,8
+
 #<Stack Implementation>
 @ Array
 class Stack{
@@ -317,6 +334,68 @@ class Stack {
             return top;
         }
         
+# Recursive Solution to Sort a Stack
+public static void sortedInsert (Stack<Integer> stack, int key){
+        if (stack.isEmpty() || key > stack.peek()){
+                stack.push(key);
+                return;
+         }
+         int top = stack.pop();
+         sortedInsert(stack, key);
+         stack.push(top);
+}
+
+public static void sortStack (Stack<Integer> stack){
+        if(stack.isEmpty()) {return;}
+        int top = stack.pop();
+        sortStack(stack);
+        sortedInsert(stack, top);
+        
+# Reverse String
+String reverse(String str){
+  Stack <Character> stack = new Stack<>();
+  
+  char[] chars = str.toCharArray();
+  for (char c:chars) {str.toCharArray();}
+  
+  for(int i = 0; i<str.length(); i++) {chars[i] = stack.pop();}
+  return new String(chars);
+}
+
+# Check Expression Balanced
+@1
+boolean isBalanced(String exp){
+  if(exp == null || exp.length()%2 == 1) {return false;}
+  Stack<Character> stack = new Stack<>();
+  
+  for(char c : exp.toCharArray()){
+      if (c == '(' || c == '{' || c == '['){
+          stack.push(c);
+      }
+      
+      if (c == ')' || c == '}' || c == ']'){
+        if (stack.empty()) {return false;}
+        Character top = stack.pop();
+        if ((top == '(' && c != ')') || (top == '{' && c != '}')|| (top == '[' && c != ']')) {return false;}
+      }
+    }
+     return stack.empty();
+}
+
+@2
+for (char ch: exp.toCharArray()){
+        if (ch == '(') {stack.push(')');}
+        else if (ch == '{') {stack.push('}');}
+        else if (ch == '[') {stack.push(']');}
+        else if (stack.isEmpty() || stack.pop() != ch) {return false;}
+}
+
+
+        
+
+
+                
+         
 
 
 
