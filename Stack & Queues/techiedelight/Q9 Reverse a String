@@ -1,0 +1,82 @@
+1. Using explicit stack
+The idea is to create an empty stack and push all characters of the string into it. Then pop each character one by one from the stack and put them back to the input string starting from the 0'th index.、
+
+import java.util.Stack;
+ 
+class Main
+{
+    // Reverse a string using a stack container in Java
+    public static String reverse(String str)
+    {
+        // create an empty stack
+        Stack<Character> stack = new Stack<>();
+ 
+        // push each character in the string into the stack
+        char[] chars = str.toCharArray();
+        for (char c: chars) {
+            stack.push(c);
+        }
+ 
+        // pop all characters from the stack and
+        // put them back to the character array
+        for (int i = 0; i < str.length(); i++) {
+            chars[i] = stack.pop();
+        }
+ 
+        // convert the char array to a string and return
+        return new String(chars);
+    }
+ 
+    public static void main (String[] args)
+    {
+        String str = "Reverse me";
+ 
+        str = reverse(str);
+        System.out.println(str);
+    }
+}
+
+2. Using implicit stack [R]
+We can also use an implicit stack, i.e., call stack., to reverse a string.
+
+class Main
+{
+    // Utility function to swap elements at indices `i` and `j` in the array `chars`
+    private static void swap(char[] chars, int i, int j)
+    {
+        char ch = chars[i];
+        chars[i] = chars[j];
+        chars[j] = ch;
+    }
+ 
+    // Reverse a string using implicit stack (recursion) in Java
+    public static void reverse(char[] chars, int i, int j)
+    {
+        if (i < j)
+        {
+            // swap characters at i'th and j'th index
+            swap(chars, i, j);
+ 
+            // recur with increasing i'th index by position and
+            // decreasing j'th index by one position
+            reverse(chars, i + 1, j - 1);
+        }
+    }
+ 
+    // Wrapper function
+    public static String reverse(String str)
+    {
+        char[] chars = str.toCharArray();
+        reverse(chars, 0, str.length() - 1);
+ 
+        return new String(chars);
+    }
+ 
+    public static void main (String[] args)
+    {
+        String str = "Reverse me";
+ 
+        str = reverse(str);
+        System.out.println(str);
+    }
+}
