@@ -1,0 +1,82 @@
+We have used two stacks in the previous approach – the main stack to store the actual stack elements and an auxiliary stack to determine the minimum number in constant time. This implementation requires extra space for the auxiliary stack, but we can do this without an auxiliary stack. The idea is to do some tricky calculations before pushing numbers into the stack.
+
+Suppose we will push a number value into a stack with a minimum number, min. If the value is greater than or equal to the min, it is pushed directly into the stack. If it is less than min, push 2×value-min, and update min as a value since a new minimum number is pushed. How about to pop? We pop it directly if the top of the stack (it is denoted as top) is greater than or equal to min. Otherwise, the number top is not the real pushed number. The real pushed number is stored as min. After the current minimum number is popped, we need to restore the previous minimum number, 2×min-top.
+
+Now let’s demonstrate its correctness of this solution. Since the value is greater than or equal to min, it is pushed into stack direct without updating min. Therefore, when we find that the top of the stack is greater than or equal to min, we can pop directly without updating min. However, if we find the value is less than min, push 2×value-min. We should notice that 2×value-min should be less than the value. Then we update the current min as value. Therefore, the new top of the stack is less than the current min. Therefore, when we find that the top of the stack is less than min, the real top (real pushed number value) is stored in min. After we pop the top of the stack, we have to restore the previous minimum number. Since top=2×value-previous-min and value is current min, previous min is 2×current-min-top.
+
+package techiedelight;
+
+import java.util.Stack;
+
+class MinStack2
+{
+    // main stack to store elements
+    private Stack<Integer> s = new Stack<>();
+
+    // variable to store the minimum element
+    private int min;
+
+    // Inserts a given element on top of the stack
+    public void push(int val)
+    {
+        if (s.empty())
+        {
+            s.push(val);
+            min = val;
+        }
+        else if (val > min) {
+            s.push(val);
+        }
+        else {
+            s.push(2*val - min);
+            min = val;
+        }
+    }
+
+    // Removes the top element from the stack
+    public void pop()
+    {
+        if (s.empty()) {
+            System.out.println("Stack underflow!!");
+            System.exit(-1);
+        }
+
+        int top = s.peek();
+        if (top < min) {
+            min = 2*min - top;
+        }
+        s.pop();
+    }
+
+    // Returns the minimum element from the stack in constant time
+    public int getMin() {
+        return min;
+    }
+}
+
+class Main4
+{
+    public static void main (String[] args)
+    {
+        MinStack2 s = new MinStack2();
+
+        s.push(6);
+        System.out.println(s.getMin());
+
+        s.push(7);
+        System.out.println(s.getMin());
+
+        s.push(5);
+        System.out.println(s.getMin());
+
+        s.push(3);
+        System.out.println(s.getMin());
+
+        s.pop();
+        System.out.println(s.getMin());
+
+        s.pop();
+        System.out.println(s.getMin());
+    }
+}
+
