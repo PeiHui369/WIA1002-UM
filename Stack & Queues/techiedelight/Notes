@@ -644,6 +644,178 @@ public static void find (int[] arr) {
   }
 }
 
+# Iterative Implementation of Quicksort
+class Pair {
+  private final int x;
+  private final int y;
+  
+  Pair(int x, int y) {
+    this.x = x;
+    this.y = y;
+  }
+  
+  public int getX() {return x;}
+  public int getY() {return y;}
+}
+
+class Main {
+//public static
+  1. void swap (int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+     }
+     
+   2. int partition (int a[], int start, int end) {
+          int pivot = a[end];
+          int pIndex = start;
+          for(int i = start; i<end; i++){
+            if(a[i] <= pivot) {
+              swap(a, i, pIndex);
+              pIndex++;
+            }
+          }
+          swap (a, pIndex, end);
+          return pIndex;
+      }
+      
+    3. void IterativeQuicksort (int[] a){
+          Stack<Pair> stack = new Stack<>();
+          int start = 0;
+          int end = a.length - 1;
+          stack.push(new Pair(start, end));
+          while (!stack.empty()) {
+            start = stack.peek().getX();
+            end = stack.peek().getY();
+            stack.pop();
+            int pivot = partition(a, start, end);
+            if (pivot - 1 > start) {
+                stack.push(new Pair(start, pivot - 1));
+            }
+            if (pivot + 1 < end) {
+                stack.push(new Pair(pivot + 1, end));
+            }
+        }
+        
+# Find all bianry strings that can be formed from a wildcard pattern
+@1 Recursive
+private static void printAllCombinations (char[] pattern, int i) {
+  if (pattern == null || pattern.length == 0) {return;}
+  if (i == pattern.length) {
+      S.o.println(pattern);
+      return;
+  }
+  if (pattern[i] == '?') {
+    for (char ch = '0'; ch <= 'i'; ch++) {
+      pattern[i] = ch;
+      printAllCombinations(pattern, i+1);
+      pattern[i] = '?';
+    }
+   }else { printAllCombinations(pattern, i+1);}
+}
+
+@2 Iterative
+public static void printAllCombinations (String pattern) {
+    if (pattern == null || pattern.length() == 0) {return;}
+    Stack<String> stack = new Stack<>();
+    stack.push(pattern);
+    int index;
+    while (!stack.empty()) {
+      String curr = stack.pop();
+      if ((index = curr.indexOf('?')) != -1) {
+        for (char ch = '0'; ch <= '1'; ch++) {
+          curr = curr.substring(0,index) + ch + curr.substring(index+1);
+          stack.push(curr);
+        }
+      }
+      else {S.o.println(curr); }
+    }
+}
+
+# Find length of longest balanced parenthesis in a string
+public static int findMaxLen (String str) {
+    if (str == null) {return 0;}
+    Stack<Integer> stack = new Stack<>();
+    stack.push(-1);
+    int len = 0;
+    for (int i = 0; i<str.length(); i++) {
+        if (str.charAt(i) == '(') {stack.push(i);}
+        else{
+          stack.pop();
+          if (stack.empty()) {
+            stack.push(i);
+            continue;
+          }
+        }
+        int curr_len = i - stack.peek();
+        if (len<curr_len) {
+            len = curr_len;
+        }
+      }
+    }
+    return len;
+  }
+ 
+# Reverse text without reversing individual words
+@1
+public static String reverseText(String s) {
+  if (s == null || s.length() == 0) {return s;}
+  int low = 0, high = 0;
+  Stack<String> stack = new Stack<>();
+  for (int i = 0; i<s.length(); i++) {
+    if (s.charAt(i) == ' ') {
+      stack.push(s.substring(low, high+1));
+      low = high = i+1;
+    }
+    else {high = i;}
+  }
+  stack.push(s.substring(low));
+  StringBuilder sb = new StringBuilder();
+  while (!stack.empty()) {sb.append(stack.pop()).append(' ');}
+  return sb.substring(0, sb.length()-1);
+}
+
+@2 -> Improve space complexity
+The idea is to in-place reverse each word present in the input text and finally reverse the whole text to get the desired output. For instance,
+
+Input text: Preparation Interview Technical
+ 
+1. Reverse each word:
+noitaraperp weivretnI lacinhceT TI rof lairetam doog edivorp eW
+ 
+2. Reverse the whole text:
+Technical Interview Preparation
+The time complexity of this solution would be O(n) and doesn’t require any extra space. The problem with this approach is that it violates the problem constraints and does three traversals of the input text instead of just on
+
+private static void swap (char[] chars, int i, int j) {
+  char temp = chars [i];
+  chars [i] = chars [j];
+  chars [j] = temp;
+}
+
+public static void reverseText (char[] chars, int begin, int end) {
+    while (begin<end) {swap(chars, begin++, end--);}
+}
+
+public static String reverseText(String str) {
+    if (str == null || str.length() == 0) {
+        return str;
+    }
+    
+    char[] chars = str.toCharArray();
+    int low = 0, high = 0;
+    for (int i = 0; i<chars.length; i++) {
+      if (chars[i] == ' ') {
+        reverseText(chars, low, high);
+        low = high = i + 1;
+      }
+      else {high = i;}
+    }
+    reverseText(chars, low, high);
+    reverseText(chars, 0, chars.length - 1);
+    return new String(chars);
+  }
+
 Q16onwards
 C++ only: 20,21
 
