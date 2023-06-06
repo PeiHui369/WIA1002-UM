@@ -1,0 +1,196 @@
+Snake and Ladder Problem
+Google Translate Icon
+Find the minimum number of throws required to win a given Snakes and Ladders board game.
+
+For example, the following game requires at least 7 dice throws to win:
+
+ 
+Snake and Ladder Problem
+ 
+
+Practice This Problem
+
+The idea is to consider the snakes and ladders board as a directed graph and run Breadth–first search (BFS) from the starting node, vertex 0, as per game rules. We construct a directed graph, keeping in mind the following conditions:
+
+For any vertex in graph v, we have an edge from v to v+1, v+2, v+3, v+4, v+5, v+6 as we can reach any of these nodes in one throw of dice from node v.
+If any of these neighbors of v has a ladder or snake, which takes us to position x, then x becomes the neighbor instead of the base of the ladder or head of the snake.
+Now the problem is reduced to finding the shortest path between two nodes in a directed graph problem. We represent the snakes and ladders board using a map.
+
+The algorithm can be implemented as follows in C++, Java, and Python:
+
+
+import java.util.*;
+ 
+// A class to store a graph edge
+class Edge
+{
+    int src, dest;
+ 
+    public Edge(int src, int dest)
+    {
+        this.src = src;
+        this.dest = dest;
+    }
+}
+ 
+// A queue node
+class Node
+{
+    // stores number associated with graph node
+    int ver;
+ 
+    // `min_dist` stores the minimum distance of a node from the starting vertex
+    int min_dist;
+ 
+    public Node(int ver, int min_dist)
+    {
+        this.ver = ver;
+        this.min_dist = min_dist;
+    }
+}
+ 
+// A class to represent a graph object
+class Graph
+{
+    // A list of lists to represent an adjacency list
+    List<List<Integer>> adjList = null;
+ 
+    // Constructor
+    Graph(List<Edge> edges, int n)
+    {
+        adjList = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            adjList.add(new ArrayList<>());
+        }
+ 
+        // add edges to the graph
+        for (Edge edge: edges)
+        {
+            // Please note that the graph is directed
+            adjList.get(edge.src).add(edge.dest);
+        }
+    }
+}
+ 
+class Main
+{
+    // Perform BFS on graph `g` starting from a given source vertex
+    public static int BFS(Graph g, int source, int n)
+    {
+        // create a queue for doing BFS
+        Queue<Node> q = new ArrayDeque<>();
+ 
+        // to keep track of whether a vertex is discovered or not
+        boolean[] discovered = new boolean[n + 1];
+ 
+        // mark the source vertex as discovered
+        discovered[source] = true;
+ 
+        // assign the minimum distance of the source vertex as 0 and
+        // enqueue it
+        Node node = new Node(source, 0);
+        q.add(node);
+ 
+        // loop till queue is empty
+        while (!q.isEmpty())
+        {
+            // dequeue front node
+            node = q.poll();
+ 
+            // Stop BFS if the last node is reached
+            if (node.ver == n) {
+                return node.min_dist;
+            }
+ 
+            // do for every adjacent node of the current node
+            for (int u: g.adjList.get(node.ver))
+            {
+                if (!discovered[u])
+                {
+                    // mark it as discovered and enqueue it
+                    discovered[u] = true;
+ 
+                    // assign the minimum distance of the current node
+                    // one more than the minimum distance of the parent node
+                    q.add(new Node(u, node.min_dist + 1));
+                }
+            }
+        }
+ 
+        return -1;
+    }
+ 
+    public static int findMinimumMoves(Map<Integer, Integer> ladder,
+                                    Map<Integer, Integer> snake)
+    {
+        // total number of nodes in the graph
+        int n = 10*10;
+ 
+        // find all edges involved and store them in a list
+        List<Edge> edges = new ArrayList<>();
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 1; j <= 6 && i + j <= n; j++)
+            {
+                int src = i;
+ 
+                // update destination if there is any ladder
+                // or snake from the current position.
+                int dest;
+ 
+                int _ladder = (ladder.get(i + j) != null) ? ladder.get(i + j): 0;
+                int _snake = (snake.get(i + j) != null) ? snake.get(i + j): 0;
+ 
+                if (_ladder != 0 || _snake != 0) {
+                    dest = _ladder + _snake;
+                }
+                else {
+                    dest = i + j;
+                }
+ 
+                // add an edge from src to dest
+                edges.add(new Edge(src, dest));
+            }
+        }
+ 
+        // construct a directed graph
+        Graph g = new Graph(edges, n);
+ 
+        // Find the shortest path between 1 and 100 using BFS
+        return BFS(g, 0, n);
+    }
+ 
+    public static void main(String[] args)
+    {
+        // snakes and ladders are represented using a map.
+        Map<Integer, Integer> ladder = new HashMap<>();
+        Map<Integer, Integer> snake = new HashMap<>();
+ 
+        // insert ladders into the map
+        ladder.put(1, 38);
+        ladder.put(4, 14);
+        ladder.put(9, 31);
+        ladder.put(21, 42);
+        ladder.put(28, 84);
+        ladder.put(51, 67);
+        ladder.put(72, 91);
+        ladder.put(80, 99);
+ 
+        // insert snakes into the map
+        snake.put(17, 7);
+        snake.put(54, 34);
+        snake.put(62, 19);
+        snake.put(64, 60);
+        snake.put(87, 36);
+        snake.put(93, 73);
+        snake.put(95, 75);
+        snake.put(98, 79);
+ 
+        System.out.println(findMinimumMoves(ladder, snake));
+    }
+}
+Download  Run Code
+
+Output:
+
+7
