@@ -1,3 +1,14 @@
+Repeated in Stack: 3,4
+
+- Out of Topic (Labtest 2) on hold -
+BST: 5, 13, 14,15,16,17,18,19,20,21,22,23,24,26,27,28,29,39,40,41,42,48
+Breadth-First Search(BFS) [Graph]: Shortest path, Movement on board, min val to convert all neg values in matrix, snake & ladder, undirected graph cycle or not
+6,7,8,9,10,11,25,30,31,33
+DFS: Movement on board, undirected graph cycle or not
+9,10,11,33
+Graph: 34,35,36,37,38,43,44,45,46,47
+
+can do: 12,32
 # Queue Implementation
 @ Array
 class Queue {
@@ -95,7 +106,64 @@ class Queue{
     4. boolean isEmpty() {return rear==null && front==null;}
     
     5. int size() {return count;}
+
+# Generate binary numbers between 1 to `n`
+class Main {
+    public static void generate (int n) {
+        Queue<String> q = new ArrayDeque<>();
+        q.add("1");
+        int i = 1;
+        while (i++ <= n) {
+            q.add(q.peek() + '0');
+            q.add(q.peek() + '1');
+        }
+        System.out.print(q.poll() + ' ');
+    }
+}
+
+# Convert a multilevel linked list to a singly linked list
+class Node{
+    int data;
+    Node next, child;
     
+    Node(int data, Node next, Node child){
+        this.data = data;
+        this.next = next;
+        this.child = child;
+    }
+}
+
+class Main{
+    1. public static Node convertList (Node head) {
+        Node curr = head;
+        Queue<Node> q = new ArrayDeque<>();
+        while (curr != null) {
+            if (curr.next = null) {curr.next = q.poll();}
+            if (curr.child != null) {q.add (curr.child);}
+            curr = curr.next;
+        }
+        return head;
+    }
+    
+    2. public static void printList (Node head) {
+        Node ptr = head;
+        while (ptr != null) {
+            S.o.p (ptr.data + " -> ");
+            ptr = ptr.next;
+        }
+        S.o.println("null")
+      }
+      
+    3. public static Node createHorizontalList(int[] input){
+        Node head = null;
+        for(int i = input.length-1; i>=0; i--){
+            head = new Node (input[i], head, null);
+        }
+        return head;
+      }
+                
+
+=========
 # Efficiently print all nodes between two given levels in a binary tree
 class Node {
     int key;
