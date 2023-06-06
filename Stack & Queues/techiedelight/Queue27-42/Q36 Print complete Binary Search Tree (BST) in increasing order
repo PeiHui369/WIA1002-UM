@@ -1,0 +1,113 @@
+Print complete Binary Search Tree (BST) in increasing order
+Google Translate Icon
+Given a level order representation of a complete binary search tree, print its elements in increasing order.
+
+For example, the level order representation of the complete BST below is [15, 10, 20, 8, 12, 18, 25]. The solution should print [8, 10, 12, 15, 18, 20, 25].
+
+Complete Binary Search Tree
+
+Practice This Problem
+
+1. Recursive Solution
+In the array representation of the binary tree, the left child for a node at index i occupies index 2i+1, and the right child occupies index 2i+2. For a complete binary tree, there will be no vacant positions in the array.
+
+The idea is to process the array similarly as an inorder traversal of the binary tree using the above property since our binary tree is a BST – the inorder traversal prints the elements in increasing order.
+
+The algorithm can be implemented as follows in C, Java, and Python:
+
+
+class Main
+{
+    // Recursive function to print a complete binary search tree in increasing order
+    public static void printIncreasingOrder(int[] keys, int low, int high)
+    {
+        if (low > high) {
+            return;
+        }
+ 
+        // recur for the left subtree
+        printIncreasingOrder(keys, low*2 + 1, high);
+ 
+        // print the root node
+        System.out.print(keys[low] + " ");
+ 
+        // recur for the right subtree
+        printIncreasingOrder(keys, low*2 + 2, high);
+    }
+ 
+    public static void main(String[] args)
+    {
+        int[] keys = { 15, 10, 20, 8, 12, 18, 25 };
+        printIncreasingOrder(keys, 0, keys.length - 1);
+    }
+}
+Download  Run Code
+
+Output:
+
+8 10 12 15 18 20 25
+
+The time complexity of the above solution is O(n), where n is the size of the BST, and requires space proportional to the tree’s height for the call stack.
+
+2. Iterative Solution
+The algorithm can be easily implemented iteratively as well. Following is the iterative version in C++, Java, and Python using an explicit stack:
+
+
+import java.util.Stack;
+ 
+class Main
+{
+    // Iterative function to print a complete binary search tree in increasing order
+    public static void printIncreasingOrder(int[] keys)
+    {
+        // base case
+        if (keys == null || keys.length == 0) {
+            return;
+        }
+ 
+        // create a stack to store array indices
+        Stack<Integer> s = new Stack<>();
+ 
+        // start with the root node (the first array element)
+        int r = 0;
+ 
+        // push the root node into the stack
+        s.add(r);
+ 
+        // run till stack is empty
+        while (!s.isEmpty())
+        {
+            // push the left child of the current node into the stack
+            // and repeat the same for the left child
+            while (r == s.peek() && r*2 + 1 < keys.length)
+            {
+                r = r*2 + 1;
+                s.add(r);
+            }
+ 
+            // print the last processed node and remove it from the stack
+            r = s.pop();
+            System.out.print(keys[r] + " ");
+ 
+            // push the right child of the current node into the stack
+            if (r*2 + 2 < keys.length)
+            {
+                r = r*2 + 2;
+                s.add(r);
+            }
+        }
+    }
+ 
+    public static void main(String[] args)
+    {
+        int[] keys = { 15, 10, 20, 8, 12, 18, 25 };
+        printIncreasingOrder(keys);
+    }
+}
+Download  Run Code
+
+Output:
+
+8 10 12 15 18 20 25
+
+The time complexity of the above solution is O(n) and requires O(n) extra space, where n is the size of the BST.
