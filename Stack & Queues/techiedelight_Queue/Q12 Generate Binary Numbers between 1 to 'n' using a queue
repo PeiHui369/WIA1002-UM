@@ -40,3 +40,22 @@ class Main
 Output:
  
 1 10 11 100 101 110 111 1000 1001 1010 1011 1100 1101 1110 1111 10000
+
+--------------------------------------------------------------------------------------
+
+The given code generates binary numbers between 1 and `n` using a queue data structure. Here's how it works:
+
+1. The `generate` function takes an integer `n` as input.
+2. It creates an empty queue (`ArrayDeque`) called `q` to store the binary numbers.
+3. The function starts by adding the string "1" to the queue.
+4. It then enters a loop that runs `n` times. The loop variable `i` is initially set to 1.
+5. Inside the loop, the function performs the following steps:
+   - Appends '0' to the front element of the queue (`q.peek() + '0'`) and adds the resulting string to the queue.
+   - Appends '1' to the front element of the queue (`q.peek() + '1'`) and adds the resulting string to the queue.
+   - Removes the front element from the queue (`q.poll()`), prints it, and adds a space after it.
+6. After the loop finishes, the function generates and prints the binary numbers between 1 and `n` in ascending order.
+
+For example, if `n` is 16, the output will be:
+1 10 11 100 101 110 111 1000 1001 1010 1011 1100 1101 1110 1111 10000
+
+Each number is a binary representation of a decimal number between 1 and 16.
