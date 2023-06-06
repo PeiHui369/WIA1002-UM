@@ -1,0 +1,181 @@
+Given an integer array, find the next greater element for every array element. The next greater element of a number x is the first greater number to the right of x in the array.
+
+In other words, for each element A[i] in the array A, find an element A[j] such that j > i and A[j] > A[i] and the value of j should be as minimum as possible. If the next greater element doesn’t exist in the array for any element, consider it -1
+
+For example,
+
+Input:  [2, 7, 3, 5, 4, 6, 8]
+Output: [7, 8, 5, 6, 6, 8, -1]
+ 
+ 
+Input:  [5, 4, 3, 2, 1]
+Output: [-1, -1, -1, -1, -1]
+  
+Note that the next greater element for the last array element is always -1.
+
+--------------------------------------
+@1
+1. Brute-Force Approach
+The idea is to use two nested loops. The outer loop takes each array element from left to right. The inner loop considers all elements to the “right” of the element picked by the outer loop. Terminate the inner loop as soon as the first larger element is found, which would be the next greater element for the element picked by the outer loop.
+The time complexity of this approach is O(n2), where n is the size of the input. 
+
+class Main
+{
+    // Find the next greater element for every array element
+    public static void findNextGreaterElements(int[] input)
+    {
+        // base case
+        if (input == null) {
+            return;
+        }
+ 
+        // do for each element
+        for (int i = 0; i < input.length; i++)
+        {
+            // keep track of the next greater element for element `input[i]`
+            int next = -1;
+ 
+            // process elements on the right of element `input[i]`
+            for (int j = i + 1; j < input.length; j++)
+            {
+                // break the inner loop at the first larger element on the
+                // right of element `input[i]`
+                if (input[j] > input[i])
+                {
+                    next = input[j];
+                    break;
+                }
+            }
+ 
+            System.out.print(next + " ");
+        }
+    }
+ 
+    public static void main(String[] args)
+    {
+        int[] input = { 2, 7, 3, 5, 4, 6, 8 };
+        findNextGreaterElements(input);
+    }
+}
+
+Output:
+7 8 5 6 6 8 -1
+
+@2. Using Stack
+The time complexity can be easily reduced to linear by using extra space. The idea is to use the stack data structure.
+For each element x in the array, pop all elements from the stack smaller than x, and set their next greater element to x.
+Loop till we have a greater element on top of the stack or stack becomes empty. Then push the current element x on top of the stack.
+Repeat the process for every array element.
+- Note that we are pushing indexes into the stack instead of the actual elements. Now the next greater element can be set for the popped elements using their index.
+
+import java.util.Arrays;
+import java.util.Stack;
+ 
+class Main
+{
+    // Find the next greater element for every array element
+    public static int[] findNextGreaterElements(int[] input)
+    {
+        // base case
+        if (input == null) {
+            return input;
+        }
+ 
+        int[] result = new int[input.length];
+        Arrays.fill(result, -1);
+ 
+        // create an empty stack
+        Stack<Integer> s = new Stack<>();
+ 
+        // do for each element
+        for (int i = 0; i < input.length; i++)
+        {
+            // loop till we have a greater element on top or stack becomes empty.
+ 
+            // Keep popping elements from the stack smaller than the current
+            // element, and set their next greater element to the current element
+ 
+            while (!s.isEmpty() && input[s.peek()] < input[i]) {
+                result[s.pop()] = input[i];
+            }
+ 
+            // push current "index" into the stack
+            s.push(i);
+        }
+ 
+        return result;
+    }
+ 
+    public static void main(String[] args)
+    {
+        int[] input = { 2, 7, 3, 5, 4, 6, 8 };
+ 
+        int[] result = findNextGreaterElements(input);
+        System.out.println(Arrays.toString(result));
+    }
+}
+
+Output:
+[7, 8, 5, 6, 6, 8, -1]
+
+@3. Stack
+Here’s another stack-based solution where elements are processed from right to left in the array.
+
+For each element x in the array, loop, till we have a greater element on top of the stack or stack, becomes empty.
+Once the stack contains a greater element on the top, set it as the next greater element of x and push x on top of the stack. If the stack becomes empty, set the next greater x as -1.
+Repeat the process for every array element.
+
+import java.util.Arrays;
+import java.util.Stack;
+ 
+class Main
+{
+    public static int[] findNextGreaterElements(int[] input)
+    {
+        // base case
+        if (input == null) {
+            return input;
+        }
+ 
+        int n = input.length;
+        int[] result = new int[n];
+        Arrays.fill(result, -1);
+ 
+        // create an empty stack
+        Stack<Integer> s = new Stack<>();
+ 
+        // process each element from right to left
+        for (int i = n - 1; i >= 0; i--)
+        {
+            // loop till we have a greater element on top or stack becomes empty.
+            while (!s.empty())
+            {
+                // pop elements that aren't greater than the current element
+                if (s.peek() <= input[i]) {
+                    s.pop();
+                }
+                // the next greater element is now on the top of the stack
+                else {
+                    result[i] = s.peek();
+                    break;
+                }
+            }
+ 
+            // push current element into the stack
+            s.push(input[i]);
+        }
+ 
+        return result;
+    }
+ 
+    public static void main(String[] args)
+    {
+        int[] input = { 2, 7, 3, 5, 4, 6, 8 };
+ 
+        int[] result = findNextGreaterElements(input);
+        System.out.println(Arrays.toString(result));
+    }
+}
+
+Output:
+[7, 8, 5, 6, 6, 8, -1]
