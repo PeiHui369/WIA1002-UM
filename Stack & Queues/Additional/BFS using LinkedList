@@ -1,0 +1,70 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
+class Graph {
+    private int vertices; // number of vertices
+    private LinkedList<Integer>[] adjacencyList; // adjacency list representation of the graph
+
+    public Graph(int v) {
+        vertices = v;
+        adjacencyList = new LinkedList[v];
+        for (int i = 0; i < v; i++) {
+            adjacencyList[i] = new LinkedList<>();
+        }
+    }
+
+    public void addEdge(int source, int destination) {
+        adjacencyList[source].add(destination);
+    }
+
+    public void BFS(int startVertex) {
+        boolean[] visited = new boolean[vertices]; // track visited vertices
+        Queue<Integer> queue = new LinkedList<>();
+
+        visited[startVertex] = true;
+        queue.offer(startVertex);
+
+        while (!queue.isEmpty()) {
+            int currentVertex = queue.poll();
+            System.out.print(currentVertex + " ");
+
+            LinkedList<Integer> neighbors = adjacencyList[currentVertex];
+            for (int neighbor : neighbors) {
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    queue.offer(neighbor);
+                }
+            }
+        }
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        // Create a graph
+        int vertices = 6;
+        Graph graph = new Graph(vertices);
+
+        // Add edges
+        graph.addEdge(0, 1);
+        graph.addEdge(0, 2);
+        graph.addEdge(1, 3);
+        graph.addEdge(1, 4);
+        graph.addEdge(2, 4);
+        graph.addEdge(3, 4);
+        graph.addEdge(3, 5);
+        graph.addEdge(4, 5);
+
+        System.out.println("BFS traversal starting from vertex 0:");
+        graph.BFS(0);
+    }
+}
+
+=======================================================================
+This code demonstrates the BFS algorithm using a graph represented as an adjacency list. The `Graph` class maintains an array of LinkedLists to store the adjacency list.
+
+The `addEdge` method adds an edge between two vertices by appending the destination vertex to the list of the source vertex.
+
+The `BFS` method performs the breadth-first search starting from a given start vertex. It uses a boolean array `visited` to keep track of visited vertices and a `Queue` to manage the order of traversal. The method follows the standard BFS algorithm by repeatedly dequeueing vertices from the queue, marking them as visited, and enqueueing their unvisited neighbors.
+
+In the `main` method, a graph is created, and edges are added between vertices. Then, the BFS traversal is performed starting from vertex 0. The result is printed, which shows the order in which the vertices are visited during the BFS traversal.
