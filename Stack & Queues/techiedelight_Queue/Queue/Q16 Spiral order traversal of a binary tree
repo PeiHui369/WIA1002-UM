@@ -1,0 +1,336 @@
+ to content
+Spiral order traversal of a binary tree
+Google Translate Icon
+Given a binary tree, print its nodes level by level in spiral order, i.e., all nodes present at level 1 should be printed first from left to right, followed by nodes of level 2 from right to left, followed by nodes of level 3 from left to right and so on… In other words, odd levels should be printed from left to right, and even levels should be printed from right to left or vice versa.
+
+For example, the spiral level order traversal for the following tree is
+
+(1, 3, 2, 4, 5, 6, 7) or (1, 2, 3, 7, 6, 5, 4)
+ 
+
+Level Order Traversal
+
+Practice This Problem
+
+ 
+A simple solution is to print all nodes of level 1 first, followed by level 2, … till level h, where h is the tree’s height. We can print all nodes present in a level by modifying the preorder traversal on the tree. Following is the C++, Java, and Python program that demonstrates it:
+
+
+// A class to store a binary tree node
+class Node
+{
+    int key;
+    Node left = null, right = null;
+ 
+    Node(int data) {
+        this.key = data;
+    }
+}
+ 
+class Main
+{
+    // Function to print all nodes of a given level from left to right
+    public static boolean printLevelLeftToRight(Node root, int level)
+    {
+        if (root == null) {
+            return false;
+        }
+ 
+        if (level == 1)
+        {
+            System.out.print(root.key + " ");
+            return true;
+        }
+ 
+        // process left child before the right child
+        boolean left = printLevelLeftToRight(root.left, level - 1);
+        boolean right = printLevelLeftToRight(root.right, level - 1);
+ 
+        return left || right;
+    }
+ 
+    // Function to print all nodes of a given level from right to left
+    public static boolean printLevelRightToLeft(Node root, int level)
+    {
+        if (root == null) {
+            return false;
+        }
+ 
+        if (level == 1)
+        {
+            System.out.print(root.key + " ");
+            return true;
+        }
+ 
+        // process right child before the left child
+        boolean right = printLevelRightToLeft(root.right, level - 1);
+        boolean left = printLevelRightToLeft(root.left, level - 1);
+ 
+        return right || left;
+    }
+ 
+    // Function to print level order traversal of a given binary tree
+    public static void spiralOrderTraversal(Node root)
+    {
+        if (root == null) {
+            return;
+        }
+ 
+        // start from level 1 — till the height of the tree
+        int level = 1;
+ 
+        // run till either function returns false
+        while (printLevelLeftToRight(root, level++) &&
+                    printLevelRightToLeft(root, level++));
+    }
+ 
+    public static void main(String[] args)
+    {
+        Node root = new Node(15);
+        root.left = new Node(10);
+        root.right = new Node(20);
+        root.left.left = new Node(8);
+        root.left.right = new Node(12);
+        root.right.left = new Node(16);
+        root.right.right = new Node(25);
+ 
+        spiralOrderTraversal(root);
+    }
+}
+Download  Run Code
+
+Output:
+
+15 20 10 8 12 16 25
+
+The time complexity of the above solution is O(n2), where n is the total number of nodes in the binary tree.
+
+ 
+We can reduce the time complexity to O(n) by using extra space. Following is a pseudocode for a simple queue-based spiral order traversal:
+
+levelorder(root)
+q —> empty double ended queue
+q.push(root)
+while (not q.isEmpty())
+  while (level is even)
+    node —> q.popFront()
+    visit(node)
+    if (node.left <> null)
+      q.pushBack(node.left)
+    if (node.right <> null)
+      q.pushBack(node.right)
+ 
+  while (level is odd)
+    node —> q.popBack()
+    visit(node)
+    if (node.right <> null)
+      q.pushFront(node.right)
+    if (node.left <> null)
+      q.pushFront(node.left)
+The algorithm can be implemented as follows in C++, Java, and Python:
+
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+ 
+// A class to store a binary tree node
+class Node
+{
+    int key;
+    Node left = null, right = null;
+ 
+    Node(int key) {
+        this.key = key;
+    }
+}
+ 
+class Main
+{
+    // Function to print spiral order traversal of a given binary tree
+    public static void spiralOrderTraversal(Node root)
+    {
+        if (root == null) {
+            return;
+        }
+ 
+        // create an empty double-ended queue and enqueue the root node
+        Deque<Node> deque = new ArrayDeque<>();        // or use deque
+        deque.addFirst(root);
+ 
+        // `flag` is used to differentiate between odd or even level
+        boolean flag = true;
+ 
+        // loop till deque is empty
+        while (!deque.isEmpty())
+        {
+            // calculate the total number of nodes at the current level
+            int nodeCount = deque.size();
+ 
+            // print left to right
+            if (flag)
+            {
+                // process each node of the current level and enqueue their
+                // non-empty left and right child to deque
+                while (nodeCount > 0)
+                {
+                    // pop from the front if `flag` is true
+                    Node curr = deque.pollFirst();
+                    System.out.print(curr.key + " ");
+ 
+                    // it is important to push the left child into the back,
+                    // followed by the right child
+ 
+                    if (curr.left != null) {
+                        deque.addLast(curr.left);
+                    }
+ 
+                    if (curr.right != null) {
+                        deque.addLast(curr.right);
+                    }
+ 
+                    nodeCount--;
+                }
+            }
+ 
+            // print right to left
+            else {
+                // process each node of the current level and enqueue their
+                // non-empty right and left child
+                while (nodeCount > 0)
+                {
+                    // it is important to pop from the back
+                    Node curr = deque.pollLast();
+                    System.out.print(curr.key + " ");    // print front node
+ 
+                    // it is important to push the right child at the front,
+                    // followed by the left child
+ 
+                    if (curr.right != null) {
+                        deque.addFirst(curr.right);
+                    }
+ 
+                    if (curr.left != null) {
+                        deque.addFirst(curr.left);
+                    }
+ 
+                    nodeCount--;
+                }
+            }
+ 
+            // flip the flag for the next level
+            flag = !flag;
+            System.out.println();
+        }
+    }
+ 
+    public static void main(String[] args)
+    {
+        Node root = new Node(15);
+        root.left = new Node(10);
+        root.right = new Node(20);
+        root.left.left = new Node(8);
+        root.left.right = new Node(12);
+        root.right.left = new Node(16);
+        root.right.right = new Node(25);
+ 
+        spiralOrderTraversal(root);
+    }
+}
+Download  Run Code
+
+Output:
+
+15
+20 10
+8 12 16 25
+
+The time complexity of the above solution is O(n) and requires O(n) extra space, where n is the size of the binary tree.
+
+ 
+We can also solve this problem by using hashing. The following code traverses the tree in a preorder fashion and uses a map to store every node and its level using the level number as a key. This approach is demonstrated below in C++, Java, and Python:
+
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.Map;
+ 
+// A class to store a binary tree node
+class Node
+{
+    int key;
+    Node left = null, right = null;
+ 
+    Node(int key) {
+        this.key = key;
+    }
+}
+ 
+class Main
+{
+    // Traverse the tree in a preorder fashion and store nodes in a map
+    // corresponding to their level
+    public static void preorder(Node root, int level, Map<Integer, Deque<Integer>> map)
+    {
+        // base case: empty tree
+        if (root == null) {
+            return;
+        }
+ 
+        // insert the current node and its level into the map
+        map.putIfAbsent(level, new ArrayDeque<>());
+ 
+        // if the level is odd, insert at the back; otherwise, search at front
+        if (level % 2 == 1) {
+            map.get(level).addLast(root.key);
+        }
+        else {
+            map.get(level).addFirst(root.key);
+        }
+ 
+        // recur for the left and right subtree by increasing the level by 1
+        preorder(root.left, level + 1, map);
+        preorder(root.right, level + 1, map);
+    }
+ 
+    // Recursive function to print spiral order traversal of a given binary tree
+    public static void levelOrderTraversal(Node root)
+    {
+        // create an empty map to store nodes between given levels
+        Map<Integer, Deque<Integer>> map = new HashMap<>();
+ 
+        // traverse the tree and insert its nodes into the map
+        // corresponding to their level
+        preorder(root, 1, map);
+ 
+        // iterate through the map and print all nodes present at every level
+        for (int i = 1; i <= map.size(); i++) {
+            System.out.println("Level " + i + ": " + map.get(i));
+        }
+    }
+ 
+    public static void main(String[] args)
+    {
+        Node root = new Node(15);
+        root.left = new Node(10);
+        root.right = new Node(20);
+        root.left.left = new Node(8);
+        root.left.right = new Node(12);
+        root.right.left = new Node(16);
+        root.right.right = new Node(25);
+        root.left.left.left = new Node(20);
+        root.right.right.right = new Node(30);
+ 
+        levelOrderTraversal(root);
+    }
+}
+Download  Run Code
+
+Output:
+
+Level 1: 15
+Level 2: 20 10
+Level 3: 8 12 16 25
+Level 4: 30 20
+
+The time complexity of the above solution is O(n) and requires O(n) extra space, where n is the size of the binary tree.
