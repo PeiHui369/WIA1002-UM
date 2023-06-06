@@ -1,0 +1,136 @@
+Construct a directed graph from an undirected graph that satisfies given constraints
+Google Translate Icon
+Given a connected undirected graph and a vertex in the graph, construct a directed graph such that any path in the directed graph leads to that particular vertex.
+
+Undirected Graph
+
+Consider the above connected undirected graph. Let the input vertex be 1. The goal is to convert the above graph to a directed graph such that any path in the directed graph leads to vertex 1. Below is one such graph.
+
+Directed Graph
+
+ 
+The idea is to perform Breadth–first search (BFS) or Depth–first search (DFS) on the undirected graph starting from the given vertex and add edges to the directed graph in the direction of the scan. A BFS Tree for the above graph that starts from vertex 1 would look like this.
+
+BFS Tree for directed graph
+
+After all the vertices are processed in our BFS or DFS, reverse all the directed graphs’ edges to have a path from every vertex in the directed graph to the input vertex. Please note that we can save reversing all edges if edges are added in reverse order in the directed graph.
+
+Following is the C++, Java, and Python program that demonstrates it:
+
+
+import java.util.*;
+ 
+// A class to store a graph edge
+class Edge
+{
+    public final int source, dest;
+ 
+    private Edge(int source, int dest)
+    {
+        this.source = source;
+        this.dest = dest;
+    }
+ 
+    // Factory method for creating an immutable instance of Edge
+    public static Edge of(int a, int b) {
+        return new Edge(a, b);        // calls private constructor
+    }
+}
+ 
+// A class to represent a graph object
+class Graph
+{
+    // A list of lists to represent an adjacency list
+    List<List<Integer>> adjList = null;
+ 
+    // Constructor
+    Graph(List<Edge> edges, int n)
+    {
+        adjList = new ArrayList<>();
+ 
+        for (int i = 0; i < n; i++) {
+            adjList.add(new ArrayList<>());
+        }
+ 
+        // add edges to the undirected graph
+        for (Edge edge: edges)
+        {
+            int src = edge.source;
+            int dest = edge.dest;
+ 
+            adjList.get(src).add(dest);
+            adjList.get(dest).add(src);
+        }
+    }
+}
+ 
+class Main
+{
+    // Perform BFS on the graph starting from vertex 'v'
+    public static List<Edge> BFS(Graph graph, int n, int v)
+    {
+        // stores directed graph edges
+        List<Edge> edges = new ArrayList<>();
+ 
+        // to keep track of whether a vertex is discovered or not
+        boolean[] discovered = new boolean[n];
+ 
+        // mark the source vertex as discovered
+        discovered[v] = true;
+ 
+        // create a queue for doing BFS
+        Queue<Integer> q = new ArrayDeque<>();
+ 
+        // enqueue source vertex
+        q.add(v);
+ 
+        // loop till queue is empty
+        while (!q.isEmpty())
+        {
+            // dequeue front node
+            v = q.poll();
+ 
+            // do for every edge (v, u)
+            for (int u: graph.adjList.get(v))
+            {
+                if (!discovered[u])
+                {
+                    // mark it as discovered and enqueue it
+                    discovered[u] = true;
+ 
+                    // add an edge from 'u' to 'v' to the directed graph
+                    edges.add(Edge.of(u, v));
+ 
+                    q.add(u);
+                }
+            }
+        }
+ 
+        return edges;
+    }
+ 
+    public static void main(String[] args)
+    {
+        // List of graph edges as per the above diagram
+        List<Edge> edges = Arrays.asList(Edge.of(0, 1), Edge.of(0, 2),
+                            Edge.of(1, 3), Edge.of(2, 3), Edge.of(2, 4),
+                            Edge.of(3, 4), Edge.of(3, 5));
+ 
+        // total number of nodes in the graph (labelled from 0 to 5)
+        int n = 6;
+ 
+        // create an undirected graph from the above edges
+        Graph graph = new Graph(edges, n);
+ 
+        // given vertex
+        int vertex = 0;
+ 
+        edges = BFS(graph, n, vertex);
+ 
+        // create a new directed graph
+        Graph digraph = new Graph(edges, n);
+    }
+}
+Download  Run Code
+
+The time complexity of the above solution is the same as that of BFS, i.e., O(V + E), where V and E are the total number of vertices and edges in the graph, respectively.
