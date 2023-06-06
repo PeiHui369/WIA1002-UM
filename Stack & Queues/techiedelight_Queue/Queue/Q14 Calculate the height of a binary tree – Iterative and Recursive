@@ -1,0 +1,144 @@
+Calculate the height of a binary tree – Iterative and Recursive
+Google Translate Icon
+Write an efficient algorithm to compute the binary tree’s height. The height or depth of a binary tree is the total number of edges or nodes on the longest path from the root node to the leaf node.
+
+The program should consider the total number of nodes in the longest path. For example, an empty tree’s height is 0, and the tree’s height with only one node is 1.
+
+Practice This Problem
+
+Recursive Solution
+The idea is to traverse the tree in a postorder fashion and calculate the height of the left and right subtree. The height of a subtree rooted at any node will be one more than the maximum height of its left and right subtree. Recursively apply this property to all tree nodes in a bottom-up manner (postorder fashion) and return the subtree’s maximum height rooted at that node.
+
+The algorithm can be implemented as follows in C++, Java, and Python:
+
+
+// A class to store a binary tree node
+class Node
+{
+    int key;
+    Node left = null, right = null;
+ 
+    Node(int key) {
+        this.key = key;
+    }
+}
+ 
+class Main
+{
+    // Recursive function to calculate the height of a given binary tree
+    public static int height(Node root)
+    {
+        // base case: empty tree has a height of 0
+        if (root == null) {
+            return 0;
+        }
+ 
+        // recur for the left and right subtree and consider maximum depth
+        return 1 + Math.max(height(root.left), height(root.right));
+    }
+ 
+    public static void main(String[] args)
+    {
+        Node root = new Node(15);
+        root.left = new Node(10);
+        root.right = new Node(20);
+        root.left.left = new Node(8);
+        root.left.right = new Node(12);
+        root.right.left = new Node(16);
+        root.right.right = new Node(25);
+ 
+        System.out.println("The height of the binary tree is " + height(root));
+    }
+}
+Download  Run Code
+
+Output:
+
+The height of the binary tree is 3
+
+The time complexity of the above recursive solution is O(n), where n is the total number of nodes in the binary tree. The auxiliary space required by the program is O(h) for the call stack, where h is the height of the tree.
+
+Iterative Solution
+In an iterative version, perform a level order traversal on the tree. Then the height of a tree is equal to the total number of levels in it. Following is the C++, Java, and Python program that demonstrates it:
+
+
+import java.util.ArrayDeque;
+import java.util.Queue;
+ 
+// A class to store a binary tree node
+class Node
+{
+    int key;
+    Node left = null, right = null;
+ 
+    Node(int data) {
+        this.key = data;
+    }
+}
+ 
+class Main
+{
+    // Iterative function to calculate the height of a given binary tree
+    // by doing level order traversal on the tree
+    public static int height(Node root)
+    {
+        // empty tree has a height of 0
+        if (root == null) {
+            return 0;
+        }
+ 
+        // create an empty queue and enqueue the root node
+        Queue<Node> queue = new ArrayDeque<>();
+        queue.add(root);
+ 
+        Node front = null;
+        int height = 0;
+ 
+        // loop till queue is empty
+        while (!queue.isEmpty())
+        {
+            // calculate the total number of nodes at the current level
+            int size = queue.size();
+ 
+            // process each node of the current level and enqueue their
+            // non-empty left and right child
+            while (size-- > 0)
+            {
+                front = queue.poll();
+ 
+                if (front.left != null) {
+                    queue.add(front.left);
+                }
+ 
+                if (front.right != null) {
+                    queue.add(front.right);
+                }
+            }
+ 
+            // increment height by 1 for each level
+            height++;
+        }
+ 
+        return height;
+    }
+ 
+    public static void main(String[] args)
+    {
+        Node root = new Node(15);
+        root.left = new Node(10);
+        root.right = new Node(20);
+        root.left.left = new Node(8);
+        root.left.right = new Node(12);
+        root.right.left = new Node(16);
+        root.right.right = new Node(25);
+ 
+        System.out.println("The height of the binary tree is " + height(root));
+    }
+}
+Download  Run Code
+
+Output:
+
+The height of the binary tree is 3
+
+The time complexity of the above iterative solution is O(n), where n is the total number of nodes in the binary tree. The auxiliary space required by the program is O(n) for the queue data structure.
