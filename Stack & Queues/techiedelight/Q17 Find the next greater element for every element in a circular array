@@ -1,0 +1,109 @@
+Given a circular integer array, find the next greater element for every element in it. The next greater element of an element x in the array is the first larger number to the next of x.
+
+In a circular array, the indices will wrap around as if it were connected end-to-end. In other words, the end of the array wraps around to the start of the array. Therefore, we can search circularly to find the next greater number. If the next greater element doesn’t exist, consider it to be -1.
+
+For example,
+
+Input:  [3, 5, 2, 4]
+Output: [5, -1, 4, 5]
+ 
+Input:  [7, 5, 3, 4]
+Output: [-1, 7, 4, 7]
+
+In the above post, we have discussed finding the next greater element for every element in a “normal” array. We can easily extend the solution for “circular” arrays as well, just by looping twice. We can do this by doubling the loop counter and taking the modulo of loop counter indices with n.
+
+The core idea remains the same – for each element x, pop elements that are smaller than x, and set their next greater element to x.
+
+-----------------------------
+@1
+import java.util.Arrays;
+import java.util.Stack;
+ 
+class Main
+{
+    public static int[] findNextGreater(int[] input)
+    {
+        // base case
+        if (input == null) {
+            return input;
+        }
+ 
+        int n = input.length;
+ 
+        int[] out = new int[n];
+        Arrays.fill(out, -1);
+ 
+        Stack<Integer> s = new Stack<>();
+ 
+        for (int i = 0; i < 2*n; i++)
+        {
+            while (!s.isEmpty() && input[s.peek()] < input[i % n]) {
+                out[s.pop()] = input[i % n];
+            }
+            s.add(i % n);
+        }
+        return out;
+    }
+ 
+    public static void main(String[] args)
+    {
+        int[] input = { 3, 5, 2, 4 };
+ 
+        int[] out = findNextGreater(input);
+        System.out.println(Arrays.toString(out));
+    }
+}
+
+Output:
+[5, -1, 4, 5]
+
+@2
+import java.util.Arrays;
+import java.util.Stack;
+ 
+class Main
+{
+    public static int[] findNextGreater(int[] input)
+    {
+        // base case
+        if (input == null) {
+            return input;
+        }
+ 
+        int n = input.length;
+ 
+        int[] out = new int[n];
+        Arrays.fill(out, -1);
+ 
+        Stack<Integer> s = new Stack<>();
+ 
+        for (int i = 2*n - 1; i >= 0; i--)
+        {
+            while (!s.isEmpty())
+            {
+                if (s.peek() <= input[i % n]) {
+                    s.pop();
+                }
+                else {
+                    out[i % n] = s.peek();
+                    break;
+                }
+            }
+            s.add(input[i % n]);
+        }
+ 
+        return out;
+    }
+ 
+    public static void main(String[] args)
+    {
+        int[] input = { 3, 5, 2, 4 };
+ 
+        int[] out = findNextGreater(input);
+        System.out.println(Arrays.toString(out));
+    }
+}
+
+Output:
+
+[5, -1, 4, 5]
