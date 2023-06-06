@@ -1,0 +1,122 @@
+Given a set of intervals, print all non-overlapping intervals after merging the overlapping intervals.
+
+For example,
+
+Input:  {1, 5}, {2, 3}, {4, 6}, {7, 8}, {8, 10}, {12, 15}
+ 
+Output: Intervals after merging overlapping intervals are {1, 6}, {7, 10}, {12, 15}.
+
+The idea is to sort the intervals in increasing order of their starting time. Then create an empty stack and for each interval,
+
+If the stack is empty or the top interval in the stack does not overlap with the current interval, push it into the stack.
+If the top interval of the stack overlaps with the current interval, merge both intervals by updating the end of the top interval at the ending of the current interval.
+Finally, print all non-overlapping intervals present in the stack. 
+
+-----------------------------------------------------
+import java.util.*;
+ 
+// A class to represent an interval
+class Interval
+{
+    int begin, end;
+ 
+    Interval(int begin, int end)
+    {
+        this.begin = begin;
+        this.end = end;
+    }
+ 
+    @Override
+    public String toString() {
+        return "{" + begin + ", " + end + "}";
+    }
+}
+ 
+class Main
+{
+    // Function to merge overlapping intervals
+    public static void mergeIntervals(List<Interval> intervals)
+    {
+        // sort the intervals in increasing order of their starting time
+        Collections.sort(intervals, Comparator.comparingInt(a -> a.begin));
+ 
+        // create an empty stack
+        Stack<Interval> stack = new Stack<>();
+ 
+        // do for each interval
+        for (Interval curr: intervals)
+        {
+            // if the stack is empty or the top interval in the stack does not overlap
+            // with the current interval, push it into the stack
+            if (stack.empty() || curr.begin > stack.peek().end) {
+                stack.push(curr);
+            }
+ 
+            // if the top interval of the stack overlaps with the current interval,
+            // merge two intervals by updating the end of the top interval
+            // to the current interval
+            if (stack.peek().end < curr.end) {
+                stack.peek().end = curr.end;
+            }
+        }
+ 
+        // print all non-overlapping intervals
+        while (!stack.empty()) {
+            System.out.println(stack.pop());
+        }
+    }
+ 
+    public static void main(String[] args)
+    {
+        List<Interval> intervals = Arrays.asList(
+                new Interval(1, 5), new Interval(2, 3),
+                new Interval(4, 6), new Interval(7, 8),
+                new Interval(8, 10), new Interval(12, 15)
+        );
+ 
+        mergeIntervals(intervals);
+    }
+}
+    
+=====================================================
+In the given input, there are multiple intervals represented by pairs of numbers. The task is to merge the overlapping intervals and obtain a new set of intervals.
+
+Let's go through the steps to understand how the interval {1, 6} is formed from the input:
+
+1. Start with the first interval {1, 5}. This interval has the starting point at 1 and the ending point at 5.
+
+2. Compare the ending point of the first interval (5) with the starting point of the next interval. The next interval is {2, 3}.
+
+   - Since the ending point of the first interval is greater than the starting point of the next interval (5 > 2), there is an overlap between these two intervals.
+
+   - To merge the overlapping intervals, we update the ending point of the current interval to the maximum of the two ending points. In this case, the new ending point becomes max(5, 3) = 5.
+
+3. Move on to the next interval {4, 6}.
+
+   - Again, compare the ending point of the current interval (5) with the starting point of the next interval (4).
+
+   - There is an overlap since the ending point of the current interval is greater than the starting point of the next interval (5 > 4).
+
+   - Update the ending point of the current interval to the maximum of the two ending points. In this case, the new ending point becomes max(5, 6) = 6.
+
+4. Now, we move to the next interval {7, 8}.
+
+   - There is no overlap between the current interval {4, 6} and the next interval {7, 8} because the ending point of the current interval (6) is not greater than the starting point of the next interval (6 <= 7).
+
+   - Since there is no overlap, we add the current interval {4, 6} to the list of merged intervals.
+
+5. Continue this process for the remaining intervals.
+
+   - The next interval {8, 10} overlaps with the previous interval {7, 8}. So we update the ending point of the previous interval to the maximum of the two ending points, which is 10.
+
+   - The interval {12, 15} does not overlap with the previous interval, so we add it as a separate interval.
+
+6. The final merged intervals are {1, 6}, {7, 10}, {12, 15}.
+
+Therefore, the interval {1, 6} is formed by merging the overlapping intervals {1, 5} and {4, 6} together.
+
+
+
+
+
+
