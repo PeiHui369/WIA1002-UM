@@ -1,0 +1,11 @@
+@ Numbers
+i. Ascending order
+Queue<Double> queue = new PriorityQueue<>();
+
+ii. Descending order
+Queue<Double> queue = new PriorityQueue<>(Collections.reverseOrder());
+
+@ String
+i. Alphabetic order: (A->Z)
+Queue<String> queue = new PriorityQueue<>();
+Queue<String> queue = new PriorityQueue<>(Collections.reverseOrder());
