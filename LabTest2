@@ -1,0 +1,51 @@
+Q1
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
+
+public class ProductCategorization {
+    public static void main(String[] args) {
+        String filename = "labtest2.txt";
+        Map<String, Queue<String>> productMap = new HashMap<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(" ");
+                if (parts.length >= 2) {
+                    String code = parts[0];
+                    String product = parts[1];
+
+                    if (!productMap.containsKey(code)) {
+                        productMap.put(code, new LinkedList<>());
+                    }
+
+                    Queue<String> queue = productMap.get(code);
+                    queue.offer(product);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading the file: " + e.getMessage());
+            System.exit(1);
+        }
+
+        // Print the categorized products
+        for (Map.Entry<String, Queue<String>> entry : productMap.entrySet()) {
+            String code = entry.getKey();
+            Queue<String> products = entry.getValue();
+
+            System.out.println("Products in category " + code + ":");
+            while (!products.isEmpty()) {
+                System.out.println(products.poll());
+            }
+            System.out.println();
+        }
+    }
+}
+
+Q2
