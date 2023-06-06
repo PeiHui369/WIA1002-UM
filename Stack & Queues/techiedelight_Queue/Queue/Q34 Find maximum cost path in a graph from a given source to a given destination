@@ -1,0 +1,184 @@
+Find maximum cost path in a graph from a given source to a given destination
+Google Translate Icon
+Given a weighted undirected graph, find the maximum cost path from a given source to any other vertex in the graph which is greater than a given cost. The path should not contain any cycles.
+
+For example, consider the following graph,
+
+Maximum cost path
+
+Let source = 0 and cost = 50.
+
+The maximum cost route from source vertex 0 is 0—6—7—1—2—5—3—4, having cost 51, which is more than cost 50. The solution should return 51.
+
+Maximum cost path solution
+
+Practice This Problem
+
+The idea is to do a Breadth–first search (BFS) traversal. BFS is generally used to find the shortest paths in graphs/matrices, but we can modify normal BFS to meet our requirements. By modifying BFS, we don’t mean using a priority queue that picks up the maximum weighted edge at every step, as that approach will fail. A low-weight edge can also be involved in the maximum cost path as there might be higher weight edges connected through it.
+
+So, how can we use BFS?
+
+Usually, BFS doesn’t explore already discovered vertices again, but here we do the opposite. To cover all possible paths from a given source, remove this check from BFS. But if the graph contains a cycle, removing this check will cause the program to go into an infinite loop. We can easily handle that if we maintain a list of nodes visited so far in the current path for a node in a queue. Basically, we maintain three things in the BFS queue node:
+
+The current vertex number.
+The cost of the current path chosen so far.
+The set of nodes visited so far in the current path.
+Whenever we encounter any node whose cost of a path is more, update the result. The BFS will terminate when we have explored every path that doesn’t result in a cycle.
+
+This is demonstrated below in C++, Java, and Python:
+
+
+import java.util.*;
+ 
+// A class to store a graph edge
+class Edge
+{
+    public final int src, dest, weight;
+ 
+    private Edge(int src, int dest, int weight)
+    {
+        this.src = src;
+        this.dest = dest;
+        this.weight = weight;
+    }
+ 
+    // Factory method for creating an immutable instance of `Edge`
+    public static Edge of(int a, int b, int c) {
+        return new Edge(a, b, c);        // calls private constructor
+    }
+}
+ 
+// A BFS Node
+class Node
+{
+    // current vertex number and cost of the current path
+    int vertex, weight;
+ 
+    // set of nodes visited so far in the current path
+    Set<Integer> s;
+ 
+    Node(int vertex, int weight, Set<Integer> s)
+    {
+        this.vertex = vertex;
+        this.weight = weight;
+        this.s = s;
+    }
+}
+ 
+// A class to represent a graph object
+class Graph
+{
+    // A list of lists to represent an adjacency list
+    List<List<Edge>> adjList = new ArrayList<>();
+ 
+    // Graph Constructor
+    public Graph(List<Edge> edges, int n)
+    {
+        // resize the list to `n` elements of type `List<Edge>`
+        for (int i = 0; i < n; i++) {
+            adjList.add(new ArrayList<>());
+        }
+ 
+        // add edges to the undirected graph
+        for (Edge e: edges)
+        {
+            adjList.get(e.src).add(Edge.of(e.src, e.dest, e.weight));
+            adjList.get(e.dest).add(Edge.of(e.dest, e.src, e.weight));
+        }
+    }
+}
+ 
+class Main
+{
+    // Perform BFS on graph `graph` starting from vertex `v`
+    public static int findMaxCost(Graph graph, int src, int k)
+    {
+        // create a queue for doing BFS
+        Queue<Node> q = new ArrayDeque<>();
+ 
+        // add source vertex to set and enqueue it
+        Set<Integer> vertices = new HashSet<>();
+        vertices.add(src);
+        q.add(new Node(src, 0, vertices));
+ 
+        // stores maximum cost of a path from the source
+        int maxCost = Integer.MIN_VALUE;
+ 
+        // loop till queue is empty
+        while (!q.isEmpty())
+        {
+            // dequeue front node
+            Node node = q.poll();
+ 
+            int v = node.vertex;
+            int cost = node.weight;
+            vertices = new HashSet<>(node.s);
+ 
+            // if the destination is reached and BFS depth is equal to `m`,
+            // update the minimum cost calculated so far
+            if (cost > k) {
+                maxCost = Math.max(maxCost, cost);
+            }
+ 
+            // do for every adjacent edge of `v`
+            for (Edge edge: graph.adjList.get(v))
+            {
+                // check for a cycle
+                if (!vertices.contains(edge.dest))
+                {
+                    // add current node to the path
+                    Set<Integer> s = new HashSet<>(vertices);
+                    s.add(edge.dest);
+ 
+                    // push every vertex (discovered or undiscovered) into
+                    // the queue with a cost equal to the
+                    // parent's cost plus the current edge's weight
+                    q.add(new Node(edge.dest, cost + edge.weight, s));
+                }
+            }
+        }
+ 
+        // return max-cost
+        return maxCost;
+    }
+ 
+    public static void main(String[] args)
+    {
+        // List of graph edges as per the above diagram
+        List<Edge> edges = Arrays.asList(Edge.of(0, 6, 11), Edge.of(0, 1, 5),
+                                Edge.of(1, 6, 3), Edge.of(1, 5, 5), Edge.of(1, 2, 7),
+                                Edge.of(2, 3, -8), Edge.of(3, 4, 10), Edge.of(5, 2, -1),
+                                Edge.of(5, 3, 9), Edge.of(5, 4, 1), Edge.of(6, 5, 2),
+                                Edge.of(7, 6, 9), Edge.of(7, 1, 6));
+ 
+        // total number of nodes in the graph (labelled from 0 to 7)
+        int n = 8;
+ 
+        // build a graph from the given edges
+        Graph graph = new Graph(edges, n);
+ 
+        int src = 0;
+        int cost = 50;
+ 
+        // Start modified BFS traversal from source vertex `src`
+        int maxCost = findMaxCost(graph, src, cost);
+ 
+        if (maxCost != Integer.MIN_VALUE) {
+            System.out.println(maxCost);
+        }
+        else {
+            System.out.println("All paths from source have their costs < " + cost);
+        }
+    }
+}
+Download  Run Code
+
+Output:
+
+51
+
+The time complexity of the above solution is O(V.E), where V and E are the total number of vertices and edges in the graph, respectively.
+
+ 
+Exercise: Extend the solution to print the maximum cost path from source to destination.
+
