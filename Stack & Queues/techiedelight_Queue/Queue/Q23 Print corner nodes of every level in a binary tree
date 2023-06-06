@@ -1,0 +1,121 @@
+Print corner nodes of every level in a binary tree
+Google Translate Icon
+Given a binary tree, print corner nodes of every level in it.
+
+For example, consider the following tree:
+
+Print Corner Nodes
+
+
+Output:
+ 
+6
+3 8
+4 2
+1 3
+
+Practice This Problem
+
+The idea is simple. First, modify the level order traversal on a given binary tree to maintain the level of each node. Then while doing level order traversal, if the current node happens to be the first or last node at the current level, print it.
+
+Following is the implementation in C++, Java, and Python based on the above idea:
+
+
+import java.util.ArrayDeque;
+import java.util.Queue;
+ 
+// A class to store a binary tree node
+class Node
+{
+    int data;
+    Node left = null, right = null;
+ 
+    Node(int data) {
+        this.data = data;
+    }
+}
+ 
+class Main
+{
+    // Iterative function to print corner nodes of every level in the binary tree
+    public static void print(Node root)
+    {
+        // return if the tree is empty
+        if (root == null) {
+            return;
+        }
+ 
+        // create an empty queue to store tree nodes
+        Queue<Node> q = new ArrayDeque<>();
+ 
+        // enqueue root node
+        q.add(root);
+ 
+        // loop till queue is empty
+        while (!q.isEmpty())
+        {
+            // get the size of the current level
+            int size = q.size();
+            int n = size;
+ 
+            // process all nodes present in the current level
+            while (n-- > 0)
+            {
+                Node node = q.poll();
+ 
+                // if the corner node is found, print it
+                if (n == size - 1 || n == 0) {
+                    System.out.print(node.data + " ");
+                }
+ 
+                // enqueue left and right child of the current node
+                if (node.left != null) {
+                    q.add(node.left);
+                }
+ 
+                if (node.right != null) {
+                    q.add(node.right);
+                }
+            }
+ 
+            // terminate level by printing an empty line
+            System.out.println();
+        }
+    }
+ 
+    public static void main(String[] args)
+    {
+        /* Construct the following tree
+                     1
+                   /   \
+                  2     3
+                /     /   \
+               4     5     6
+             /     /   \     \
+            7     8     9     10
+        */
+ 
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.right.left = new Node(5);
+        root.right.right = new Node(6);
+        root.left.left.left = new Node(7);
+        root.right.left.left = new Node(8);
+        root.right.left.right = new Node(9);
+        root.right.right.right = new Node(10);
+ 
+        print(root);
+    }
+}
+Download  Run Code
+
+Output:
+
+1
+2 3
+4 6
+7 10
+
+The time complexity of the above solution is O(n) and requires O(n) extra space, where n is the size of the binary tree.
