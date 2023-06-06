@@ -1,0 +1,253 @@
+Check whether the leaf traversal of given binary trees is the same or not
+Google Translate Icon
+Given two binary trees, check whether the leaf traversals of both trees are the same or not.
+
+For example, the leaf traversals of the following binary trees are 4, 5, 6:
+
+Leaf Traversal of Binary Tree
+
+Practice This Problem
+
+A simple solution is to traverse the first tree using inorder traversal and store each encountered leaf in an array. Repeat the same for the second tree. Then the problem reduces to comparing two arrays for equality. The time complexity of this approach is O(m + n), and the additional space used is O(m + n). Here m is the total number of nodes in the first tree, and n is the total number of nodes in the second tree.
+
+1. Using Iterative Preorder Traversal
+The idea is to traverse both trees simultaneously using the iterative preorder traversal and compare data of each encountered leaf node, i.e., the i'th leaf in the first tree is compared with the i'th leaf in the second tree. The algorithm can be implemented as follows in C++, Java, and Python:
+
+
+import java.util.Stack;
+ 
+// A class to store a binary tree node
+class Node
+{
+    int data;
+    Node left, right;
+ 
+    public Node(int data)
+    {
+        this.data = data;
+        this.left = this.right = null;
+    }
+}
+ 
+class Main
+{
+    // Utility function to check if a given node is a leaf node
+    private static boolean isLeaf(Node node) {
+        return node.left == null && node.right == null;
+    }
+ 
+    // Utility function to return the next leaf node in a preorder sequence
+    private static Node getNextLeafNode(Stack<Node> s)
+    {
+        // continue the preorder sequence from the top node of the stack
+        Node curr = s.pop();
+ 
+        // repeat till a leaf node is encountered
+        while (curr != null && !isLeaf(curr))
+        {
+            // push the right child of the popped node into the stack before the
+            // left child (Since the stack follows LIFO semantics, the left child
+            // is processed before the right child)
+ 
+            if (curr.right != null) {
+                s.push(curr.right);
+            }
+ 
+            if (curr.left != null) {
+                s.push(curr.left);
+            }
+ 
+            // update the current node to the top node of the stack
+            curr = s.pop();
+        }
+ 
+        // current node will be a leaf at this point
+        return curr;
+    }
+ 
+    // Function to check if the leaf traversal of two given binary trees is the same
+    public static boolean isLeafTraversalSame(Node x, Node y)
+    {
+        // create two empty stacks
+        Stack<Node> first = new Stack<>();
+        Stack<Node> second = new Stack<>();
+ 
+        // push the root node of the first and second tree into the first and
+        // second stack, respectively
+        first.push(x);
+        second.push(y);
+ 
+        // loop till a stack becomes empty
+        while (!first.empty() && !second.empty())
+        {
+            // get the next leaf in a preorder sequence of the first tree
+            Node xLeaf = getNextLeafNode(first);
+ 
+            // get the next leaf in a preorder sequence of the second tree
+            Node yLeaf = getNextLeafNode(second);
+ 
+            if (xLeaf == null && yLeaf == null) {
+                return true;
+            }
+ 
+            // return false if their data doesn't match
+            if (xLeaf == null || yLeaf == null || xLeaf.data != yLeaf.data) {
+                return false;
+            }
+        }
+ 
+        // return true only if both stacks are empty at this point;
+        // if any of the stacks is not empty, that means some tree
+        // contains more leaf nodes
+        return first.empty() && second.empty();
+    }
+ 
+    public static void main(String[] args)
+    {
+        Node x = new Node(1);
+        x.left = new Node(2);
+        x.right = new Node(3);
+        x.left.left = new Node(4);
+        x.left.right = new Node(5);
+        x.right.left = new Node(6);
+ 
+        Node y = new Node(1);
+        y.left = new Node(2);
+        y.right = new Node(3);
+        y.left.right = new Node(4);
+        y.right.left = new Node(5);
+        y.right.right = new Node(6);
+ 
+        boolean isSame = isLeafTraversalSame(x, y);
+        if (isSame) {
+            System.out.println("The tree traversals are the same");
+        }
+        else {
+            System.out.println("The tree traversals are different");
+        }
+    }
+}
+Download  Run Code
+
+Output:
+
+The tree traversals are the same
+
+The time complexity of the above solution is O(m + n), where m is the total number of nodes in the first tree and n is the total number of nodes in the second tree. The Extra space of O(x + y) is used for the stack data structure where x is the height of the first tree, and y is the height of the second tree.
+
+2. Connect Leaf Nodes
+Another approach is to connect leaf nodes in the form of a linked list and then traverse both lists and compare their data. Following is the C++, Java, and Python program that demonstrates it:
+
+
+// Data structure to store a binary tree node
+class Node
+{
+    int key;
+    Node left, right;
+ 
+    Node(int key)
+    {
+        this.key = key;
+        this.left = this.right = null;
+    }
+}
+ 
+class Main
+{
+    // Wrapper over `Node` class
+    static class NodeWrapper {
+        public Node node;
+    }
+ 
+    // Utility function to check if a given node is a leaf node
+    public static boolean isLeaf(Node node) {
+        return node.left == null && node.right == null;
+    }
+ 
+    // Recursive function to connect leaf nodes of a given tree
+    public static void connectLeafNodes(Node root, NodeWrapper head, NodeWrapper prev)
+    {
+        // base case
+        if (root == null) {
+            return;
+        }
+ 
+        // If the current node is a leaf node, connect it with the previous leaf node
+        // using the right child. If the previous leaf node does not exist,
+        // make the current node as head of the list
+        if (isLeaf(root))
+        {
+            if (prev.node == null) {
+                head.node = root;
+            }
+            else {
+                prev.node.right = root;
+            }
+            prev.node = root;
+        }
+ 
+        // recur for the left and right subtree
+        connectLeafNodes(root.left, head, prev);
+        connectLeafNodes(root.right, head, prev);
+    }
+ 
+    // Function to check if the leaf traversal of two given binary trees is the same
+    public static boolean isLeafTraversalSame(Node x, Node y)
+    {
+        // connect leaf nodes of the first binary tree into a linked list
+        NodeWrapper first = new NodeWrapper();
+        NodeWrapper prev = new NodeWrapper();
+        connectLeafNodes(x, first, prev);
+ 
+        // connect leaf nodes of the second binary tree into a linked list
+        NodeWrapper second = new NodeWrapper();
+        prev.node = null;
+        connectLeafNodes(y, second, prev);
+ 
+        x = first.node;
+        y = second.node;
+ 
+        // compare both lists and break the loop on `x` data mismatch
+        while (x != null && y != null && x.key == y.key)
+        {
+            x = x.right;
+            y = y.right;
+        }
+ 
+        // return true only if both lists are empty at this point;
+        // if any of the lists are not empty, that means the tree
+        // contains more leaf nodes, or the leaf nodes don't match
+        return x == null && y == null;
+    }
+ 
+    public static void main(String[] args)
+    {
+        Node x = new Node(1);
+        x.left = new Node(2);
+        x.right = new Node(3);
+        x.left.left = new Node(4);
+        x.left.right = new Node(5);
+        x.right.left = new Node(6);
+ 
+        Node y = new Node(1);
+        y.left = new Node(2);
+        y.right = new Node(3);
+        y.left.right = new Node(4);
+        y.right.left = new Node(5);
+        y.right.right = new Node(6);
+ 
+        boolean isSame = isLeafTraversalSame(x, y);
+        if (isSame) {
+            System.out.println("The tree traversals are the same");
+        }
+        else {
+            System.out.println("The tree traversals are different");
+        }
+    }
+}
+Download  Run Code
+
+Output:
+
+The tree traversals are the same
+
