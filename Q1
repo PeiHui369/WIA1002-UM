@@ -1,0 +1,121 @@
+Question 1 (5 marks)
+DIO, the enigmatic and powerful vampire, seeks to ascend to Heaven by memorizing fourteen phrases. To
+aid him in his quest, he requires a clever mechanism to store and manage his precious flashcards. That’s
+where you come in. DIO has enlisted your expertise to craft a generic stack data structure named
+DIOStack with a type parameter known as DIO, implemented using an array.
+Your task is to design and implement DIOStack that must possess the following methods:
+● public void push(DIO o): allow DIO to insert an element onto the top of the stack,
+dynamically doubling the size of the stack if it is full before the insertion.
+● public DIO pop(): allow DIO to remove and retrieve the topmost element from the stack, or
+return null if the stack is empty. If the number of elements in the stack after the removal only
+reaches a quarter of its array capacity, the stack size should reduce by half.
+● public DIO peek(): allow DIO to retrieve the element at the top of the stack, or return null
+if the stack is empty.
+● public boolean isEmpty(): allow DIO to check whether the stack contains any elements
+● public int size(): allow DIO to retrieve the current size of the stack.
+● public String toString(): allow DIO to obtain a string representation of all the elements
+in the stack.
+● private void resize(int size): move the stack to a new array of the specified size.
+DIO provides the initial code for implementing the DIOStack, which you can find below. By successfully
+accomplishing this task, you should be able to obtain the same output after running the test program
+below.
+Initial Code
+public class DIOStack<DIO> {
+private DIO[] array = (DIO[]) new Object[1];
+private int size = 0;
+public void push(DIO o) {
+/ Implement your code here
+}
+public DIO pop() {
+/ Implement your code here
+}
+public DIO peek() {
+/ Implement your code here
+}
+public boolean isEmpty() {
+/ Implement your code here
+}
+public int size() {
+/ Implement your code here
+}
+@Override
+public String toString() {
+/ Implement your code here
+}
+private void resize(int size) {
+/ Implement your code here
+}
+}
+Test Program
+public class TestDIOStack {
+public static void main(String[] args) {
+DIOStack<String> stack = new DIOStack >();
+System.out.println(stack); / the underlying array should have a
+length of 1 at this point
+stack.push("Spiral Staircase");
+stack.push("Rhinoceros Beetle");
+stack.push("Desolation Row");
+stack.push("Fig Tart");
+stack.push("Rhinoceros Beetle");
+System.out.println(stack); / the underlying array should have a
+length of 8 at this point
+System.out.println();
+for (int i = 0; i < 4; i +)
+System.out.print(stack.pop() + " > ");
+System.out.println();
+System.out.println(stack); / the underlying array should have a
+length of 2 at this point
+System.out.println(stack.size());
+System.out.println();
+stack.push("Via Dolorosa");
+stack.push("Rhinoceros Beetle");
+stack.push("Singularity Point");
+stack.push("Giotto");
+stack.push("Angel");
+stack.push("Hydrangea");
+System.out.println(stack.pop());
+System.out.println(stack.peek());
+System.out.println(stack.size());
+System.out.println(stack); / the underlying array should have a
+length of 8 at this point
+System.out.println();
+stack.push("Rhinoceros Beetle");
+stack.push("Singularity Point");
+stack.push("Secret Emperor");
+System.out.println(stack.peek());
+System.out.println(stack); / the underlying array should have a
+length of 16 at this point
+System.out.println(stack.size());
+System.out.println();
+while (!stack.isEmpty())
+System.out.print(stack.pop() + " > ");
+System.out.println();
+System.out.println(stack.pop());
+System.out.println(stack.peek());
+System.out.println(stack.size());
+System.out.println(stack); / the underlying array should have a
+length of 2 at this point
+}
+}
+Sample Output
+[]
+[Spiral Staircase, Rhinoceros Beetle, Desolation Row, Fig Tart, Rhinoceros
+Beetle]
+Rhinoceros Beetle > Fig Tart > Desolation Row > Rhinoceros Beetle >
+[Spiral Staircase]
+1
+Hydrangea
+Angel
+6
+[Spiral Staircase, Via Dolorosa, Rhinoceros Beetle, Singularity Point,
+Giotto, Angel]
+Secret Emperor
+[Spiral Staircase, Via Dolorosa, Rhinoceros Beetle, Singularity Point,
+Giotto, Angel, Rhinoceros Beetle, Singularity Point, Secret Emperor]
+9
+Secret Emperor > Singularity Point > Rhinoceros Beetle > Angel > Giotto >
+Singularity Point > Rhinoceros Beetle > Via Dolorosa > Spiral Staircase >
+null
+null
+0
+[]
