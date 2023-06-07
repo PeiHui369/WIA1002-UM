@@ -1,0 +1,104 @@
+Question 2 (5 marks)
+Step into the thrilling world of Giorno Giovanna, the current mafia boss of Italy, who finds himself
+overseeing a bustling parcel collection center. The center has gained immense popularity, attracting an
+overwhelming influx of parcels. Faced with a shortage of manpower, Giorno harnesses the power of his
+Stand, Gold Experience, to summon a multitude of animals, each tasked with temporarily holding the
+incoming parcels.
+Your responsibility will be to organize the parcels and ensure a seamless retrieval process for their
+respective owners. As each parcel arrives, it is placed on top of the stack held by a chosen animal. Once
+all parcels have been accounted for, the owners will arrive to claim their parcels. However, there’s a catch
+- the owners express their dissatisfaction with the need to remove other parcels stacked on top in order to
+retrieve their own. In other words, they can only access the elements on the top of the stack.
+Your mission is to design a method that utilizes the Stack class to solve this challenge with the
+minimum number of animals required. The method will receive two lists of strings as input: one
+representing the arrival order of the parcels labeled with their owners’ names, and the other representing
+the arrival order of the owners themselves. It should return a stack of stacks, where each stack represents
+the parcels held by a specific animal. If multiple valid arrangements are possible, any one of them can be
+returned. Most importantly, you are only allowed to use the methods provided by the Stack and List
+classes without utilizing other data structures such as Queue or PriorityQueue. It is worth mentioning
+that the owner names are unique identifiers.
+import java.util.List;
+import java.util.Stack;
+public class GoldExperience {
+public static Stack<Stack<String > minimumAnimals(List<String> parcels,
+List<String> owners) {
+final Stack<Stack<String > animals = new Stack >();
+/ Implement your code here
+}
+public static void main(String[] args) {
+final int N = 6;
+final List<List<String > parcelList = List.of(
+List.of("Jotaro", "Joseph", "Jolyne", "Jotaro", "Joseph",
+"Jolyne", "Jotaro", "Joseph", "Jolyne", "Jotaro", "Joseph", "Jolyne",
+"Jotaro", "Joseph", "Jolyne"),
+List.of("DIO"),
+List.of("Babyface", "Beach Boy", "Metallica", "King
+Crimson", "Beach Boy", "The Grateful Dead", "Beach Boy"),
+List.of("Whitesnake", "Whitesnake", "Whitesnake",
+"Whitesnake", "Made in Heaven", "Made in Heaven", "Made in Heaven", "Made in
+Heaven", "C-Moon", "C-Moon", "C-Moon", "C-Moon"),
+List.of("Formaggio", "Formaggio", "Prosciutto", "Illuso",
+"Melone", "Pesci", "Formaggio", "Ghiaccio", "Pesci", "Sale"),
+List.of("Koichi", "Hayato", "JoJo", "Iggy", "Giorno",
+"Emporio", "Foo", "DIO", "DIO", "DIO", "DIO", "DIO", "Akira", "Bucciarati",
+"Akira", "Akira")
+);
+final List<List<String > ownerList = List.of(
+List.of("Jolyne", "Joseph", "Jotaro"),
+List.of("DIO"),
+List.of("Babyface", "Beach Boy", "King Crimson",
+"Metallica", "The Grateful Dead"),
+List.of("C-Moon", "Made in Heaven", "Whitesnake"),
+List.of("Formaggio", "Ghiaccio", "Illuso", "Melone",
+"Pesci", "Prosciutto", "Sale"),
+List.of("Akira", "Bucciarati", "DIO", "Emporio", "Foo",
+"Giorno", "Hayato", "Iggy", "JoJo", "Koichi")
+);
+for (int i = 0; i < N; i +) {
+Stack<Stack<String > animals = minimumAnimals(parcelList.get(i),
+ownerList.get(i));
+System.out.printf("Case %d\n", i + 1);
+System.out.printf("Number of animals: %d\n", animals.size());
+for (int j = 0; j < animals.size(); j +)
+System.out.printf("Animal %d: %s\n", j + 1, animals.get(j));
+System.out.println();
+}
+}
+}
+Upon successfully implementing and executing the program, you should see a sample output similar to
+the following:
+Case 1
+Number of animals: 3
+Animal 1: [Jotaro, Jotaro, Jotaro, Jotaro, Jotaro]
+Animal 2: [Joseph, Joseph, Joseph, Joseph, Joseph]
+Animal 3: [Jolyne, Jolyne, Jolyne, Jolyne, Jolyne]
+Case 2
+Number of animals: 1
+Animal 1: [DIO]
+Case 3
+Number of animals: 4
+Animal 1: [Babyface]
+Animal 2: [Beach Boy, Beach Boy, Beach Boy]
+Animal 3: [Metallica, King Crimson]
+Animal 4: [The Grateful Dead]
+Case 4
+Number of animals: 1
+Animal 1: [Whitesnake, Whitesnake, Whitesnake, Whitesnake, Made in Heaven,
+Made in Heaven, Made in Heaven, Made in Heaven, C-Moon, C-Moon, C-Moon,
+C-Moon]
+Case 5
+Number of animals: 5
+Animal 1: [Formaggio, Formaggio]
+Animal 2: [Prosciutto, Illuso, Formaggio]
+Animal 3: [Melone, Ghiaccio]
+Animal 4: [Pesci, Pesci]
+Animal 5: [Sale]
+Case 6
+Number of animals: 2
+Animal 1: [Koichi, Hayato, Giorno, Emporio, DIO, DIO, DIO, DIO, DIO, Akira,
+Akira, Akira]
+Animal 2: [JoJo, Iggy, Foo, Bucciarati]
+In Case 3, Metallica’s parcel can be positioned beneath King Crimson’s parcel within the same stack,
+since King Crimson will arrive first to claim his parcel. In Case 4, all the parcels can be placed into one
+single stack. Each owner can retrieve their respective parcels from the top of the stack once all the
+preceding owners have collected theirs.
