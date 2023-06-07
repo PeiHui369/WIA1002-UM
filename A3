@@ -1,0 +1,45 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
+
+public class SlidingWindowMax {
+    public static List<Integer> findMaxSlidingWindow(int[] arr, int k) {
+        List<Integer> result = new ArrayList<>();
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);
+
+        // Process the first k elements
+        for (int i = 0; i < k; i++) {
+            pq.offer(arr[i]);
+        }
+        result.add(pq.peek());
+
+        // Process the remaining elements
+        for (int i = k; i < arr.length; i++) {
+            pq.remove(arr[i - k]);
+            pq.offer(arr[i]);
+            result.add(pq.peek());
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] arr1 = {4, 3, 8, 9, 0, 1};
+        int k1 = 3;
+        List<Integer> result1 = findMaxSlidingWindow(arr1, k1);
+        System.out.println("Input arr: [4, 3, 8, 9, 0, 1], k = 3");
+        System.out.println("Output: " + result1);
+
+        int[] arr2 = {9, 8, 6, 4, 3, 1};
+        int k2 = 4;
+        List<Integer> result2 = findMaxSlidingWindow(arr2, k2);
+        System.out.println("Input arr: [9, 8, 6, 4, 3, 1], k = 4");
+        System.out.println("Output: " + result2);
+
+        int[] arr3 = {1, 2, 3, 4, 10, 6, 9, 8, 7, 5};
+        int k3 = 3;
+        List<Integer> result3 = findMaxSlidingWindow(arr3, k3);
+        System.out.println("Input arr: [1, 2, 3, 4, 10, 6, 9, 8, 7, 5], k = 3");
+        System.out.println("Output: " + result3);
+    }
+}
