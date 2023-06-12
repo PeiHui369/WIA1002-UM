@@ -1,0 +1,52 @@
+class TreeNode<E> {
+  E element;
+  TreeNode<E> left;
+  TreeNode<E> right;
+  
+  public TreeNode(E o ){
+    element = o;
+  }
+  
+  public boolean search(E element){
+    TreeNode<E> current = root;
+    while (current != null){
+      if (element < current.element) {
+        current = current.left;
+      }
+      else if (element > current.element) {
+        current = current.right;
+      }
+      else {
+        return true;
+      }
+    return false;
+  }
+  
+  if (root == null) {
+    root = new TreeNode(element);
+  }else{
+    current = root;
+    while (current != null) {
+      if (element value < the value in current element) {
+        parent = current;
+        current = current.left;
+      }
+      else if (element value > the value in current.element) {
+        parent = current;
+        current = current.right;
+      }else{  //Duplicate node not inserted
+        return false;
+      }
+    
+    if (element < parent.element) {
+      parent.left = new TreeNode(element);
+    }else{
+      parent.right = new TreeNode(element);
+    }
+  
+  size++;
+  return true;
+}
+  TreeNode<Integer> root = new TreeNode<Integer>(new Integer(60));
+  root.left = new TreeNode<Integer>(new Integer(55));
+  
