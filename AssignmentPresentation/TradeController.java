@@ -47,7 +47,9 @@ public void setUser(User user){
     label_loss.setText("" + String.format("%.2f",user.getPoint()));
 }
 ```
-These lines declare a private instance variable `user` of type `User` and define a setter method `setUser()` to set the user object. Inside the `setUser()` method, the `user` instance variable is assigned the provided `User` object, and some user-related information is displayed in labels.
+These lines declare a private instance variable `user` of type `User` and define a setter method `setUser()` to set the user object. 
+    Inside the `setUser()` method, the `user` instance variable is assigned the provided `User` object, 
+    and some user-related information is displayed in labels.
 
 ```java
 private TradingFunctions tf;
@@ -55,12 +57,14 @@ public void setTf(TradingFunctions tf){
     this.tf = tf;
 }
 ```
-These lines declare a private instance variable `tf` of type `TradingFunctions` and define a setter method `setTf()` to set the `TradingFunctions` object.
+These lines declare a private instance variable `tf` of type `TradingFunctions` 
+    and define a setter method `setTf()` to set the `TradingFunctions` object.
 
 ```java
 private Timeline timeline;
 ```
-This line declares a private instance variable `timeline` of type `Timeline` for updating the time and market status labels.
+This line declares a private instance variable `timeline` of type `Timeline` 
+    for updating the time and market status labels.
 
 ```java
 @FXML
