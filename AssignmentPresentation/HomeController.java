@@ -3,7 +3,9 @@ Sure! Here's the explanation for each part of the code in the `HomeController` c
 ```java
 public class HomeController implements Initializable {
 ```
-The `HomeController` class is a controller for the home view in a JavaFX application. It implements the `Initializable` interface, which allows initializing the controller and its components when the associated FXML file is loaded.
+The `HomeController` class is a controller for the home view in a JavaFX application.
+    It implements the `Initializable` interface, 
+    pwhich allows initializing the controller and its components when the associated FXML file is loaded.
 
 ```java
 private User user;
@@ -79,7 +81,9 @@ timeline = new Timeline(new KeyFrame(javafx.util.Duration.seconds(1), event -> {
 timeline.setCycleCount(Timeline.INDEFINITE); // Run indefinitely
 timeline.play();
 ```
-This code creates a `Timeline` that updates the time and market status labels every second. It uses a `KeyFrame` with a duration of one second and defines an event handler to call the `updateDateTime()` and `updateMarketStatus()` methods.
+This code creates a `Timeline` that updates the time and market status labels every second.
+    It uses a `KeyFrame` with a duration of one second and 
+    defines an event handler to call the `updateDateTime()` and `updateMarketStatus()` methods.
 
 ```java
 btn_home.setOnAction(event -> DBUtils.changeScene(event, "/FXML/Home.fxml", "Home", user));
