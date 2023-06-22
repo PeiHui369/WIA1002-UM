@@ -1,0 +1,137 @@
+3.	Bayangkan bahawa anda mempunyai satu set kad poker rawak di tangan kiri  anda. Anda boleh menyusun kad tersebut dalam susunan menurun atau menaik. Bagi membuat perbandingan, anda mengambil kad rawak  pertama  dan  diletakkan di tangan kanan anda dengan menganggap bahawa  kad  pertama sudah disusun. Kemudian, anda mengambil kad rawak berikutnya dan menyusun ia ke dalam kedudukan yang betul di tangan kanan anda sehingga semua kad disusun.
+
+Imagine that you have a set of random poker cards in your left hand. You may organize the cards in decreasing or increasing order. To do the comparison, you pick up the first random cards and you insert it in your right hand of organized cards by assuming that the first card is already sorted. You keep on picking the subsequent random cards and organize them into its correct position in your right hand until all cards are sorted.
+
+Berikut diberikan senarai nombor berikut:
+
+Given the following list of integers.
+
+82	54	71	86	43	99
+
+Untuk Soalan 3 (a, b dan c), tuliskan jawapan anda di dalam fail teks sebagai NoMatriks_Q3.txt)
+
+For Question 3(a, b and c), write yoUr answer in a text file as MatrixNumber_Q3.txt)
+
+a)	Nyatakan nama jenis susunan ini.
+
+State the name of this type of sorting.
+
+(1 markah/mark)
+
+b)	Tunjukkan senarai urutan susunan bagi nombor-nombor yang  diberikan  di atas. Susunkan nombor-nombor tersebut dalam susunan menaik.
+
+Show by listing the sequence of sorting for the numbers given above. Sort the numbers in increasing order.
+
+(2 markah/marks)
+
+c)	Nyatakan jumlah pengulangan yang diperlukan untuk menyusun nilai yang diberikan dalam susunan menaik menggunakan jenis susunan ini.
+
+State the number of repetitions needed to sort in an increasing order for the given values using this type of sorting.
+
+(1 markah/mark)
+ 
+d)	Nilai yang diberikan disimpan sebagai tatasusunan. Tulis sebuah  aturcara untuk menyusun nilai-nilai dalam susunan terkecil hingga terbesar menggunakan jenis susunan yang anda namakan dalam Soalan 3(a). Berikut diberikan kaedah signature.
+
+The given values are stored as arrays. Write a program to sort these values from largest to smallest using the type of sorting you named in Question 3(a). Given is the method signature.
+
+puh11c  s ta t 1c  vol  d   the So z t  ( in  t	[	) nu/n)
+
+(5 markah/marks)
+
+e)	Di dalam sebuah aturcara ujian, paparkan perkara berikut:
+
+In your test program, display the following.‘
+
+i)	Paparkan nilai-nilai yang diberikan sebelum disusun.
+
+Display the given values before sorting.
+
+ii)	Senaraikan urutan susunan [Soalan 3(b)].
+
+List of sequence for sorting [Question 3(b)).
+
+iii)	Jumlah ulangan yang diperlukan untuk susunan [Soalan 3(c)].
+
+Number of repetition needed for sorting [Question 3(c)).
+
+(5 markah/marks)
+================================================================================================================
+
+Apologies for the confusion. Here are the answers to the questions:
+
+a) The type of sorting used in this scenario is "Insertion Sort".
+
+b) The sequence of sorting for the given values in increasing order using Insertion Sort is as follows:
+
+54 82 71 86 43 99
+54 71 82 86 43 99
+54 71 82 86 43 99
+43 54 71 82 86 99
+43 54 71 82 86 99
+43 54 71 82 86 99
+
+c) The number of repetitions needed to sort the given values in increasing order using Insertion Sort is 5.
+
+Here's the complete program including the test program:
+
+```java
+public class InsertionSort {
+    public static void main(String[] args) {
+        int[] numbers = {82, 54, 71, 86, 43, 99};
+
+        System.out.println("Given values before sorting:");
+        displayArray(numbers);
+
+        insertionSort(numbers);
+
+        System.out.println("\nList of sequence for sorting:");
+        displayArray(numbers);
+
+        System.out.println("Number of repetitions needed for sorting: " + getRepetitions(numbers));
+    }
+
+    public static void insertionSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 1; i < n; ++i) {
+            int key = arr[i];
+            int j = i - 1;
+
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j = j - 1;
+            }
+            arr[j + 1] = key;
+        }
+    }
+
+    public static void displayArray(int[] arr) {
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+
+    public static int getRepetitions(int[] arr) {
+        int repetitions = 0;
+        int n = arr.length;
+        for (int i = 1; i < n; ++i) {
+            int key = arr[i];
+            int j = i - 1;
+
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j = j - 1;
+                repetitions++;
+            }
+            arr[j + 1] = key;
+        }
+        return repetitions;
+    }
+}
+```
+
+Please note that the program assumes a console-based output for simplicity.
+
+
+
+
