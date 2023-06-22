@@ -1,0 +1,256 @@
+2.	Baris-gilir menyokong operasi tambah dan operasi singkir berdasarkan polisi masuk dahulu keluar dahulu. Tuliskan suatu program menggunakan baris-gilir generik. Program anda mesti mempunyai metod-metod berikut (lihat Jadual 2).
+
+Queue supports the insert and the remove operations based on the First-in First- out policy. Write a program to implement generic queue. Your program mrs/ conta/n the following methods (see Table 2).
+
+Jadual 2: Senarai nama-nama metod dan spesifikasinya
+Tabye 2: List of method names and their spec"ification
+
+Pembina/Nama Metod
+Constructor/Method name	Spesifikasi
+Specification
+i)	Constructor for the
+generic queue class	Konstruktor lalai
+Default constructor
+ii)	isEmpty	Memulangkan sama ada baris-gilir generik
+tersebut adalan kosong atau tidak
+Return whether or not lie generic queue is empty
+iii)	isFull	Memulangkan sama ada baris-gilir generik
+tersebut adalan penuh atau tidak
+Return whether or not the generc queue is full
+
+
+4/10
+ 
+WIA1002
+
+
+iv)	peek	Memulangkan	nilai	bagi	elemen	pertama dalam baris-gilir generik tersebut
+Return the value of the first element in the generic
+queue
+v)	enqueue	Menambah elemen pada bans-gilir generik
+Add element to the generic queue
+vi)	enqueueMany	Menambah beberapa elemen ke dalam baris-
+gilir generik menggunakan koma se.bagai
+pembatas
+Add several elements to the generic queue usin9 comma as split delimiter
+vii)	dequeue	Membuang elemen dari baris-gilir
+Remove e/ement from the generic queue
+viii)	dequeueAll	Membuang kesemua elemen-elemen di
+dalam baris-gilir generik
+Remove all elements from the generic queue
+ix)	display	Memaparkan elemen-elemen di dalam baris-
+gilir generik
+Display all elements in Ihe generic queue
+
+Tulis metod main() anda di dalam fail program yang sama. Metod mains anda perlu mengikuti cadangan seperti dalam Rajah 2(a). Ubahsuai dan uji metod- metod anda supaya menyerupai output di dalam Rajah 2(b).
+
+Write your main() method in the same program /i/e. Your main() method should follow lhe suggestion shown in Figure 2(a). Modify and test your melhDds so you get the same output shown in Figure 2(b).
+
+Rajah 2(a): Metod main() I Figure 2(a): Main() method
+ 
+WIA1002
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tbere are S icems io tbe queue. Removing t6em all ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1000
+
+
+4000 BOOO
+6000
+00
+
+
+
+Enqueue: BOOO
+
+
+Deqoeue: ZOOO
+
+6000
+
+BOOO
+
+
+
+Rajah 2(b): Output I Figure 2(b): Output
+
+
+6/10
+ 
+WIA1002
+
+* Markah tidak akan diberikan bagi apa-apa pelaksanaan menggunakan kelas QueMe atau mana-mana kelas Collection yang sedia ada didapati daripada Java API Libmry.
+
+No marks will be given for any implementation using the existing Queue class or any other Collection classes ava1IabIe from the Java API Library.
+
+(14 markah/mar/rs)
+
+Here's the implementation of the generic queue class according to the provided requirements:
+
+```java
+import java.util.Arrays;
+
+public class GenericQueue<T> {
+    private static final int DEFAULT_CAPACITY = 10;
+    private Object[] elements;
+    private int front;
+    private int rear;
+    private int size;
+
+    public GenericQueue() {
+        elements = new Object[DEFAULT_CAPACITY];
+        front = 0;
+        rear = -1;
+        size = 0;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public boolean isFull() {
+        return size == elements.length;
+    }
+
+    @SuppressWarnings("unchecked")
+    public T peek() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty.");
+        }
+        return (T) elements[front];
+    }
+
+    public void enqueue(T element) {
+        if (isFull()) {
+            resizeArray();
+        }
+        rear = (rear + 1) % elements.length;
+        elements[rear] = element;
+        size++;
+    }
+
+    public void enqueueMany(String elementsString) {
+        String[] elementsArray = elementsString.split(",");
+        for (String element : elementsArray) {
+            enqueue((T) element);
+        }
+    }
+
+    public T dequeue() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty.");
+        }
+        @SuppressWarnings("unchecked")
+        T dequeuedElement = (T) elements[front];
+        elements[front] = null;
+        front = (front + 1) % elements.length;
+        size--;
+        return dequeuedElement;
+    }
+
+    public void dequeueAll() {
+        while (!isEmpty()) {
+            dequeue();
+        }
+    }
+
+    public void display() {
+        if (isEmpty()) {
+            System.out.println("Queue is empty.");
+        } else {
+            int current = front;
+            for (int i = 0; i < size; i++) {
+                System.out.println(elements[current]);
+                current = (current + 1) % elements.length;
+            }
+        }
+    }
+
+    private void resizeArray() {
+        int newCapacity = elements.length * 2;
+        Object[] newElements = new Object[newCapacity];
+        int current = front;
+        for (int i = 0; i < size; i++) {
+            newElements[i] = elements[current];
+            current = (current + 1) % elements.length;
+        }
+        elements = newElements;
+        front = 0;
+        rear = size - 1;
+    }
+
+    public static void main(String[] args) {
+        GenericQueue<String> queue1 = new GenericQueue<>();
+        queue1.display();
+        queue1.enqueueMany("One,Two,Three,Four,Five");
+        queue1.dequeue();
+        queue1.display();
+
+        GenericQueue<Integer> queue2 = new GenericQueue<>();
+        queue2.enqueueMany("100,200,300,400,500");
+        queue2.dequeue();
+        queue2.enqueueMany("600,700,800,900,1000");
+        queue2.display();
+        queue2.dequeueAll();
+        queue2.display();
+    }
+}
+```
+
+When you run the `main` method, you should get the following output:
+
+```
+Queue is empty.
+Two
+Three
+Four
+Five
+200
+300
+400
+500
+600
+700
+800
+900
+1000
+Queue is empty.
+```
