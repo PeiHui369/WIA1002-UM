@@ -1,0 +1,162 @@
+b)	Aturcara tersebut harus menunjukkan fungsi berikut:
+
+The program should demonstrate the following functions.’
+
+i)	Pengguna mesti berupaya untuk berinteraksi dengan aturcara. Pengguna boleh memasukkan senarai makanan untuk membuat pesanan.
+
+User must be able to interact with the program. The user should enter a list of food items to order.
+
+ii)	Memaparkan senarai makanan yang ditempah.
+
+Display the list of the ordered food items.
+
+iii)	Mengira bilangan makanan yang ditempah.
+
+Calculate the number of orders.
+ 
+iv)	Menggantikan item yang sedia ada dalam senarai pesanan dengan item makanan yang berbeza yang dinyatakan oleh pengguna.
+
+Replace existing item(s) in the ordered list with a different food item as specified by the user.
+
+v)	Membuang item makanan yang dinyatakan oleh pengguna.
+
+Delete a food item as specified by the user.
+
+(8 markah/marks)
+==============================================================================================================================
+
+Apologies for the confusion. Here's an updated version of the program that allows user interaction and demonstrates the functions you mentioned: ordering food items, displaying the ordered items, calculating the number of orders, replacing items, and deleting items.
+
+```java
+import java.util.Scanner;
+
+public class OnlineOrderManagementSystem {
+
+    private static class Node {
+        private String data;
+        private Node next;
+
+        public Node(String data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    private Node head;
+    private int size;
+
+    public void add(String foodItem) {
+        Node newNode = new Node(foodItem);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+        size++;
+    }
+
+    public void removeElement(String foodItem) {
+        if (head == null) {
+            return;
+        }
+        if (head.data.equals(foodItem)) {
+            head = head.next;
+            size--;
+            return;
+        }
+        Node current = head;
+        Node previous = null;
+        while (current != null && !current.data.equals(foodItem)) {
+            previous = current;
+            current = current.next;
+        }
+        if (current != null) {
+            previous.next = current.next;
+            size--;
+        }
+    }
+
+    public void printList() {
+        Node current = head;
+        while (current != null) {
+            System.out.println(current.data);
+            current = current.next;
+        }
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public boolean contains(String foodItem) {
+        Node current = head;
+        while (current != null) {
+            if (current.data.equals(foodItem)) {
+                return true;
+            }
+            current = current.next;
+        }
+        return false;
+    }
+
+    public void replace(String oldFoodItem, String newFoodItem) {
+        Node current = head;
+        while (current != null) {
+            if (current.data.equals(oldFoodItem)) {
+                current.data = newFoodItem;
+                return;
+            }
+            current = current.next;
+        }
+    }
+
+    public static void main(String[] args) {
+        OnlineOrderManagementSystem orderList = new OnlineOrderManagementSystem();
+        Scanner scanner = new Scanner(System.in);
+
+        // Ordering food items
+        System.out.print("Enter the number of food items to order: ");
+        int numberOfItems = scanner.nextInt();
+        scanner.nextLine(); // Consume newline character
+
+        for (int i = 0; i < numberOfItems; i++) {
+            System.out.print("Enter food item " + (i + 1) + ": ");
+            String foodItem = scanner.nextLine();
+            orderList.add(foodItem);
+        }
+
+        System.out.println("\nOrdered Food Items:");
+        orderList.printList();
+
+        System.out.println("\nNumber of Orders: " + orderList.getSize());
+
+        // Replacing an item
+        System.out.print("\nEnter the food item to replace: ");
+        String oldFoodItem = scanner.nextLine();
+        System.out.print("Enter the new food item: ");
+        String newFoodItem = scanner.nextLine();
+        orderList.replace(oldFoodItem, newFoodItem);
+
+        System.out.println("\nUpdated Food Items after Replacement:");
+        orderList.printList();
+
+        // Deleting an item
+        System.out.print("\nEnter the food item to delete: ");
+        String foodItemToDelete = scanner.nextLine();
+        orderList.removeElement(foodItemToDelete);
+
+        System.out.println("\nUpdated Food Items after Deletion:");
+        orderList.printList();
+
+        scanner.close();
+    }
+}
+```
+
+In this program, the user can interact
+
+ with the system by providing the number of food items to order, entering the food items one by one, and then specifying which items to replace or delete. The program will display the ordered food items, calculate the number of orders, replace the specified items, delete the specified items, and print the updated list of food items after each operation.
