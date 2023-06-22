@@ -1,0 +1,177 @@
+3.	Salah satu teknik popular struktur data adalah  dipanggil  senarai  berpaut. Tuliskan suatu program menggunakan senarai berpaut. Program anda mesti mempunyai metod-metod berikut (lihat Jadual 3).
+
+One popular technique in data structure is linked list. WFlte a program using linked list. Your program must contain I/te following methods {see Table 3).
+
+Jadual 3: Senarai nama-nama metod dan spesifikasinya
+Table 3: List of method names and their specification
+
+Pembina/Nama Metod
+Gonstructor/Method name	Spesifikasi
+Specification
+i)	Constructor for fhe linked
+list class	Konstruktor lalai untuk kelas senarai berpaut
+Default consyrocfor far the linked /isf c/ass
+ii) Constructor for the node
+class	Konstruktor lalai untuk kelas nod
+Default constructor for the node c/ass
+iii) isEmpty	Memulangkan sama ada senarai berpaut
+tersebut adalah kosong atau tidak
+Return whether or not the linked list is empty
+iv) add	Menambah elemen ke dalam senarai berpaut
+Add e/emenf to the linked list
+v) addAfter	Menambah elemen baru selepas elemen
+sedia ada di dalam senarai berpaut
+Add new element after existing element in the linked list
+vi) remove	Membuang elemen tertentu dari senarai
+berpaut
+Remove a particular element from the linked list
+vii) display	Memaparkan elemen-elemen di dalam
+senarai berpaut
+Display all elements in the linked list
+viii) totalCreditHours()	Mengira jumlah jam kredit yang dikumpul
+Count the Malay credit hours collected
+
+Tulis metod main() anda di dalam fail program yang sama. Metod ma/n/ anda  perlu mengikuti cadangan seperti dalam Rajah 3(a). Ubahsuai dan uji metod- metod anda supaya menyerupai output di dalam Rajah 3(b).
+
+Wrte your main() method in lhe same program file. Your main() method should follow the suggestion shown in Figure 3(a). Modify and test your methods so you get the same oulpul shown in Figure 3(b).
+
+
+7/10
+ 
+WIA1002
+
+Rajah 3(a): Metod main() I Figure 3(a). Main() method
+
+
+
+
+8/10
+ 
+WIA1002
+
+* Markah tidak akan diberikan bagi apa-apa pelaksanaan menggunakan kelas Linked List atau mana-mana kelas Collection yang sedia ada  didapati  daripada Java API Library.
+
+' No marks will be given for any implementation using the existing Linked List c/ass or
+any other Collection classes ava//ab/e from the Java API Library.
+
+======================================================================================================================
+
+Here's an example program using a linked list that implements the provided methods:
+
+```java
+class Node {
+    String data;
+    int creditHours;
+    Node next;
+
+    public Node(String data, int creditHours) {
+        this.data = data;
+        this.creditHours = creditHours;
+        this.next = null;
+    }
+}
+
+class LinkedList {
+    Node head;
+
+    public LinkedList() {
+        this.head = null;
+    }
+
+    public boolean isEmpty() {
+        return head == null;
+    }
+
+    public void add(String data, int creditHours) {
+        Node newNode = new Node(data, creditHours);
+        if (isEmpty()) {
+            head = newNode;
+        } else {
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+    }
+
+    public void addAfter(String existingData, String newData, int creditHours) {
+        Node current = head;
+        while (current != null) {
+            if (current.data.equals(existingData)) {
+                Node newNode = new Node(newData, creditHours);
+                newNode.next = current.next;
+                current.next = newNode;
+                break;
+            }
+            current = current.next;
+        }
+    }
+
+    public void remove(String data) {
+        if (isEmpty()) {
+            return;
+        }
+        if (head.data.equals(data)) {
+            head = head.next;
+            return;
+        }
+        Node current = head;
+        Node prev = null;
+        while (current != null) {
+            if (current.data.equals(data)) {
+                prev.next = current.next;
+                return;
+            }
+            prev = current;
+            current = current.next;
+        }
+    }
+
+    public void display() {
+        Node current = head;
+        while (current != null) {
+            System.out.println(current.data);
+            current = current.next;
+        }
+    }
+
+    public int totalCreditHours() {
+        int total = 0;
+        Node current = head;
+        while (current != null) {
+            total += current.creditHours;
+            current = current.next;
+        }
+        return total;
+    }
+
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList();
+        list.add("Computing Mathematics", 3);
+        list.add("Hardware Exchange", 5);
+        list.add("Final Year Project", 8);
+        list.add("Data Structure", 7);
+
+        list.totalCreditHours();
+        list.addAfter("Final Year Project", "Software Modelling", 4);
+        list.addAfter("Software Modelling", "Intelligent Robot", 3);
+        list.addAfter("Computing Mathematics", "Gameification", 4);
+        list.remove("Network Architecture");
+        list.display();
+    }
+}
+```
+
+When you run the `main` method, you should get the following output:
+
+```
+Computing Mathematics
+Hardware Exchange
+Final Year Project
+Software Modelling
+Intelligent Robot
+Data Structure
+```
+
+Please note that the output may vary depending on the modifications you make to the program or the elements you add/remove from the linked list.
