@@ -1,0 +1,147 @@
+2.	Encik Bond bekerja sebagai seorang perisik. Dalam usaha untuk memastikan mesej beliau adalah rahsia, dia perlu menghantar mesej ’encrypt’ kepada  penerima. Tulis satu aturcara yang menerima nombor dan  mengekodkannya  untuk mengembalikan perkataan sepadan dengan menggunakan barisan.
+
+Mr Bond works as a spy. In order to protect his message as a secret, he needs to send an encrypted message to the receiver. Write a program to accept numbers and encode them to return their corresponding word by using queue.
+
+Program anda harus menunjukkan perkara berikut:
+
+Your program must demonstrate the following.
+
+a)	Laksanakan	sebuah	kelas	Queue<E>.	Pastikan	kaedah-kaedah	dan konstruktor-konstruktor berikut dilaksanakan.
+
+Implement a Queue<E» class. Ensure that the following methods and constructors are implemented.
+
+j	public Queue(E[] items)
+
+ii)	public Queue()
+
+M)	public void enqueue(E e) iV)	public E dequeue()
+V)	public E getElement(int i) Vl)	public int getsize()
+V)	public boolean isEmpty()
+
+Vl) public String tostring()
+(8 markah/marks)
+============================================================================================================================
+
+Here's an implementation of the `Queue` class and a program that accepts numbers and encodes them into corresponding words using a queue:
+
+```java
+import java.util.Arrays;
+
+public class Queue<E> {
+    private E[] items;
+    private int front;
+    private int rear;
+    private int size;
+
+    public Queue(E[] items) {
+        this.items = items;
+        this.front = 0;
+        this.rear = items.length - 1;
+        this.size = items.length;
+    }
+
+    public Queue() {
+        this.items = (E[]) new Object[10];
+        this.front = 0;
+        this.rear = -1;
+        this.size = 0;
+    }
+
+    public void enqueue(E e) {
+        if (isFull()) {
+            resize();
+        }
+        rear = (rear + 1) % items.length;
+        items[rear] = e;
+        size++;
+    }
+
+    public E dequeue() {
+        if (isEmpty()) {
+            return null;
+        }
+        E dequeuedItem = items[front];
+        front = (front + 1) % items.length;
+        size--;
+        return dequeuedItem;
+    }
+
+    public E getElement(int i) {
+        if (i >= 0 && i < size) {
+            int index = (front + i) % items.length;
+            return items[index];
+        }
+        return null;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            int index = (front + i) % items.length;
+            sb.append(items[index]).append(" ");
+        }
+        return sb.toString();
+    }
+
+    private boolean isFull() {
+        return size == items.length;
+    }
+
+    private void resize() {
+        E[] newItems = (E[]) new Object[items.length * 2];
+        for (int i = 0; i < size; i++) {
+            int index = (front + i) % items.length;
+            newItems[i] = items[index];
+        }
+        items = newItems;
+        front = 0;
+        rear = size - 1;
+    }
+
+    public static void main(String[] args) {
+        // Mapping of numbers to words
+        String[] numberToWord = {
+            "Zero", "One", "Two", "Three", "Four",
+            "Five", "Six", "Seven", "Eight", "Nine"
+        };
+
+        Queue<Integer> numberQueue = new Queue<>();
+
+        // Accept numbers from the user and enqueue them
+        // Stop accepting numbers when the user enters a negative number
+        int number;
+        do {
+            System.out.print("Enter a number (negative to stop): ");
+            number = Integer.parseInt(System.console().readLine());
+            if (number >= 0) {
+                numberQueue.enqueue(number);
+            }
+        } while (number >= 0);
+
+        System.out.print("\nEncoded Message: ");
+        StringBuilder encodedMessage = new StringBuilder();
+        while (!numberQueue.isEmpty()) {
+            int dequeuedNumber = numberQueue.dequeue();
+            if (dequeuedNumber >= 0 && dequeuedNumber <= 9) {
+                encodedMessage.append(numberToWord[dequeuedNumber]).append(" ");
+            }
+        }
+        System.out.println(encodedMessage.toString());
+    }
+}
+```
+
+This program demonstrates the use of the `Queue` class to accept numbers from the user and encode them into corresponding words. The program uses an array-based circular queue implementation for the `Queue` class. The user can enter numbers until a
+
+ negative number is entered, and then the program dequeues the numbers and encodes them into words based on the mapping defined in the `numberToWord` array.
+
+Note: The program assumes a console-based input for simplicity.
