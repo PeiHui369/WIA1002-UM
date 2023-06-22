@@ -1,0 +1,168 @@
+1.	Bina satu projek “Netbeans” bernama “q1 NomborMatzlkAnda” untuk menyimpan semua fail kod anda untuk Soalan 1. Taipkan nombor matrik anda sebagai baris pertama bagi setiap fail.
+
+Create a Netbeans project entitled “QJ_ zauzea tz1 cNu ber” to store all your code files for Question 1. Type your metric number as the libel line of each file.
+
+Dalam soalan ini, anda akan menulis satu aturcara yang mencipta dua senarai berpaut, dan kemudian menggabung kedua-dua senarai ini menjadi satu senarai berpaut baru.
+
+In this question, you are going to write a program that creates two linked-lists and then combine these two lists into one new linked-list.
+
+a)	Tulis satu kelas Java Node yang menyimpan dua atribut dan satu pembina. Atribut pertama ialah satu atribut berjenis generik dan atribut kedua ialah satu petunjuk ke code yang lain. Pembina ini menerima satu parameter berjenis generik.
+
+Write a Java class Node with two attributes and a constructor. The first attribute is an attribute of generic type and the second attribute is a pointer to another Node. The constructor receives one parameter of generic type.
+
+(1 markah/can)
+
+b)	Fail kelas Java bernama Ay7T AedS1s r mempunyai Node yang dibangunkan dalam bahagian (a) sebagai atribut. Bangunkan fail kelas ini dengan artribut- atribut, pembina dan metod-metod berikut:
+i)	Isytiharkan atribut-atribut Aea4, ca dan st ze.
+ii)	Satu pembina lalai yang menetapkan head la 1 dan st ze kepada nilai-
+nilai yang sesuai.
+iii)	Salu melod get S1 ze yang memulangkan saiz senarai berpaut
+berkenaan.
+iv)	Satu metod added zsr yang menambah satu nod ke posisi pertama
+senarai berpaut berkenaan dan tidak memulangkan apa-apa.
+v)	Satu metod ac/dzas r yang menambah satu nod ke posisi terakhir senarai berpaut berkenaan dan tidak memulangkan apa-apa.
+vi)	Satu metod zemove6 zsr yang membuang satu nod di posisi pertama senarai berpaut berkenaan dan memulangkan elemen yang disimpan dalam nod tersebut.
+vii)	Menimpa motod r osr z1np supaya saiz senarai berpaut berkenaan, berikutan dengan elemen dalam setiap nod akan dicetak mengikut susunan. Contohnya, jika senarai berpaut mempunyai 3 nod yang menyimpan string “use ”, "vozJ d” and !’ masing-masing, pemanggilan metod CoSLz1 g' mencetak:
+
+[size-3] >> Hello >> World >> !
+ 
+
+Java class file eye nk nz s I has Node developed in part (a) as attribute. Develop this c/ass file with the following attributes, constructor and methods.
+i)	Dec/are 3 attributes named hea d, ta z1 and s zze.
+ii)	A default constructor I/?af set the h ead, t.a11 and s:i ze lo appropn”ate values.
+iii)	A ge tslze method that returns the size of the linked-list.
+iv)	An ado'z zs c method that add a node to the first position of the linked-list and
+return nothing.
+v)	An eodze s I melhod that add a node to the last position of the linked-list and return nothing.
+vi)	A ze oveF? zs t method that remove tfte first node in the linked-list, and return the element slored in the node.
+vii)	Overfide the t as r eg method so that the size of the I1st, follows by element in each node w/// be printed in sequence. For example, if the linked-list has 3 nodes storing strings “no/ a”, “ loo z2 d” and “!" respectively, a call to this to St:ring method prints:
+
+[size=3] >> Mello >> World >> !
+
+(7 markah/marks)
+===================================================================================================================
+
+To create a NetBeans project for Question 1, follow these steps:
+
+1. Open NetBeans IDE.
+2. Go to "File" > "New Project".
+3. Select "Java" category and "Java Application" project.
+4. Click "Next".
+5. Enter the project name as "QJ_zauzea_tz1_cNu_ber".
+6. Choose the project location and click "Finish".
+
+Now, you can create the required Java classes within this project.
+
+Here's the implementation of the Node class and the QJ_zauzea_tz1_cNu_ber class as described:
+
+**Node.java:**
+```java
+public class Node<E> {
+    private E element;
+    private Node<E> next;
+
+    public Node(E element) {
+        this.element = element;
+        this.next = null;
+    }
+
+    public E getElement() {
+        return element;
+    }
+
+    public Node<E> getNext() {
+        return next;
+    }
+
+    public void setNext(Node<E> next) {
+        this.next = next;
+    }
+}
+```
+
+**QJ_zauzea_tz1_cNu_ber.java:**
+```java
+public class QJ_zauzea_tz1_cNu_ber {
+    private Node<String> head;
+    private Node<String> tail;
+    private int size;
+
+    public QJ_zauzea_tz1_cNu_ber() {
+        head = null;
+        tail = null;
+        size = 0;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void addFirst(String element) {
+        Node<String> newNode = new Node<>(element);
+        if (head == null) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            newNode.setNext(head);
+            head = newNode;
+        }
+        size++;
+    }
+
+    public void addLast(String element) {
+        Node<String> newNode = new Node<>(element);
+        if (tail == null) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail.setNext(newNode);
+            tail = newNode;
+        }
+        size++;
+    }
+
+    public String removeFirst() {
+        if (head == null) {
+            return null;
+        }
+
+        Node<String> removedNode = head;
+        head = head.getNext();
+        removedNode.setNext(null);
+        size--;
+
+        if (head == null) {
+            tail = null;
+        }
+
+        return removedNode.getElement();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[size=").append(size).append("]");
+
+        Node<String> currentNode = head;
+        while (currentNode != null) {
+            sb.append(" >> ").append(currentNode.getElement());
+            currentNode = currentNode.getNext();
+        }
+
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        QJ_zauzea_tz1_cNu_ber list = new QJ_zauzea_tz1_cNu_ber();
+        list.addFirst("Hello");
+        list.addLast("World");
+        list.addLast("!");
+
+        System.out.println(list);
+    }
+}
+```
+
+When you run the main method of the `QJ_zauzea_tz1_cNu_ber` class, it will create a linked-list, add elements to it, and display the resulting string representation of the linked-list as mentioned in the question.
+
+Make sure to save the files within the project directory you created.
