@@ -1,0 +1,254 @@
+2.	Bina satu projek "Netbeans" bersama “q2_NombozMat£1ñAnda” untuk menyimpan semua fail Kod anda untuk Soalan 2. Taipkan nombor matrik anda sebagai baris pertama bagi setiap fail.
+
+Crea/e a Netbeans project enfi/led “Q2 7ouzMa Lz1cNuzhe r” to slore all your code files for Question 2. Type your metric number as the first line of each file.
+
+Dalam program ini, anda dikehendaki untuk menyusun-semula senarai data jualan,  yang  mengandungi  maklumat   mengenai   region,   Safe.s Repzesen la 11•ze Nam.e dan sat es Your r. Anda perlu membina dua kelas,
+
+Dalam la 1es11s r, anda perlu mengisytiharkan tiga pembolehubah, mengekodkan pembina lalai dan pembina yang mentakrifkan tiga pembolehubah, serta metod L os eg ‹ yang memaparkan output dalam bentuk yang ditunjukkan.
+(2 markah)
+
+Dalam soz I:Sat es11s t, anda dikehendaki untuk menggunakan Corps saide dalam menyiapkan tugas-tugas berikut:
+
+a)	Menyusun-semula data Region dengan menggunakan Selection Sort dalam susunan menurun.
+(3 markah)
+b)	Menyusun-semula data sat es Coun z dengan menggunakan Insertion Sort
+dalam susunan menaik.
+(2.5 markah)
+c)	Menyusun-semula data sad es Repze sew L a L z ve	Name dengan menggunakan Bubble Sort dalam susunan menaik.
+(2.5 markah)
+
+Tuliskan main metod yang memanggil metod-metod yang berkenaan untuk memaparkan hasil susun-semula tersebut.
+(2 markah) Data asal dan output sampel adalah ditunjukkan dalam Rajah 2 di bawah:
+ 
+
+You are asked to sort a /isf of sa/es data, w//fC// consis/fnp af Real on,  ate° Reoresen ta’› •ze'. Name  ana  sa Yes  count:.  You  need  /o  create  two  classes, sa esz s I and say I la 1 esT s t.
+
+In a J eslz s t, you need to declare the three relevant variables, code the default no-arg constructor and constructor whish defines three variables, and the t out:ring ) me/hod
+that structure the display of the output.
+f2 marks)
+
+ 
+In son tea 1est:i s t, you are required to use cozrtpa raise to:
+a)	Sort Regs on data using Selection Sort in descending order.
+
+b)	Sort .had es Your L using Insertion Sort in ascending order.
+ 
+
+
+(3 marks)
+
+(2.5 marks)
+ 
+c)	Sort Sa I. es Rep resen t:a I j.we Name using Bubble Sort in ascending order.
+(2.5 marks)
+
+Then, wr”ite a ma in method whlch calls the relevant methods to display the sorting results.
+(2 marks)
+The original data and sample output are given in Figure 2 below:
+ 
+
+or1g1na1 Data:
+As1a	458 Ahnad
+Europe	51s Hen1sh
+Europe	658 Banny
+Greenland	208 sin
+! asia	3s$ Eli
+Greenland	678 Ben
+1s1a	198 Lee
+Sorting Result on Reg1on using Select1onSort:
+Greenland	208 Ain	 
+Greenland	670 Ben
+Europe	659 Banny
+Europe	516 8ea1sh
+As1a	39e AU
+As1a	458 Ahaad
+As1a	798 Lee
+
+Sorting Result on Sales «s1ng Insert1onSort: Greenland	288 Aln
+As1a	390 All
+4se Ahaad
+!Erope	518 8ea1sh
+Europe	658 Banny
+' Greenland	678 Ben
+As1a	798 Lee
+
+'sorting Result on salesRep usIng Bubb1eSort:
+As1a	458	Ahead
+, Greenland	208	Aln
+As1a	3s9	Ali
+Europe	658	Banny
+Greenland	678	ben
+Europe	51s	lien1sh
+As1a		798 	Lee	
+Rajah 2 /FlgUre 2
+==========================================================================================================================
+Here's the updated `Q2_7ouzMaLz1cNuzhe r.java` file with the implementation of the `SalesList` and `SalesTest` classes, including the sorting methods and the main method:
+
+```java
+public class Q2_7ouzMaLz1cNuzhe r {
+    public static void main(String[] args) {
+        SalesTest salesTest = new SalesTest();
+
+        // Populate the sales list
+        salesTest.populateSalesList();
+
+        // Sort the sales list by region using Selection Sort in descending order
+        salesTest.sortByRegion();
+
+        // Sort the sales list by sales using Insertion Sort in ascending order
+        salesTest.sortBySales();
+
+        // Sort the sales list by salesRepName using Bubble Sort in ascending order
+        salesTest.sortBySalesRepName();
+
+        // Display the sorted results
+        salesTest.displaySortedResults();
+    }
+}
+
+class SalesList {
+    private Sales[] salesData;
+    private int size;
+
+    public SalesList(int capacity) {
+        salesData = new Sales[capacity];
+        size = 0;
+    }
+
+    public void add(Sales sales) {
+        salesData[size] = sales;
+        size++;
+    }
+
+    public Sales get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+        return salesData[index];
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void selectionSort() {
+        for (int i = 0; i < size - 1; i++) {
+            int maxIndex = i;
+            for (int j = i + 1; j < size; j++) {
+                if (salesData[j].getRegion().compareTo(salesData[maxIndex].getRegion()) > 0) {
+                    maxIndex = j;
+                }
+            }
+            swap(i, maxIndex);
+        }
+    }
+
+    public void insertionSort() {
+        for (int i = 1; i < size; i++) {
+            Sales currentSales = salesData[i];
+            int j = i - 1;
+            while (j >= 0 && salesData[j].getSales() > currentSales.getSales()) {
+                salesData[j + 1] = salesData[j];
+                j--;
+            }
+            salesData[j + 1] = currentSales;
+        }
+    }
+
+    public void bubbleSort() {
+        for (int i = 0; i < size - 1; i++) {
+            for (int j = 0; j < size - i - 1; j++) {
+                if (salesData[j].getSalesRepName().compareTo(salesData[j + 1].getSalesRepName()) > 0) {
+                    swap(j, j + 1);
+                }
+            }
+        }
+    }
+
+    private void swap(int i, int j) {
+        Sales temp = salesData[i];
+        salesData[i] = salesData[j];
+        salesData[j] = temp;
+    }
+}
+
+class Sales {
+    private String region;
+    private int sales;
+    private String salesRepName;
+
+    public Sales(String region, int sales, String salesRepName) {
+        this.region = region;
+        this.sales = sales;
+        this.salesRepName = salesRepName;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public int getSales() {
+        return sales;
+    }
+
+    public String getSalesRepName() {
+        return salesRepName;
+    }
+
+    @Override
+    public String toString() {
+        return region + "\t" + sales + "\t" + salesRepName;
+    }
+}
+
+class Sales
+
+Test {
+    private SalesList salesList;
+
+    public SalesTest() {
+        salesList = new SalesList(7);
+    }
+
+    public void populateSalesList() {
+        salesList.add(new Sales("Asia", 458, "Ahmad"));
+        salesList.add(new Sales("Europe", 518, "Henish"));
+        salesList.add(new Sales("Europe", 658, "Banny"));
+        salesList.add(new Sales("Greenland", 208, "Sin"));
+        salesList.add(new Sales("Asia", 390, "Eli"));
+        salesList.add(new Sales("Greenland", 678, "Ben"));
+        salesList.add(new Sales("Asia", 798, "Lee"));
+    }
+
+    public void sortByRegion() {
+        salesList.selectionSort();
+    }
+
+    public void sortBySales() {
+        salesList.insertionSort();
+    }
+
+    public void sortBySalesRepName() {
+        salesList.bubbleSort();
+    }
+
+    public void displaySortedResults() {
+        System.out.println("Sorting Result on Region using Selection Sort:");
+        for (int i = 0; i < salesList.getSize(); i++) {
+            System.out.println(salesList.get(i));
+        }
+
+        System.out.println("\nSorting Result on Sales using Insertion Sort:");
+        for (int i = 0; i < salesList.getSize(); i++) {
+            System.out.println(salesList.get(i));
+        }
+
+        System.out.println("\nSorting Result on SalesRepName using Bubble Sort:");
+        for (int i = 0; i < salesList.getSize(); i++) {
+            System.out.println(salesList.get(i));
+        }
+    }
+}
+```
+
+Please make sure to create a NetBeans project named "Q2_7ouzMaLz1cNuzhe r" and add the provided code files to the project.
