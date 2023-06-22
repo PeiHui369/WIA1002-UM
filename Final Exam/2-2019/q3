@@ -1,0 +1,315 @@
+3.	Bina satu projek “Netbeans” bernama “g3_NomborMat z1 fiADd ” untuk menyimpan semua fail kod anda untuk Soalan 3. Taipkan nombor matrik anda sebagai baris pertama bagi setiap fail.
+Create a Netbeans project entitled ”Q3 to urea Lz1c/Vum6ez” /o store all your code files for Question 3. Type your metric number as lhe first line of each file.
+
+Kejohanan Triwizard adalah pertandingan ajaib yang diadakan antara tiga sekolah sihir terbesar di Eropah. Harry Potter telah meluluskan dua tugas pertama. Tugas akhir yang paling berbahaya, maze Triwizard adalah halangan akhir yang mesti dihadapi. Profesor Dumbledore telah meminta anda untuk membantu Hany, bukan dengan menggunakan tongkat sihir anda, tetapi kemahiran komputer anda.
+ 
+
+Anda perlu membangunkan program untuk mengesan pergerakan Hany dalam maze. Program ini pertama kali membaca Peta IViarauders, yang merupakan fail teks bernama "ma ze . Lx ”, dan memaparkannya.
+
+1 menandakan laluan, 0 bermakna jalan mati, dan C ialah Piala Triwizard.
+
+Harry akan menggunakan algoritma mudah untuk mencari Piala Triwizard yang tersembunyi dalam maze, cuba dan ralat. Dia akan memasuki maze di lokasi (0,0) dan mula meneroka semua jalan yang mungkin ada. Sekiranya Harry bertemu dengan jalan mati, dia akan kembali ke blok maze sebelumnya.
+
+Sekiranya Carry beqaya menemui piala, program anda harus menunjukkan lokasi piala, serta jalan kepadanya, seperti di bawah:
+
+The Triwizard Maze:
+1 0	l	l	0
+1 1	1	0	1
+0 1	0	1	C
+1 1	0	1	0
+0 1	l	1	0
+
+Hurray!! ! Harry found the Triwizard Cup at (2,4)
+Tims is the path Harry )ias waken: (0,0) > (J,0) > (l, 1) > (2, 1) > (3,1) > (4,1) > (4,2) > (4,3) > (3,3) > (2,3) > (2,4)
+
+Jika tidak, program itu harus memberi amaran kepada kami:
+
+The Triwizara Maze:
+1	0	1	1	U
+1	1	1	0	1
+0	1	0	0	C
+1	l	0	1	0
+0	l	1	1	l
+
+Oh no!! ! Harry couIcn't find the Triwizard Cup! Somsore quickly gets Professor Dumbledorc.
+ 	 
+ 
+WIA1002
+
+
+Tugas anda:
+
+a)	Ini adalah masalah backtracking yang biasa, di mana anda boleh menggunakan timbunan untuk menyimpan semua koordinat (baris, iajur) dan arah yang mungkin (iaitu atas, kiri, bawah dan kanan), sebagai nod, dan menolaknya ke timbunan. Melaksanakan kelas tindanan yang generik. Tiada markah akan diberikan jika anda menggunakan ADT Stack dalam Java Collection Framework.
+
+(5 markah)
+
+b)	Tulis program seperti yang diterangkan di atas dengan menggunakan timbunan yang telah anda IaksanaKan dalam di atas. Anda tidak perlu bimbang sama ada ia adalah jalan terpendek, sekiranya terdapat lebih daripada satu.
+
+(10 markah)
+
+The Triwizard Tournament is a magical contest held between the three largest wizarding schools of Europe. Harry Potter has passed the first two tashs. The most dangerous final task, the Triwizard Maze is /he final obstacle he must face. Pro/essor Dumbledore has demanded you to help the poor Harry, not using your magic wand, bul your computer skills.
+
+'r'oo will need to develop a program to track Harry’s movement in the maze. The program first read the Marauders Map, which is a text file named "ma ze . txt", and display it.
+
+1	0	T	1	0
+l	1		0	1
+0	1	0	1	C
+1	1	0	1	0
+0	1	1	1	0
+
+1 denotes a path, 0 means ”it is a dead end, and C is he of the Triwizard Cup.
+
+Harry will use a simple algorithm to find the Triwizard Cup hidden in //?e maze, try and error. He'll enter the maze at /ocation (0,0) and start to explore all possible. If Harry meets a dead end, he will retract back to the previous block of the maze.
+
+If Harry managed to find the cup, your program should show the location of the cup, as well as the path to it, as below.
+
+Tke Triwizard Mare:
+ 	 
+
+,Hurray! ! !  Harry   found  the  Triwizard Cup  at	(2,4)
+This   is    the  path  Harry has  taken:	(0,0) > (1,0)  >  (l,l)  >  (2,1)  >  (3,1)  > (4,1) > (4,2) > (4,3) > (3,3) > (2,3) > (2,4)
+
+8/10
+ 
+WIA1002
+
+
+0hem  itpshe  ,rogram  should warn us.	
+'T.e Triwizard Maze:
+›I 0 1 1 0
+1 1 1 0 1
+
+1 1 0 1 0
+0 1 1 l 1
+
+Oh no!!! Harry couldn't find the Triwizard Cup!
+Someone quickly gets Professor Dumbledore.
+
+Your task.
+a)	This is a typical backtracking problem, where you can use a stack to keep all of the possible coordinates (row, column) and directions (i.e. up, left, down and right), as a node. and push it onto the stack. Implement a generic slack class. No marks will be awarded if you use /he ADT Stack in the Java Collection Framework.
+
+(5 marks)
+
+b)	Write the program as described above using the stack that you have implemented in above. You do not need to worry about whether it is a shortest path, if there ex/s/ more than one.
+/fO rztar/rs/
+
+
+4.	a) Bina satu projek "Netbeans" bernama “g4 a_fiombo rMd t L kAr.da” untuk menyimpan semua fail kod anda untuk Soalan 4(a). Taipkan nombor matrik anda sebagai baris pertama bagi setiap fail.
+
+Create a Netbeans project entitled £‘Q4a	zouzNa I.c.i cNumhe r”to store all your code files for Question 4(a). Type your metric number as the first line of each /i/e.
+
+Tulis satu program Java untuk mencetak “He	o—Wom 1ct” tanpa menggunakan semicolon.
+
+(4 mafkah)
+
+Write a Java program to print “Heb I o —Work cf” without using semicolon.
+
+(4 marks)
+
+
+
+
+
+
+
+
+
+
+
+
+9/10
+ 
+WIA1002
+
+b) Taip jawapan anda untuk Soalan 4(b) di dalam satu editor teks dan namakannya
+”Q4b NcmborMatrikArida.ext'
+
+Type	your	answer	for	Question	4(b)	in	a	text	editor	and	name	it
+
+Bagikan  "preorder”,  ”inorder"   dan  ”postordeF   traversal  untuk  pokok  yang
+berikut.
+
+(6 marks)
+
+Give the preorder, inorder and postorder traversal of the following tree.
+
+(6 marks)
+===========================================================================================================================
+
+Sure! Here's the solution to both parts (a) and (b) of Question 4:
+
+a) Implementation of a Stack class:
+
+```java
+public class MyStack<T> {
+    private static class Node<T> {
+        private T data;
+        private Node<T> next;
+
+        public Node(T data) {
+            this.data = data;
+        }
+    }
+
+    private Node<T> top;
+
+    public boolean isEmpty() {
+        return top == null;
+    }
+
+    public void push(T data) {
+        Node<T> newNode = new Node<>(data);
+        newNode.next = top;
+        top = newNode;
+    }
+
+    public T pop() {
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+        T data = top.data;
+        top = top.next;
+        return data;
+    }
+
+    public T peek() {
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+        return top.data;
+    }
+}
+```
+
+b) Maze Solver Program:
+
+```java
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.EmptyStackException;
+import java.util.Scanner;
+
+public class Q4a_zouzMaLz1cNuzhe r {
+    public static void main(String[] args) {
+        char[][] maze = readMazeFromFile("maze.txt");
+        int rows = maze.length;
+        int cols = maze[0].length;
+
+        MyStack<Coordinate> stack = new MyStack<>();
+        stack.push(new Coordinate(0, 0));
+
+        while (!stack.isEmpty()) {
+            Coordinate current = stack.peek();
+            int row = current.getRow();
+            int col = current.getCol();
+
+            if (maze[row][col] == 'C') {
+                System.out.println("The Triwizard Maze:");
+                displayMaze(maze);
+                System.out.println("\nHurray!!! Harry found the Triwizard Cup at (" + row + "," + col + ")");
+                System.out.println("This is the path Harry has taken:");
+                displayPath(stack);
+                return;
+            }
+
+            // Mark the current position as visited
+            maze[row][col] = 'V';
+
+            // Check for available paths
+            if (isValidMove(maze, row - 1, col)) {  // Up
+                stack.push(new Coordinate(row - 1, col));
+                continue;
+            }
+            if (isValidMove(maze, row, col - 1)) {  // Left
+                stack.push(new Coordinate(row, col - 1));
+                continue;
+            }
+            if (isValidMove(maze, row + 1, col)) {  // Down
+                stack.push(new Coordinate(row + 1, col));
+                continue;
+            }
+            if (isValidMove(maze, row, col + 1)) {  // Right
+                stack.push(new Coordinate(row, col + 1));
+                continue;
+            }
+
+            // If no available paths, retract back to the previous block
+            stack.pop();
+        }
+
+        System.out.println("The Triwizard Maze:");
+        displayMaze(maze);
+        System.out.println("\nOh no!!! Harry couldn't find the Triwizard Cup!");
+        System.out.println("Someone quickly gets Professor Dumbledore.");
+    }
+
+    private static char[][] readMazeFromFile(String filename) {
+        File file = new File(filename);
+        try (Scanner scanner = new Scanner(file)) {
+            int rows = Integer.parseInt(scanner.nextLine());
+            int cols = Integer.parseInt(scanner.nextLine());
+            char[][] maze = new char[rows][cols];
+            for (int i = 0; i < rows; i++) {
+                String[] row = scanner.nextLine().split("\\s");
+                for (int j = 0; j < cols; j++) {
+
+
+                    maze[i][j] = row[j].charAt(0);
+                }
+            }
+            return maze;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static void displayMaze(char[][] maze) {
+        for (char[] row : maze) {
+            for (char cell : row) {
+                System.out.print(cell + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    private static boolean isValidMove(char[][] maze, int row, int col) {
+        int numRows = maze.length;
+        int numCols = maze[0].length;
+        return row >= 0 && row < numRows && col >= 0 && col < numCols && (maze[row][col] == '1' || maze[row][col] == 'C');
+    }
+
+    private static void displayPath(MyStack<Coordinate> stack) {
+        while (!stack.isEmpty()) {
+            Coordinate coordinate = stack.pop();
+            System.out.print("(" + coordinate.getRow() + "," + coordinate.getCol() + ")");
+            if (!stack.isEmpty()) {
+                System.out.print(" > ");
+            }
+        }
+        System.out.println();
+    }
+
+    private static class Coordinate {
+        private int row;
+        private int col;
+
+        public Coordinate(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+
+        public int getRow() {
+            return row;
+        }
+
+        public int getCol() {
+            return col;
+        }
+    }
+}
+```
+
+Regarding Question 4(b), I'll need the specific tree structure to provide the preorder, inorder, and postorder traversals. Could you please provide the tree structure?
+
+
