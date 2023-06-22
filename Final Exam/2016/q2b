@@ -1,0 +1,152 @@
+b)	Aturcara“ tersebut menggunakan kelas Queue<E> yang telah dilaksanakan di dalam Soalan 2(a). Berikut adalah maklumat lanjut bagi membantu membangunkan aturcara tersebut:
+
+The program’ uses the Queue<E> class implemented in Question 2(a). Following are further hints to guide the program development:
+
+     Senarai huruf (i.e., a-z) diberikan sebagai tatasusun seperti  berikut.  Simpan tatasusun huruf ini dalam barisan yang telah dilaksanakan dalam Soalan 2(a). Terdapat sejumlah 26 aksara (i.e., abjad dan simbol garis bawah).
+
+A list of alphabets (i.e., a-z) is given as an array as follows. Store this array of alphabets in the queue implemented in Question 2(a). There are 26 characters in total (i.e., alphabet and an underscore symbol)
+
+alphabet = {’a’,’b’,’c’,...,’y’,’z’,’_’}
+
+ii)	Indeks (lihat contoh output) mewakili lokasi indeks bagi huruf dan tidak diberikan sebagai tatasusun berasingan.
+
+The index (see example output) represents the index location of the alphabets and not given as a separate array.
+
+iii)	Program ini berinteraksi dengan pengguna melalui pertanyaan mengenai kekerapan input nombor yang akan diberi.
+
+The program interacts with the user by asking the frequency of input numbers to be provided.
+
+iv)	Setelah	pengguna	memasukkan	semua   nombor,	program	ini akan memaparkan huruf yang sepadan.
+
+Once the user enters all the numbers, the program will display their corresponding alphabets.
+
+* Markah tidak akan diberikan untuk perlaksanaan yang tidak menggunakan kelas Queue<E> daripada Soalan 2(a).
+
+No marks will be given for any implementation without using Queue<E» class in Question 2(a).
+
+(10 markahlmarks)
+=========================================================================================================================================
+
+Here's an implementation of the `Queue` class and a program that accepts numbers and encodes them into corresponding words using a queue:
+
+```java
+import java.util.Arrays;
+
+public class Queue<E> {
+    private E[] items;
+    private int front;
+    private int rear;
+    private int size;
+
+    public Queue(E[] items) {
+        this.items = items;
+        this.front = 0;
+        this.rear = items.length - 1;
+        this.size = items.length;
+    }
+
+    public Queue() {
+        this.items = (E[]) new Object[10];
+        this.front = 0;
+        this.rear = -1;
+        this.size = 0;
+    }
+
+    public void enqueue(E e) {
+        if (isFull()) {
+            resize();
+        }
+        rear = (rear + 1) % items.length;
+        items[rear] = e;
+        size++;
+    }
+
+    public E dequeue() {
+        if (isEmpty()) {
+            return null;
+        }
+        E dequeuedItem = items[front];
+        front = (front + 1) % items.length;
+        size--;
+        return dequeuedItem;
+    }
+
+    public E getElement(int i) {
+        if (i >= 0 && i < size) {
+            int index = (front + i) % items.length;
+            return items[index];
+        }
+        return null;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            int index = (front + i) % items.length;
+            sb.append(items[index]).append(" ");
+        }
+        return sb.toString();
+    }
+
+    private boolean isFull() {
+        return size == items.length;
+    }
+
+    private void resize() {
+        E[] newItems = (E[]) new Object[items.length * 2];
+        for (int i = 0; i < size; i++) {
+            int index = (front + i) % items.length;
+            newItems[i] = items[index];
+        }
+        items = newItems;
+        front = 0;
+        rear = size - 1;
+    }
+
+    public static void main(String[] args) {
+        // Mapping of numbers to words
+        String[] numberToWord = {
+            "Zero", "One", "Two", "Three", "Four",
+            "Five", "Six", "Seven", "Eight", "Nine"
+        };
+
+        Queue<Integer> numberQueue = new Queue<>();
+
+        // Accept numbers from the user and enqueue them
+        // Stop accepting numbers when the user enters a negative number
+        int number;
+        do {
+            System.out.print("Enter a number (negative to stop): ");
+            number = Integer.parseInt(System.console().readLine());
+            if (number >= 0) {
+                numberQueue.enqueue(number);
+            }
+        } while (number >= 0);
+
+        System.out.print("\nEncoded Message: ");
+        StringBuilder encodedMessage = new StringBuilder();
+        while (!numberQueue.isEmpty()) {
+            int dequeuedNumber = numberQueue.dequeue();
+            if (dequeuedNumber >= 0 && dequeuedNumber <= 9) {
+                encodedMessage.append(numberToWord[dequeuedNumber]).append(" ");
+            }
+        }
+        System.out.println(encodedMessage.toString());
+    }
+}
+```
+
+This program demonstrates the use of the `Queue` class to accept numbers from the user and encode them into corresponding words. The program uses an array-based circular queue implementation for the `Queue` class. The user can enter numbers until a
+
+ negative number is entered, and then the program dequeues the numbers and encodes them into words based on the mapping defined in the `numberToWord` array.
+
+Note: The program assumes a console-based input for simplicity.
