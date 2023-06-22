@@ -1,0 +1,132 @@
+A restaurant needs to use an online order management system enabling its customers to make an online order of food. Write a program using singly linked list to demonstrate the following:
+
+Implement’ the following methods using the Singly Linked List’.
+
+i)	public void add(E e)
+
+ii)	public void removeElement(E e)
+
+iii)	public void printList()
+
+iv)	public int getsize()
+
+v)	public boolean contains(E e)
+
+vi)	public void replace(E e, E newE)
+
+No marks will be given for any implementation using the existing LinkedList class available from the Java API Library.
+
+==========================================================
+Certainly! Here's an implementation of a singly linked list in Java that includes the methods you mentioned: `add()`, `removeElement()`, `printList()`, `getSize()`, `contains()`, and `replace()`.
+
+```java
+public class OnlineOrderManagementSystem<E> {
+
+    private Node<E> head;
+    private int size;
+
+    private static class Node<E> {
+        private E data;
+        private Node<E> next;
+
+        public Node(E data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    public void add(E e) {
+        Node<E> newNode = new Node<>(e);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node<E> current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+        size++;
+    }
+
+    public void removeElement(E e) {
+        if (head == null) {
+            return;
+        }
+        if (head.data.equals(e)) {
+            head = head.next;
+            size--;
+            return;
+        }
+        Node<E> current = head;
+        Node<E> previous = null;
+        while (current != null && !current.data.equals(e)) {
+            previous = current;
+            current = current.next;
+        }
+        if (current != null) {
+            previous.next = current.next;
+            size--;
+        }
+    }
+
+    public void printList() {
+        Node<E> current = head;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public boolean contains(E e) {
+        Node<E> current = head;
+        while (current != null) {
+            if (current.data.equals(e)) {
+                return true;
+            }
+            current = current.next;
+        }
+        return false;
+    }
+
+    public void replace(E e, E newE) {
+        Node<E> current = head;
+        while (current != null) {
+            if (current.data.equals(e)) {
+                current.data = newE;
+                return;
+            }
+            current = current.next;
+        }
+    }
+
+    public static void main(String[] args) {
+        OnlineOrderManagementSystem<String> orderList = new OnlineOrderManagementSystem<>();
+        orderList.add("Pizza");
+        orderList.add("Burger");
+        orderList.add("Pasta");
+        orderList.add("Salad");
+
+        System.out.println("List:");
+        orderList.printList();
+
+        System.out.println("Size: " + orderList.getSize());
+        System.out.println("Contains 'Burger': " + orderList.contains("Burger"));
+
+        orderList.removeElement("Burger");
+        System.out.println("After removing 'Burger':");
+        orderList.printList();
+
+        orderList.replace("Pasta", "Sushi");
+        System.out.println("After replacing 'Pasta' with 'Sushi':");
+        orderList.printList();
+    }
+}
+```
+
+This program demonstrates the usage of the methods implemented using a singly linked list. You can customize the code to suit your specific needs, such as adding additional fields or modifying the data type of the elements in the list.
