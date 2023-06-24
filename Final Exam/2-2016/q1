@@ -1,0 +1,161 @@
+Based on your provided program, it seems you want to implement a linked list to manage a list of books with their sales figures. Here's a modified version of the code that includes the required methods and main() method:
+
+```java
+class Node {
+    String bookName;
+    int sales;
+    Node next;
+
+    public Node(String bookName, int sales) {
+        this.bookName = bookName;
+        this.sales = sales;
+        this.next = null;
+    }
+}
+
+class LinkedList {
+    Node head;
+
+    public LinkedList() {
+        this.head = null;
+    }
+
+    public void createNode(String bookName, int sales) {
+        Node newNode = new Node(bookName, sales);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node temp = head;
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+            temp.next = newNode;
+        }
+    }
+
+    public void addAfter(String prevBookName, String bookName, int sales) {
+        Node newNode = new Node(bookName, sales);
+        Node temp = head;
+        while (temp != null) {
+            if (temp.bookName.equals(prevBookName)) {
+                newNode.next = temp.next;
+                temp.next = newNode;
+                break;
+            }
+            temp = temp.next;
+        }
+    }
+
+    public void removeNode(String bookName) {
+        if (head != null) {
+            if (head.bookName.equals(bookName)) {
+                head = head.next;
+            } else {
+                Node prev = null;
+                Node current = head;
+                while (current != null) {
+                    if (current.bookName.equals(bookName)) {
+                        prev.next = current.next;
+                        break;
+                    }
+                    prev = current;
+                    current = current.next;
+                }
+            }
+        }
+    }
+
+    public void display() {
+        if (head == null) {
+            System.out.println("The linked list is empty.");
+        } else {
+            Node temp = head;
+            while (temp != null) {
+                System.out.println(temp.bookName + ": " + temp.sales + " Sold");
+                temp = temp.next;
+            }
+        }
+    }
+
+    public int totalSold() {
+        int total = 0;
+        Node temp = head;
+        while (temp != null) {
+            total += temp.sales;
+            temp = temp.next;
+        }
+        return total;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedList myLL = new LinkedList();
+
+        myLL.createNode("Lord of The Rings", 500_000_000);
+        myLL.createNode("Tale of the Body Thief", 1_000_000);
+        myLL.createNode("Memnoch the Devil", 100_000_000);
+        myLL.createNode("Heart of a Samurai", 10_000_000);
+        myLL.display();
+
+        myLL.addAfter("Memnoch the Devil", "White Crane", 10_000_000);
+        myLL.addAfter("White Crane", "Memoirs of a Geisha", 90_000_000);
+        myLL.removeNode("Harry Potter");
+        myLL.removeNode("Heart of a Samurai");
+        myLL.display();
+
+        System.out.println("Total sales: " + myLL.totalSold());
+    }
+}
+```
+
+The program creates a LinkedList class that stores book names and their sales figures as nodes. It includes methods to create a node, add a node after a specific node, remove a node, display the linked list, and calculate the total sales. The main() method demonstrates the usage of these methods by creating a linked list of books and performing various operations on it.
+
+Please note that I assumed the sales
+
+ figures are represented as integers. You can modify the code as per your needs and update the sales figure representation accordingly.
+ Specify your day in number:
+ 1	for	xonday
+2	for	Tuesday
+3	for	Wednesday
+A	for	Thursday
+5	for	Friday
+6	for	Saturday
+7	for	Sunday
+
+The name of the day is : Nonday
+The following day of Monday is : Tueeday
+The   previous   dam  of  t4onday  is	: Sunday
+how many Qays to add to the specified/current day (Mondayl7 :
+
+The new day after the addition o€ 4 day(s) is : Friday
+
+
+Specify your day Ln number :
+1	for	Honda y
+2	Sof.  4It*	Y
+3	for ¥e‹inesday
+4	for Thursday 5 for Friday 6 for Saturday 7 for Sunday
+
+The name of the day is : Sunday
+The following day of Sunday is : Monday The previous day of Sunday is : Saturday
+how many days to add to tbe specified/current day (Sunday)? :
+
+The   new  day   a fter  the actdJeion   oE  1 day {s	1s : Sunday
+
+Specify your day in number:
+1	for Bondey
+2	for tuesday
+3	for Wednesday
+4	for Thursday
+5	for Priday
+6	for Saturday 7 for Sunday
+
+The me	of the day is : Thursday
+The following day of Thursday is : Friday The previous day of Thursday is : Wednesday
+How many days to add to the specified/current day (Thursday)?
+
+23
+The new day after the addition of 23 day(s} is : Saturday
+========================================================================================
+
