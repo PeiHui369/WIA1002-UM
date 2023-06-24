@@ -1,0 +1,73 @@
+Queue supports the insert and the remove operations based on the First-in First-out policy. Write a program to implement generic queue. Your program must contain the following methods (see Table 2).
+Pembina/Nama
+Constructor/Metho	Metod
+d name	Spesifikasi
+Specification
+i)	Constructor for
+generic queue	the
+class	Konstruktor lalai
+Default constructor
+ii) isEmpty	Memulangkan sama ada baris-gilir generik
+tersebut adalah kosong atau tidak
+Return whether or not the generic queue is empty
+iii) isFull	Memulangkan sama ada baris-gilir generik
+tersebut adalah penuh atau tidak
+Return whether or not the generic queue is full
+iv) peek	Memulangkan	nilai	bagi	elemen	pertama
+dalam baris-gilir generik tersebut
+Return the value of the first element in the generic
+queue
+v) enqueue	Menambah elemen pada baris-gilir generik
+Add element to the generic queue
+vi) dequeue	Membuang elemen dari baris-gilir generik
+Remove element from the generic queue
+vii) changeOrder	Menerima satu parameter integer k yang
+mencapai satu elemen dalam  baris-gilir generik dari hadapan. Kemudian, menukar susunan baris gilir generik dengan elemen di posisi k dianjak ke hadapan barisan. Tiada elemen disingkirkan dari barisan.
+Accepts one integer parameter k which points to an element in the generic queue from front. Then, change the arrangement of the generics queue so element at position k becomes first in queue. No elements are removed from the queue.
+ 
+ 
+Tulis semua metod-metod dalam Jadual 2 serta metod main() anda di dalam fail program yang sama. Metod main() anda perlu mengikuti cadangan seperti dalam Rajah 2(a). Ubahsuai dan uji metod-metod anda supaya menyerupai output di dalam Rajah 2(b).
+
+Write all methods from Table 2 as well as your main() method in the same program /iye. Your main() method should follow the suggestion shown in Figure 2(a). Modify and test your methods so you get the same output shown in Figure 2(b).
+public static void main(Strings args) {
+GenencQueue< Strings q = new GenencQueue<String>(10);
+q,enqueue("Dorn T"),
+q,enqueue("Rafa N");
+q.enqueueMany("Roger F,Daniil M,Novak D,A1ex Z,Stef T,Karen K'); q.display();
+q.dequeue(), q.enqueue("Matt B");
+q,enqueue(”Kei N"); q,dispIay(); q.dequeueAII(); q,dispIay();
+System.out.println("----—---——-—	—--—-----——---"),
+
+GenericQueue<Integer> q2 = new GenericQueue<Integer>(10),
+q2.enqueue(10);
+q2.enqueue(20); q2.enqueueMany("30,40,50,60,70,80,90");
+q2.display(), q2.changeOrder(5); q2.display();
+
+run:
+Enqueue: Dorn T Enqueue: Rafa N Enqueue Roger F Enqueue: Daniil M Enqueue. Novak D Enqueue: Alex Z Enqueue: Stef T Enqueue: Karen K
+
+There are 8 items in the queue. Displaying...
+Dorn T | Rafa N I Roger F | Daniil M I Novak D I Alex	I Stef T | Karen K Dequeue: Oom T
+Enqueue: Matt B
+Enqueue: Kei N	
+There are 9 items in the Queue. Displaying...
+Rafa N I Roger F | Daniil M | Novak D | Alex Z | Stef T I Karen K | Matt B | Kei N
+There are 9 items in the queue. Removing them all . . Dequeue: Rafa N
+Dequeue: Roger F Dequeue: Daniit M Dequeue: Novak D Dequeue: Alex Z Dequeue: Stef T Dequeue: Karen K Dequeue: Matt B Dequeue: Kei N
+Nothing to display Enqueue: 10
+Enqueue: 20
+Enqueue: 30
+Enqueue: 40
+Enqueue: 50
+Enqueue: 60
+Enqueue: 70
+Enqueue: 80
+Enqueue: 90
+
+There are 9 items in the queue. Displaying... 10 | 20 1 30 | 40 | 50 | 60 1 70 | 80 | 90 I
+Change queue order.
+
+There are 9 items in the queue. Displaying.
+*+ 1 60 | 70 | 80 |	1 10 1 20 1 30 | 40
+BUILD SUCCESSFUL (total Ome: 0 seconds)
+
