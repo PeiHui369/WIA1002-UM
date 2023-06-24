@@ -1,0 +1,196 @@
+3.	Salah satu teknik popular struktur data adalah dipanggil  senarai  berpaut.  Tuliskan suatu program meng9unakan senarai berpaut. Program anda mesti mempunyai metod-metod berikut (lihat Jadual 3).
+
+One popular technique in data structure is linked list. Write a program using linked //s/.
+Your program must contain the following methods (see Table 3).
+
+Jadual 3: Senarai nama-nama metod dan spesifikasinya
+Table 3. List of method names and their specification
+
+Pembina/Nama Metod
+Constructor/Method name	Spesifikasi
+Specification
+i)	Constructor for the linked
+//sf class	Konstruktor lalai untuk kelas senarai berpaut
+Default constructor for the linked list class
+ii) Constructor for the node
+class	Konstruktor lalai untuk kelas nod
+Default constructor for the node class
+iii) isEmpty	Memulangkan sama ada senarai berpaut
+tersebut adalah kosong atau tidak
+Return whether or not the linked list is empty
+iv) add	Menambah elemen ke dalam senarai berpaut
+Add element to the linked list
+v) addAfter	Menambah elemen baru selepas elemen
+sedia ada di dalam senarai berpaut
+Add new element after existing element in the linked list
+vi) remove	Membuang elemen tertentu dari senarai
+berpaut
+Remove a particular element from the linked list
+vii) display	Memaparkan elemen-elemen di dalam ' senarai berpaut
+Display all elements in the linked list
+viii) totalsold()	Mengira jumlah jualan yang dikumpul
+Count the total sale collected
+
+Tulis semua metod-metod dalam Jadual 3 serta metod main() anda di dalam fail program yang sama. Metod main() anda peñu mengikuti cadangan seperti dalam Rajah 3(a). Ubahsuai dan uji metod-metod anda supaya menyerupai output di dalam Rajah 3(b).
+
+Write all methods in Table 3 as well as your main() method in the same program file. Your main() method should follow the suggestion shown in Figure 3(a). Modify and test your methods so you get the same output shown in Figure 3(b).
+ 
+ 	 
+
+public static void main(String(j args)(
+
+LL myLL = new LL();
+
+myLL.createNode("Lord of The Rings", 500): myLL.createNode("Tale of the Body Thief', 1); myLL.createNode("Memnoch the Devil", 100); myLL.createNode("Heart of a Samurai", 10), myLL.display();
+myLL.addAfter("Memnoch the Devil", "White Crane", 10); myLL.addAfter('White Crane", "Memoirs of a Geisha", 90); myLL.removeNode(“Harry Potter"); myLL.removeNode("Heart of a Samurai");
+myLL.display();
+
+
+
+Rajah 3(a): Metod main()
+Figure 3(a).  Main() method
+
+
+run:
+
+Displaying the Linked List "***””””“““““““““"“*	“"
+
+Heart of a Samurai: 10,000,000 Sold Memnoch the Devil: 100,000,000 Sold Tale of the Body Thief. 1,000,000 Sold Lord of The Rings: 500,0D0,000 Sold
+
+Adding White Crane after Memnoch the Devil
+Found Memnoch the Devil which is book number 2 in the linked list Displaying the Linked List "*““**““*“““““*“““““““"“*“““"" "““"“"
+Heart of a Samurai: 10,000,000 Sold Memnoch the Devil. 100,000,000 Sold White Crane. 10,000,000 Sold
+Tale of the Body Thief: 1,000,000 Sold Lord of The Rings: 500,000,000 Sold
+
+Adding Memoirs of a Geisha after White Crane
+Found White Crane which is book number 3 in the linked list
+Displaying the Linked List **”""”*”””*“”""“*“”"*“"”"““* Heart of a Samurai: 10,000,000 Sold
+Memnoch the Devil: 100,000,000 Sold White Crane: 10,000, 000 Sold Memoirs of a Geisha: 90,D00,000 Sold Tale of the Body Thief: 1, 000,000 Sold Lord of The Rings: 500,000,000 Sold
+
+Removing Harry Potter.. Couldn't find bookname..
+
+Removing Heart of a Samurai..
+Heart of a Samurai is the first book. Removing Heart of a Samurai from the linked list
+
+Displaying the Linked List “““*““"*""*“*“*““““““““"“***“*“*“****
+Memnoch the Devil: 100,000,000 Sold White Crane: 10,000,000 Sold Memoirs of a Geisha. 90,000,000 Sold Tale of the Body Thief: 1,000,000 Sold Lord of The Rings: 500,000,000 Sold
+
+BUILD SUCCESSFUL (total time: 0 seconds
+=========================================================================================================================
+
+Based on your provided program, it seems you want to implement a linked list to manage a list of books with their sales figures. Here's a modified version of the code that includes the required methods and main() method:
+
+```java
+class Node {
+    String bookName;
+    int sales;
+    Node next;
+
+    public Node(String bookName, int sales) {
+        this.bookName = bookName;
+        this.sales = sales;
+        this.next = null;
+    }
+}
+
+class LinkedList {
+    Node head;
+
+    public LinkedList() {
+        this.head = null;
+    }
+
+    public void createNode(String bookName, int sales) {
+        Node newNode = new Node(bookName, sales);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node temp = head;
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+            temp.next = newNode;
+        }
+    }
+
+    public void addAfter(String prevBookName, String bookName, int sales) {
+        Node newNode = new Node(bookName, sales);
+        Node temp = head;
+        while (temp != null) {
+            if (temp.bookName.equals(prevBookName)) {
+                newNode.next = temp.next;
+                temp.next = newNode;
+                break;
+            }
+            temp = temp.next;
+        }
+    }
+
+    public void removeNode(String bookName) {
+        if (head != null) {
+            if (head.bookName.equals(bookName)) {
+                head = head.next;
+            } else {
+                Node prev = null;
+                Node current = head;
+                while (current != null) {
+                    if (current.bookName.equals(bookName)) {
+                        prev.next = current.next;
+                        break;
+                    }
+                    prev = current;
+                    current = current.next;
+                }
+            }
+        }
+    }
+
+    public void display() {
+        if (head == null) {
+            System.out.println("The linked list is empty.");
+        } else {
+            Node temp = head;
+            while (temp != null) {
+                System.out.println(temp.bookName + ": " + temp.sales + " Sold");
+                temp = temp.next;
+            }
+        }
+    }
+
+    public int totalSold() {
+        int total = 0;
+        Node temp = head;
+        while (temp != null) {
+            total += temp.sales;
+            temp = temp.next;
+        }
+        return total;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedList myLL = new LinkedList();
+
+        myLL.createNode("Lord of The Rings", 500_000_000);
+        myLL.createNode("Tale of the Body Thief", 1_000_000);
+        myLL.createNode("Memnoch the Devil", 100_000_000);
+        myLL.createNode("Heart of a Samurai", 10_000_000);
+        myLL.display();
+
+        myLL.addAfter("Memnoch the Devil", "White Crane", 10_000_000);
+        myLL.addAfter("White Crane", "Memoirs of a Geisha", 90_000_000);
+        myLL.removeNode("Harry Potter");
+        myLL.removeNode("Heart of a Samurai");
+        myLL.display();
+
+        System.out.println("Total sales: " + myLL.totalSold());
+    }
+}
+```
+
+The program creates a LinkedList class that stores book names and their sales figures as nodes. It includes methods to create a node, add a node after a specific node, remove a node, display the linked list, and calculate the total sales. The main() method demonstrates the usage of these methods by creating a linked list of books and performing various operations on it.
+
+Please note that I assumed the sales
+
+ figures are represented as integers. You can modify the code as per your needs and update the sales figure representation accordingly.
