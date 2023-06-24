@@ -1,0 +1,111 @@
+Queue supports the insert and the remove operations based on the First-in First-out
+
+
+Write a program fo create a class named Queue<ltem>. The class should consist of methods as specified in Table 2:
+Constructor for Queue class
+Default constructor
+
+isEmpty
+Return whether or not the queue is empty
+
+size
+Return the size of the queue
+
+peek
+Return the value or ihe first element in the queue
+
+enqueue
+Add element to the bottom of the queue
+
+dequeue
+Remove element rrom the top of the queue
+
+tostring
+Print the element in the queue
+
+Create a method called ChangeOrder(int k) that accepts a parameter of integer k. This method will remove k-1 element from the top of a queue and add its corresponding value to the bottom of the same queue. The k-th element will be added at the bottom of the queue but will not be removed from the queue. For example.”
+
+Andaikan input / Say input: 10, 20, 30, 40, 50, 60, 70, 80, 90 Dan nilai / And value of k = 4,
+Maka output / Thus the output. 40, 50, 60, 70, 80, 90, 10, 20, 30
+
+Create a test program to fill the queue with the following values [10, 20, 30, 40, 50, 60, 70, 80, 90]. Call the ChangeOrder method to illustrate your implementation. Print all of the values.
+
+Create a test program to fill the queue with the following values [10, 20, 30, 40, 50, 60, 70, 80, 90]. Call the ChangeOrder method to illustrate your implementation. Print all of the values.
+
+Apologies for the confusion earlier. Let me answer all the questions for you.
+
+1. Constructor for the `Queue` class:
+```python
+class Queue:
+    def __init__(self):
+        self.queue = []
+```
+
+2. `isEmpty` method:
+```python
+    def isEmpty(self):
+        return len(self.queue) == 0
+```
+
+3. `size` method:
+```python
+    def size(self):
+        return len(self.queue)
+```
+
+4. `peek` method:
+```python
+    def peek(self):
+        if self.isEmpty():
+            return None
+        return self.queue[0]
+```
+
+5. `enqueue` method:
+```python
+    def enqueue(self, item):
+        self.queue.append(item)
+```
+
+6. `dequeue` method:
+```python
+    def dequeue(self):
+        if self.isEmpty():
+            return None
+        return self.queue.pop(0)
+```
+
+7. `tostring` method:
+```python
+    def tostring(self):
+        print(self.queue)
+```
+
+8. `ChangeOrder` method:
+```python
+    def ChangeOrder(self, k):
+        if k <= 1 or k > self.size():
+            return
+        for _ in range(k-1):
+            item = self.dequeue()
+            self.enqueue(item)
+```
+
+Test program to fill the queue with values [10, 20, 30, 40, 50, 60, 70, 80, 90], and call the `ChangeOrder` method:
+
+```python
+queue = Queue()
+
+# Fill the queue with values [10, 20, 30, 40, 50, 60, 70, 80, 90]
+values = [10, 20, 30, 40, 50, 60, 70, 80, 90]
+for value in values:
+    queue.enqueue(value)
+
+# Call the ChangeOrder method with k = 4
+queue.ChangeOrder(4)
+
+# Print all values
+queue.tostring()
+```
+
+The output will be: `[40, 50, 60, 70, 80, 90, 10, 20, 30]`
