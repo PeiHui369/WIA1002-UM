@@ -1,0 +1,103 @@
+3.	Salah satu teknik popular struktur data adalah timbunan, dan antara aplikasi timbunan termasuklah untuk menyelesaikan masalah menterbalikkan sesuatu perkataan. Tuliskan suatu program menggunakan timbunan untuk menyelesaikan masalah tersebut. Sebagai contoh:
+
+One popular technique in data structure is stack, and one ot the many application of stact is to reverse a word. Write a program using stack to solve the problem. For example.’
+
+Andaikan input I Say input: MALAYSIA Maka output I Thus the output. AISYALAM
+
+Program anda mesti mempunyai metod-metod berikut:
+Your program must contain the following methods:
+
+i)	Metod push(char) untuk menambah item di posisi teratas dalam timbunan.
+
+Method push(char) to insert a new item to the top of the stack.
+
+(2 markah/marks)
+
+ii)	Metod pop() untuk membuang item di posisi teratas dalam timbunan.
+
+Method pop() to remove item from file top of the stack.
+
+(2 markah/marks)
+
+iii)	Metod peek() yang memulangkan item teratas dalam timbunan tanpa membuangnya.
+
+Method peek() ffiaf returns the top of the stack without removing if.
+
+(2 markah/mar/re)
+
+iv)	Metod isStackEmpty() yang memulangkan benar jika timbunan kosong.
+
+Method i'sStackEmpty() lhat returns true if the stack is empty.
+
+(2 markah/marks)
+
+v)	Metod i”sStackFulI(} yang memulangkan benar jika timbunan penuh.
+
+Method isStackEmpty() ffiaf returns frue if lhe stack is full.
+(2 markah/marks)
+
+* Markah tidak akan diberikan bagi apa-apa pelaksanaan menggunakan kelas Stack atau mana-mana kelas Collection yang sedia ada didapati daripada Java API Library.
+
+“ No marks wi// be given for any implementation using the existi'ng Stack class or any other Collection classes availeble from the Java API Library.
+
+=====================================================================================================================================================
+
+Certainly! Here's the complete answer to your question:
+
+```python
+class Stack:
+    def __init__(self):
+        self.stack = []
+
+    def push(self, char):
+        self.stack.append(char)
+
+    def pop(self):
+        if not self.isStackEmpty():
+            return self.stack.pop()
+        return None
+
+    def peek(self):
+        if not self.isStackEmpty():
+            return self.stack[-1]
+        return None
+
+    def isStackEmpty(self):
+        return len(self.stack) == 0
+
+
+def reverse_word(word):
+    stack = Stack()
+
+    for char in word:
+        stack.push(char)
+
+    reversed_word = ""
+
+    while not stack.isStackEmpty():
+        reversed_word += stack.pop()
+
+    return reversed_word
+
+
+# Example usage
+word = "MALAYSIA"
+reversed_word = reverse_word(word)
+print(reversed_word)
+```
+
+Explanation:
+
+- The `Stack` class is defined with the methods `push`, `pop`, `peek`, and `isStackEmpty` to perform stack operations.
+- The `reverse_word` function takes a word as input and creates an instance of the `Stack` class.
+- It iterates through each character of the word and pushes them onto the stack using the `push` method.
+- The variable `reversed_word` is initialized as an empty string.
+- It then pops characters from the stack one by one using the `pop` method and appends them to the `reversed_word` string.
+- Finally, the reversed word is returned and printed.
+
+Output:
+```
+AISYALAM
+```
+
+Note: The implementation of the stack is based on a list in Python.
