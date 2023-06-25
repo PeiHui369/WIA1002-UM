@@ -1,0 +1,181 @@
+4.	Salah satu teknik popular struktur deta adalah dipanggil senarai berpaut Tuliskan suatu program menggunakan senaral berpauL Program anda mesti mempunyai metod-metod berikut (lihat Jadual 3).
+One pops/ar technique in deta structure is //zdred list Wfite a program using linhed list. Your program must contain he /a//ow/ug meifior/s (see Tebte 3).
+Jadual 3: Sensmi nama	ma metod dan speefflkaslnya
+
+
+
+
+
+9/12
+ 
+WIA1002
+
+a)	Uji metod-metod tersebut dengan memprogram di dalam metod main() anda seperti contoh di dalam Rajah 5.
+
+Yes/ /he methods by programming your main() method similar to the example in Figure 5.
+poblic static void -;n(Strlog[l args)(
+
+
+
+i »m.«adl"c	u-lnq Mathematics 3", 3): list.add(•Piiaciplez of M’,	3): list.add(’Prcgrxmeing 1-, 5);
+list.add(’Data S:Luc:ure’, 5); list.display(),
+list.addAfter(’Pr:-gremming 1", -Software Archi:ec:ure’, d): list.aa	mt-software Archizeccare’, -Ne:wOrt3ng’, A);
+
+use.remoPe(’Hecwcrkiog’, 4).
+1i*r.display{);
+
+lise.renove(•Pr	Ciplts of AI-, 3}: list.display{):
+Add a method totalCreditHours() to count the total cred”it hours collected. See Figure
+6 for program and oulput example.
+pubLic sratic void saio(String[} args}(
+
+
+ 
+
+list.edd(’Cumputing Mazbemazics l’, 3), list.add("Principles of AI’, 3); list.add(’Progrs	tng i’, s); list.addt’Daza Structure’. 5):
+//iisz.display();
+list.totalCxeoitBouzs(),
+lisE.^bdRfter(’Progra-ing l’, ’5o£zware .VcAirec:use", 4); List.xdbRfter(•5cf:ware Archite:rure", •Wesworbiog’, 9);
+.. /1isc .displb\’(); list.toralCred1zBours(); li*t.rcmovef’We:wcr2ing’, 8);
+,'/lis c,Gizplay{);
+li*z.reasawe(’Principles of AI’. 3):
+’/l*s:.displa,: t);
+was.tozaicreaimourmi):
+
+
+
+
+
+
+
+
+TocaJ crsBit Roors cakso: ¥4
+============================================================================================================================================
+Here is an example program in Java to create a Linked List class that supports the specified methods:
+
+```java
+public class LinkedList {
+    private Node head;
+
+    public LinkedList() {
+        head = null;
+    }
+
+    public boolean isEmpty() {
+        return head == null;
+    }
+
+    public void add(String data, int creditHours) {
+        Node newNode = new Node(data, creditHours);
+        if (isEmpty()) {
+            head = newNode;
+        } else {
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+    }
+
+    public void addAfter(String data, String newData, int creditHours) {
+        Node current = head;
+        while (current != null) {
+            if (current.data.equals(data)) {
+                Node newNode = new Node(newData, creditHours);
+                newNode.next = current.next;
+                current.next = newNode;
+                break;
+            }
+            current = current.next;
+        }
+    }
+
+    public void remove(String data) {
+        if (isEmpty()) {
+            return;
+        }
+        if (head.data.equals(data)) {
+            head = head.next;
+            return;
+        }
+        Node current = head;
+        Node prev = null;
+        while (current != null) {
+            if (current.data.equals(data)) {
+                prev.next = current.next;
+                break;
+            }
+            prev = current;
+            current = current.next;
+        }
+    }
+
+    public void display() {
+        Node current = head;
+        while (current != null) {
+            System.out.println(current.data + " - " + current.creditHours);
+            current = current.next;
+        }
+    }
+
+    public int totalCreditHours() {
+        int total = 0;
+        Node current = head;
+        while (current != null) {
+            total += current.creditHours;
+            current = current.next;
+        }
+        return total;
+    }
+
+    private static class Node {
+        private String data;
+        private int creditHours;
+        private Node next;
+
+        public Node(String data, int creditHours) {
+            this.data = data;
+            this.creditHours = creditHours;
+            this.next = null;
+        }
+    }
+
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList();
+        list.add("Mathematics 3", 3);
+        list.add("Principles of M", 3);
+        list.add("Programming 1", 5);
+        list.add("Data Structure", 5);
+        list.display();
+
+        System.out.println("After adding new data:");
+        list.addAfter("Programming 1", "Software Architecture", 4);
+        list.addAfter("Software Architecture", "Networking", 9);
+        list.display();
+
+        System.out.println("After removing data:");
+        list.remove("Homeworking");
+        list.remove("Principles of M");
+        list.display();
+
+        System.out.println("Total credit hours: " + list.totalCreditHours());
+    }
+}
+```
+
+In the above program, the `LinkedList` class represents a singly linked list with a head node. Each node contains two fields: `data` (to store the name of the subject) and `creditHours` (to store the number of credit hours for the subject). The provided methods are implemented as follows:
+
+- The constructor `LinkedList()` initializes the head to `null`.
+- The `isEmpty()` method checks if the linked list is empty.
+- The `add()` method adds a new node to the end of the linked list.
+- The `addAfter()` method adds a new node after a specific node in the linked list.
+- The `remove()` method removes a node with a specific data value from the linked list.
+- The `
+
+display()` method displays all nodes in the linked list along with their credit hours.
+- The `totalCreditHours()` method calculates and returns the total credit hours of all subjects in the linked list.
+
+In the `main()` method, the program creates an instance of the `LinkedList` class and performs various operations such as adding nodes, adding nodes after a specific node, removing nodes, and displaying the linked list. It also calculates and displays the total credit hours of all subjects.
+
+Remember to save and compile all the relevant files associated with this program (LinkedList class and the main method) and place them in the designated folder for your exam account.
