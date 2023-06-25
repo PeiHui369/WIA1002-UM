@@ -1,0 +1,105 @@
+2.	Baris-gilir menyokong operasl tambah dan operasi singkir berdasañ‹an polisi masuk dahulu keluar dahulu. Tulis sebuah program untuk membina sebuah kalas yang bemama Qoaue. Kelas ini seharusnya mempunyai metod-metod seperti yang dinyatakan dalam Jadual 1:
+
+Queue supports the inaart and tha remove oparetloris based on the Ffistñn First-out pa/icy. Wife a pa›gram to create a dase nen›ed Quane. Ttia c/ass sfiould oonstst o/ methods es specified in Ta6/e 1.
+
+constructor for Queue c/ass	Konstruktor lalai
+isEmpty  Memulangkan sama ada" bans-gllir tersebut
+adalan kocong atau tidak
+Ratt/m wfiethar or oot fñe 4uaue la empty
+Peek Memulangkan	nilai bagi elemen	pertama
+dalam baris-gilirtareebut
+RefiJm the value of lie fifist alainent in the gtzeue
+enqueue Menambah	eiemen pada bane-gflfr patlng
+bawah
+Add elamant to tfie bottom of ne goez/e	
+ Queue	Membuang alemen pada baris-gllir paling atas
+temove e/emefit/i'om fhe top at ffie
+   
+vJ display	Mamaparkan elemen-elamen di dalam bad gilir tersebut
+Display eit elements in fha queua
+Test I/io rnatfiods by programming your mains method aimiter la tha axemple in
+Figure 1.public static void -ain{Strlng{} args) (
+q.eoqueue{’all’};
+q.enqoeue(’who•):
+q. dequeue () ;
+q.enqueue ("2000") ;
+q.peek () ;
+
+Data wants inserted
+
+Modify the method display() to display each index and element in boxes as shown in
+/he example in Figure 2.
+Queue q-new Queue (5) ;
+q.enqueue ("2000")
+(Simpan dan salin kesemua faikfail yang berkaitan dangan program ini (kalas Qoaue dan metod mains) ke diroktori akaun peperiksaan anda di dalam folder yang dlnamakan {Q2§.
+
+{Save and copx all dated files to this progre/rt {Qt/eoe c/ass ar›d mam() method) /o p› reza/zz escort d/e›c/zry and keep /ñanz inside a fc¥derca/ted/O2,/j.
+
+” Markah tidak akan diberikan bagi apwapa pelaksanaan menggunakan kelas Oueue atau mana-mana kalas Collection yang sedia ada didapati daripada Java API Library.
+“ No marks w'ill be given /br eny imptementelion uaing the ex/sling Queue c/ess or sny other Col/ecUon c/asses ava//abfe from tña Java API Library.
+=============================================================================================================================================================
+Here is an example program in Java to create a Queue class that supports the specified methods:
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class Queue {
+    private List<String> elements;
+
+    public Queue() {
+        elements = new ArrayList<>();
+    }
+
+    public boolean isEmpty() {
+        return elements.isEmpty();
+    }
+
+    public String peek() {
+        if (isEmpty()) {
+            return "Queue is empty";
+        }
+        return elements.get(0);
+    }
+
+    public void enqueue(String element) {
+        elements.add(element);
+    }
+
+    public String dequeue() {
+        if (isEmpty()) {
+            return "Queue is empty";
+        }
+        return elements.remove(0);
+    }
+
+    public void display() {
+        for (int i = 0; i < elements.size(); i++) {
+            System.out.println("[" + i + "] " + elements.get(i));
+        }
+    }
+
+    public static void main(String[] args) {
+        Queue q = new Queue();
+        q.enqueue("apple");
+        q.enqueue("banana");
+        q.dequeue();
+        q.enqueue("2000");
+        System.out.println(q.peek());
+        q.display();
+    }
+}
+```
+
+In the above program, the `Queue` class is implemented with an underlying `ArrayList` to store the elements. The provided methods are implemented as follows:
+
+- The constructor `Queue()` initializes the `elements` list.
+- The `isEmpty()` method checks if the queue is empty.
+- The `peek()` method returns the value of the first element in the queue.
+- The `enqueue()` method adds an element to the bottom of the queue.
+- The `dequeue()` method removes and returns the element at the top of the queue.
+- The `display()` method displays each index and element in the queue.
+
+In the `main()` method, the program creates a `Queue` object, performs enqueue and dequeue operations, and demonstrates the usage of `peek()` and `display()` methods.
+
+Remember to save and compile all the relevant files associated with this program (Queue class and the main method) and place them in the designated folder for your exam account.
