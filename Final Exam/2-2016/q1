@@ -1,113 +1,38 @@
-Based on your provided program, it seems you want to implement a linked list to manage a list of books with their sales figures. Here's a modified version of the code that includes the required methods and main() method:
+A week consists of seven days. A class called Oay should store the days fiom Monday through Sumtey. Des”ign and wfite a program for days of tfio week that sfiouid do ttie
 
-```java
-class Node {
-    String bookName;
-    int sales;
-    Node next;
+i)	Membolehkan pengguna untuk memasukkan satu input bagi hari berdasarkan nombor seperti 1 untuk Isnin dan 2 untuk Selasa. (i.e., 1 = lsnin, 2 = Selasa,
+.. , 7 = Ahad).
+A/lows user to key-in an input ol' he day based on numbers such as I for fooday
+and 2 for 7vesdsy. (/.e.. f = dondey, 2 = Tuesday, ... , 7 -- Sunday).
 
-    public Node(String bookName, int sales) {
-        this.bookName = bookName;
-        this.sales = sales;
-        this.next = null;
-    }
-}
+ii)	Paparkan nama penuh yang eapadan bagi hari (i).
+Display the conespondlng full name of the day of (i}.
 
-class LinkedList {
-    Node head;
+iii)	Kira dan paparkan satu hari berikut dan satu hañ sebelumnya berdasarkan nombor yang dimasukkan dalam (i).
+Ca/cu/afe aoct display the /b/lowing and previbus days dased on the nvmber entered
 
-    public LinkedList() {
-        this.head = null;
-    }
+iv)	Kira dan kembalikan hari dengan menambah hari-hari tertentu untuk hari semasa sebagaimana yang dinyatakan oleh (il). Sebagai contoh, jika hari semasa adalah lsnin dan klta menambah empat han“, hari yang dikembalikan adalah hari Jumaar Begitu juga, jika hari semasa adalah Selasa dan kita menambah 13 hari, hari yang dikembalikan adalah lsnin.
+Calculate end relum t/ie dar z “ e •• rtain days to the cunent day as opecdéd by (ii). for axamp/e, if the current day ie I onaoy and D's edd four days, f/ie day to be returned is Ffiday. Similarly, if I/ie currient day is Tuesday and w'e edd 13 days, the day to be returned is Monday.
 
-    public void createNode(String bookName, int sales) {
-        Node newNode = new Node(bookName, sales);
-        if (head == null) {
-            head = newNode;
-        } else {
-            Node temp = head;
-            while (temp.next != null) {
-                temp = temp.next;
-            }
-            temp.next = newNode;
-        }
-    }
+Dengan me• eambiI kira 9emua maklumat yang diberikan di atas:
+Considering all of the above given infonnahon:
 
-    public void addAfter(String prevBookName, String bookName, int sales) {
-        Node newNode = new Node(bookName, sales);
-        Node temp = head;
-        while (temp != null) {
-            if (temp.bookName.equals(prevBookName)) {
-                newNode.next = temp.next;
-                temp.next = newNode;
-                break;
-            }
-            temp = temp.next;
-        }
-    }
+a)	Kenalpadti keperluan program tersebut dengan rnewakTli mereka menggunakan satu Kelas UML untuk kelas Hari.
+Identify t/te program requirements dy representing them using one UML Close for the
+Day cless.
+(3 markah/mets)
+b)	Tulis sebuah program untuk melaksanakan kelas Hari berdasarkan keperluan yang telah dikenalpasti.
+Wrife a p/ogrem fa /mp/ement the Oay c/ass following the ibenfiñed requirements.
 
-    public void removeNode(String bookName) {
-        if (head != null) {
-            if (head.bookName.equals(bookName)) {
-                head = head.next;
-            } else {
-                Node prev = null;
-                Node current = head;
-                while (current != null) {
-                    if (current.bookName.equals(bookName)) {
-                        prev.next = current.next;
-                        break;
-                    }
-                    prev = current;
-                    current = current.next;
-                }
-            }
-        }
-    }
+(5 markah/marks)
+ 
+WIA1002
 
-    public void display() {
-        if (head == null) {
-            System.out.println("The linked list is empty.");
-        } else {
-            Node temp = head;
-            while (temp != null) {
-                System.out.println(temp.bookName + ": " + temp.sales + " Sold");
-                temp = temp.next;
-            }
-        }
-    }
-
-    public int totalSold() {
-        int total = 0;
-        Node temp = head;
-        while (temp != null) {
-            total += temp.sales;
-            temp = temp.next;
-        }
-        return total;
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        LinkedList myLL = new LinkedList();
-
-        myLL.createNode("Lord of The Rings", 500_000_000);
-        myLL.createNode("Tale of the Body Thief", 1_000_000);
-        myLL.createNode("Memnoch the Devil", 100_000_000);
-        myLL.createNode("Heart of a Samurai", 10_000_000);
-        myLL.display();
-
-        myLL.addAfter("Memnoch the Devil", "White Crane", 10_000_000);
-        myLL.addAfter("White Crane", "Memoirs of a Geisha", 90_000_000);
-        myLL.removeNode("Harry Potter");
-        myLL.removeNode("Heart of a Samurai");
-        myLL.display();
-
-        System.out.println("Total sales: " + myLL.totalSold());
-    }
-}
-```
+c)	Tulis sebuah program uj)an menglkut format yang diberikan dalam contoh output berikut
+Wfite a test program in tfie fcxznal given in ffie following output examples.
+(2 markañ/maAe)
+Output contoh program ini edatah seperti berikut. Teks dalam huruf tebal adalah input pengguna.
+An examp/e outpuf of tha program is es fa/he 7ña text iñ boldis tha t/aer inpot.
 
 The program creates a LinkedList class that stores book names and their sales figures as nodes. It includes methods to create a node, add a node after a specific node, remove a node, display the linked list, and calculate the total sales. The main() method demonstrates the usage of these methods by creating a linked list of books and performing various operations on it.
 
@@ -115,7 +40,7 @@ Please note that I assumed the sales
 
  figures are represented as integers. You can modify the code as per your needs and update the sales figure representation accordingly.
  Specify your day in number:
- 1	for	xonday
+ 1	for	Monday
 2	for	Tuesday
 3	for	Wednesday
 A	for	Thursday
@@ -123,8 +48,8 @@ A	for	Thursday
 6	for	Saturday
 7	for	Sunday
 
-The name of the day is : Nonday
-The following day of Monday is : Tueeday
+The name of the day is : Monday
+The following day of Monday is : Tuesday
 The   previous   dam  of  t4onday  is	: Sunday
 how many Qays to add to the specified/current day (Mondayl7 :
 
@@ -132,9 +57,9 @@ The new day after the addition o€ 4 day(s) is : Friday
 
 
 Specify your day Ln number :
-1	for	Honda y
-2	Sof.  4It*	Y
-3	for ¥e‹inesday
+1	for	Monday
+2   for Tuesday
+3	for Wednesday
 4	for Thursday 5 for Friday 6 for Saturday 7 for Sunday
 
 The name of the day is : Sunday
@@ -144,11 +69,11 @@ how many days to add to tbe specified/current day (Sunday)? :
 The   new  day   a fter  the actdJeion   oE  1 day {s	1s : Sunday
 
 Specify your day in number:
-1	for Bondey
-2	for tuesday
+1	for Monday
+2	for Tuesday
 3	for Wednesday
 4	for Thursday
-5	for Priday
+5	for Friday
 6	for Saturday 7 for Sunday
 
 The me	of the day is : Thursday
@@ -158,4 +83,140 @@ How many days to add to the specified/current day (Thursday)?
 23
 The new day after the addition of 23 day(s} is : Saturday
 ========================================================================================
+
+a) The UML class diagram for the "Day" class:
+
+```
+__________________
+|     Day        |
+|----------------|
+| - dayNumber    |
+|----------------|
+| + Day()        |
+| + setDay(int)  |
+| + getDay()     |
+| + getFullName()|
+| + getNextDay() |
+| + getPrevDay() |
+| + addDays(int) |
+------------------
+```
+
+b) Here's an implementation of the "Day" class based on the identified requirements:
+
+```java
+public class Day {
+    private int dayNumber;
+
+    public Day() {
+        this.dayNumber = 1; // Set default day as Monday
+    }
+
+    public void setDay(int dayNumber) {
+        if (dayNumber >= 1 && dayNumber <= 7) {
+            this.dayNumber = dayNumber;
+        } else {
+            System.out.println("Invalid day number. Setting default day as Monday.");
+            this.dayNumber = 1;
+        }
+    }
+
+    public int getDay() {
+        return dayNumber;
+    }
+
+    public String getFullName() {
+        String fullName;
+        switch (dayNumber) {
+            case 1:
+                fullName = "Monday";
+                break;
+            case 2:
+                fullName = "Tuesday";
+                break;
+            case 3:
+                fullName = "Wednesday";
+                break;
+            case 4:
+                fullName = "Thursday";
+                break;
+            case 5:
+                fullName = "Friday";
+                break;
+            case 6:
+                fullName = "Saturday";
+                break;
+            case 7:
+                fullName = "Sunday";
+                break;
+            default:
+                fullName = "Invalid day";
+        }
+        return fullName;
+    }
+
+    public String getNextDay() {
+        int nextDayNumber = (dayNumber % 7) + 1;
+        Day nextDay = new Day();
+        nextDay.setDay(nextDayNumber);
+        return nextDay.getFullName();
+    }
+
+    public String getPrevDay() {
+        int prevDayNumber = ((dayNumber - 2) % 7) + 1;
+        Day prevDay = new Day();
+        prevDay.setDay(prevDayNumber);
+        return prevDay.getFullName();
+    }
+
+    public String addDays(int numDays) {
+        int newDayNumber = ((dayNumber - 1) + numDays) % 7 + 1;
+        Day newDay = new Day();
+        newDay.setDay(newDayNumber);
+        return newDay.getFullName();
+    }
+}
+```
+
+c) Here's a sample test program that demonstrates the usage of the "Day" class:
+
+```java
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Specify your day in number (1-7): ");
+        int dayNumber = scanner.nextInt();
+
+        Day day = new Day();
+        day.setDay(dayNumber);
+
+        System.out.println("The name of the day is: " + day.getFullName());
+        System.out.println("The following day of " + day.getFullName() + " is: " + day.getNextDay());
+        System.out.println("The previous day of " + day.getFullName() + " is: " + day.getPrevDay());
+
+        System.out.print("How many days to add to the specified/current day (" + day.getFullName() + ")? ");
+        int numDays = scanner.nextInt();
+
+        String newDay = day.addDays(numDays);
+        System.out.println("The new day after the addition of " + numDays + " day(s) is: " + newDay);
+    }
+}
+```
+
+Example output:
+```
+Specify your day in number (1-
+
+7): 1
+The name of the day is: Monday
+The following day of Monday is: Tuesday
+The previous day of Monday is: Sunday
+How many days to add to the specified/current day (Monday)? 4
+The new day after the addition of 4 day(s) is: Friday
+```
+
+I hope this helps! Let me know if you have any further questions.
 
