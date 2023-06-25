@@ -1,0 +1,197 @@
+3.	Salah satu teknik popular struktur data adalah timbunan. Tuliskan suatu program menggunakan timbunan. Program anda mesti mempunyai metod-metod berikut (lihat Jadual 2).
+One popular technique in data structure is slack. Wfite a program using sta<a sour
+program must cantainthe following methods (see had/e 2).
+’I)	Constructor for Stac/I	Konstruktor lalai
+8£f COfiSf7UCfOF
+
+ 	
+I?) peek	Memulangkan sama ada timbunan tersabut
+adalan koeong atau tidak
+Return whether or nol the stack is empty
+	Memulangkan elamen tarataa dalam timbunan
+tanpa membuangnya.
+Return /he va/we o/lite libel e/emer/f in ff/e stack
+without removing “fl.	 	
+		Menambah elemen di posisi teratas dalam
+timbunan
+Add element to /he lap aFsfack
+ 	Mambuang elamen di posisi taratas dalam
+timbunan
+Rsmova e/emenf loom //ta lap afthe stack
+
+ 	Mambuang kesemua elemen-elemen di dalam timbunan
+Remove af/ elements from the slack
+
+ 	’Memaparkan elamen-elemen dl dalam
+timbunan
+Display all elements in the stack
+via“) displaylnReverse	Memaparkan oternen-elemen di dalam
+timbunan menglkut susunan terbalik
+Display atl e/ements inI/te stack in zevezsod arder
+Test the metfiada by programming your mein(}’ mathod similar to f/te examp/e in Figure 3.
+public static voi4 xsio(Ztring args[])4
+
+'	.pusb(’:wo’);
+.pumA(’:hre •);
+z	!.pusb(•rodr’T;
+.displayReverse{):
+
+’"	:dlsplayReverse();
+
+Display szac¥ in reverses
+
+
+
+
+
+Pep aLl itRm io scack.
+
+
+
+
+Display  bac•k  in  rewezss :
+
+b)	Dengan sedikit pengubahsuaian, tukarkan program timbunan anda dalam bentuk Generic supaya yang berikut dapat dilakukan (lihat Rajah 4).
+
+W”ith some modification, change your stack program into Generic form so that the following can be implemented (see Figure 4).
+
+public static void xa3n(Striog	°f1)(
+
+5cackWitAGeoeric<5tring› stackl	oew foackWizhGeneric‹Stzing>l9);
+
+
+stack1.push( "zhze-’);
+stackl.push( ":=i_"):
+.ou t. priotlo(s oackl.peekl) )• szackl.display{); stackl.displayReverse{):
+ztackl.poph1l{);
+
+StackEizhGeneric‹Inze0er› stack2 new StackWizhGeneiic<Integer>(4); stack7.push(10D);
+stackZ.push{200): stack2.pusb{300); soack2.puzh{400);
+y	.car.priatLolstack2.peek()); stack2.display{); ntack2.displayReversel): stacks.popAll{};
+
+Push lsem into Etack- oce Push izeso ioco stack: svo Pust item isto smac :
+Pusd ibem inbc szac¥:
+
+0i lay srack.
+cue
+
+Disptey srarL im zwverse:
+four
+rhxee
+
+sne
+Pop all isee in ssack:
+Disptey srarL im zwverse:
+four
+rhxee
+
+sne
+Pop all isee in ssack:
+IBA Lteoo. irish s|La€E: 100 PusA *tea to stack: ZOO PusR *gem into aLac*: SOO
+PusA ices imEo stack: 40o
+D1'sp1a y s oa c-k :
+‹00
+300
+405
+display stack in reverse’ 400
+
+‹f0
+
+Pop all item in stack Removing 400
+gemoviog 300
+Removing ?00 Removing l0D
+!.scoaI tiJae: !D °ecnud:-Y
+============================================================================================================================================
+Here is an example program in Java to create a Stack class that supports the specified methods:
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class Stack<T> {
+    private List<T> elements;
+
+    public Stack() {
+        elements = new ArrayList<>();
+    }
+
+    public boolean isEmpty() {
+        return elements.isEmpty();
+    }
+
+    public T peek() {
+        if (isEmpty()) {
+            return null;
+        }
+        return elements.get(elements.size() - 1);
+    }
+
+    public void push(T element) {
+        elements.add(element);
+    }
+
+    public T pop() {
+        if (isEmpty()) {
+            return null;
+        }
+        return elements.remove(elements.size() - 1);
+    }
+
+    public void popAll() {
+        elements.clear();
+    }
+
+    public void display() {
+        for (int i = elements.size() - 1; i >= 0; i--) {
+            System.out.println(elements.get(i));
+        }
+    }
+
+    public void displayReverse() {
+        for (T element : elements) {
+            System.out.println(element);
+        }
+    }
+
+    public static void main(String[] args) {
+        Stack<String> stack1 = new Stack<>();
+        stack1.push("one");
+        stack1.push("two");
+        stack1.push("three");
+        System.out.println(stack1.peek());
+        stack1.display();
+
+        System.out.println("Display in reverse:");
+        stack1.displayReverse();
+
+        Stack<Integer> stack2 = new Stack<>();
+        stack2.push(100);
+        stack2.push(200);
+        stack2.push(300);
+        stack2.push(400);
+        System.out.println(stack2.peek());
+        stack2.display();
+
+        System.out.println("Display in reverse:");
+        stack2.displayReverse();
+
+        stack2.popAll();
+    }
+}
+```
+
+In the above program, the `Stack` class is implemented using a generic type `T` to allow for flexibility in the type of elements stored in the stack. The underlying data structure used is an `ArrayList`. The provided methods are implemented as follows:
+
+- The constructor `Stack()` initializes the `elements` list.
+- The `isEmpty()` method checks if the stack is empty.
+- The `peek()` method returns the value of the top element in the stack without removing it.
+- The `push()` method adds an element to the top of the stack.
+- The `pop()` method removes and returns the top element from the stack.
+- The `popAll()` method removes all elements from the stack.
+- The `display()` method displays all elements in the stack in the order from top to bottom.
+- The `displayReverse()` method displays all elements in the stack in reverse order.
+
+In the `main()` method, the program creates two instances of the `Stack` class, one with `String` elements and another with `Integer` elements. It performs push, pop, peek, display, and display in reverse operations to demonstrate the usage of the stack.
+
+Remember to save and compile all the relevant files associated with this program (Stack class and the main method) and place them in the designated folder for your exam account.
+
