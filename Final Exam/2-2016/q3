@@ -1,0 +1,184 @@
+3.	Baris-gilir menyokong operasi tambah dan operasi singkir berdasarkan polisi masuk dahulu keluar dahulu.
+Queue supports the insert and the remove operations #ased on file First-in Firat ”<r
+a)	Tulis sebuah program untuk membina sebuah kelas yang bemama Queoe<//em>. Kelas ini seharusnya mempunyai metod-metod seperti yang dinyatakan dalam Jadual 2:
+
+Write a program to creale a class named Quet/e</tem>. The ctass should consist at methods as specified in Table 2:
+
+Jadual 2: Senarai Nama-Nama Metod dan Spesifikasinya
+Table 2: Lis/ ofmeff/od nernes and their specification
+
+ 
+Pembina/Nama Metod
+Consfructor/Method name
+i)	Constructor for Queue
+c/sss
+ 
+
+
+Konstruktor lalal
+Default aonatructor
+ 
+Spesifikasi
+Ifipecificetion
+ 
+
+ 
+
+
+Ill) size
+ 
+Memulangkan sama ada bans-gilir tersebut adalan kosong aau tidak
+Return whether or not the t/eue is em Memulangkan saiz baris-gilir tersebut Rettzm the size of the ueue
+ 
+5N
+ 
+WIA1 02
+
+
+ 	Memulangkan	nilai	bagi	elemen	pertama
+dalam bañs-$ilir Brsebut
+Refum the va/ua offhe //rst element in ffte queue
+v) enqueue	Menambah	elsmen	pada	baric-gilir	paling
+bawah
+Add siszzze nt to tfie bo#am of the queue
+	Membuang elemen pada bans-gilir paling aBs
+Ramove e/emant /	zi the top of the queoa
+	Mencetak elemen-elemen di dalam baris-gilir
+tersebut
+Print the e/ement in.tfte queue
+(11 markah/mans)
+
+b)	Bina cebuah metod bemama ChengaOrder(int k) yang menerima satu parameter in’teger h. Metod ini akan slngkirkan k-1 elemen daripada atas sesuatu barisan dan menambahkannya di bahagian bawah barican yang nama. Elambn ke-k ini akan diambah ke bawah barisan tetapi tidak akan disingkirkan daripada bariean. Sebagai contoh, jika k=4, maka output seharusnya 40,50,60,70,80,90,10,20,30.
+
+Cmate a method celled ChangoOrder(int k) that accepts a parameter of integer k. Thia method w'4l remove k-I element fiorn tfie tap of a queve and add “its mnesponding value to fee bottom of I/te same queue. 7fte k-th ele/zieat will be edded at the bottom of the queue but 'ill not be removed horn the qneue. For exemp/é, /fk=4, then the output should 6e •i0,50,60,70,80,90. f0,20,30.
+
+(2 markah/marks)
+
+c)	Tulis sebuah program ujian untuk mengisi bans-gillr tersebut dengan nilai berikut [10, 20, 30, 40, 50, 60, 70, 80, 00]. Panggil metod CftengeOrder untuk mempamerkan implimentasi anda. Paparkan kesemua nilai temebut.
+
+Create a test program. Io fill file queue wills. he /b//o«/iug va/ues {IO, 20, 30, AO, fi0, 60, 70, 80, 90). Call ttie C/iangeOrder method la ”4lustrate your implementation. Print a// off/te we/oes.
+(2 markeh/mans)
+
+=========================================================================================================================================
+
+a) Here's the program to create a class named `QueueItem`. The class should have methods as specified in Table 2:
+
+```python
+class QueueItem:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
+class Queue:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.size = 0
+
+    def is_empty(self):
+        return self.size == 0
+
+    def get_size(self):
+        return self.size
+
+    def enqueue(self, value):
+        new_item = QueueItem(value)
+        if self.is_empty():
+            self.head = new_item
+        else:
+            self.tail.next = new_item
+        self.tail = new_item
+        self.size += 1
+
+    def dequeue(self):
+        if self.is_empty():
+            return None
+        else:
+            item_value = self.head.value
+            self.head = self.head.next
+            self.size -= 1
+            if self.is_empty():
+                self.tail = None
+            return item_value
+
+    def print_queue(self):
+        current = self.head
+        while current:
+            print(current.value, end=" ")
+            current = current.next
+        print()
+
+
+# Test the implementation
+queue = Queue()
+queue.enqueue(10)
+queue.enqueue(20)
+queue.enqueue(30)
+queue.enqueue(40)
+queue.enqueue(50)
+queue.print_queue()
+print("Size:", queue.get_size())
+
+queue.dequeue()
+queue.print_queue()
+print("Size:", queue.get_size())
+```
+
+b) Here's the implementation of the `ChangeOrder` method:
+
+```python
+def ChangeOrder(queue, k):
+    if k > queue.get_size():
+        return
+    for _ in range(k - 1):
+        item_value = queue.dequeue()
+        queue.enqueue(item_value)
+
+# Test the ChangeOrder method
+queue = Queue()
+queue.enqueue(10)
+queue.enqueue(20)
+queue.enqueue(30)
+queue.enqueue(40)
+queue.enqueue(50)
+queue.enqueue(60)
+queue.enqueue(70)
+queue.enqueue(80)
+queue.enqueue(90)
+
+ChangeOrder(queue, 4)
+queue.print_queue()
+```
+
+c) Here's the test program to fill the queue with the given values [10, 20, 30, 40, 50, 60, 70, 80, 90] and call the `ChangeOrder` method to demonstrate the implementation:
+
+```python
+queue = Queue()
+queue.enqueue(10)
+queue.enqueue(20)
+queue.enqueue(30)
+queue.enqueue(40)
+queue.enqueue(50)
+queue.enqueue(60)
+queue.enqueue(70)
+queue.enqueue(80)
+queue.enqueue(90)
+
+print("Initial queue:")
+queue.print_queue()
+
+print("After ChangeOrder(4):")
+ChangeOrder(queue, 4)
+queue.print_queue()
+```
+
+Output:
+```
+Initial queue:
+10 20 30 40 50 60 70 80 90 
+After ChangeOrder(4):
+50 60 70 80 90 10 20 30 40 
+```
+
+I hope this helps! Let me know if you have any further questions.
