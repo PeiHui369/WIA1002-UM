@@ -1,0 +1,57 @@
+1.	Masalah toners of Hanoi adalah satu masalah klasik yang sering  digunakan untuk menggambarkan kekuatan teknik rekursi. Penjelasan masalah tersebut adalah seperti berikut:
+
+The Towers of Hanoi problem is a classical problem used to illustrate the power of recursion. Explaiiation of the problem goes as to/iows.’
+
+Terdapat tiga tiang dengan 64 cakera yang berlainan saiz. Asalnya, semua cakera-cakera tersebut telah diletakkan pada tiang pertama dengan cakera terbesar berada paling bawah dan yang terkecil berada paling atas. Anda perlu menggerakkan kesemua cakera-cakera yang terletak di tiang pertama ke tiang ketiga, dengan cakera terbesar berada paling bawah dan yang terkecil berada paling atas. Anda hanya boleh menggerakkan hanya satu cakera pada satu-satu masa dan cakera yang lebih besar tidak boleh diletakkan di atas cakera yang lebih kecil. Tiang kedua boleh digunakan sebagai tiang pengantara untuk membantu anda memindahkan cakera-cakera tersebut
+
+There are three poles and 64 discs of different sizes. Ini”tially, all the discs are placed on the first pole with the largest disc at the bottom and the smallest one at I/ie top. You need Io move all the d/scs from the first pole to the third pole, with the smallest disc at the top and the largest at the boftom. You can move only one disc at a time and at any point of ttme, a /arper disc cannot de placed over a scatter one. The second pole can be used as an intermediate pole to help you in transfering the discs.
+
+Tiang/'Pa/e 1	Tiang/Po/e 2	Ttang/’Po/e 3
+
+Bagi masalah dengan hanya 2 cakera (cakera 1 dan cakera 2), masalah ini
+boleh diselesaikan dengan langkah-langkah (algorithm) berikut:
+
+Langkah 1: Gerak cakera 1 dari tiang 1 ke tiang 2
+Langkah 2: Gerak cakera 2 dari tiang 1 ke tiang 3
+Langkah 3: Gerak cakera 1 dari tiang 1 ke tiang 3
+for a puzzle w”ith 2 discs (disc 1 and disc 2), the puzzle can be solved witfi the following steps (algorithm).
+
+Step 1: Move disc 1 from po/e I lo pole 2 Step 2: dov'e disc 2 from pole 1 to po/e 3
+Step 3: Move disc 3 from pole 1 to pole 3
+ 
+WIA1002
+
+Tuliskan  sebuah program  untuk menyelesaikan  masalah Towers  of Henoi
+dengan menggunakan taknik rekursi.
+(Simpan dan saJin fail ini ke diraI‹tori aMun peperiksaan anda dan masukkan ke
+dalam folder yang dinamakan [Q1]).
+Wfita a progrent to solve 7owws o/Hano/ using rect/rsian.
+(Save and copy tire /Ee fa your exam accouof directory and keep itifisfi:lfi a faklerceiied
+
+
+Here is an example program in Python to solve the Towers of Hanoi problem using recursion:
+
+```python
+def towers_of_hanoi(n, source, target, auxiliary):
+    if n > 0:
+        # Move n-1 discs from the source pole to the auxiliary pole
+        towers_of_hanoi(n-1, source, auxiliary, target)
+        
+        # Move the largest disc from the source pole to the target pole
+        print(f"Move disc {n} from pole {source} to pole {target}")
+        
+        # Move n-1 discs from the auxiliary pole to the target pole
+        towers_of_hanoi(n-1, auxiliary, target, source)
+
+# Input the number of discs
+num_discs = 3
+
+# Call the function to solve the Towers of Hanoi problem
+towers_of_hanoi(num_discs, 'A', 'C', 'B')
+```
+
+In the above program, the `towers_of_hanoi` function is used to solve the Towers of Hanoi problem recursively. The `n` parameter represents the number of discs to be moved, while `source`, `target`, and `auxiliary` represent the names of the poles (e.g., 'A', 'B', 'C').
+
+The program will print the steps required to move all the discs from the source pole to the target pole. Each step will be displayed in the format "Move disc [disc number] from pole [source] to pole [target]".
+
+You can change the value of `num_discs` to the desired number of discs you want to use in the simulation.
