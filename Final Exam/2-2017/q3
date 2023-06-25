@@ -1,0 +1,124 @@
+3.	Tulis kod bagi metod-metod berikut untuk digunakan di dalam sebuah kelas pepohon carian binari jenis E.
+
+Write a code for the following methods to be implemented in a generic binary search tree class type E.
+
+i)	Metod public boolean add(Node E> node, E ”Item) untuk  me.nambah  item baru jenis E ke dalam pepohon carian binari. Metod tersebut perlu memulangkan nilai boolean: benar jika selitan berjaya, dan salah jika  ianya item berulang.
+
+Method public boolean add{/\/ode<P» node, E item) to add new item type E into the binary search tree. The method should return a boolean value, true if the insertion is successful, and false ”d it is a duplicated 'item.
+
+(3 markah/marms)
+
+ 
+ii)	Metod public void printTreelnOrder( ) untuk mencetak pepohon dalam in-order secara iteratif (bukan-rekursif).
+ 
+item-item
+ 
+
+Metod public void printTreelnOrder() to print all of tfie tree items in ’in order iteratively (non-mcursive).
+
+(4 markah/marks)
+
+iii)	Metod public too/ean contains(E item) untuk menyemak jika pepohon carian binari mengandungi sesuatu item yang tertentu.  Metod  tersebut  memulangkan nilai boolean: benar jika item dijumpai, dan salah sebaliknya.
+
+Method public boolean contains(E item) to check if the binary search tree contains a specified item. The method should return boolean ya/oe: true "if the item is found, otherwise return la/se.
+
+(3 markah/mats)
+
+=============================================================================================================================
+Here's the code for the requested methods in a generic binary search tree class:
+
+```java
+public class BinarySearchTree<E extends Comparable<E>> {
+
+    private Node<E> root;
+
+    public BinarySearchTree() {
+        root = null;
+    }
+
+    public boolean add(Node<E> node, E item) {
+        if (root == null) {
+            root = new Node<>(item);
+            return true;
+        }
+
+        Node<E> current = node;
+        while (current != null) {
+            int comparison = item.compareTo(current.data);
+            if (comparison < 0) {
+                if (current.left == null) {
+                    current.left = new Node<>(item);
+                    return true;
+                }
+                current = current.left;
+            } else if (comparison > 0) {
+                if (current.right == null) {
+                    current.right = new Node<>(item);
+                    return true;
+                }
+                current = current.right;
+            } else {
+                // Item already exists in the tree
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    public void printTreeInOrder() {
+        if (root == null) {
+            System.out.println("Tree is empty.");
+            return;
+        }
+
+        Node<E> current = root;
+        Stack<Node<E>> stack = new Stack<>();
+        while (current != null || !stack.isEmpty()) {
+            while (current != null) {
+                stack.push(current);
+                current = current.left;
+            }
+
+            current = stack.pop();
+            System.out.print(current.data + " ");
+            current = current.right;
+        }
+
+        System.out.println();
+    }
+
+    public boolean contains(E item) {
+        Node<E> current = root;
+        while (current != null) {
+            int comparison = item.compareTo(current.data);
+            if (comparison < 0) {
+                current = current.left;
+            } else if (comparison > 0) {
+                current = current.right;
+            } else {
+                // Item found in the tree
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static class Node<E> {
+        private E data;
+        private Node<E> left;
+        private Node<E> right;
+
+        public Node(E data) {
+            this.data = data;
+            left = null;
+            right = null;
+        }
+    }
+}
+```
+
+Note: The code assumes you have a `Stack` implementation available, either from the standard Java library or a custom implementation.
+
+I hope this helps! Let me know if you have any further questions.
