@@ -1,114 +1,107 @@
-2.	Dari perspektif seorang pengaturcare, sslah satu tugas yang paling mencabar adalah untuk memadankan kurungan kiri dengan kurungan kanan. Kurungam kurungan yang lazimnya digunakan dalam menulis program tercenarai dalam Jadual 1.
 
-Ifiom tfie perspeoflve of a programmer, one of he most chelleztging fasks is to match tfie let-breoket to tfie fionespoadlng fights. flame of he commonly used brackets in smiling a program are //sfed in Cab/e f.
-Jadual 1: Kurungan-kurungan yang lazimnya digunakan
-rad/e 1: Brackets that eve commonly In uae
+From the perspective of a programmer, one of the most challenging tasks is to match the left-bracket to the corresponding right-bracket. Some of the commonly used brackets in writing a program are listed in Table 1
 
-Kiri /Loft	Kanan /R"/g/if	Nama /Name
+Table 1: Brackets that are commonly in use
+
+Left	Right    Name
+[	  ]     Bracket
+{         }     Curly Bracket
+(	  )     Round Bracket
+<	  >     Angled Bracket
 		
 
- 	
- 	curty brenkeWcurly breaes
 
- 	
- 	round Aracket/parenihesis
-		
-
-a)	Rangka satu algoritma untuk memertkaa sama ada input )enls sling yang dibekalkan tardirt daripada kurungan-kurungan yang telah dlpadankan. Algorttma itu akan memberi output EA — semua kurungan Blah dlpadankanl” apabila semua kurungan kiri dipadankan oleh.kurungan kanan mengikut jenis yang berpadanan. Sekiranya ada kurungan yang tidak disopadankan, algorttma itu akan memberikan output "Not a// branhets are male/›e‹f’. Jika 8dak ada kurungan dalam input jenis strinp, output "There is no 6‹acaef In ffie inpuf’. Ringkaskan algorftma arda dengan menggunakan format kod-pseudo.
- 
-\MA1D02
-
-Oevise an otgofitfim to fihefik eihe‹ an input of type stfing consists a/ me/ched brackets 7he algorithm outputs “YES - all matched!“ when all /e/t-dzac/refs are matched 6y /f›eircorresprrid/og @/if-0rackefs of fho same /ype. If thefe exists some brackets that n‹:›t matched, the atgofithm should output "Not all dzackets ara matched*. ff there is no bracket in tha input slfing. output “The/e is no bracket in the input“. Summarize your aigofithm in tho forn› of peeudo•cod8.
-
+Devise an algorithm to check whether an input of type string consists of matched
+brackets. The algorithm outputs "YES - all matched!" when all left-brackets are
+matched by their coresponding right-brackets of the same type. If there exists some
+brackets that not matched, the algorithm should output "Not all brackets are
+matched". If there is no bracket in the input string, output "There is no bracket in tne
+input". Summarize your algorithm in the form of pseudo-code.
 (5 markah/marks)
 
-b)	Te/jemahkan kod-pseudo anda ke dalam 9ebuah program yang menerima input beijenis s/ring melalui teks fail yang bemama - 8racUatch.lxl. Fail tersebut mengandungi beberapa barisan teks. Contoh maklumat yang tarkandune di dalam fail BracMelch.txt adalah seperti berikut:
-Translate yourpsuedo-code into a program, wfiiinh dCOO§ls fhe i•R*i s•*•e thigh a text file called - BfiecMefch. txt. The flla flannels ol' severa/ lines of' fexts. An exarrip/e of he conlant of //ie BrecMatsfi. lxl lima ie es follows:
+Translate your psuedo-code into a program, which accepts the input string through a
+text file caled- BracMatch. txt. The file consists of several lines of texts. An example
+of the content of the BracMatch txt file is as follows.
 
-(axa•uc/der{Mejcurv]e•nothng]
-{D	sf lJ
+(x,y;z)
+(area<un[der{the}curv]e>nothing)
+(DS-{is[my>]}
+])
+datastructure
 
 ================================================================================================================================================
 
-a) Pseudo-code for matching brackets algorithm:
+Apologies for the confusion. Here's the corrected Java program that implements the algorithm to check whether an input string consists of matched brackets:
 
-```
-function checkBracketMatching(inputString):
-    stack = empty stack
+```java
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Stack;
 
-    for each character in inputString:
-        if character is a left bracket:
-            push character to stack
-        else if character is a right bracket:
-            if stack is empty or top of stack is not the corresponding left bracket:
-                return "Not all brackets are matched"
-            else:
-                pop the top of stack
+public class BracketMatcher {
+    public static void main(String[] args) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("BracMatch.txt"));
+            String line;
 
-    if stack is not empty:
-        return "Not all brackets are matched"
-    else if inputString does not contain any brackets:
-        return "There is no bracket in the input"
-    else:
-        return "All brackets are matched"
-```
+            while ((line = reader.readLine()) != null) {
+                String result = checkBracketMatch(line);
+                System.out.println(result);
+            }
 
-b) Here's the implementation of the program in Python that reads input from a text file named "BracketMatch.txt":
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        }
+    }
 
-```python
-def check_bracket_matching(input_string):
-    stack = []
+    public static String checkBracketMatch(String inputString) {
+        Stack<Character> stack = new Stack<>();
 
-    for char in input_string:
-        if char in ['(', '[', '{']:
-            stack.append(char)
-        elif char in [')', ']', '}']:
-            if len(stack) == 0 or not is_matching(stack[-1], char):
-                return "Not all brackets are matched"
-            else:
-                stack.pop()
+        for (int i = 0; i < inputString.length(); i++) {
+            char character = inputString.charAt(i);
 
-    if len(stack) > 0:
-        return "Not all brackets are matched"
-    elif all(char not in ['(', ')', '[', ']', '{', '}'] for char in input_string):
-        return "There is no bracket in the input"
-    else:
-        return "All brackets are matched"
+            if (isLeftBracket(character)) {
+                stack.push(character);
+            } else if (isRightBracket(character)) {
+                if (stack.isEmpty()) {
+                    return "Not all brackets are matched";
+                } else {
+                    char top = stack.peek();
+                    if (isMatchingBracket(top, character)) {
+                        stack.pop();
+                    } else {
+                        return "Not all brackets are matched";
+                    }
+                }
+            }
+        }
 
+        if (stack.isEmpty()) {
+            return "YES - all matched!";
+        } else {
+            return "Not all brackets are matched";
+        }
+    }
 
-def is_matching(left, right):
-    if left == '(' and right == ')':
-        return True
-    elif left == '[' and right == ']':
-        return True
-    elif left == '{' and right == '}':
-        return True
-    else:
-        return False
+    public static boolean isLeftBracket(char bracket) {
+        return bracket == '(' || bracket == '[' || bracket == '{' || bracket == '<';
+    }
 
+    public static boolean isRightBracket(char bracket) {
+        return bracket == ')' || bracket == ']' || bracket == '}' || bracket == '>';
+    }
 
-# Read input from file
-with open("BracketMatch.txt", "r") as file:
-    lines = file.readlines()
-
-for line in lines:
-    input_string = line.strip()
-    result = check_bracket_matching(input_string)
-    print(result)
-```
-
-Note: Make sure the "BracketMatch.txt" file is in the same directory as the Python program, and it contains the input strings on separate lines.
-
-Example content of "BracketMatch.txt":
-```
-axa[uc/der{Mej(curv]e)noth}ing]
-{D(sf lJ
+    public static boolean isMatchingBracket(char left, char right) {
+        return (left == '(' && right == ')') ||
+                (left == '[' && right == ']') ||
+                (left == '{' && right == '}') ||
+                (left == '<' && right == '>');
+    }
+}
 ```
 
-Example output:
-```
-All brackets are matched
-Not all brackets are matched
-```
+Please make sure to create a text file named `BracMatch.txt` and populate it with the desired input strings. Each input string should be on a separate line. Then, run the Java program to read the file and check if the brackets are matched for each line. The program will print the corresponding output for each input string.
 
-I hope this helps! Let me know if you have any further questions.
+I apologize for the earlier mistake and appreciate your understanding. Let me know if you have any further questions.
