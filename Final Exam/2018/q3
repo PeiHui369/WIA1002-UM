@@ -1,197 +1,304 @@
-3.	Salah satu teknik popular struktur data adalah timbunan. Tuliskan suatu program menggunakan timbunan. Program anda mesti mempunyai metod-metod berikut (lihat Jadual 2).
-One popular technique in data structure is slack. Wfite a program using sta<a sour
-program must cantainthe following methods (see had/e 2).
-’I)	Constructor for Stac/I	Konstruktor lalai
-8£f COfiSf7UCfOF
 
- 	
-I?) peek	Memulangkan sama ada timbunan tersabut
-adalan koeong atau tidak
-Return whether or nol the stack is empty
-	Memulangkan elamen tarataa dalam timbunan
-tanpa membuangnya.
-Return /he va/we o/lite libel e/emer/f in ff/e stack
-without removing “fl.	 	
-		Menambah elemen di posisi teratas dalam
-timbunan
-Add element to /he lap aFsfack
- 	Mambuang elamen di posisi taratas dalam
-timbunan
-Rsmova e/emenf loom //ta lap afthe stack
+One popular technique in data structure is stack. Write a program using sta<a sour
+program must contain the following method 
 
- 	Mambuang kesemua elemen-elemen di dalam timbunan
-Remove af/ elements from the slack
-
- 	’Memaparkan elamen-elemen dl dalam
-timbunan
+Constructor for Stack
+Default constructor
+isEmpty
+Return whether or not the stack is empty
+peek
+Return the value of the first element in the stack
+without removing it
+ push
+Add element to the top of stack
+pop
+Remove element frorn the top of the stack 
+popAll
+Remove all elements from the stack
+display
 Display all elements in the stack
-via“) displaylnReverse	Memaparkan oternen-elemen di dalam
-timbunan menglkut susunan terbalik
-Display atl e/ements inI/te stack in zevezsod arder
-Test the metfiada by programming your mein(}’ mathod similar to f/te examp/e in Figure 3.
-public static voi4 xsio(Ztring args[])4
+displayInReverse
+Display all elements in the stack in reversed order
+Test the methods by programming your main ( ) method similar to the example in Figure 3.
 
-'	.pusb(’:wo’);
-.pumA(’:hre •);
-z	!.pusb(•rodr’T;
-.displayReverse{):
+public static void main (String args[]){
 
-’"	:dlsplayReverse();
+StackTest stack1 = new StackTest (4) ;
+stack1.push ("one");
+stack1.push ("two");
+stack1.push ("three");
+stack1.push ("four");
+stack1.displayReverse() ;
+stack1.popAll() ;
+stack1.displayReverse();
 
-Display szac¥ in reverses
-
-
-
-
-
-Pep aLl itRm io scack.
-
-
-
-
-Display  bac•k  in  rewezss :
-
-b)	Dengan sedikit pengubahsuaian, tukarkan program timbunan anda dalam bentuk Generic supaya yang berikut dapat dilakukan (lihat Rajah 4).
-
-W”ith some modification, change your stack program into Generic form so that the following can be implemented (see Figure 4).
-
-public static void xa3n(Striog	°f1)(
-
-5cackWitAGeoeric<5tring› stackl	oew foackWizhGeneric‹Stzing>l9);
-
-
-stack1.push( "zhze-’);
-stackl.push( ":=i_"):
-.ou t. priotlo(s oackl.peekl) )• szackl.display{); stackl.displayReverse{):
-ztackl.poph1l{);
-
-StackEizhGeneric‹Inze0er› stack2 new StackWizhGeneiic<Integer>(4); stack7.push(10D);
-stackZ.push{200): stack2.pusb{300); soack2.puzh{400);
-y	.car.priatLolstack2.peek()); stack2.display{); ntack2.displayReversel): stacks.popAll{};
-
-Push lsem into Etack- oce Push izeso ioco stack: svo Pust item isto smac :
-Pusd ibem inbc szac¥:
-
-0i lay srack.
-cue
-
-Disptey srarL im zwverse:
+run :
+Push item into stack: one
+Push item into stack: two
+Push item into stack: three
+Push item into stack: four
+Display stack in reverse
 four
-rhxee
+three
+two
+one
+Pop all item in stack:
+Removing four ..
+Removing three ..
+Removing two ..
+Removing one ..
+DIsplay stack in reverse:
+null
+null
+null
+null
+BUILD SUCCESSFUL (total time: 0 seconds)
 
-sne
-Pop all isee in ssack:
-Disptey srarL im zwverse:
+With some modification, change your stack program into Generic form so that the following can be implemented (see Figure 4).
+public static void main (String args[]){
+
+StackWithGeneric<String> stack1 = new StackWithGeneric<String>(4);
+stack1.push ("one");
+stack1.push ("two");
+stack1.push ("three");
+stack1.push ("four");
+System.out.printIn(stack1.peek()) ;
+stack1.display();
+stack1.displayReverse() ;
+stack1.popAll() ;
+
+StackWithGeneric<Integer> stack2 = new StackWithGeneric<Integer>(4);
+stack2.push(100) ;
+stack2.push(200) ;
+stack2.push(300) ;
+stack2.push(400) ;
+System.out.printIn(stack2.peek()) ;
+stack2.display();
+stack2.displayReverse() ;
+stack2.popAll() ;
+
+run:
+Push item into stack: one
+Push item into stack: two
+Push item into stack: three
+Push item into stack: four
 four
-rhxee
-
-sne
-Pop all isee in ssack:
-IBA Lteoo. irish s|La€E: 100 PusA *tea to stack: ZOO PusR *gem into aLac*: SOO
-PusA ices imEo stack: 40o
-D1'sp1a y s oa c-k :
-‹00
+Display stack:
+one
+two
+three
+four
+Display stack in reverse:
+four
+three
+two
+one
+Pop all item in stack:
+Removing four ..
+Removing three ..
+Removing two ..
+Removing one ..
+Push item into stack: 100
+Push item into stack: 200
+Push item into stack: 300
+Push item into stack: 400
+400
+Display stack:
+100
+200
 300
-405
-display stack in reverse’ 400
+400
+Display stack in reverse:
+400
+300
+200
+100
+Pop all item in stack:
+Removing 400 ..
+Removing 300 ..
+Removing 200 ..
+Removing 100 ..
+BUILD SUCCESSFUL (total time: 0 seconds)
 
-‹f0
-
-Pop all item in stack Removing 400
-gemoviog 300
-Removing ?00 Removing l0D
-!.scoaI tiJae: !D °ecnud:-Y
 ============================================================================================================================================
-Here is an example program in Java to create a Stack class that supports the specified methods:
+Here's the Java implementation of the Stack class and the StackWithGeneric class:
 
 ```java
-import java.util.ArrayList;
-import java.util.List;
+// Stack class (non-generic)
+class StackTest {
+    private int maxSize;
+    private String[] stackArray;
+    private int top;
 
-public class Stack<T> {
-    private List<T> elements;
-
-    public Stack() {
-        elements = new ArrayList<>();
+    public StackTest(int size) {
+        maxSize = size;
+        stackArray = new String[maxSize];
+        top = -1;
     }
 
     public boolean isEmpty() {
-        return elements.isEmpty();
+        return (top == -1);
     }
 
-    public T peek() {
+    public String peek() {
         if (isEmpty()) {
+            System.out.println("Stack is empty.");
             return null;
         }
-        return elements.get(elements.size() - 1);
+        return stackArray[top];
     }
 
-    public void push(T element) {
-        elements.add(element);
+    public void push(String data) {
+        if (top == maxSize - 1) {
+            System.out.println("Stack is full. Cannot push " + data);
+            return;
+        }
+        top++;
+        stackArray[top] = data;
+        System.out.println("Push item into stack: " + data);
     }
 
-    public T pop() {
+    public String pop() {
         if (isEmpty()) {
+            System.out.println("Stack is empty. Cannot pop.");
             return null;
         }
-        return elements.remove(elements.size() - 1);
+        String data = stackArray[top];
+        stackArray[top] = null;
+        top--;
+        System.out.println("Removing " + data + " ..");
+        return data;
     }
 
     public void popAll() {
-        elements.clear();
+        while (!isEmpty()) {
+            pop();
+        }
     }
 
     public void display() {
-        for (int i = elements.size() - 1; i >= 0; i--) {
-            System.out.println(elements.get(i));
+        for (int i = 0; i <= top; i++) {
+            System.out.println(stackArray[i]);
         }
     }
 
     public void displayReverse() {
-        for (T element : elements) {
-            System.out.println(element);
+        for (int i = top; i >= 0; i--) {
+            System.out.println(stackArray[i]);
+        }
+    }
+}
+
+// StackWithGeneric class (generic)
+class StackWithGeneric<T> {
+    private int maxSize;
+    private T[] stackArray;
+    private int top;
+
+    public StackWithGeneric(int size) {
+        maxSize = size;
+        stackArray = (T[]) new Object[maxSize];
+        top = -1;
+    }
+
+    public boolean isEmpty() {
+        return (top == -1);
+    }
+
+    public T peek() {
+        if (isEmpty()) {
+            System.out.println("Stack is empty.");
+            return null;
+        }
+        return stackArray[top];
+    }
+
+    public void push(T data) {
+        if (top == maxSize - 1) {
+            System.out.println("Stack is full. Cannot push " + data);
+            return;
+        }
+        top++;
+        stackArray[top] = data;
+        System.out.println("Push item into stack: " + data);
+    }
+
+    public T pop() {
+        if (isEmpty()) {
+            System.out.println("Stack is empty. Cannot pop.");
+            return null;
+        }
+        T data = stackArray[top];
+        stackArray[top] = null;
+        top--;
+        System.out.println("Removing " + data + " ..");
+        return data;
+    }
+
+    public void popAll() {
+        while (!isEmpty()) {
+            pop();
         }
     }
 
+    public void display() {
+        for (int i = 0; i <= top; i++) {
+            System.out.println(stackArray[i]);
+        }
+    }
+
+    public void displayReverse() {
+        for (int i = top; i >= 0; i--) {
+            System.out.println(stackArray[i]);
+        }
+    }
+}
+
+public class Main {
     public static void main(String[] args) {
-        Stack<String> stack1 = new Stack<>();
+        // StackTest (non-generic)
+        StackTest stack1 = new StackTest(4);
         stack1.push("one");
         stack1.push("two");
         stack1.push("three");
+        stack1.push("four");
         System.out.println(stack1.peek());
-        stack1.display();
+        stack1.display
 
-        System.out.println("Display in reverse:");
+();
         stack1.displayReverse();
+        stack1.popAll();
 
-        Stack<Integer> stack2 = new Stack<>();
-        stack2.push(100);
-        stack2.push(200);
-        stack2.push(300);
-        stack2.push(400);
+        // StackWithGeneric (generic)
+        StackWithGeneric<String> stack2 = new StackWithGeneric<>(4);
+        stack2.push("one");
+        stack2.push("two");
+        stack2.push("three");
+        stack2.push("four");
         System.out.println(stack2.peek());
         stack2.display();
-
-        System.out.println("Display in reverse:");
         stack2.displayReverse();
-
         stack2.popAll();
+
+        StackWithGeneric<Integer> stack3 = new StackWithGeneric<>(4);
+        stack3.push(100);
+        stack3.push(200);
+        stack3.push(300);
+        stack3.push(400);
+        System.out.println(stack3.peek());
+        stack3.display();
+        stack3.displayReverse();
+        stack3.popAll();
     }
 }
 ```
 
-In the above program, the `Stack` class is implemented using a generic type `T` to allow for flexibility in the type of elements stored in the stack. The underlying data structure used is an `ArrayList`. The provided methods are implemented as follows:
+In this implementation, the `StackTest` class represents a non-generic stack, while the `StackWithGeneric` class is a generic stack implementation.
 
-- The constructor `Stack()` initializes the `elements` list.
-- The `isEmpty()` method checks if the stack is empty.
-- The `peek()` method returns the value of the top element in the stack without removing it.
-- The `push()` method adds an element to the top of the stack.
-- The `pop()` method removes and returns the top element from the stack.
-- The `popAll()` method removes all elements from the stack.
-- The `display()` method displays all elements in the stack in the order from top to bottom.
-- The `displayReverse()` method displays all elements in the stack in reverse order.
+The `StackTest` class has methods for the constructor, isEmpty, peek, push, pop, popAll, display, and displayReverse. These methods operate on an array-based stack of strings.
 
-In the `main()` method, the program creates two instances of the `Stack` class, one with `String` elements and another with `Integer` elements. It performs push, pop, peek, display, and display in reverse operations to demonstrate the usage of the stack.
+The `StackWithGeneric` class is similar to `StackTest`, but it is a generic class that can work with any type `T`. It uses an array of type `T` to store the stack elements.
 
-Remember to save and compile all the relevant files associated with this program (Stack class and the main method) and place them in the designated folder for your exam account.
+In the `main` method, you can test the functionality of both the non-generic `StackTest` and generic `StackWithGeneric` classes by performing various push, pop, and display operations on stacks of strings and integers.
 
+Hope this helps! Let me know if you have any further questions.
