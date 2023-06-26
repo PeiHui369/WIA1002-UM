@@ -1,26 +1,19 @@
-b)	Aturcara“ tersebut menggunakan kelas Queue<E> yang telah dilaksanakan di dalam Soalan 2(a). Berikut adalah maklumat lanjut bagi membantu membangunkan aturcara tersebut:
 
 The program’ uses the Queue<E> class implemented in Question 2(a). Following are further hints to guide the program development:
 
-     Senarai huruf (i.e., a-z) diberikan sebagai tatasusun seperti  berikut.  Simpan tatasusun huruf ini dalam barisan yang telah dilaksanakan dalam Soalan 2(a). Terdapat sejumlah 26 aksara (i.e., abjad dan simbol garis bawah).
-
+    
 A list of alphabets (i.e., a-z) is given as an array as follows. Store this array of alphabets in the queue implemented in Question 2(a). There are 26 characters in total (i.e., alphabet and an underscore symbol)
 
 alphabet = {’a’,’b’,’c’,...,’y’,’z’,’_’}
 
-ii)	Indeks (lihat contoh output) mewakili lokasi indeks bagi huruf dan tidak diberikan sebagai tatasusun berasingan.
-
 The index (see example output) represents the index location of the alphabets and not given as a separate array.
 
-iii)	Program ini berinteraksi dengan pengguna melalui pertanyaan mengenai kekerapan input nombor yang akan diberi.
 
 The program interacts with the user by asking the frequency of input numbers to be provided.
 
-iv)	Setelah	pengguna	memasukkan	semua   nombor,	program	ini akan memaparkan huruf yang sepadan.
 
 Once the user enters all the numbers, the program will display their corresponding alphabets.
 
-* Markah tidak akan diberikan untuk perlaksanaan yang tidak menggunakan kelas Queue<E> daripada Soalan 2(a).
 
 No marks will be given for any implementation without using Queue<E» class in Question 2(a).
 
