@@ -1,40 +1,31 @@
-3.	Salah satu teknik popular struktur data adalah dipanggil  senarai  berpaut.  Tuliskan suatu program meng9unakan senarai berpaut. Program anda mesti mempunyai metod-metod berikut (lihat Jadual 3).
 
 One popular technique in data structure is linked list. Write a program using linked //s/.
 Your program must contain the following methods (see Table 3).
 
-Jadual 3: Senarai nama-nama metod dan spesifikasinya
+
 Table 3. List of method names and their specification
 
-Pembina/Nama Metod
-Constructor/Method name	Spesifikasi
-Specification
+
 i)	Constructor for the linked
-//sf class	Konstruktor lalai untuk kelas senarai berpaut
+//sf class	
 Default constructor for the linked list class
 ii) Constructor for the node
-class	Konstruktor lalai untuk kelas nod
+class
 Default constructor for the node class
-iii) isEmpty	Memulangkan sama ada senarai berpaut
-tersebut adalah kosong atau tidak
+iii) isEmpty	
 Return whether or not the linked list is empty
-iv) add	Menambah elemen ke dalam senarai berpaut
+iv) add	
 Add element to the linked list
-v) addAfter	Menambah elemen baru selepas elemen
-sedia ada di dalam senarai berpaut
+v) addAfter	
 Add new element after existing element in the linked list
-vi) remove	Membuang elemen tertentu dari senarai
-berpaut
+vi) remove
 Remove a particular element from the linked list
-vii) display	Memaparkan elemen-elemen di dalam ' senarai berpaut
+vii) display
 Display all elements in the linked list
-viii) totalsold()	Mengira jumlah jualan yang dikumpul
+viii) totalsold()	
 Count the total sale collected
 
-Tulis semua metod-metod dalam Jadual 3 serta metod main() anda di dalam fail program yang sama. Metod main() anda peñu mengikuti cadangan seperti dalam Rajah 3(a). Ubahsuai dan uji metod-metod anda supaya menyerupai output di dalam Rajah 3(b).
-
 Write all methods in Table 3 as well as your main() method in the same program file. Your main() method should follow the suggestion shown in Figure 3(a). Modify and test your methods so you get the same output shown in Figure 3(b).
- 
  	 
 
 public static void main(String(j args)(
@@ -45,11 +36,7 @@ myLL.createNode("Lord of The Rings", 500): myLL.createNode("Tale of the Body Thi
 myLL.addAfter("Memnoch the Devil", "White Crane", 10); myLL.addAfter('White Crane", "Memoirs of a Geisha", 90); myLL.removeNode(“Harry Potter"); myLL.removeNode("Heart of a Samurai");
 myLL.display();
 
-
-
-Rajah 3(a): Metod main()
 Figure 3(a).  Main() method
-
 
 run:
 
