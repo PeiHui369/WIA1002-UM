@@ -1,38 +1,31 @@
-A week consists of seven days. A class called Oay should store the days fiom Monday through Sumtey. Des”ign and wfite a program for days of tfio week that sfiouid do ttie
+A week consists of seven days. A class called Oay should store the days from Monday through Sumtey. Des”ign and write a program for days of the week that should do this
 
-i)	Membolehkan pengguna untuk memasukkan satu input bagi hari berdasarkan nombor seperti 1 untuk Isnin dan 2 untuk Selasa. (i.e., 1 = lsnin, 2 = Selasa,
-.. , 7 = Ahad).
-A/lows user to key-in an input ol' he day based on numbers such as I for fooday
-and 2 for 7vesdsy. (/.e.. f = dondey, 2 = Tuesday, ... , 7 -- Sunday).
+Allows users to key in an input ol' he day based on numbers such as 1 for Monday
+and 2 for Tuesday. (/.e.. 1 = Monday, 2 = Tuesday, ... , 7 -- Sunday).
 
-ii)	Paparkan nama penuh yang eapadan bagi hari (i).
-Display the conespondlng full name of the day of (i}.
 
-iii)	Kira dan paparkan satu hari berikut dan satu hañ sebelumnya berdasarkan nombor yang dimasukkan dalam (i).
-Ca/cu/afe aoct display the /b/lowing and previbus days dased on the nvmber entered
+Display the corresponding full name of the day of (i}.
 
-iv)	Kira dan kembalikan hari dengan menambah hari-hari tertentu untuk hari semasa sebagaimana yang dinyatakan oleh (il). Sebagai contoh, jika hari semasa adalah lsnin dan klta menambah empat han“, hari yang dikembalikan adalah hari Jumaar Begitu juga, jika hari semasa adalah Selasa dan kita menambah 13 hari, hari yang dikembalikan adalah lsnin.
-Calculate end relum t/ie dar z “ e •• rtain days to the cunent day as opecdéd by (ii). for axamp/e, if the current day ie I onaoy and D's edd four days, f/ie day to be returned is Ffiday. Similarly, if I/ie currient day is Tuesday and w'e edd 13 days, the day to be returned is Monday.
+Calculate and display the /b/lowing and previous days based on the number entered
 
-Dengan me• eambiI kira 9emua maklumat yang diberikan di atas:
-Considering all of the above given infonnahon:
+Calculate and return the day by adding certain days to the current day as specified by (ii). for example, if the current day is Monday and we add four days, the day to be returned is Friday. Similarly, if the current day is Tuesday and we add 13 days, the day to be returned is Monday.
 
-a)	Kenalpadti keperluan program tersebut dengan rnewakTli mereka menggunakan satu Kelas UML untuk kelas Hari.
-Identify t/te program requirements dy representing them using one UML Close for the
-Day cless.
+Considering all of the above given information:
+
+Identify the program requirements by representing them using one UML. Class for the
+Day class.
 (3 markah/mets)
-b)	Tulis sebuah program untuk melaksanakan kelas Hari berdasarkan keperluan yang telah dikenalpasti.
-Wrife a p/ogrem fa /mp/ement the Oay c/ass following the ibenfiñed requirements.
+
+Write a program to implement the day class following the identified requirements.
 
 (5 markah/marks)
  
 WIA1002
 
-c)	Tulis sebuah program uj)an menglkut format yang diberikan dalam contoh output berikut
-Wfite a test program in tfie fcxznal given in ffie following output examples.
+Write a test program in the format given in the following output examples.
 (2 markañ/maAe)
-Output contoh program ini edatah seperti berikut. Teks dalam huruf tebal adalah input pengguna.
-An examp/e outpuf of tha program is es fa/he 7ña text iñ boldis tha t/aer inpot.
+
+An example output of the program is as follow. 
 
 The program creates a LinkedList class that stores book names and their sales figures as nodes. It includes methods to create a node, add a node after a specific node, remove a node, display the linked list, and calculate the total sales. The main() method demonstrates the usage of these methods by creating a linked list of books and performing various operations on it.
 
@@ -51,22 +44,25 @@ A	for	Thursday
 The name of the day is : Monday
 The following day of Monday is : Tuesday
 The   previous   dam  of  t4onday  is	: Sunday
-how many Qays to add to the specified/current day (Mondayl7 :
+how many days to add to the specified/current day (Monday)? :
 
-The new day after the addition o€ 4 day(s) is : Friday
+The new day after the addition of 4 day(s) is : Friday
 
 
-Specify your day Ln number :
+Specify your day in number :
 1	for	Monday
-2   for Tuesday
+2 for Tuesday
 3	for Wednesday
-4	for Thursday 5 for Friday 6 for Saturday 7 for Sunday
+4	for Thursday 
+5 for Friday
+6 for Saturday
+7 for Sunday
 
 The name of the day is : Sunday
-The following day of Sunday is : Monday The previous day of Sunday is : Saturday
-how many days to add to tbe specified/current day (Sunday)? :
-
-The   new  day   a fter  the actdJeion   oE  1 day {s	1s : Sunday
+The following day of Sunday is : Monday 
+The previous day of Sunday is : Saturday
+how many days to add to the specified/current day (Sunday)? :
+The   new  day   after  the addition  of  7 day(s) is  : Sunday
 
 Specify your day in number:
 1	for Monday
@@ -74,35 +70,18 @@ Specify your day in number:
 3	for Wednesday
 4	for Thursday
 5	for Friday
-6	for Saturday 7 for Sunday
+6	for Saturday 
+7 for Sunday
 
-The me	of the day is : Thursday
-The following day of Thursday is : Friday The previous day of Thursday is : Wednesday
+The name	of the day is : Thursday
+The following day of Thursday is : Friday
+The previous day of Thursday is : Wednesday
 How many days to add to the specified/current day (Thursday)?
-
+:
 23
 The new day after the addition of 23 day(s} is : Saturday
 ========================================================================================
-
-a) The UML class diagram for the "Day" class:
-
-```
-__________________
-|     Day        |
-|----------------|
-| - dayNumber    |
-|----------------|
-| + Day()        |
-| + setDay(int)  |
-| + getDay()     |
-| + getFullName()|
-| + getNextDay() |
-| + getPrevDay() |
-| + addDays(int) |
-------------------
-```
-
-b) Here's an implementation of the "Day" class based on the identified requirements:
+Certainly! Here's the updated response with the implementation in Java:
 
 ```java
 public class Day {
@@ -178,7 +157,7 @@ public class Day {
 }
 ```
 
-c) Here's a sample test program that demonstrates the usage of the "Day" class:
+And here's the test program:
 
 ```java
 import java.util.Scanner;
@@ -187,7 +166,16 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Specify your day in number (1-7): ");
+        System.out.println("Specify your day in number:");
+        System.out.println("1 for Monday");
+        System.out.println("2 for Tuesday");
+        System.out.println("3 for Wednesday");
+        System.out.println("4 for Thursday");
+        System.out.println("5 for Friday");
+        System.out.println("6 for Saturday");
+        System.out.println("7 for Sunday");
+        System.out.print("Enter your choice: ");
+
         int dayNumber = scanner.nextInt();
 
         Day day = new Day();
@@ -206,17 +194,5 @@ public class Main {
 }
 ```
 
-Example output:
-```
-Specify your day in number (1-
-
-7): 1
-The name of the day is: Monday
-The following day of Monday is: Tuesday
-The previous day of Monday is: Sunday
-How many days to add to the specified/current day (Monday)? 4
-The new day after the addition of 4 day(s) is: Friday
-```
-
-I hope this helps! Let me know if you have any further questions.
+You can copy and run this code in a Java IDE or compiler to test it out. Let me know if you have any more questions!
 
