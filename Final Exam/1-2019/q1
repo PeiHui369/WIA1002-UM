@@ -1,16 +1,15 @@
 
-1.		Salah satu teknik popular struktur data adalah pelaksanaan timbunan generik. Tuliskan suatu program menggunakan timbunan generik. Program anda mesti mempunyai metod-metod berikut (lihat Jadual 1).
+1.		
+One popular technique in data structure is the generic slack implementation. 
+Write a program for implement generic stack. 
+Your program must contain the following methods (see Table 1).
 
-One popular technique in data structure is the generic slack implementation. Write a program fo implement generic stack. Your program must contain the following methods (see Table 1).
-
-Jadual 1: Senarai nama-nama metod dan spesifikasinya
 Table 1: List of method names and their specification
 
-Pembina/Nama Metod
-Constructor/Method name	Spesifikasi
+Constructor/Method name	
 Specification
 i)	Constructor for the generic
-stack class	Konstruktor lalai
+stack class	
 Oe/ao/I constructor
 ii) isEmpty	Memulangkan sama ada timbunan generik
 tersebut adalan kosong atau tidak
