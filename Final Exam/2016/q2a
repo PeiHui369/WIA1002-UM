@@ -1,12 +1,10 @@
-2.	Encik Bond bekerja sebagai seorang perisik. Dalam usaha untuk memastikan mesej beliau adalah rahsia, dia perlu menghantar mesej ’encrypt’ kepada  penerima. Tulis satu aturcara yang menerima nombor dan  mengekodkannya  untuk mengembalikan perkataan sepadan dengan menggunakan barisan.
 
 Mr Bond works as a spy. In order to protect his message as a secret, he needs to send an encrypted message to the receiver. Write a program to accept numbers and encode them to return their corresponding word by using queue.
 
-Program anda harus menunjukkan perkara berikut:
+
 
 Your program must demonstrate the following.
 
-a)	Laksanakan	sebuah	kelas	Queue<E>.	Pastikan	kaedah-kaedah	dan konstruktor-konstruktor berikut dilaksanakan.
 
 Implement a Queue<E» class. Ensure that the following methods and constructors are implemented.
 
