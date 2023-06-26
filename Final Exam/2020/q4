@@ -1,27 +1,18 @@
-4.	Peta-pagar merupakan struktur yang menyimpan data dalam bentuk pasangan- pasangan Kekunci dan nilai. Tuliskan suatu program menggunakan peta-pagar. Program anda mesti mempunyai metod-metod berikut (lihat Jadual 4).
 
 HashUap is a structure that stores data in the form of Key and value pairs. Write
 a program to implement  HashMap. Your program must contain the following  methods
 /see Table 4).
 
-Jadual 4: Senarai nama-nama metod dan spesifikasinya
 Table 4. List of method names and their specification
 
-Pembina/Nama Metod
-Constructor/Method name	Spesifikasi
-Specification
 i)	Constructor for the
-HashMap class	Konstruktor lalai yang menerima parameter-
-parameter kekunci dan nilai pasangan
-Default constructor which accepts Key and value pairparameters
-ii) get	Memulangkan entry yang dipetakan kepada
-kekunci di dalam peta-pagar
+HashMap class	
+Default constructor which accepts Key and value pair parameters
+ii) get	
 Return the entry mapped to key in the HashMap
- 	Menambah entry baru sekiranya kekunci belum
-iagi dipetakan di dalam peta-pagar. Sebaliknya, mengemaskini entry lama sekiranya kekunci telah wujud di dalam peta-pagar.
-Add new entry if Key is not yet mapped into the HashMap. Otherwise, up0ate antry mapped to Key if the HashMap already contains the Key
- 
-Tulis semua metod-metod dalam Jadual 4 serta metod main() anda di dalam fail program yang sama. Metod main() anda perlu mengikuti cadangan seperti dalam Rajah 4(a). Ubahsuai dan uji metod-metod anda supaya menyerupai output di dalam Rajah 4(b).
+
+Add new entry if Key is not yet mapped into the HashMap. Otherwise, update entry mapped to Key if the HashMap already contains the Key
+
 
 Write all methods in Table 4 as well as your main() method in the same  program  file.  Your main() method should follow the suggestion shown in Figure 4(a). Modify and test your methods so you gel //ie same output shown in Figure 4(b).
 
@@ -45,8 +36,6 @@ myHashMap. put("JeanG", "019-9001123");
 Entry e3	myHashMap.get("BruceW"); System.out.printIn("BruceW: " + e3.getVaIue()); Entry e4 — myHashMap.get("JeanG"): System.out. println(”JeanG: " + e4.getVaIue());
 
 
-
-Rajah 4(a): Metod main()
 Figure 4(a).  Main() method
 run:
 New directory entry:
