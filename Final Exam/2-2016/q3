@@ -1,184 +1,124 @@
-3.	Baris-gilir menyokong operasi tambah dan operasi singkir berdasarkan polisi masuk dahulu keluar dahulu.
-Queue supports the insert and the remove operations #ased on file First-in Firat ”<r
-a)	Tulis sebuah program untuk membina sebuah kelas yang bemama Queoe<//em>. Kelas ini seharusnya mempunyai metod-metod seperti yang dinyatakan dalam Jadual 2:
 
-Write a program to creale a class named Quet/e</tem>. The ctass should consist at methods as specified in Table 2:
+Queue supports the insert and the remove operations based on file First-in First-out policy
 
-Jadual 2: Senarai Nama-Nama Metod dan Spesifikasinya
-Table 2: Lis/ ofmeff/od nernes and their specification
+Write a program to create a class named Queue<Item>. The class should consist of methods as specified in Table 2:
 
- 
-Pembina/Nama Metod
-Consfructor/Method name
+
+Table 2: List of method names and their specification
+
 i)	Constructor for Queue
-c/sss
- 
+class
+Default constructor
 
+ii) isEmpty
+Return whether or not the queue is empty
 
-Konstruktor lalal
-Default aonatructor
- 
-Spesifikasi
-Ifipecificetion
- 
+iii) size
+Return the size of the queue
 
- 
+iv) peek
+Return the value of the first element in the queue
 
+v) enqueue
+add element to the bottom of the queue
 
-Ill) size
- 
-Memulangkan sama ada bans-gilir tersebut adalan kosong aau tidak
-Return whether or not the t/eue is em Memulangkan saiz baris-gilir tersebut Rettzm the size of the ueue
- 
-5N
- 
-WIA1 02
+vi) dequeue 
+remove element to the bottom of the queue
 
+vii) toString
+print the element in the queue 
 
- 	Memulangkan	nilai	bagi	elemen	pertama
-dalam bañs-$ilir Brsebut
-Refum the va/ua offhe //rst element in ffte queue
-v) enqueue	Menambah	elsmen	pada	baric-gilir	paling
-bawah
-Add siszzze nt to tfie bo#am of the queue
-	Membuang elemen pada bans-gilir paling aBs
-Ramove e/emant /	zi the top of the queoa
-	Mencetak elemen-elemen di dalam baris-gilir
-tersebut
-Print the e/ement in.tfte queue
 (11 markah/mans)
-
-b)	Bina cebuah metod bemama ChengaOrder(int k) yang menerima satu parameter in’teger h. Metod ini akan slngkirkan k-1 elemen daripada atas sesuatu barisan dan menambahkannya di bahagian bawah barican yang nama. Elambn ke-k ini akan diambah ke bawah barisan tetapi tidak akan disingkirkan daripada bariean. Sebagai contoh, jika k=4, maka output seharusnya 40,50,60,70,80,90,10,20,30.
-
-Cmate a method celled ChangoOrder(int k) that accepts a parameter of integer k. Thia method w'4l remove k-I element fiorn tfie tap of a queve and add “its mnesponding value to fee bottom of I/te same queue. 7fte k-th ele/zieat will be edded at the bottom of the queue but 'ill not be removed horn the qneue. For exemp/é, /fk=4, then the output should 6e •i0,50,60,70,80,90. f0,20,30.
-
+	
+Create a method called ChangeOrder(int k) that accepts a parameter of integer k.
+This method will remove the k-1 element from the top of a queue and add its corresponding value to the bottom of the same queue. The k-th element will be
+added at the bottom of the queue but will not be removed from the queue. For example, if k=4, then the output should be 40,50,60,70,80,90,10,20,30.
 (2 markah/marks)
 
-c)	Tulis sebuah program ujian untuk mengisi bans-gillr tersebut dengan nilai berikut [10, 20, 30, 40, 50, 60, 70, 80, 00]. Panggil metod CftengeOrder untuk mempamerkan implimentasi anda. Paparkan kesemua nilai temebut.
-
-Create a test program. Io fill file queue wills. he /b//o«/iug va/ues {IO, 20, 30, AO, fi0, 60, 70, 80, 90). Call ttie C/iangeOrder method la ”4lustrate your implementation. Print a// off/te we/oes.
-(2 markeh/mans)
+Create a test program to fill the queue with the following values [10,20,30,40,50,
+60, 70, 80, 90]. Call the ChangeOrder method to illustrate your implementation. Print
+all of the values
 
 =========================================================================================================================================
 
-a) Here's the program to create a class named `QueueItem`. The class should have methods as specified in Table 2:
+Here's the Java implementation of the `Queue` class and the `ChangeOrder` method:
 
-```python
-class QueueItem:
-    def __init__(self, value):
-        self.value = value
-        self.next = None
+```java
+import java.util.LinkedList;
 
+public class Queue<Item> {
+    private LinkedList<Item> queue;
 
-class Queue:
-    def __init__(self):
-        self.head = None
-        self.tail = None
-        self.size = 0
+    public Queue() {
+        queue = new LinkedList<>();
+    }
 
-    def is_empty(self):
-        return self.size == 0
+    public boolean isEmpty() {
+        return queue.isEmpty();
+    }
 
-    def get_size(self):
-        return self.size
+    public int size() {
+        return queue.size();
+    }
 
-    def enqueue(self, value):
-        new_item = QueueItem(value)
-        if self.is_empty():
-            self.head = new_item
-        else:
-            self.tail.next = new_item
-        self.tail = new_item
-        self.size += 1
+    public Item peek() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
+        return queue.getFirst();
+    }
 
-    def dequeue(self):
-        if self.is_empty():
-            return None
-        else:
-            item_value = self.head.value
-            self.head = self.head.next
-            self.size -= 1
-            if self.is_empty():
-                self.tail = None
-            return item_value
+    public void enqueue(Item item) {
+        queue.addLast(item);
+    }
 
-    def print_queue(self):
-        current = self.head
-        while current:
-            print(current.value, end=" ")
-            current = current.next
-        print()
+    public Item dequeue() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
+        return queue.removeFirst();
+    }
 
+    @Override
+    public String toString() {
+        return queue.toString();
+    }
 
-# Test the implementation
-queue = Queue()
-queue.enqueue(10)
-queue.enqueue(20)
-queue.enqueue(30)
-queue.enqueue(40)
-queue.enqueue(50)
-queue.print_queue()
-print("Size:", queue.get_size())
+    public void changeOrder(int k) {
+        if (k < 1 || k > size()) {
+            throw new IllegalArgumentException("Invalid value of k");
+        }
 
-queue.dequeue()
-queue.print_queue()
-print("Size:", queue.get_size())
+        for (int i = 0; i < k - 1; i++) {
+            Item item = dequeue();
+            enqueue(item);
+        }
+    }
+}
 ```
 
-b) Here's the implementation of the `ChangeOrder` method:
+And here's a test program that demonstrates the usage of the `Queue` class and the `ChangeOrder` method:
 
-```python
-def ChangeOrder(queue, k):
-    if k > queue.get_size():
-        return
-    for _ in range(k - 1):
-        item_value = queue.dequeue()
-        queue.enqueue(item_value)
+```java
+public class QueueTest {
+    public static void main(String[] args) {
+        Queue<Integer> queue = new Queue<>();
 
-# Test the ChangeOrder method
-queue = Queue()
-queue.enqueue(10)
-queue.enqueue(20)
-queue.enqueue(30)
-queue.enqueue(40)
-queue.enqueue(50)
-queue.enqueue(60)
-queue.enqueue(70)
-queue.enqueue(80)
-queue.enqueue(90)
+        // Fill the queue with values [10, 20, 30, 40, 50, 60, 70, 80, 90]
+        for (int i = 10; i <= 90; i += 10) {
+            queue.enqueue(i);
+        }
 
-ChangeOrder(queue, 4)
-queue.print_queue()
+        System.out.println("Original Queue: " + queue);
+
+        int k = 4;
+        queue.changeOrder(k);
+
+        System.out.println("Queue after changing order for k = " + k + ": " + queue);
+    }
+}
 ```
 
-c) Here's the test program to fill the queue with the given values [10, 20, 30, 40, 50, 60, 70, 80, 90] and call the `ChangeOrder` method to demonstrate the implementation:
-
-```python
-queue = Queue()
-queue.enqueue(10)
-queue.enqueue(20)
-queue.enqueue(30)
-queue.enqueue(40)
-queue.enqueue(50)
-queue.enqueue(60)
-queue.enqueue(70)
-queue.enqueue(80)
-queue.enqueue(90)
-
-print("Initial queue:")
-queue.print_queue()
-
-print("After ChangeOrder(4):")
-ChangeOrder(queue, 4)
-queue.print_queue()
-```
-
-Output:
-```
-Initial queue:
-10 20 30 40 50 60 70 80 90 
-After ChangeOrder(4):
-50 60 70 80 90 10 20 30 40 
-```
+When you run the `QueueTest` program, it will create a `Queue` instance, fill it with values [10, 20, 30, 40, 50, 60, 70, 80, 90], and then call the `changeOrder` method with `k = 4`. Finally, it will print the contents of the queue before and after the order change.
 
 I hope this helps! Let me know if you have any further questions.
