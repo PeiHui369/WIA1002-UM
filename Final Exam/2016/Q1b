@@ -1,24 +1,20 @@
-b)	Aturcara tersebut harus menunjukkan fungsi berikut:
 
 The program should demonstrate the following functions.’
 
-i)	Pengguna mesti berupaya untuk berinteraksi dengan aturcara. Pengguna boleh memasukkan senarai makanan untuk membuat pesanan.
 
 User must be able to interact with the program. The user should enter a list of food items to order.
 
-ii)	Memaparkan senarai makanan yang ditempah.
+
 
 Display the list of the ordered food items.
 
-iii)	Mengira bilangan makanan yang ditempah.
 
 Calculate the number of orders.
  
-iv)	Menggantikan item yang sedia ada dalam senarai pesanan dengan item makanan yang berbeza yang dinyatakan oleh pengguna.
+
 
 Replace existing item(s) in the ordered list with a different food item as specified by the user.
 
-v)	Membuang item makanan yang dinyatakan oleh pengguna.
 
 Delete a food item as specified by the user.
 
