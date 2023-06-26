@@ -1,68 +1,126 @@
-4.	Salah satu teknik popular struktur deta adalah dipanggil senarai berpaut Tuliskan suatu program menggunakan senaral berpauL Program anda mesti mempunyai metod-metod berikut (lihat Jadual 3).
-One pops/ar technique in deta structure is //zdred list Wfite a program using linhed list. Your program must contain he /a//ow/ug meifior/s (see Tebte 3).
-Jadual 3: Sensmi nama	ma metod dan speefflkaslnya
+One popular technique in deta structure is linked list Write a program using linked list. Your program must contain the following methods (see Table 3).
+
+Constructor for the linked list class
+Default constructor for the linked list class
+Constructor for the node class
+Default constructor for the node class
+isEmpty
+Return whether or not the stack is empty
+add
+Add element to the top of stack
+addAfter
+Remove element from the top of the stack
+remove
+Remove all elements from the stack
+display
+Display all elements in stack
+
+Test the methods by programming your main() method similar to the example in Figure 5.
+public static void main(String[] args) {
+
+LList list = new LList () ;
+
+list.add("Computing Mathematics 1", 3) ;
+list.add("Principles of AI", 3) ;
+list.add("Programming 1", 5) ;
+list.add("Data Structure", 5) ;
+list.display() ;
+list.addAfter("Programming 1", "Software Architecture", 4) ;
+list.addAfter("Software Architecture", "Networking", 4) ;
+
+list.remove("Networking", 4);
+list.display() ;
+
+list.remove("Principles of AI", 3)
+list.display()  ;
 
 
+run:
+Displaying the Linked List *****************************************************************************
 
+Data Structure: 5 hours
+Programming 1: 5 hours
+Principles of AI: 3 hours
+Computing Mathematics 1: 3 hours
 
+Adding Software Architecture after Programming 1
+Found Programming 1 which is book number 2 in the linked list
 
-9/12
- 
-WIA1002
+Displaying the Linked List *****************************************************************************
 
-a)	Uji metod-metod tersebut dengan memprogram di dalam metod main() anda seperti contoh di dalam Rajah 5.
+Data Structure: 5 hours
+Programming 1: 5 hours
+Principles of AI: 3 hours
+Computing Mathematics 1: 3 hours
 
-Yes/ /he methods by programming your main() method similar to the example in Figure 5.
-poblic static void -;n(Strlog[l args)(
+Adding Networking after Software Architecture
+Found Software Architecture which is book number 3 in the linked list
 
+Add a method totalCreditHours() to count the total credit hours collected. See Figure 6 for program and output example
 
+public static void main(String[] args){
 
-i »m.«adl"c	u-lnq Mathematics 3", 3): list.add(•Piiaciplez of M’,	3): list.add(’Prcgrxmeing 1-, 5);
-list.add(’Data S:Luc:ure’, 5); list.display(),
-list.addAfter(’Pr:-gremming 1", -Software Archi:ec:ure’, d): list.aa	mt-software Archizeccare’, -Ne:wOrt3ng’, A);
+LLiat list = new LList();
+list.add("Computing Mathematics 1", 3) ;
+list.add("Principles of AI", 3) ;
+list.add("Programming 1", 5) ;
+list.add("Data Structure", 5) ;
+//list.display() ;
+list.addAfter("Programming 1", "Software Architecture", 4) ;
+list.addAfter("Software Architecture", "Networking", 4) ;
+//list.display();
+list.totalCreditHours();
+list.remove("Networking", 4);
+//list.display();
+list.remove("Principles of AI", 3);
+//list.display();
+list.totalCreditHours();
 
-use.remoPe(’Hecwcrkiog’, 4).
-1i*r.display{);
+run:
+Total credit hours taken: 16
 
-lise.renove(•Pr	Ciplts of AI-, 3}: list.display{):
-Add a method totalCreditHours() to count the total cred”it hours collected. See Figure
-6 for program and oulput example.
-pubLic sratic void saio(String[} args}(
+Adding Software Architecture after Programming 1
+Found Programming 1 which is book number 2 in the linked list
 
+Adding Networking e after Software Architecture
+Found Networking which is book number 3 in the linked list
+Total cedit hours taken: 24
 
- 
+Removing Networking..
+Found a match.. Networking is book number 4 in the linked list
 
-list.edd(’Cumputing Mazbemazics l’, 3), list.add("Principles of AI’, 3); list.add(’Progrs	tng i’, s); list.addt’Daza Structure’. 5):
-//iisz.display();
-list.totalCxeoitBouzs(),
-lisE.^bdRfter(’Progra-ing l’, ’5o£zware .VcAirec:use", 4); List.xdbRfter(•5cf:ware Archite:rure", •Wesworbiog’, 9);
-.. /1isc .displb\’(); list.toralCred1zBours(); li*t.rcmovef’We:wcr2ing’, 8);
-,'/lis c,Gizplay{);
-li*z.reasawe(’Principles of AI’. 3):
-’/l*s:.displa,: t);
-was.tozaicreaimourmi):
+Removing Principles of AI..
+Found a match.. Principles of AI is book number 4 in the linked list
+Total credit hours taken: 17
+BUILD SUCCESSFUL (total time: 0 seconds)
 
-
-
-
-
-
-
-
-TocaJ crsBit Roors cakso: ¥4
 ============================================================================================================================================
-Here is an example program in Java to create a Linked List class that supports the specified methods:
+Here's the Java implementation of the LinkedList class and the Node class, including the additional method `totalCreditHours`:
 
 ```java
-public class LinkedList {
+// Node class
+class Node {
+    public String data;
+    public int creditHours;
+    public Node next;
+
+    public Node(String data, int creditHours) {
+        this.data = data;
+        this.creditHours = creditHours;
+        this.next = null;
+    }
+}
+
+// LinkedList class
+class LList {
     private Node head;
 
-    public LinkedList() {
+    public LList() {
         head = null;
     }
 
     public boolean isEmpty() {
-        return head == null;
+        return (head == null);
     }
 
     public void add(String data, int creditHours) {
@@ -78,104 +136,96 @@ public class LinkedList {
         }
     }
 
-    public void addAfter(String data, String newData, int creditHours) {
+    public void addAfter(String targetData, String newData, int creditHours) {
         Node current = head;
         while (current != null) {
-            if (current.data.equals(data)) {
+            if (current.data.equals(targetData)) {
                 Node newNode = new Node(newData, creditHours);
                 newNode.next = current.next;
                 current.next = newNode;
-                break;
+                System.out.println("Found " + targetData + " which is book number " + creditHours + " in the linked list");
+                return;
             }
             current = current.next;
         }
+        System.out.println("Cannot find " + targetData + " in the linked list.");
     }
 
-    public void remove(String data) {
+    public void remove(String data, int creditHours) {
         if (isEmpty()) {
+            System.out.println("The linked list is empty.");
             return;
         }
-        if (head.data.equals(data)) {
+        if (head.data.equals(data) && head.creditHours == creditHours) {
+            System.out.println("Removing " + data + "..");
             head = head.next;
             return;
         }
         Node current = head;
-        Node prev = null;
+        Node previous = null;
         while (current != null) {
-            if (current.data.equals(data)) {
-                prev.next = current.next;
-                break;
+            if (current.data.equals(data) && current.creditHours == creditHours) {
+                System.out.println("Removing " + data + "..");
+                previous.next = current.next;
+                return;
             }
-            prev = current;
+            previous = current;
             current = current.next;
         }
+        System.out.println("Cannot find " + data + " in the linked list.");
     }
 
     public void display() {
+        System.out.println("Displaying the Linked List ******************************");
         Node current = head;
         while (current != null) {
-            System.out.println(current.data + " - " + current.creditHours);
+            System.out.println(current.data + ": " + current.creditHours + " hours");
             current = current.next;
         }
+        System.out.println();
     }
 
-    public int totalCreditHours() {
-        int total = 0;
+    public void totalCreditHours() {
+        int totalHours = 0;
         Node current = head;
         while (current != null) {
-            total += current.creditHours;
+            totalHours += current.creditHours;
             current = current.next;
         }
-        return total;
-    }
-
-    private static class Node {
-        private String data;
-        private int creditHours;
-        private Node next;
-
-        public Node(String data, int creditHours) {
-            this.data = data;
-            this.creditHours = creditHours;
-            this.next = null;
-        }
-    }
-
-    public static void main(String[] args) {
-        LinkedList list = new LinkedList();
-        list.add("Mathematics 3", 3);
-        list.add("Principles of M", 3);
-        list.add("Programming 1", 5);
-        list.add("Data Structure", 5);
-        list.display();
-
-        System.out.println("After adding new data:");
-        list.addAfter("Programming 1", "Software Architecture", 4);
-        list.addAfter("Software Architecture", "Networking", 9);
-        list.display();
-
-        System.out.println("After removing data:");
-        list.remove("Homeworking");
-        list.remove("Principles of M");
-        list.display();
-
-        System.out.println("Total credit hours: " + list.totalCreditHours());
+        System.out.println("Total credit hours taken: " + totalHours);
+        System.out.println();
     }
 }
-```
 
-In the above program, the `LinkedList` class represents a singly linked list with a head node. Each node contains two fields: `data` (to store the name of the subject) and `creditHours` (to store the number of credit hours for the subject). The provided methods are implemented as follows:
+public class Main {
+    public static void main(String[] args) {
+        LList list = new LList();
 
-- The constructor `LinkedList()` initializes the head to `null`.
-- The `isEmpty()` method checks if the linked list is empty.
-- The `add()` method adds a new node to the end of the linked list.
-- The `addAfter()` method adds a new node after a specific node in the linked list.
-- The `remove()` method removes a node with a specific data value from the linked list.
-- The `
+        list.add("Computing Mathematics 1", 3);
+        list.add("Principles of AI", 3);
+        list.add("Programming 1", 5);
+        list.add("Data Structure", 5);
 
-display()` method displays all nodes in the linked list along with their credit hours.
-- The `totalCreditHours()` method calculates and returns the total credit hours of all subjects in the linked list.
+        list.display();
 
-In the `main()` method, the program creates an instance of the `LinkedList` class and performs various operations such as adding nodes, adding nodes after a specific node, removing nodes, and displaying the linked list. It also calculates and displays the total credit hours of all subjects.
+        list.addAfter("Programming 1", "Software Architecture", 4);
+        list.addAfter("Software Architecture", "Networking", 4);
 
-Remember to save and compile all the relevant files associated with this program (LinkedList class and the main method) and place them in the designated folder for your exam account.
+        list.remove("Networking", 4);
+        list.display();
+
+        list.remove("Principles of AI", 3);
+        list.display();
+
+        list.totalCreditHours();
+    }
+}
+``
+
+`
+
+This program defines a `LList` class representing a linked list. It has methods for the constructor, isEmpty, add, addAfter, remove, display, and totalCreditHours. The `totalCreditHours` method calculates the total credit hours by traversing the linked list and adding up the credit hours of each node.
+
+In the `main` method, you can test the functionality of the `LList` class by performing various operations such as adding nodes, removing nodes, displaying the linked list, and calculating the total credit hours.
+
+Hope this helps! Let me know if you have any further questions.
