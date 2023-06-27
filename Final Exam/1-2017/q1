@@ -1,23 +1,15 @@
-1.	Masalah how'ers of Hanoi adalah satu masalah klasik yang sering digunakan untuk menggambarkan kekuatan teknik rekursi. Penjelasan masalah tersebut adalah seperti berikut:
 
  
-The Towers of Hanoi problem is a classical problem used recursion. Explanation of the problem goes as rollows.
+The Towers of Hanoi problem is a classical problem used recursion. Explanation of the problem goes as follows.
  
 to illustrate the power of
  
-
 
 Terdapat tiga tiang dengan 64 cakera yang berlainan saiz. Asalnya, semua cakera-cakera tersebut telah diletakkan pada tiang pertama dengan cakera terbesar berada paling bawah dan yang terkecil berada paling atas. Anda perlu menggerakkan kesemua cakera-cakera yang terletak di tiang pertama ke tiang ketiga, dengan cakera terbesar berada paling bawah dan yang terkecil berada paling atas. Anda hanya boleh menggerakkan hanya satu cakera pada satu-satu masa dan cakera yang lebih besar tidak boleh diletakkan di atas cakera yang lebih kecil. Tiang kedua boleh digunakan sebagai tiang pengantara untuk membantu anda memindahkan cakera-cakera tersebut.
 
 There are three poles and 64 discs of different sizes. Initially, all the discs are placed on the first pole with the largest disc at the bottom and the smallest one at the top. You need to move all the discs from the first pole to the third pole, with f//e smallest disc at the top and the largest at the bottom. You can move only one disc at a time and at any point of time, a larger disc cannot be placed over a smaller one. The second pole can be used as an intermediate pole to help you in transferring the discs.
 
-Tiang/Pale 1	Tiang/Po/e 2	Tiang/Pole 3
-
-Bagi masalah dengan hanya 2 cakera (cakera 1 dan cakera 2), masalah ini boleh diselesaikan dengan langkah-langkah (algorithm) berikut:
-
-Langkah 1: Gerak cakera 1 dari tiang 1 ke tiang 2
-Langkah 2: Gerak cakera 2 dari tiang 1 ke tiang 3
-Langkah 3: Gerak cakera 1 dari tiang 1 ke tiang 3
+Pole 1	Pole 2	Pole 3
 
 For a puzzle with 2 discs (disc 1 and disc 2), the puzzle can be solved with the following steps (algorithm).
 
@@ -25,21 +17,9 @@ Step 1. Move disc 1 from pole 1 fo pole 2
 Slep 2: Move disc 2 from pole 1 to pole 3
 Step 3.’ Move disc 3 from pole 1 to pole 3
 
-
-
-
-
-2/8
- 
-WIA1002
-
-a)	Sekiranya anda diberi 3 cakera (cakera 1, cakera 2 dan cakera 3), rangka satu algoritma untuk menyelesaikan masalah Towers of Hanoi, di mana anda menggunakan teknik rekursi di dalam penyelesaian anda.
-
 Assume that you are given 3 discs (disc 1, disc 2, disc and disc 3), devise an algorithm to solve the Towers of Hanoi problem, in which you are using recursion in your answers.
 
 (3 markah/marks)
-
-b)	Berdasarkan algoritma yang anda tulis di (a), tuliskan sebuah program untuk menyelesaikan masalah Towers of Hanoi dengan menggunakan teknik rekursi.
 
 Based on the algorithm that you wrote in (a), write a program to solve Towers of Hanoi using recursion.
 
@@ -47,42 +27,38 @@ Based on the algorithm that you wrote in (a), write a program to solve Towers of
 
 ===================================================================================================================================================================
 
-To solve the Towers of Hanoi problem using recursion, you can follow the algorithm below:
+Sure! Here's the Java code to solve the Towers of Hanoi problem using recursion:
 
-1. Define a recursive function, let's call it "move_discs," that takes the following parameters:
-   - The number of discs to be moved (n)
-   - The source pole (src)
-   - The destination pole (dest)
-   - The auxiliary pole (aux)
-
-2. Inside the function, check the base case:
-   - If n is equal to 1, move the disc from the source pole to the destination pole and return.
-
-3. Recursively call the "move_discs" function with the following parameters:
-   - Move n-1 discs from the source pole to the auxiliary pole, using the destination pole as the auxiliary.
-   - Move the remaining disc (the largest one) from the source pole to the destination pole directly.
-   - Move the n-1 discs from the auxiliary pole to the destination pole, using the source pole as the auxiliary.
-
-Now, let's write a Python program that implements this algorithm:
-
-```python
-def move_discs(n, src, dest, aux):
-    if n == 1:
-        print(f"Move disc {n} from pole {src} to pole {dest}")
-        return
-
-    move_discs(n - 1, src, aux, dest)
-    print(f"Move disc {n} from pole {src} to pole {dest}")
-    move_discs(n - 1, aux, dest, src)
-
-
-# Example usage: Solve Towers of Hanoi with 3 discs
-num_discs = 3
-source_pole = 1
-destination_pole = 3
-auxiliary_pole = 2
-
-move_discs(num_discs, source_pole, destination_pole, auxiliary_pole)
+```java
+public class TowersOfHanoi {
+    public static void solve(int discs, String source, String auxiliary, String destination) {
+        if (discs == 1) {
+            System.out.println("Move disc 1 from " + source + " to " + destination);
+            return;
+        }
+        
+        solve(discs - 1, source, destination, auxiliary);
+        System.out.println("Move disc " + discs + " from " + source + " to " + destination);
+        solve(discs - 1, auxiliary, source, destination);
+    }
+    
+    public static void main(String[] args) {
+        int totalDiscs = 3;
+        String sourcePole = "Pole 1";
+        String auxiliaryPole = "Pole 2";
+        String destinationPole = "Pole 3";
+        
+        solve(totalDiscs, sourcePole, auxiliaryPole, destinationPole);
+    }
+}
 ```
 
-When you run this program, it will output the steps needed to solve the Towers of Hanoi problem for three discs. You can modify the `num_discs`, `source_pole`, `destination_pole`, and `auxiliary_pole` variables to solve the problem for a different number of discs or with different pole configurations.
+In the `solve` method, we pass the number of discs, the source pole, auxiliary pole, and destination pole as parameters. The base case is when there's only one disc, in which case we directly move it from the source pole to the destination pole.
+
+For more than one disc, we first recursively move `discs - 1` discs from the source pole to the auxiliary pole using the destination pole as the temporary pole. Then we move the largest disc (disc `discs`) from the source pole to the destination pole. Finally, we recursively move the remaining `discs - 1` discs from the auxiliary pole to the destination pole using the source pole as the temporary pole.
+
+In the `main` method, we specify the total number of discs (in this case, 3) and the names of the three poles. The `solve` method is called with these parameters to solve the Towers of Hanoi problem.
+
+When you run the program, it will print the sequence of moves required to solve the problem.
+
+I hope this helps! Let me know if you have any further questions.
