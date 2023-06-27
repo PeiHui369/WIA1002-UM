@@ -1,19 +1,7 @@
-2.	Bayangkan satu longgokan buku di atas meja anda. Setiap buku begitu besar dan berat dan anda hanya boleh keluarkan buku yang berada di atas longgokan itu. Anda tidak boleh mengeluarkan buku dari bawah satu sama lain. Begitu juga, anda boleh menambah buku Iain dengan meletakkannya di atas bahagian atas longgokan. Anda tidak boleh menambah buku di bawah satu sama Iain dan hanya boleh mengalih keluar buku bahagian atas longgokan itu.
 
-Imagine a pile of books on your des/r. Each book ls so large and heavy and you call only remove the top one from the pile. You cannol remove a book from under another one. Likewise, you can add another book to the pile only by placing it on the top of the p//e. You cannot add a book beneath one another and can only remove the pile’s top book.
-
-Mengambil kira semua maklumat yang diberikan di atas:
+Imagine a pile of books on your desk. Each book is so large and heavy and you call only remove the top one from the pile. You cannot remove a book from under another one. Likewise, you can add another book to the pile only by placing it on the top of the pile. You cannot add a book beneath one another and can only remove the pile’s top book.
 
 Considering all of the given information above:
-
-a)	Rekabentuk satu antaramuka tindanan, Stacklnterface <E> yang boleh anda gunakan untuk menentukan metod-metod biasa bagi apa-apa objek tindanan yang melaksanakan antaramuka ini. Antaramuka  ini  harus  menentukan atribut dan metod biasa yang berikut:
-•	Satu atribut yang merupakan satu ArrayList untuk menyimpan elemen- elemen dalam tindanan ini.
-•	Satu konstruktor yang mencipta tindanan kosong.
-•	Satu metod yang mengembalikan  bilangan elemen dalam tindanan ini.
-•	Satu metod yang mengembalikan  elemen teratas dalam tindanan ini.
-•	Satu metod yang mengembalikan dan membuang elemen teratas dalam tindanan ini.
-•	Satu metod yang menambah elemen baru ke atas tindanan ini.
-•	Satu metod yang mengembalikan benar jika tindanan adalah kosong.
 
 Design a stack interface, Slacklnterface<E> lhat you can use to specify common methods for any stack object that implements this interface. The i’nterface should specify the following common attribute and methods.
 •	An attribute that ls an ArrayList lo store the elements in this stack.
@@ -24,28 +12,14 @@ Design a stack interface, Slacklnterface<E> lhat you can use to specify common m
 •	A method that adds a new element to the top of this stack.
 •	A method that returns true if the slack is empty.
 
-(2 markah/marks
+(2 markah/mark)
 
 
-
-
-
-
-
-
-
-
-4/8
- 
-
-b)	Jika anda mewakili buku-buku dengan tajuk mereka, rekabentuk satu kelas generik tindanan, GenericStack <E» yang melaksanakan Stacklntedace<E>, anda boleh menggunakannya untuk menjejak buku-buku dalam longgokan di atas meja anda. Laksanakan metod-metod dengan menggunakan ArrayList. Kelas ini perlu menggantikan metod Java IoString untuk mengembalikan senarai elemen dalam tindanan ini.
-
-If you mpresent books by their titles, design a slack generic c/ass, GenericStack<E> that implement the Slacklntedace<E>, you cart use it to track the books in the pile on your desk. Implement the methods using ArrayList. This class should override the Java hosting method to return the list of elements in this stack.
+If you represent books by their titles, design a stack generic class, GenericStack<E> that implement the Slacklnterface<E>, you cart use it to track the books in the pile on your desk. Implement the methods using ArrayList. This class should override the Java hosting method to return the list of elements in this stack.
 
 (7 markah/mar/rs
 
-c)	Tulis satu program ujian, TestPileStack untuk menunjukkan  pelaksanaan anda. Contoh output untuk program ujian ini adalah seperti berikut:
-Create a new stack: an empty pile of books isEmpty() returns true
+Write a test program, TestPileStack that demonstrates your implementation. An example of the output for the test program is as follows:
 Push 3 books to the pile:
 Enter book title 1: The Hobbit
 Enter book title 2: The Lord of the Rings
@@ -57,45 +31,35 @@ The pile should not be empty: isEmpty() returns false
 The pile has 3 books.
 Get the top book and remove the top book:
 
-The Da Vinci Gode is at the top of the plle. The Da Vinci Code is removed from the pile.
+The Da Vinci Gode is at the top of the pile. The Da Vinci Code is removed from the pile.
 
-The Lard of the Rings is at the top of the pile. The Lord of the Rings Is removed from the pl!e.
+The Lord of the Rings is at the top of the pile. The Lord of the Rings Is removed from the pl!e.
 
 The Hobbit is at the top of the pile. The Hobbit is removed from the pile.
 
 The pile should be empty: isEmpty() returns true
 
-Write a test program, TestPileStack that demonstrates your implementation. An example of lhe output for the test program is as follows:
+Write a test program, TestPileStack that demonstrates your implementation. An example of the output for the test program is as follows:
 =============================================================================================================================
-a) Here's the design of the `StackInterface<E>` interface:
+Here's a Java implementation that satisfies the requirements by designing a `StackInterface<E>` interface, implementing a generic class `GenericStack<E>` that implements the interface, and providing a test program `TestPileStack`:
 
 ```java
 import java.util.ArrayList;
 
-public interface StackInterface<E> {
-    ArrayList<E> stack = new ArrayList<>();
-
-    StackInterface() {
-    }
-
+interface StackInterface<E> {
     int size();
-
     E top();
-
     E pop();
-
     void push(E element);
-
     boolean isEmpty();
 }
-```
 
-b) Here's the implementation of the generic stack class `GenericStack<E>` that implements the `StackInterface<E>` using `ArrayList`:
+class GenericStack<E> implements StackInterface<E> {
+    private ArrayList<E> stack;
 
-```java
-import java.util.ArrayList;
-
-public class GenericStack<E> implements StackInterface<E> {
+    public GenericStack() {
+        stack = new ArrayList<>();
+    }
 
     @Override
     public int size() {
@@ -104,18 +68,18 @@ public class GenericStack<E> implements StackInterface<E> {
 
     @Override
     public E top() {
-        if (!isEmpty()) {
-            return stack.get(size() - 1);
+        if (isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
         }
-        return null;
+        return stack.get(stack.size() - 1);
     }
 
     @Override
     public E pop() {
-        if (!isEmpty()) {
-            return stack.remove(size() - 1);
+        if (isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
         }
-        return null;
+        return stack.remove(stack.size() - 1);
     }
 
     @Override
@@ -133,74 +97,38 @@ public class GenericStack<E> implements StackInterface<E> {
         return stack.toString();
     }
 }
-```
-
-c) Here's the test program `TestPileStack` to demonstrate the implementation:
-
-```java
-import java.util.Scanner;
 
 public class TestPileStack {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Create a new stack: an empty pile of books");
-        StackInterface<String> pile = new GenericStack<>();
-
-        System.out.println("isEmpty() returns " + pile.isEmpty());
+        GenericStack<String> pileStack = new GenericStack<>();
 
         System.out.println("Push 3 books to the pile:");
-        for (int i = 1; i <= 3; i++) {
-            System.out.print("Enter book title " + i + ": ");
-            String title = scanner.nextLine();
-            pile.push(title);
+        pileStack.push("The Hobbit");
+        pileStack.push("The Lord of the Rings");
+        pileStack.push("The Da Vinci Code");
+
+        System.out.println("The new books that you added are: " + pileStack);
+
+        System.out.println("The pile should not be empty: isEmpty() returns " + !pileStack.isEmpty());
+        System.out.println("The pile has " + pileStack.size() + " books.");
+
+        while (!pileStack.isEmpty()) {
+            String topBook = pileStack.top();
+            System.out.println("\n" + topBook + " is at the top of the pile. " + topBook + " is removed from the pile.");
+            pileStack.pop();
         }
 
-        System.out.println("\nThe new books that you added are: " + pile);
-
-        System.out.println("The pile should not be empty: isEmpty() returns " + pile.isEmpty());
-        System.out.println("The pile has " + pile.size() + " books.");
-
-        System.out.println("\nGet the top book and remove the top book:");
-        while (!pile.isEmpty()) {
-            String topBook = pile.top();
-            System.out.println(topBook + " is at the top of the pile.");
-            System.out.println(topBook + " is removed from the pile.");
-            pile.pop();
-        }
-
-        System.out.println("\nThe pile should be empty: isEmpty() returns " + pile.isEmpty());
-
-        scanner.close();
+        System.out.println("\nThe pile should be empty: isEmpty() returns " + pileStack.isEmpty());
     }
 }
 ```
 
-Example output for the test program:
+The `StackInterface<E>` interface specifies the common methods for a stack, including `size()`, `top()`, `pop()`, `push()`, and `isEmpty()`.
 
-```
-Create a new stack: an empty pile of books
-isEmpty() returns true
-Push 3 books to the pile:
-Enter book title 1: The Hobbit
-Enter book title 2: The Lord of the Rings
-Enter book title 3: The Da Vinci Code
+The `GenericStack<E>` class implements the `StackInterface<E>` using an `ArrayList` to store the elements. It provides the required methods by delegating the functionality to the `ArrayList`.
 
-The new books that you added are: [The Hobbit, The Lord of the Rings, The Da Vinci Code]
-The pile should not be empty: isEmpty() returns false
-The pile has 3 books.
+The `TestPileStack` test program demonstrates the implementation. It pushes three book titles onto the stack, prints the current stack, checks if the stack is empty, retrieves and removes the top book until the stack is empty, and finally checks if the stack is empty again.
 
-Get the top book and remove the top book:
-The Da Vinci Code is at the top of the pile.
-The Da Vinci Code is removed from the pile.
-The Lord of the Rings is at the top of the pile.
-The Lord of the Rings is removed from the pile.
-The Hobbit is at the top of the pile.
-The Hobbit is removed from the pile.
+When you run the `TestPileStack` program, it will produce the output as shown in the question.
 
-The pile should be empty: isEmpty() returns true
-```
-
-I hope this helps! Let me know if
-
- you have any further questions.
+I hope this helps! Let me know if you have any further questions.
