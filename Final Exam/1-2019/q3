@@ -1,53 +1,72 @@
-3.	Salah satu teknik popular struktur data adalah  dipanggil  senarai  berpaut. Tuliskan suatu program menggunakan senarai berpaut. Program anda mesti mempunyai metod-metod berikut (lihat Jadual 3).
 
-One popular technique in data structure is linked list. WFlte a program using linked list. Your program must contain I/te following methods {see Table 3).
+One popular technique in data structure is linked list. Write a program using linked list. Your program must contain I/te following methods {see Table 3).
 
-Jadual 3: Senarai nama-nama metod dan spesifikasinya
+
 Table 3: List of method names and their specification
 
-Pembina/Nama Metod
-Gonstructor/Method name	Spesifikasi
-Specification
-i)	Constructor for fhe linked
-list class	Konstruktor lalai untuk kelas senarai berpaut
-Default consyrocfor far the linked /isf c/ass
+i)	Constructor for the linked
+list class	
+Default constructor far the linked list class
 ii) Constructor for the node
-class	Konstruktor lalai untuk kelas nod
-Default constructor for the node c/ass
-iii) isEmpty	Memulangkan sama ada senarai berpaut
-tersebut adalah kosong atau tidak
+class	
+Default constructor for the node class
+iii) isEmpty	
 Return whether or not the linked list is empty
-iv) add	Menambah elemen ke dalam senarai berpaut
-Add e/emenf to the linked list
-v) addAfter	Menambah elemen baru selepas elemen
-sedia ada di dalam senarai berpaut
+iv) add	
+Add element to the linked list
+v) addAfter	
 Add new element after existing element in the linked list
-vi) remove	Membuang elemen tertentu dari senarai
-berpaut
+vi) remove	
 Remove a particular element from the linked list
-vii) display	Memaparkan elemen-elemen di dalam
-senarai berpaut
+vii) display	
 Display all elements in the linked list
-viii) totalCreditHours()	Mengira jumlah jam kredit yang dikumpul
-Count the Malay credit hours collected
+viii) totalCreditHours()	
+Count the total credit hours collected
 
-Tulis metod main() anda di dalam fail program yang sama. Metod ma/n/ anda  perlu mengikuti cadangan seperti dalam Rajah 3(a). Ubahsuai dan uji metod- metod anda supaya menyerupai output di dalam Rajah 3(b).
+Write your main() method in the same program file. Your main() method should follow the suggestion shown in Figure 3(a). Modify and test your methods so you get the same output shown in Figure 3(
+public static void main(String[] args) {
 
-Wrte your main() method in lhe same program file. Your main() method should follow the suggestion shown in Figure 3(a). Modify and test your methods so you get the same oulpul shown in Figure 3(b).
+LinkedList list = new LinkedList() ;
+list.add("Computing Mathematics", 3);
+list.add("Network Architecture", 3);
+list.add("Final Year Project", 5);
+list.add("Data Structure", 5);
+list.display();
+list.totalCreditHours() ;
+list.addAfter("Final Year Project", "Software Modelling", 4) ;
+list.addAfter("Software Modelling", "Intelligent Robot", 3) ;
+list.addAfter("Computing Mathematics", "Gamification", 4) ;
+list.totalCreditHours() ;
+list.remove("Network Architecture", 3) ;
+list.remove("Software Modelling", 4) ;
+list.display() ;
+list.totalCreditHours() ;
 
+run:
+displaying the Linked List ----------------------------------------
 
-7/10
- 
-WIA1002
+Data Structure: 5 hours
+Final Year Project: 5 hours
+Network Architecture: 3 hours
+Computing Mathematics: 3 hours
+Total Credit Hours: 16
+Adding Software Modelling after Final Year Project
+Adding Intelligent Robot after Software Modelling
+Adding Gamification after Computing Mathematics
+Total Credit Hours: 27
+Removing Network Architecture..
+Removing Software Modelling..
+Displaying the Linked List-------------------------------
 
-Rajah 3(a): Metod main() I Figure 3(a). Main() method
+Data Structure: 5 hours 
+Final Year Project: 5 hours
+Intelligent Robot: 3 hours
+Computing Mathematics: 3 hours
+Gamification: 4 hours
 
+Total credit hours: 20
+BUILD SUCCESSFUL (total time: 0 seconds)
 
-
-
-8/10
- 
-WIA1002
 
 * Markah tidak akan diberikan bagi apa-apa pelaksanaan menggunakan kelas Linked List atau mana-mana kelas Collection yang sedia ada  didapati  daripada Java API Library.
 
@@ -56,23 +75,23 @@ any other Collection classes ava//ab/e from the Java API Library.
 
 ======================================================================================================================
 
-Here's an example program using a linked list that implements the provided methods:
+Sure! Here's a Java program that implements a linked list according to the specifications given:
 
 ```java
 class Node {
-    String data;
+    String course;
     int creditHours;
     Node next;
 
-    public Node(String data, int creditHours) {
-        this.data = data;
+    public Node(String course, int creditHours) {
+        this.course = course;
         this.creditHours = creditHours;
         this.next = null;
     }
 }
 
 class LinkedList {
-    Node head;
+    private Node head;
 
     public LinkedList() {
         this.head = null;
@@ -82,8 +101,8 @@ class LinkedList {
         return head == null;
     }
 
-    public void add(String data, int creditHours) {
-        Node newNode = new Node(data, creditHours);
+    public void add(String course, int creditHours) {
+        Node newNode = new Node(course, creditHours);
         if (isEmpty()) {
             head = newNode;
         } else {
@@ -95,11 +114,11 @@ class LinkedList {
         }
     }
 
-    public void addAfter(String existingData, String newData, int creditHours) {
+    public void addAfter(String existingCourse, String newCourse, int creditHours) {
         Node current = head;
         while (current != null) {
-            if (current.data.equals(existingData)) {
-                Node newNode = new Node(newData, creditHours);
+            if (current.course.equals(existingCourse)) {
+                Node newNode = new Node(newCourse, creditHours);
                 newNode.next = current.next;
                 current.next = newNode;
                 break;
@@ -108,70 +127,75 @@ class LinkedList {
         }
     }
 
-    public void remove(String data) {
-        if (isEmpty()) {
+    public void remove(String course, int creditHours) {
+        if (head == null) {
             return;
         }
-        if (head.data.equals(data)) {
+        if (head.course.equals(course) && head.creditHours == creditHours) {
             head = head.next;
             return;
         }
         Node current = head;
-        Node prev = null;
+        Node previous = null;
         while (current != null) {
-            if (current.data.equals(data)) {
-                prev.next = current.next;
-                return;
+            if (current.course.equals(course) && current.creditHours == creditHours) {
+                previous.next = current.next;
+                break;
             }
-            prev = current;
+            previous = current;
             current = current.next;
         }
     }
 
     public void display() {
+        System.out.println("Displaying the Linked List ------------------------------");
         Node current = head;
         while (current != null) {
-            System.out.println(current.data);
+            System.out.println(current.course + ": " + current.creditHours + " hours");
             current = current.next;
         }
+        System.out.println();
     }
 
-    public int totalCreditHours() {
-        int total = 0;
+    public void totalCreditHours() {
+        int totalHours = 0;
         Node current = head;
         while (current != null) {
-            total += current.creditHours;
+            totalHours += current.creditHours;
             current = current.next;
         }
-        return total;
+        System.out.println("Total credit hours: " + totalHours);
+        System.out.println();
     }
+}
 
+public class Main {
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
         list.add("Computing Mathematics", 3);
-        list.add("Hardware Exchange", 5);
-        list.add("Final Year Project", 8);
-        list.add("Data Structure", 7);
-
+        list.add("Network Architecture", 3);
+        list.add("Final Year Project", 5);
+        list.add("Data Structure", 5);
+        list.display();
         list.totalCreditHours();
         list.addAfter("Final Year Project", "Software Modelling", 4);
         list.addAfter("Software Modelling", "Intelligent Robot", 3);
-        list.addAfter("Computing Mathematics", "Gameification", 4);
-        list.remove("Network Architecture");
+        list.addAfter("Computing Mathematics", "Gamification", 4);
+        list.totalCreditHours();
+        list.remove("Network Architecture", 3);
+        list.remove("Software Modelling", 4);
         list.display();
+        list.totalCreditHours();
     }
 }
 ```
 
-When you run the `main` method, you should get the following output:
+This program defines a `Node` class that represents a node in the linked list. Each node contains information about a course and its credit hours, as well as a reference to the next node.
 
-```
-Computing Mathematics
-Hardware Exchange
-Final Year Project
-Software Modelling
-Intelligent Robot
-Data Structure
-```
+The `LinkedList` class represents the linked list and provides methods to add elements, add elements after an existing element, remove elements, display the list, and calculate the total credit hours.
 
-Please note that the output may vary depending on the modifications you make to the program or the elements you add/remove from the linked list.
+The `main` method demonstrates the usage of the linked list by creating an instance of
+
+ the `LinkedList` class, adding elements, performing operations, and displaying the results.
+
+I hope this helps! Let me know if you have any further questions.
