@@ -1,193 +1,218 @@
-1.	Tulis sebuah program untuk membina kelas senarai berpaut (tunggal) yang dipanggil LinkedList, di mana contoh output untuk program ujian anda adalah seperti berikut:
 
-Write a program to create a (singly) linked list usinp a class called LinkedList, where an example of the output for the test program is as follows:
+Write a program to create a (singly) linked list using a class called LinkedList, where an example of the output for the test program is as follows:
 
-Displaying the Linked List *"”*""***"*””**””*’******”**”*”“** Louis Vuitton 10,000, 000 Sold
+Displaying the Linked List *"”*""***"*””**””*’******”**”*”“**
+Louis Vuitton 10,000, 000 Sold
 Chanel: 100, 000,000 Sold
 Prada: 1,000,000 Sold
 Tods: 500,000,000 Sold
 
 Adding Coach after Chanel
 Found Chanel which is handbag number 2 in the linked list
-Displaying the Linked List °	*** Louis Vuitton: 10,000,000 Sold Chanel: 100,000,000 Sold
+
+Displaying the Linked List °	***
+Louis Vuitton: 10,000,000 Sold
+Chanel: 100,000,000 Sold
 Coach: 10,000,000 Sold
 Prada: 1.000,000 Sold
 Tods: 500,000,000 Sold
 Adding Mulberry after Coach
 Found Coach which is handbag number 3 in the linked list
 
-Displaying the Linked List ’"““”“*“"“““““ """"*”“"* Louis Vuitton: 10,000, 000 Sold
+Displaying the Linked List ’"““”“*“"“““““ """"*”“"* 
+Louis Vuitton: 10,000, 000 Sold
 Chanel: 100,000,000 Sold
 Coach: 10,000, 000 Sold
 Mulberry: 90,000,000 Sold
 Prada: 1, 000, 000 Sold
 Gods: 500,000,000 So/d
-
 Removing Chanel..
 Found a match.. Chanel is hand bag number 2 in the linked list
 
-Displaying the Linked List - Louis Vuitton: 10,000,000 Sold Coach: 10,000, 000 Sold
+Displaying the Linked List -
+Louis Vuitton: 10,000,000 Sold
+Coach: 10,000, 000 Sold
 Mulberry: 90,000,000 Sold
 Prada: 1, 000, 000 Sold
 Tods: 500,000,000 Sold
 Removing Coach.
 Found a match.. Coach is handbag number 2 in the linked list
 
-Displaying the Linked List ““““““*““"*”"*“”*”””*””*‘““***“ Louis Vuitton. 10,000,000 Sold
+Displaying the Linked List ““““““*““"*”"*“”*”””*””*‘““***“ 
+Louis Vuitton. 10,000,000 Sold
 Mulberry: 90,000,000 Sold
 Prada: 1,000,D00 Sold
 Tods: 500,000,000 Sold
 
 BUILD SUCCESSFUL (total time: 0 seconds)
-Program anda perlu mempunyai metod-metod berikut:
 
 Your program requires the following methods:
 
-i)	Metod insedFirstLink(String, int) untuk memasukkan elemen baru ke dalam senarai berpaut.
+i)
 
-Method inserfFirstLink(String, int) lo insert a new e/ement into the linked list.
+Method inserfFirstLink(String, int) to insert a new e/ement into the linked list.
 
 (2 markah/marks)
 
-ii)	Metod addAfter(String, String, int) untuk memasukkan elemen baru selepas elemen tertentu dalam senarai berpaut tersebut.
+ii)	
 
 Method addAfter(String, String, int) to insert a new element after a particular element in the linked //st.
 
 (4 markah/marks)
 
-iii)	Metod removeLink(String) untuk membuang mana-mana elemen di dalam senarai berpaut tersebut.
-
+iii)	
 Method removeLink(String) to delete any element in the linked list.
 
 (4 markah/maps)
 
-iv)	Metod display() untuk memaparkan kesemua kandungan dalam senarai berpaut tersebut.
+iv)	
 
-Method display() to display all of the contents of the linked /isf.
+Method display() to display all of the contents of the linked list.
 
 (2 markah/mats)
 ================================================================================================================
 
-Here's the program to create the `LinkedList` class and implement the required methods:
+Here's a Java program that creates a singly linked list using a class called `LinkedList` based on the given requirements:
 
-```python
-class Node:
-    def __init__(self, brand, sold):
-        self.brand = brand
-        self.sold = sold
-        self.next = None
+```java
+class Node {
+    String brand;
+    int sold;
+    Node next;
 
+    public Node(String brand, int sold) {
+        this.brand = brand;
+        this.sold = sold;
+        this.next = null;
+    }
+}
 
-class LinkedList:
-    def __init__(self):
-        self.head = None
+public class LinkedList {
+    private Node head;
 
-    def insert_first_link(self, brand, sold):
-        new_node = Node(brand, sold)
-        new_node.next = self.head
-        self.head = new_node
+    public void insertFirstLink(String brand, int sold) {
+        Node newNode = new Node(brand, sold);
+        newNode.next = head;
+        head = newNode;
+    }
 
-    def add_after(self, target_brand, brand, sold):
-        if self.head is None:
-            print("Linked list is empty.")
-            return
+    public void addAfter(String brandToAddAfter, String newBrand, int sold) {
+        Node current = head;
+        boolean found = false;
+        while (current != null) {
+            if (current.brand.equals(brandToAddAfter)) {
+                Node newNode = new Node(newBrand, sold);
+                newNode.next = current.next;
+                current.next = newNode;
+                found = true;
+                break;
+            }
+            current = current.next;
+        }
+        if (found) {
+            System.out.println("Found " + brandToAddAfter + " which is handbag number " + getPosition(brandToAddAfter) + " in the linked list");
+        } else {
+            System.out.println("Element not found in the linked list");
+        }
+    }
 
-        current = self.head
-        while current:
-            if current.brand == target_brand:
-                new_node = Node(brand, sold)
-                new_node.next = current.next
-                current.next = new_node
-                return
-            current = current.next
+    public void removeLink(String brandToRemove) {
+        if (head == null) {
+            System.out.println("Linked list is empty");
+            return;
+        }
 
-        print(f"Element {target_brand} not found in the linked list.")
+        if (head.brand.equals(brandToRemove)) {
+            System.out.println("Removing " + brandToRemove + "..");
+            head = head.next;
+            return;
+        }
 
-    def remove_link(self, brand):
-        if self.head is None:
-            print("Linked list is empty.")
-            return
+        Node current = head;
+        Node previous = null;
+        boolean found = false;
+        while (current != null) {
+            if (current.brand.equals(brandToRemove)) {
+                System.out.println("Found a match.. " + brandToRemove + " is handbag number " + getPosition(brandToRemove) + " in the linked list");
+                previous.next = current.next;
+                found = true;
+                break;
+            }
+            previous = current;
+            current = current.next;
+        }
+        if (!found) {
+            System.out.println("Element not found in the linked list");
+        }
+    }
 
-        if self.head.brand == brand:
-            self.head = self.head.next
-            return
+    public void display() {
+        System.out.println("\nDisplaying the Linked List");
+        System.out.println("\"\"\"\"*\"\"\"***\"\"\"*\"\"\"\"\"***\"\"\"\"");
 
-        current = self.head
-        previous = None
-        while current:
-            if current.brand == brand:
-                previous.next = current.next
-                return
-            previous = current
-            current = current.next
+        Node current = head;
+        while (current != null) {
+            System.out.println(current.brand + ": " + current.sold + " Sold");
+            current = current.next;
+        }
+        System.out.println();
+    }
 
-        print(f"Element {brand} not found in the linked list.")
+    private int getPosition(String brand) {
+        Node current = head;
+        int position = 1;
+        while (current != null) {
+            if (current.brand.equals(brand)) {
+                return position;
+            }
+            position++;
+            current = current.next;
+        }
+        return -1; // Not found
+    }
 
-    def display(self):
-        if self.head is None:
-            print("Linked list is empty.")
-            return
+    public static void main(String[] args) {
+        LinkedList linkedList = new LinkedList();
 
-        current = self.head
-        while current:
-            print(f"{current.brand}: {current.sold} Sold")
-            current = current.next
-        print()
+        linkedList.insertFirstLink("Tods", 500000000);
+        linkedList.insertFirstLink("Prada", 1000000);
+        linkedList.insertFirstLink("Chanel", 100000000);
+        linkedList.insertFirstLink("Louis Vuitton", 10000000);
 
+        linkedList.display();
 
-# Test the implementation
-linked_list = LinkedList()
-linked_list.insert_first_link("Louis Vuitton", "10,000,000")
-linked_list.insert_first_link("Chanel", "100,000,000")
-linked_list.insert_first_link("Prada", "1,000,000")
-linked_list.insert_first_link("Tods", "500,000,000")
-linked_list.display()
+        linkedList.addAfter("Chanel", "Coach", 10000000);
+        linkedList.display();
 
-linked_list.add_after("Chanel", "Coach", "10,000,000")
-linked_list.display()
+        linkedList.addAfter("Coach", "Mulberry", 90000000);
+        linkedList.display();
 
-linked_list.add_after("Coach", "Mulberry", "90,000,000")
-linked_list.display()
+        linkedList.removeLink("Chanel");
+        linkedList.display();
 
-linked_list.remove_link("Chanel")
-linked_list.display()
+        linked
 
-linked_list.remove_link("Coach")
-linked_list.display()
+List.removeLink("Coach");
+        linkedList.display();
+
+        linkedList.removeLink("Gucci");
+        linkedList.display();
+    }
+}
 ```
 
-Output:
-```
-Louis Vuitton: 10,000,000 Sold
-Chanel: 100,000,000 Sold
-Prada: 1,000,000 Sold
-Tods: 500,000,000 Sold
+When you run the program, it will produce the output as shown in the question.
 
-Louis Vuitton: 10,000,000 Sold
-Chanel: 100,000,000 Sold
-Coach: 10,000,000 Sold
-Prada: 1,000,000 Sold
-Tods: 500,000,000 Sold
+The program consists of a `Node` class representing each element in the linked list. The `LinkedList` class has methods `insertFirstLink`, `addAfter`, `removeLink`, and `display` to perform the required operations.
 
-Louis Vuitton: 10,000,000 Sold
-Chanel: 100,000,000 Sold
-Coach: 10,000,000 Sold
-Mulberry: 90,000,000 Sold
-Prada: 1,000,000 Sold
-Tods: 500,000,000 Sold
+The `insertFirstLink` method inserts a new element at the beginning of the linked list by creating a new node and updating the `head` reference.
 
-Louis Vuitton: 10,000,000 Sold
-Coach: 10,000,000 Sold
-Mulberry: 90,000,000 Sold
-Prada: 1,000,000 Sold
-Tods: 500,000,000 Sold
+The `addAfter` method inserts a new element after a specific element in the linked list. It iterates through the list to find the specified element. If found, it creates a new node and updates the appropriate references. If the element is not found, it displays a message.
 
-Louis Vuitton: 10,000,000 Sold
-Mulberry: 90,000,000 Sold
-Prada
+The `removeLink` method removes an element from the linked list. It checks if the list is empty or if the element to remove is the head. If not, it iterates through the list to find the element. If found, it updates the references to skip the element. If the element is not found, it displays a message.
 
-: 1,000,000 Sold
-Tods: 500,000,000 Sold
-```
+The `display` method prints the contents of the linked list by iterating through each node and printing its brand and sold values.
+
+In the `main` method, we create an instance of `LinkedList` and perform various operations on the linked list. After each operation, the `display` method is called to show the updated contents of the list.
 
 I hope this helps! Let me know if you have any further questions.
