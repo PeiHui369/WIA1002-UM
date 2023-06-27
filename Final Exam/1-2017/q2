@@ -1,7 +1,7 @@
 Queue supports the insert and the remove operations based on the First-in First-out
 
 
-Write a program fo create a class named Queue<ltem>. The class should consist of methods as specified in Table 2:
+Write a program to create a class named Queue<ltem>. The class should consist of methods as specified in Table 2:
 Constructor for Queue class
 Default constructor
 
@@ -18,94 +18,85 @@ enqueue
 Add element to the bottom of the queue
 
 dequeue
-Remove element rrom the top of the queue
+Remove element from the top of the queue
 
 tostring
 Print the element in the queue
 
 Create a method called ChangeOrder(int k) that accepts a parameter of integer k. This method will remove k-1 element from the top of a queue and add its corresponding value to the bottom of the same queue. The k-th element will be added at the bottom of the queue but will not be removed from the queue. For example.”
 
-Andaikan input / Say input: 10, 20, 30, 40, 50, 60, 70, 80, 90 Dan nilai / And value of k = 4,
-Maka output / Thus the output. 40, 50, 60, 70, 80, 90, 10, 20, 30
-
 Create a test program to fill the queue with the following values [10, 20, 30, 40, 50, 60, 70, 80, 90]. Call the ChangeOrder method to illustrate your implementation. Print all of the values.
+===================================================================================
+Here's the Java code for the Queue class with the specified methods, including the `ChangeOrder` method:
 
-Create a test program to fill the queue with the following values [10, 20, 30, 40, 50, 60, 70, 80, 90]. Call the ChangeOrder method to illustrate your implementation. Print all of the values.
+```java
+import java.util.LinkedList;
+import java.util.Queue;
 
-Apologies for the confusion earlier. Let me answer all the questions for you.
+public class QueueExample<T> {
+    private Queue<T> queue;
 
-1. Constructor for the `Queue` class:
-```python
-class Queue:
-    def __init__(self):
-        self.queue = []
+    public QueueExample() {
+        queue = new LinkedList<>();
+    }
+
+    public boolean isEmpty() {
+        return queue.isEmpty();
+    }
+
+    public int size() {
+        return queue.size();
+    }
+
+    public T peek() {
+        return queue.peek();
+    }
+
+    public void enqueue(T element) {
+        queue.offer(element);
+    }
+
+    public T dequeue() {
+        return queue.poll();
+    }
+
+    public void toString() {
+        System.out.println(queue);
+    }
+
+    public void changeOrder(int k) {
+        if (k <= 0 || k > queue.size())
+            return;
+
+        for (int i = 0; i < k - 1; i++) {
+            T element = queue.poll();
+            queue.offer(element);
+        }
+    }
+
+    public static void main(String[] args) {
+        QueueExample<Integer> queueExample = new QueueExample<>();
+
+        queueExample.enqueue(10);
+        queueExample.enqueue(20);
+        queueExample.enqueue(30);
+        queueExample.enqueue(40);
+        queueExample.enqueue(50);
+        queueExample.enqueue(60);
+        queueExample.enqueue(70);
+        queueExample.enqueue(80);
+        queueExample.enqueue(90);
+
+        queueExample.changeOrder(4);
+        queueExample.toString();
+    }
+}
 ```
 
-2. `isEmpty` method:
-```python
-    def isEmpty(self):
-        return len(self.queue) == 0
-```
+In this code, we use the built-in `LinkedList` class to implement the Queue data structure. The `QueueExample` class has the specified methods: `isEmpty`, `size`, `peek`, `enqueue`, `dequeue`, and `toString`. Additionally, we added the `changeOrder` method as requested.
 
-3. `size` method:
-```python
-    def size(self):
-        return len(self.queue)
-```
+In the `changeOrder` method, we accept an integer `k` as a parameter. This method removes `k-1` elements from the top of the queue and adds their corresponding values to the bottom of the same queue. The k-th element is added to the bottom but is not removed. This is achieved by using a temporary variable to store the element being removed from the queue and then adding it back to the queue using the `offer` method.
 
-4. `peek` method:
-```python
-    def peek(self):
-        if self.isEmpty():
-            return None
-        return self.queue[0]
-```
+In the `main` method, we create an instance of the `QueueExample` class, enqueue values from 10 to 90, and then call the `changeOrder` method with `k = 4`. Finally, we print the elements in the queue using the `toString` method.
 
-5. `enqueue` method:
-```python
-    def enqueue(self, item):
-        self.queue.append(item)
-```
-
-6. `dequeue` method:
-```python
-    def dequeue(self):
-        if self.isEmpty():
-            return None
-        return self.queue.pop(0)
-```
-
-7. `tostring` method:
-```python
-    def tostring(self):
-        print(self.queue)
-```
-
-8. `ChangeOrder` method:
-```python
-    def ChangeOrder(self, k):
-        if k <= 1 or k > self.size():
-            return
-        for _ in range(k-1):
-            item = self.dequeue()
-            self.enqueue(item)
-```
-
-Test program to fill the queue with values [10, 20, 30, 40, 50, 60, 70, 80, 90], and call the `ChangeOrder` method:
-
-```python
-queue = Queue()
-
-# Fill the queue with values [10, 20, 30, 40, 50, 60, 70, 80, 90]
-values = [10, 20, 30, 40, 50, 60, 70, 80, 90]
-for value in values:
-    queue.enqueue(value)
-
-# Call the ChangeOrder method with k = 4
-queue.ChangeOrder(4)
-
-# Print all values
-queue.tostring()
-```
-
-The output will be: `[40, 50, 60, 70, 80, 90, 10, 20, 30]`
+I hope this helps! Let me know if you have any further questions.
