@@ -1,42 +1,46 @@
-4.	Peta-pagar merupakan struktur yang menyimpan data dalam bentuk pasangan- pasangan Kekunci dan nilai. Tuliskan suatu program menggunakan peta-pagar. Program anda mesti mempunyai metod-metod berikut (lihat Jadual 4).
 
 HashMap is a structure  that stores data in the form of Key and value pairs. Wrile  a program to implement HashMap. Your program must con/a/ñ the followi'ng methods (see had/e 4).
 
-Jadual 4: Senarai nama-nama metod dan spesifikasinya
 Table 4: List of method names and their specification
 
-Pembina/Nama Metod
-Constructor/Method name	Spesifikasi
-Specification
-i)	Conslruclor for the
-HashMap class	Konstruktor lalai yang menerima parameter-
-parameter kekunci dan nilai pasangan
+i)	Constructor for the
+HashMap class	
 Default constructor which accepts Key and value
 pair parameters
-ii)	get	Memulangkan ent/y yang dipetakan kepada
-kekunci di dalam peta-pagar
+ii)	get	
 Return the entry mapped to key in the HashMap
- 	Menambah ents baru sekiranya kekunci
-belum lagi dipetakan di dalam peta-pagar. Sebaliknya, mengemaskini entry lama sekiranya kekunci telah wujud di dalam peta- pagar.
-Add new ents if Key is not yet mapped into the HashMap. O/henv/se, update entry mapped to Key if the HashMap a/ready contains lhe Key
-
-Tulis metod main() anda di dalam fail program yang sama. Metod main() anda perlu mengikuti cadangan seperti dalam Rajah 4(a). Ubahsuai dan uji metod- metod anda supaya menyerupai output di dalam Rajah 4(b).
+iii) put
+Add new entry if Key is not yet mapped into the HashMap, Otherwise, update entry mapped to Key if the HashMap already contains the Key
 
 Write your main() method in the same program file. Your main() method should follow the suggestion shown in Figure 4(a}. Modify and test your methods so you get the same ou/pof shown in Figure 4(b).
 
+public static void main(String[] args) {
+MyHashMap myHashMap = new MyHashMap() ;
 
+myHashMap.put("BruceW", "011-8998990") ;
+myHashMap.put("DeanW", "017-2274000") ;
+myHashMap.put("TonyS", "019-4550800") ;
+myHashMap.put("LaraC", "014-6402009") ;
 
+Entry el = myHashMap.get("DeanW") ;
+System.out.printIn("Value: " + el.getValue()) ;
+Entry e2 = myHashMap.get("TonyS") ;
+System.out.printIn("Value: " + e2.getValue()) ;
 
+myHashMap.put("BruceW", "011-5677900") ;
+Entry e3 = myHashMap.get("Brucew") ;
+System.out.printIn("Value: " + e3.getValue()) ;
 
+myHashMap.put("JeanG", "019-9001123") ;
+Entry e4 = myHashMap.get("JeanG") ;
+System.out.printIn("Value: " + e4.getValue()) ;
 
-
-9/10
- 
-WIA1002
-
-Rajah 4(a): Metod main() i Figure 4(a). main() method
-
-Rajah 4(b): Output I Figure 4(b): Outpul
+run:
+Value: 017-2274000
+Value: 019-4550800
+Value: 011-5677900
+Value: 019-9001123
+BUILD SUCCESSFUL (total time: 0 seconds)
 
 * Markah tidak akan diberikan bagi apa-apa pelaksanaan menggunakan kelas HashMap atau mana-mana kelas Collection yang sedia ada didapati daripada Java API Library.
 
@@ -46,122 +50,107 @@ No marks will be given for any implementation using the existing HashMap class o
 
 ===========================================================================================================================
 
-Here's an example program using a linked list that implements the provided methods:
+Certainly! Here's a Java program that implements a HashMap according to the specifications given:
 
 ```java
-class Node {
-    String data;
-    int creditHours;
-    Node next;
+class Entry {
+    private String key;
+    private String value;
 
-    public Node(String data, int creditHours) {
-        this.data = data;
-        this.creditHours = creditHours;
-        this.next = null;
+    public Entry(String key, String value) {
+        this.key = key;
+        this.value = value;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public String getValue() {
+        return value;
     }
 }
 
-class LinkedList {
-    Node head;
+class MyHashMap {
+    private Entry[] entries;
+    private int capacity;
+    private int size;
 
-    public LinkedList() {
-        this.head = null;
+    public MyHashMap() {
+        this.capacity = 10;
+        this.entries = new Entry[capacity];
+        this.size = 0;
     }
 
-    public boolean isEmpty() {
-        return head == null;
+    private int hash(String key) {
+        int hashCode = key.hashCode();
+        return Math.abs(hashCode % capacity);
     }
 
-    public void add(String data, int creditHours) {
-        Node newNode = new Node(data, creditHours);
-        if (isEmpty()) {
-            head = newNode;
+    public Entry get(String key) {
+        int index = hash(key);
+        Entry entry = entries[index];
+        while (entry != null) {
+            if (entry.getKey().equals(key)) {
+                return entry;
+            }
+            entry = entry.next;
+        }
+        return null;
+    }
+
+    public void put(String key, String value) {
+        Entry newEntry = new Entry(key, value);
+        int index = hash(key);
+        Entry entry = entries[index];
+        if (entry == null) {
+            entries[index] = newEntry;
         } else {
-            Node current = head;
-            while (current.next != null) {
-                current = current.next;
+            while (entry != null) {
+                if (entry.getKey().equals(key)) {
+                    entry.value = value;
+                    return;
+                }
+                if (entry.next == null) {
+                    entry.next = newEntry;
+                    break;
+                }
+                entry = entry.next;
             }
-            current.next = newNode;
         }
+        size++;
     }
+}
 
-    public void addAfter(String existingData, String newData, int creditHours) {
-        Node current = head;
-        while (current != null) {
-            if (current.data.equals(existingData)) {
-                Node newNode = new Node(newData, creditHours);
-                newNode.next = current.next;
-                current.next = newNode;
-                break;
-            }
-            current = current.next;
-        }
-    }
-
-    public void remove(String data) {
-        if (isEmpty()) {
-            return;
-        }
-        if (head.data.equals(data)) {
-            head = head.next;
-            return;
-        }
-        Node current = head;
-        Node prev = null;
-        while (current != null) {
-            if (current.data.equals(data)) {
-                prev.next = current.next;
-                return;
-            }
-            prev = current;
-            current = current.next;
-        }
-    }
-
-    public void display() {
-        Node current = head;
-        while (current != null) {
-            System.out.println(current.data);
-            current = current.next;
-        }
-    }
-
-    public int totalCreditHours() {
-        int total = 0;
-        Node current = head;
-        while (current != null) {
-            total += current.creditHours;
-            current = current.next;
-        }
-        return total;
-    }
-
+public class Main {
     public static void main(String[] args) {
-        LinkedList list = new LinkedList();
-        list.add("Computing Mathematics", 3);
-        list.add("Hardware Exchange", 5);
-        list.add("Final Year Project", 8);
-        list.add("Data Structure", 7);
+        MyHashMap myHashMap = new MyHashMap();
 
-        list.totalCreditHours();
-        list.addAfter("Final Year Project", "Software Modelling", 4);
-        list.addAfter("Software Modelling", "Intelligent Robot", 3);
-        list.addAfter("Computing Mathematics", "Gameification", 4);
-        list.remove("Network Architecture");
-        list.display();
+        myHashMap.put("BruceW", "011-8998990");
+        myHashMap.put("DeanW", "017-2274000");
+        myHashMap.put("TonyS", "019-4550800");
+        myHashMap.put("LaraC", "014-6402009");
+
+        Entry el = myHashMap.get("DeanW");
+        System.out.println("Value: " + el.getValue());
+        Entry e2 = myHashMap.get("TonyS");
+        System.out.println("Value: " + e2.getValue());
+
+        myHashMap.put("BruceW", "011-5677900");
+        Entry e3 = myHashMap.get("BruceW");
+        System.out.println("Value: " + e3.getValue());
+
+        myHashMap.put("JeanG", "019-9001123");
+        Entry e4 = myHashMap.get("JeanG");
+        System.out.println("Value: " + e4.getValue());
     }
 }
 ```
 
-When you run the `main` method, you should get the following output:
+This program defines an `Entry` class that represents an entry in the HashMap. Each entry contains a key and a value.
 
-```
-Computing Mathematics
-Hardware Exchange
-Final Year Project
-Software Modelling
-Intelligent Robot
-Data Structure
-```
+The `MyHashMap` class represents the HashMap and provides methods to get and put entries. It uses an array of `Entry` objects to store the data and a hash function to determine the index of the array for each key.
 
-Please note that the output may vary depending on the modifications you make to the program or the elements you add/remove from the linked list.
+The `main` method demonstrates the usage of the HashMap by creating an instance of the `MyHashMap` class, adding entries, retrieving values based on keys, and displaying the results.
+
+I hope this helps! Let me know if you have any further questions.
