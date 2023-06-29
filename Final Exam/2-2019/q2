@@ -11,222 +11,157 @@ c) Sort Sales Representative Name using Bubble Sort in ascending order.
 
 Then, write a main method which calls the relevant methods to display the sorting results.
 The original data and sample output
-
-
-(3 marks)
-
-(2.5 marks)
- 
-c)	Sort Sa I. es Rep resen t:a I j.we Name using Bubble Sort in ascending order.
-(2.5 marks)
-
-Then, wr”ite a ma in method whlch calls the relevant methods to display the sorting results.
-(2 marks)
-The original data and sample output are given in Figure 2 below:
  
 
 or1g1na1 Data:
-As1a	458 Ahnad
-Europe	51s Hen1sh
-Europe	658 Banny
-Greenland	208 sin
-! asia	3s$ Eli
-Greenland	678 Ben
-1s1a	198 Lee
-Sorting Result on Reg1on using Select1onSort:
+As1a	450 AhMad
+Europe	518 Hen1sh
+Europe	650 Banny
+Greenland	208 Ain
+Asia	390 Ali
+Greenland	670 Ben
+Asia 790 Lee
+
+Sorting Result on Reg1on using SelectionSort:
 Greenland	208 Ain	 
 Greenland	670 Ben
 Europe	659 Banny
-Europe	516 8ea1sh
-As1a	39e AU
-As1a	458 Ahaad
-As1a	798 Lee
+Europe	518 Hemish
+Asia 390 Ali
+Asia	450 Ahmad
+Asia	790 Lee
 
-Sorting Result on Sales «s1ng Insert1onSort: Greenland	288 Aln
-As1a	390 All
-4se Ahaad
-!Erope	518 8ea1sh
-Europe	658 Banny
-' Greenland	678 Ben
-As1a	798 Lee
+Sorting Result on Sales «s1ng Insert1onSort:
+Greenland	200 Aln
+As1a	390 Ali
+Asia 450 Ahmad
+Erope	518 Hemish
+Europe	650 Banny
+Greenland	670 Ben
+As1a	790 Lee
 
-'sorting Result on salesRep usIng Bubb1eSort:
-As1a	458	Ahead
-, Greenland	208	Aln
-As1a	3s9	Ali
-Europe	658	Banny
-Greenland	678	ben
-Europe	51s	lien1sh
-As1a		798 	Lee	
+Sorting Result on salesRep usIng Bubb1eSort:
+Asia 450 Ahmad
+Greenland	200	Ain
+Asia	390	Ali
+Europe	650	Banny
+Greenland	670	Ben
+Europe	518	Hemish
+Asia	798	Lee	
 Rajah 2 /FlgUre 2
 ==========================================================================================================================
-Here's the updated `Q2_7ouzMaLz1cNuzhe r.java` file with the implementation of the `SalesList` and `SalesTest` classes, including the sorting methods and the main method:
+Here's the implementation of the SalesList and SortSalesList classes, along with the main method that calls the relevant sorting methods and displays the sorting results:
 
 ```java
-public class Q2_7ouzMaLz1cNuzhe r {
-    public static void main(String[] args) {
-        SalesTest salesTest = new SalesTest();
+import java.util.Arrays;
 
-        // Populate the sales list
-        salesTest.populateSalesList();
-
-        // Sort the sales list by region using Selection Sort in descending order
-        salesTest.sortByRegion();
-
-        // Sort the sales list by sales using Insertion Sort in ascending order
-        salesTest.sortBySales();
-
-        // Sort the sales list by salesRepName using Bubble Sort in ascending order
-        salesTest.sortBySalesRepName();
-
-        // Display the sorted results
-        salesTest.displaySortedResults();
-    }
-}
-
-class SalesList {
-    private Sales[] salesData;
-    private int size;
-
-    public SalesList(int capacity) {
-        salesData = new Sales[capacity];
-        size = 0;
-    }
-
-    public void add(Sales sales) {
-        salesData[size] = sales;
-        size++;
-    }
-
-    public Sales get(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
-        return salesData[index];
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void selectionSort() {
-        for (int i = 0; i < size - 1; i++) {
-            int maxIndex = i;
-            for (int j = i + 1; j < size; j++) {
-                if (salesData[j].getRegion().compareTo(salesData[maxIndex].getRegion()) > 0) {
-                    maxIndex = j;
-                }
-            }
-            swap(i, maxIndex);
-        }
-    }
-
-    public void insertionSort() {
-        for (int i = 1; i < size; i++) {
-            Sales currentSales = salesData[i];
-            int j = i - 1;
-            while (j >= 0 && salesData[j].getSales() > currentSales.getSales()) {
-                salesData[j + 1] = salesData[j];
-                j--;
-            }
-            salesData[j + 1] = currentSales;
-        }
-    }
-
-    public void bubbleSort() {
-        for (int i = 0; i < size - 1; i++) {
-            for (int j = 0; j < size - i - 1; j++) {
-                if (salesData[j].getSalesRepName().compareTo(salesData[j + 1].getSalesRepName()) > 0) {
-                    swap(j, j + 1);
-                }
-            }
-        }
-    }
-
-    private void swap(int i, int j) {
-        Sales temp = salesData[i];
-        salesData[i] = salesData[j];
-        salesData[j] = temp;
-    }
-}
-
-class Sales {
+public class SalesList {
     private String region;
-    private int sales;
     private String salesRepName;
+    private int salesAmount;
 
-    public Sales(String region, int sales, String salesRepName) {
+    public SalesList(String region, String salesRepName, int salesAmount) {
         this.region = region;
-        this.sales = sales;
         this.salesRepName = salesRepName;
+        this.salesAmount = salesAmount;
     }
 
     public String getRegion() {
         return region;
     }
 
-    public int getSales() {
-        return sales;
-    }
-
     public String getSalesRepName() {
         return salesRepName;
     }
 
+    public int getSalesAmount() {
+        return salesAmount;
+    }
+
     @Override
     public String toString() {
-        return region + "\t" + sales + "\t" + salesRepName;
+        return region + "\t" + salesAmount + "\t" + salesRepName;
     }
 }
 
-class Sales
-
-Test {
-    private SalesList salesList;
-
-    public SalesTest() {
-        salesList = new SalesList(7);
+public class SortSalesList {
+    public static void selectionSortByRegion(SalesList[] sales) {
+        int n = sales.length;
+        for (int i = 0; i < n - 1; i++) {
+            int maxIndex = i;
+            for (int j = i + 1; j < n; j++) {
+                if (sales[j].getRegion().compareTo(sales[maxIndex].getRegion()) > 0) {
+                    maxIndex = j;
+                }
+            }
+            SalesList temp = sales[maxIndex];
+            sales[maxIndex] = sales[i];
+            sales[i] = temp;
+        }
     }
 
-    public void populateSalesList() {
-        salesList.add(new Sales("Asia", 458, "Ahmad"));
-        salesList.add(new Sales("Europe", 518, "Henish"));
-        salesList.add(new Sales("Europe", 658, "Banny"));
-        salesList.add(new Sales("Greenland", 208, "Sin"));
-        salesList.add(new Sales("Asia", 390, "Eli"));
-        salesList.add(new Sales("Greenland", 678, "Ben"));
-        salesList.add(new Sales("Asia", 798, "Lee"));
+    public static void insertionSortBySalesAmount(SalesList[] sales) {
+        int n = sales.length;
+        for (int i = 1; i < n; i++) {
+            SalesList key = sales[i];
+            int j = i - 1;
+            while (j >= 0 && sales[j].getSalesAmount() > key.getSalesAmount()) {
+                sales[j + 1] = sales[j];
+                j--;
+            }
+            sales[j + 1] = key;
+        }
     }
 
-    public void sortByRegion() {
-        salesList.selectionSort();
+    public static void bubbleSortBySalesRepName(SalesList[] sales) {
+        int n = sales.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (sales[j].getSalesRepName().compareTo(sales[j + 1].getSalesRepName()) > 0) {
+                    SalesList temp = sales[j];
+                    sales[j] = sales[j + 1];
+                    sales[j + 1] = temp;
+                }
+            }
+        }
     }
 
-    public void sortBySales() {
-        salesList.insertionSort();
-    }
+    public static void main(String[] args) {
+        SalesList[] sales = new SalesList[7];
+        sales[0] = new SalesList("Asia", "Ahmad", 450);
+        sales[1] = new SalesList("Europe", "Henish", 518);
+        sales[2] = new SalesList("Europe", "Banny", 650);
+        sales[3] = new SalesList("Greenland", "Ain", 208);
+        sales[4] = new SalesList("Asia", "Ali", 390);
+        sales[5] = new SalesList("Greenland", "Ben", 670);
+        sales[6] = new SalesList("Asia", "Lee", 790);
 
-    public void sortBySalesRepName() {
-        salesList.bubbleSort();
-    }
+        System.out.println("Original Data:");
+        for (SalesList sale : sales) {
+            System.out.println(sale);
+        }
 
-    public void displaySortedResults() {
-        System.out.println("Sorting Result on Region using Selection Sort:");
-        for (int i = 0; i < salesList.getSize(); i++) {
-            System.out.println(salesList.get(i));
+        System.out.println("\nSorting Result on Region using Selection Sort:");
+        selectionSortByRegion(sales);
+        for (SalesList sale : sales) {
+
+
+            System.out.println(sale);
         }
 
         System.out.println("\nSorting Result on Sales using Insertion Sort:");
-        for (int i = 0; i < salesList.getSize(); i++) {
-            System.out.println(salesList.get(i));
+        insertionSortBySalesAmount(sales);
+        for (SalesList sale : sales) {
+            System.out.println(sale);
         }
 
-        System.out.println("\nSorting Result on SalesRepName using Bubble Sort:");
-        for (int i = 0; i < salesList.getSize(); i++) {
-            System.out.println(salesList.get(i));
+        System.out.println("\nSorting Result on salesRep using Bubble Sort:");
+        bubbleSortBySalesRepName(sales);
+        for (SalesList sale : sales) {
+            System.out.println(sale);
         }
     }
 }
 ```
 
-Please make sure to create a NetBeans project named "Q2_7ouzMaLz1cNuzhe r" and add the provided code files to the project.
+The `SalesList` class represents a single sales entry, containing the region, sales representative name, and sales amount. The `SortSalesList` class contains the sorting methods `selectionSortByRegion()`, `insertionSortBySalesAmount()`, and `bubbleSortBySalesRepName()` that perform the sorting based on the specified fields. The main method creates an array of `SalesList` objects, populates it with data, and then calls the sorting methods to display the sorting results.
