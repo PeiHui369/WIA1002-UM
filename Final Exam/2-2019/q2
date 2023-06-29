@@ -1,38 +1,16 @@
-2.	Bina satu projek "Netbeans" bersama “q2_NombozMat£1ñAnda” untuk menyimpan semua fail Kod anda untuk Soalan 2. Taipkan nombor matrik anda sebagai baris pertama bagi setiap fail.
 
-Crea/e a Netbeans project enfi/led “Q2 7ouzMa Lz1cNuzhe r” to slore all your code files for Question 2. Type your metric number as the first line of each file.
-
-Dalam program ini, anda dikehendaki untuk menyusun-semula senarai data jualan,  yang  mengandungi  maklumat   mengenai   region,   Safe.s Repzesen la 11•ze Nam.e dan sat es Your r. Anda perlu membina dua kelas,
-
-Dalam la 1es11s r, anda perlu mengisytiharkan tiga pembolehubah, mengekodkan pembina lalai dan pembina yang mentakrifkan tiga pembolehubah, serta metod L os eg ‹ yang memaparkan output dalam bentuk yang ditunjukkan.
-(2 markah)
-
-Dalam soz I:Sat es11s t, anda dikehendaki untuk menggunakan Corps saide dalam menyiapkan tugas-tugas berikut:
-
-a)	Menyusun-semula data Region dengan menggunakan Selection Sort dalam susunan menurun.
-(3 markah)
-b)	Menyusun-semula data sat es Coun z dengan menggunakan Insertion Sort
-dalam susunan menaik.
-(2.5 markah)
-c)	Menyusun-semula data sad es Repze sew L a L z ve	Name dengan menggunakan Bubble Sort dalam susunan menaik.
-(2.5 markah)
-
-Tuliskan main metod yang memanggil metod-metod yang berkenaan untuk memaparkan hasil susun-semula tersebut.
-(2 markah) Data asal dan output sampel adalah ditunjukkan dalam Rajah 2 di bawah:
- 
-
-You are asked to sort a /isf of sa/es data, w//fC// consis/fnp af Real on,  ate° Reoresen ta’› •ze'. Name  ana  sa Yes  count:.  You  need  /o  create  two  classes, sa esz s I and say I la 1 esT s t.
-
-In a J eslz s t, you need to declare the three relevant variables, code the default no-arg constructor and constructor whish defines three variables, and the t out:ring ) me/hod
+You are asked to sort a list of sales data, which consisting of Region, Sales Representative Name and Sales Amount. You need to create two classes, SalesList and SortSalesList 
+In SalesListyou need to declare the three relevant variables, code the default no-arg constructor and constructor whish defines three variables, and the toString() method
 that structure the display of the output.
-f2 marks)
-
+(2 marks)
  
-In son tea 1est:i s t, you are required to use cozrtpa raise to:
-a)	Sort Regs on data using Selection Sort in descending order.
+In SortSalesList, you are required to use Comparable to:
+a)	Sort Region data using Selection Sort in descending order.
+b)	Sort Sales Amount using Insertion Sort in ascending order.
+c) Sort Sales Representative Name using Bubble Sort in ascending order.
 
-b)	Sort .had es Your L using Insertion Sort in ascending order.
- 
+Then, write a main method which calls the relevant methods to display the sorting results.
+The original data and sample output
 
 
 (3 marks)
