@@ -1,0 +1,31 @@
+4.	
+Write a Java program to print “Hello-World” without using semicolon.
+
+(4 marks)
+
+Give the preorder, inorder and postorder traversal of the following tree.
+                                       9
+                                    /     \
+                                   5      20
+                                  / \     / \
+                                 3   8   12  30
+(6 marks)
+===========================================================================================================================
+
+a) Here's a Java program to print "Hello-World" without using a semicolon:
+
+```java
+public class HelloWorldWithoutSemicolon {
+    public static void main(String[] args) {
+        if (System.out.printf("Hello-World") == null) {}
+    }
+}
+```
+
+In this program, the `if` statement checks if the `printf` method of `System.out` returns `null`. Since `printf` returns a `PrintStream` object and not `null`, the condition is never true, and the program executes without any actual code within the `if` block. Therefore, "Hello-World" is printed without using a semicolon.
+
+b) The preorder, inorder, and postorder traversals of the given tree are as follows:
+
+Preorder traversal: 9, 5, 3, 8, 20, 12, 30
+Inorder traversal: 3, 5, 8, 9, 12, 20, 30
+Postorder traversal: 3, 8, 5, 12, 30, 20, 9
