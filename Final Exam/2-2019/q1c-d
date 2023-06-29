@@ -1,142 +1,33 @@
 
-c)	Dalam file ketiga, bangunkan satu aturcara yang mengisytiharkan tiga Nya	Aeoz c r untuk menyimpan Integer, iaitu	r I, 1 .s I:J dan nev£lno. far I iaiah satu senarai dengan 5 nombor dalam susunan meningkat: “2", "10",  “38",  41" dan “51";  manakala 1 src	mempunyai 7 nombor dalam
-susunan meningkat yang sama: “5", "12", "18", "21", “35", “41" dan “56".
-Cetak JI sr I, II s rJ dan nevslsI yang akan dijana dalam bahagian (d)
-soalan ini.
-Contoh output adalah seperti Rajah 1 di bawah:
-
-in yhe third file, develop a program tial declares three eye 1 nk eds1 s t to sfore Integers, namely I?s t1, 1?s r2 and need ! s L. the st I is a list with 5 numbers in incremental order. "2", ’ f10", “38", 41”and “31“’, whereas    i s t:fl with  7 numbers in the same incremental order. ’5", “12’, ’18", “21", "35", “4f" and “56".
-Print out	s I  ,	s t2 and nevLla t which will be generated in part (d) of th1S
+in the third file, develop a program tial declares three MyLinkedList to store Integers, namely list1,list2 and newList. The list1 is a list with 5 numbers in incremental order. "2", "10", “38", "41”and “31“, whereas list2 with 7 numbers in the same incremental order. ’5", “12’, ’18", “21", "35", “41" and “56".
+Print out	list1,	list2 and newList which will be generated in part (d) of this 
 question.
-Example of the output fs as Fi”gure 1 below.
+Example of the output fs as Figure 1 below.
 
-ze=5) >> 2 >> 10 >> 38 >> 41 >> 51
-#{size=7j >> 5 >> 12 >> 18 >> 21 >> 38 >> 41 >> 56
-The newList iz:
-[size=12] >> 2 >> l >> 10 >> 12 >> 18 >> 21 >> 35 >> 38 >> 41 >>
+(size=5) >> 2 >> 10 >> 38 >> 41 >> 51
+(size=7) >> 5 >> 12 >> 18 >> 21 >> 35 >> 41 >> 56
+The newList is:
+[size=12] >> 2 >> 5 >> 10 >> 12 >> 18 >> 21 >> 35 >> 38 >> 41 >>
+41 >> 51  >> 56
 (2 markah/marks)
 
-d)	Dalam fail yang anda bangunkan dalam bahagian (c), cipta satu metod combine yang menggunakan metod-metod dalam kelas uyT 1nkedh s L untuk mengintegrasikan dua senarai. Kalau kedua-dua senarai input mempunyai integer disusun dalam urutan menaik, senarai baru yang dijana adalah satu senarai dengan semua integer dalam kedua-dua senarai dalam urutan menaik juga.
- 
-
-In the file you developed in part (c), create a method combine that make use of methods in nyL1nkedT 1s L class to integrate two lists. If both the input lists haye integers sorted in ascending order, the new list generated is a list wlth all the integers in both lists in ascending order as well.
+In the file you developed in part (c), create a method combine that make use of methods in MyLinkedList class to integrate two lists. If both the input lists have integers sorted in ascending order, the new list generated is a list with all the integers in both lists in ascending order as well.
 (3 markah/marks)
 
-Markah tidak akan diberi bagi apa-apa pelaksanaan yang menggunakan kelas
-“Tick eds s L.” daripada “Java API Library”.
-
-No mark will be given /or any implementation using the existing z? nkedL s I class from the Java API Library.
-
-
 =========================================================================================================================
-
-Here's the updated `QJ_zauzea_tz1_cNu_ber.java` file with the additional code to declare and print the three lists, as well as the implementation of the `combine` method:
+Here's the implementation of the program that declares three MyLinkedList objects, populates them with integers, combines the lists, and prints the results:
 
 ```java
-public class QJ_zauzea_tz1_cNu_ber {
-    private Node<Integer> head;
-    private Node<Integer> tail;
-    private int size;
-
-    public QJ_zauzea_tz1_cNu_ber() {
-        head = null;
-        tail = null;
-        size = 0;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void addFirst(Integer element) {
-        Node<Integer> newNode = new Node<>(element);
-        if (head == null) {
-            head = newNode;
-            tail = newNode;
-        } else {
-            newNode.setNext(head);
-            head = newNode;
-        }
-        size++;
-    }
-
-    public void addLast(Integer element) {
-        Node<Integer> newNode = new Node<>(element);
-        if (tail == null) {
-            head = newNode;
-            tail = newNode;
-        } else {
-            tail.setNext(newNode);
-            tail = newNode;
-        }
-        size++;
-    }
-
-    public Integer removeFirst() {
-        if (head == null) {
-            return null;
-        }
-
-        Node<Integer> removedNode = head;
-        head = head.getNext();
-        removedNode.setNext(null);
-        size--;
-
-        if (head == null) {
-            tail = null;
-        }
-
-        return removedNode.getElement();
-    }
-
-    public void combine(QJ_zauzea_tz1_cNu_ber list1, QJ_zauzea_tz1_cNu_ber list2) {
-        Node<Integer> current1 = list1.head;
-        Node<Integer> current2 = list2.head;
-
-        while (current1 != null && current2 != null) {
-            if (current1.getElement() < current2.getElement()) {
-                addLast(current1.getElement());
-                current1 = current1.getNext();
-            } else {
-                addLast(current2.getElement());
-                current2 = current2.getNext();
-            }
-        }
-
-        while (current1 != null) {
-            addLast(current1.getElement());
-            current1 = current1.getNext();
-        }
-
-        while (current2 != null) {
-            addLast(current2.getElement());
-            current2 = current2.getNext();
-        }
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[size=").append(size).append("]");
-
-        Node<Integer> currentNode = head;
-        while (currentNode != null) {
-            sb.append(" >> ").append(currentNode.getElement());
-            currentNode = currentNode.getNext();
-        }
-
-        return sb.toString();
-    }
-
+public class Main {
     public static void main(String[] args) {
-        QJ_zauzea_tz1_cNu_ber list1 = new QJ_zauzea_tz1_cNu_ber();
+        MyLinkedList<Integer> list1 = new MyLinkedList<>();
         list1.addLast(2);
         list1.addLast(10);
         list1.addLast(38);
         list1.addLast(41);
         list1.addLast(51);
 
-        QJ_zauzea_tz1_cNu_ber list2 = new QJ_zauzea_tz1_cNu_ber();
+        MyLinkedList<Integer> list2 = new MyLinkedList<>();
         list2.addLast(5);
         list2.addLast(12);
         list2.addLast(18);
@@ -145,5 +36,42 @@ public class QJ_zauzea_tz1_cNu_ber {
         list2.addLast(41);
         list2.addLast(56);
 
-        System.out.println("s1: " + list1);
-        System.out.println("
+        MyLinkedList<Integer> newList = combine(list1, list2);
+
+        System.out.println("list1: " + list1);
+        System.out.println("list2: " + list2);
+        System.out.println("newList: " + newList);
+    }
+
+    public static MyLinkedList<Integer> combine(MyLinkedList<Integer> list1, MyLinkedList<Integer> list2) {
+        MyLinkedList<Integer> newList = new MyLinkedList<>();
+
+        Node<Integer> node1 = list1.getHead();
+        Node<Integer> node2 = list2.getHead();
+
+        while (node1 != null && node2 != null) {
+            if (node1.getData() <= node2.getData()) {
+                newList.addLast(node1.getData());
+                node1 = node1.getNext();
+            } else {
+                newList.addLast(node2.getData());
+                node2 = node2.getNext();
+            }
+        }
+
+        while (node1 != null) {
+            newList.addLast(node1.getData());
+            node1 = node1.getNext();
+        }
+
+        while (node2 != null) {
+            newList.addLast(node2.getData());
+            node2 = node2.getNext();
+        }
+
+        return newList;
+    }
+}
+```
+
+Make sure to also have the `MyLinkedList` class implementation from the previous answer. The `combine()` method takes two MyLinkedList objects, `list1` and `list2`, and creates a new MyLinkedList object called `newList` by iterating over the two input lists and adding elements in ascending order. The resulting `newList` is then printed along with `list1` and `list2`.
