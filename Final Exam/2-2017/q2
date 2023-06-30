@@ -40,8 +40,29 @@ The Hobbit is at the top of the pile. The Hobbit is removed from the pile.
 The pile should be empty: isEmpty() returns true
 
 Write a test program, TestPileStack that demonstrates your implementation. An example of the output for the test program is as follows:
+Create a new stack: an empty pile of books isEmpty() returns true
+Push 3 books to the pile:
+Enter book title 1: The Hobbit
+Enter book title 2: The Lord of the Rings
+Enter book title 3: The Da Vinci Cade
+
+The new books that you added are: {The Hobbit, The Lord of the Rings, The Da Vinci Code]
+
+The pile should not be empty: isEmpty() returns false
+The pile has 3 books.
+Get the top book and remove the top book:
+
+The Da Vinci Gode is at the top of the pile. The Da Vinci Code is removed from the pile.
+
+The Lord of the Rings is at the top of the pile. The Lord of the Rings Is removed from the pile.
+
+The Hobbit is at the top of the pile. The Hobbit is removed from the pile.
+
+The pile should be empty: isEmpty() returns true
+
+
 =============================================================================================================================
-Here's a Java implementation that satisfies the requirements by designing a `StackInterface<E>` interface, implementing a generic class `GenericStack<E>` that implements the interface, and providing a test program `TestPileStack`:
+Here's an example implementation in Java of the `StackInterface` and `GenericStack` classes:
 
 ```java
 import java.util.ArrayList;
@@ -61,12 +82,10 @@ class GenericStack<E> implements StackInterface<E> {
         stack = new ArrayList<>();
     }
 
-    @Override
     public int size() {
         return stack.size();
     }
 
-    @Override
     public E top() {
         if (isEmpty()) {
             throw new IllegalStateException("Stack is empty");
@@ -74,7 +93,6 @@ class GenericStack<E> implements StackInterface<E> {
         return stack.get(stack.size() - 1);
     }
 
-    @Override
     public E pop() {
         if (isEmpty()) {
             throw new IllegalStateException("Stack is empty");
@@ -82,12 +100,10 @@ class GenericStack<E> implements StackInterface<E> {
         return stack.remove(stack.size() - 1);
     }
 
-    @Override
     public void push(E element) {
         stack.add(element);
     }
 
-    @Override
     public boolean isEmpty() {
         return stack.isEmpty();
     }
@@ -97,38 +113,41 @@ class GenericStack<E> implements StackInterface<E> {
         return stack.toString();
     }
 }
+```
+
+And here's a test program `TestPileStack` that demonstrates the usage of the `GenericStack` class:
+
+```java
+import java.util.Scanner;
 
 public class TestPileStack {
     public static void main(String[] args) {
-        GenericStack<String> pileStack = new GenericStack<>();
+        GenericStack<String> pile = new GenericStack<>();
+        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Push 3 books to the pile:");
-        pileStack.push("The Hobbit");
-        pileStack.push("The Lord of the Rings");
-        pileStack.push("The Da Vinci Code");
-
-        System.out.println("The new books that you added are: " + pileStack);
-
-        System.out.println("The pile should not be empty: isEmpty() returns " + !pileStack.isEmpty());
-        System.out.println("The pile has " + pileStack.size() + " books.");
-
-        while (!pileStack.isEmpty()) {
-            String topBook = pileStack.top();
-            System.out.println("\n" + topBook + " is at the top of the pile. " + topBook + " is removed from the pile.");
-            pileStack.pop();
+        for (int i = 1; i <= 3; i++) {
+            System.out.print("Enter book title " + i + ": ");
+            String title = scanner.nextLine();
+            pile.push(title);
         }
 
-        System.out.println("\nThe pile should be empty: isEmpty() returns " + pileStack.isEmpty());
+        System.out.println("\nThe new books that you added are: " + pile);
+        System.out.println("The pile should not be empty: isEmpty() returns " + !pile.isEmpty());
+        System.out.println("The pile has " + pile.size() + " books.");
+
+        System.out.println("\nGet the top book and remove the top book:");
+        while (!pile.isEmpty()) {
+            String topBook = pile.top();
+            System.out.println(topBook + " is at the top of the pile. " + topBook + " is removed from the pile.");
+            pile.pop();
+        }
+
+        System.out.println("\nThe pile should be empty: isEmpty() returns " + pile.isEmpty());
+
+        scanner.close();
     }
 }
 ```
 
-The `StackInterface<E>` interface specifies the common methods for a stack, including `size()`, `top()`, `pop()`, `push()`, and `isEmpty()`.
-
-The `GenericStack<E>` class implements the `StackInterface<E>` using an `ArrayList` to store the elements. It provides the required methods by delegating the functionality to the `ArrayList`.
-
-The `TestPileStack` test program demonstrates the implementation. It pushes three book titles onto the stack, prints the current stack, checks if the stack is empty, retrieves and removes the top book until the stack is empty, and finally checks if the stack is empty again.
-
-When you run the `TestPileStack` program, it will produce the output as shown in the question.
-
-I hope this helps! Let me know if you have any further questions.
+When you run the `TestPileStack` program, it prompts you to enter the titles of three books, then it demonstrates the operations on the stack. It prints the stack after adding books, checks if the stack is empty, gets the top book and removes it until the stack is empty, and finally checks if the stack is empty again.
