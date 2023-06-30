@@ -24,19 +24,21 @@ tostring
 Print the element in the queue
 
 Create a method called ChangeOrder(int k) that accepts a parameter of integer k. This method will remove k-1 element from the top of a queue and add its corresponding value to the bottom of the same queue. The k-th element will be added at the bottom of the queue but will not be removed from the queue. For example.”
+Say input: 10,20,30,40,50,60,70,80,90
+and value of k=4
+Thus the output: 40,50,60,70,80,90,10,20,30
 
 Create a test program to fill the queue with the following values [10, 20, 30, 40, 50, 60, 70, 80, 90]. Call the ChangeOrder method to illustrate your implementation. Print all of the values.
 ===================================================================================
-Here's the Java code for the Queue class with the specified methods, including the `ChangeOrder` method:
+Here's an example implementation in Java of the `Queue` class with the specified methods, including the `ChangeOrder` method:
 
 ```java
 import java.util.LinkedList;
-import java.util.Queue;
 
-public class QueueExample<T> {
-    private Queue<T> queue;
+public class Queue<Item> {
+    private LinkedList<Item> queue;
 
-    public QueueExample() {
+    public Queue() {
         queue = new LinkedList<>();
     }
 
@@ -48,55 +50,59 @@ public class QueueExample<T> {
         return queue.size();
     }
 
-    public T peek() {
+    public Item peek() {
         return queue.peek();
     }
 
-    public void enqueue(T element) {
-        queue.offer(element);
+    public void enqueue(Item item) {
+        queue.addLast(item);
     }
 
-    public T dequeue() {
+    public Item dequeue() {
         return queue.poll();
     }
 
-    public void toString() {
-        System.out.println(queue);
-    }
-
     public void changeOrder(int k) {
-        if (k <= 0 || k > queue.size())
-            return;
+        if (k < 1 || k > queue.size()) {
+            throw new IllegalArgumentException("Invalid value of k");
+        }
 
         for (int i = 0; i < k - 1; i++) {
-            T element = queue.poll();
-            queue.offer(element);
+            Item item = queue.poll();
+            queue.addLast(item);
         }
     }
 
-    public static void main(String[] args) {
-        QueueExample<Integer> queueExample = new QueueExample<>();
-
-        queueExample.enqueue(10);
-        queueExample.enqueue(20);
-        queueExample.enqueue(30);
-        queueExample.enqueue(40);
-        queueExample.enqueue(50);
-        queueExample.enqueue(60);
-        queueExample.enqueue(70);
-        queueExample.enqueue(80);
-        queueExample.enqueue(90);
-
-        queueExample.changeOrder(4);
-        queueExample.toString();
+    public String toString() {
+        return queue.toString();
     }
 }
 ```
 
-In this code, we use the built-in `LinkedList` class to implement the Queue data structure. The `QueueExample` class has the specified methods: `isEmpty`, `size`, `peek`, `enqueue`, `dequeue`, and `toString`. Additionally, we added the `changeOrder` method as requested.
+And here's a test program that demonstrates the usage of the `Queue` class and the `ChangeOrder` method:
 
-In the `changeOrder` method, we accept an integer `k` as a parameter. This method removes `k-1` elements from the top of the queue and adds their corresponding values to the bottom of the same queue. The k-th element is added to the bottom but is not removed. This is achieved by using a temporary variable to store the element being removed from the queue and then adding it back to the queue using the `offer` method.
+```java
+public class QueueTest {
+    public static void main(String[] args) {
+        Queue<Integer> queue = new Queue<>();
+        queue.enqueue(10);
+        queue.enqueue(20);
+        queue.enqueue(30);
+        queue.enqueue(40);
+        queue.enqueue(50);
+        queue.enqueue(60);
+        queue.enqueue(70);
+        queue.enqueue(80);
+        queue.enqueue(90);
 
-In the `main` method, we create an instance of the `QueueExample` class, enqueue values from 10 to 90, and then call the `changeOrder` method with `k = 4`. Finally, we print the elements in the queue using the `toString` method.
+        System.out.println("Before change order: " + queue);
 
-I hope this helps! Let me know if you have any further questions.
+        int k = 4;
+        queue.changeOrder(k);
+
+        System.out.println("After change order (k = " + k + "): " + queue);
+    }
+}
+```
+
+When you run the `QueueTest` program, it will fill the queue with the values [10, 20, 30, 40, 50, 60, 70, 80, 90], then call the `changeOrder` method with `k = 4`. Finally, it will print all the values in the queue before and after the change in order.
