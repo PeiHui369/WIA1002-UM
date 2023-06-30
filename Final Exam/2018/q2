@@ -2,13 +2,14 @@
 Queue supports the insert and the remove operations based on the Ffistñn First-out pa/icy. Write a program to create a class named Queue. The class should consist of methods as specified in Ta6/e 1.
 
 constructor for Queue class	
+Default constructor
 isEmpty  
 return whether or not the queue is empty
 Peek
 return the value of the first element in the queue
 enqueue 
 Add element to the bottom of the queue
- Queue	
+dequeue	
 remove element from top of the queue
 vJ display	
 Display all elements in the queue 
@@ -80,77 +81,67 @@ Peek(): who
 
 “ No marks will be given /br any implementation using the ex/sling Queue c/ess or sny other Col/ecUon c/asses ava//abfe from tña Java API Library.
 =============================================================================================================================================================
-Here's the Java implementation of the Queue class with the specified methods:
+Certainly! Here's an example implementation in Java that fulfills the requirements:
 
 ```java
 public class Queue {
-    private int maxSize;
-    private String[] queueArray;
+    private String[] elements;
     private int front;
     private int rear;
-    private int nItems;
+    private int size;
+    private int capacity;
 
-    public Queue(int size) {
-        maxSize = size;
-        queueArray = new String[maxSize];
-        front = 0;
-        rear = -1;
-        nItems = 0;
+    public Queue(int capacity) {
+        this.capacity = capacity;
+        this.elements = new String[capacity];
+        this.front = 0;
+        this.rear = -1;
+        this.size = 0;
     }
 
     public boolean isEmpty() {
-        return (nItems == 0);
-    }
-
-    public boolean isFull() {
-        return (nItems == maxSize);
+        return size == 0;
     }
 
     public String peek() {
-        return queueArray[front];
+        if (isEmpty()) {
+            return null;
+        }
+        return elements[front];
     }
 
     public void enqueue(String data) {
-        if (isFull()) {
+        if (size == capacity) {
             System.out.println("Queue is full. Cannot enqueue " + data);
             return;
         }
-        rear++;
-        if (rear == maxSize)
-            rear = 0;
-        queueArray[rear] = data;
-        nItems++;
+        rear = (rear + 1) % capacity;
+        elements[rear] = data;
+        size++;
         System.out.println("Data " + data + " inserted");
     }
 
-    public String dequeue() {
+    public void dequeue() {
         if (isEmpty()) {
             System.out.println("Queue is empty. Cannot dequeue.");
-            return null;
+            return;
         }
-        String data = queueArray[front];
-        front++;
-        if (front == maxSize)
-            front = 0;
-        nItems--;
-        System.out.println("Data " + data + " has been removed");
-        return data;
+        String removedItem = elements[front];
+        front = (front + 1) % capacity;
+        size--;
+        System.out.println("Data " + removedItem + " has been removed");
     }
 
     public void display() {
         System.out.println("-----------------------------------------");
         System.out.print("|");
-        for (int i = 0; i < maxSize; i++) {
+        for (int i = 0; i < capacity; i++) {
             System.out.print("  " + i + "  |");
         }
         System.out.println("\n-----------------------------------------");
         System.out.print("|");
-        int index = front;
-        for (int i = 0; i < nItems; i++) {
-            System.out.printf("  %-8s|", queueArray[index]);
-            index++;
-            if (index == maxSize)
-                index = 0;
+        for (int i = 0; i < capacity; i++) {
+            System.out.print("  " + elements[i] + "  |");
         }
         System.out.println("\n-----------------------------------------");
     }
@@ -172,14 +163,4 @@ public class Queue {
 }
 ```
 
-In this implementation, the `Queue` class has a fixed size (`maxSize`) and an array `queueArray` to store the elements. The `front` and `rear` variables keep track of the positions in the array, and `nItems` keeps track of the number of items in the queue.
-
-The `isEmpty` and `isFull` methods check if the queue is empty or full, respectively. The `peek` method returns the value of the first element in the queue.
-
-The `enqueue` method adds an element to the rear of the queue, and the `dequeue` method removes an element from the front of the queue. If the queue is full, the `enqueue` method displays an error message, and if the queue is empty, the `dequeue` method displays an error message.
-
-The `display` method prints the elements of the queue in a formatted table.
-
-In the `main` method, you can test the functionality of the `Queue` class by enqueueing, dequeueing, peeking, and displaying the elements of the queue.
-
-Hope this helps! Let me know if you have any further questions.
+When you run the `Queue` program, it demonstrates the usage of the queue methods. It enqueues elements, dequeues elements, peeks at the first element, and displays the contents of the queue. The display is presented with each index and element in boxes.
