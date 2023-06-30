@@ -1,0 +1,64 @@
+Certainly! Here's an example implementation of the program in Java:
+
+```java
+import java.util.ArrayDeque;
+import java.util.Queue;
+import java.util.Scanner;
+
+public class StockTransaction {
+    public static void main(String[] args) {
+        Queue<Integer> shares = new ArrayDeque<>();
+        Queue<Integer> prices = new ArrayDeque<>();
+        int totalGainOrLoss = 0;
+
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.print("Enter your query (In format 'Buy/Sell x shares at $y each'): ");
+            String query = scanner.nextLine();
+
+            if (query.equalsIgnoreCase("exit")) {
+                break;
+            }
+
+            String[] parts = query.split("\\s+");
+            String action = parts[0].toLowerCase();
+            int shareCount = Integer.parseInt(parts[1]);
+            int price = Integer.parseInt(parts[4]);
+
+            if (action.equals("buy")) {
+                System.out.println("Buying now...");
+                shares.offer(shareCount);
+                prices.offer(price);
+            } else if (action.equals("sell")) {
+                System.out.println("Selling now...");
+                int sharesToSell = shareCount;
+                while (sharesToSell > 0 && !shares.isEmpty()) {
+                    int sharesBought = shares.poll();
+                    int sharePrice = prices.poll();
+                    int sharesSold = Math.min(sharesBought, sharesToSell);
+                    int gainOrLoss = (price - sharePrice) * sharesSold;
+                    totalGainOrLoss += gainOrLoss;
+                    sharesToSell -= sharesSold;
+                    if (sharesBought > sharesSold) {
+                        shares.offer(sharesBought - sharesSold);
+                        prices.offer(sharePrice);
+                    }
+                }
+            }
+
+            System.out.println("Queue for Share: " + shares);
+            System.out.println("Queue for Price: " + prices);
+            System.out.println("Total gain or loss: $" + totalGainOrLoss);
+        }
+
+        scanner.close();
+    }
+}
+```
+
+This program uses two `Queue` data structures to keep track of the shares and their corresponding prices. It continuously prompts the user for input until the user enters "exit." For each query, it splits the input and performs the appropriate action (buy or sell) based on the given information. The FIFO protocol is implemented when selling shares, ensuring that the shares held the longest are sold first. The program also prints the current state of the share and price queues, as well as the total gain or loss after each transaction.
+
+You can run this Java program in any Java IDE or compile and run it using the command line.
+
+Please note that this is a basic implementation and may require additional error handling and input validation depending on your specific requirements.
