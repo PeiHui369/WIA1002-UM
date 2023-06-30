@@ -18,141 +18,186 @@ Replace existing item(s) in the ordered list with a different food item as speci
 
 Delete a food item as specified by the user.
 
+Example outputs of the program are as follows. The bolded texts are the user input.
+
+Example output 1.
+Enter your list of food to order. Enter 'n' to end. 
+steak
+nasi lemak
+mee hoon
+burger
+laksa
+eggs
+mee hoon
+n
+
+You have ordered the following menu
+steak, nasi lemak, mee hoon, burger, laksa, eggs, mee hoon. The number of items ordered are : 7
+Do you want to change your order? Enter 'y' for yes, 'n' to
+proceed.
+
+y
+
+Enter the old menu item
+mee hoon
+
+Enter the new menu item :
+mee goreng
+
+The new order list is :
+steak, nasi lemak, mee goreng, burger, laksa, eggs, mee goreng.
+
+Do you want to remove any of your menu items? Enter 'y' for
+yes, 'n' to proceed.
+
+y
+
+Enter a menu item to remove :
+eggs
+
+The number of updated order is :6 The updated order is
+steak, nasi lemak, mee goreng, burger, laksa, mee goreng.
+
+Your order is complete. Thank you!
+
+Example output 2:
+Enter your list of food to order. Enter 'n' to end.
+pasta
+kebab
+
+sandwich
+n
+
+You have ordered the following menu :
+pasta, kebab, pizza, sandwich.
+
+The number of items ordered are : 4
+
+Do you want to change your order? Enter 'y' for yes, 'n' to proceed.
+n
+
+Do you want to remove any of your menu item? Enter 'y' for yes, 'n' to proceed.
+y
+
+Enter a menu item to remove
+salad
+Item you want to remove is not in the existing order list. The number of updated order is :4
+The updated order is
+pasta, kebab, pizza, sandwich.
+
+Your order is complete. Thank you!
+
+Example output 3
+Enter your list of food to order. Enter 'n' to end.
+fried rice
+chicken rice
+n
+
+You have ordered the following menu : fried rice, chicken rice.
+
+The number of items ordered are : 2
+
+Do you want to change your order? Enter 'y' for yes, 'n' to
+proceed.
+n
+
+Do you want to remove any of your menu items? Enter 'y' for
+yes, 'n' to proceed.
+n
+
+The number of order is :2
+You ordered the following . fried rice, chicken rice.
+
+Your order is complete. Thank you!
+
+
 (8 markah/marks)
 ==============================================================================================================================
 
-Apologies for the confusion. Here's an updated version of the program that allows user interaction and demonstrates the functions you mentioned: ordering food items, displaying the ordered items, calculating the number of orders, replacing items, and deleting items.
+Sure! Here's an example implementation in Java that demonstrates the functions you described:
 
 ```java
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class OnlineOrderManagementSystem {
-
-    private static class Node {
-        private String data;
-        private Node next;
-
-        public Node(String data) {
-            this.data = data;
-            this.next = null;
-        }
-    }
-
-    private Node head;
-    private int size;
-
-    public void add(String foodItem) {
-        Node newNode = new Node(foodItem);
-        if (head == null) {
-            head = newNode;
-        } else {
-            Node current = head;
-            while (current.next != null) {
-                current = current.next;
-            }
-            current.next = newNode;
-        }
-        size++;
-    }
-
-    public void removeElement(String foodItem) {
-        if (head == null) {
-            return;
-        }
-        if (head.data.equals(foodItem)) {
-            head = head.next;
-            size--;
-            return;
-        }
-        Node current = head;
-        Node previous = null;
-        while (current != null && !current.data.equals(foodItem)) {
-            previous = current;
-            current = current.next;
-        }
-        if (current != null) {
-            previous.next = current.next;
-            size--;
-        }
-    }
-
-    public void printList() {
-        Node current = head;
-        while (current != null) {
-            System.out.println(current.data);
-            current = current.next;
-        }
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public boolean contains(String foodItem) {
-        Node current = head;
-        while (current != null) {
-            if (current.data.equals(foodItem)) {
-                return true;
-            }
-            current = current.next;
-        }
-        return false;
-    }
-
-    public void replace(String oldFoodItem, String newFoodItem) {
-        Node current = head;
-        while (current != null) {
-            if (current.data.equals(oldFoodItem)) {
-                current.data = newFoodItem;
-                return;
-            }
-            current = current.next;
-        }
-    }
-
+public class FoodOrderProgram {
     public static void main(String[] args) {
-        OnlineOrderManagementSystem orderList = new OnlineOrderManagementSystem();
+        ArrayList<String> orderList = new ArrayList<>();
+
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter your list of food to order. Enter 'n' to end.");
 
-        // Ordering food items
-        System.out.print("Enter the number of food items to order: ");
-        int numberOfItems = scanner.nextInt();
-        scanner.nextLine(); // Consume newline character
-
-        for (int i = 0; i < numberOfItems; i++) {
-            System.out.print("Enter food item " + (i + 1) + ": ");
-            String foodItem = scanner.nextLine();
-            orderList.add(foodItem);
+        String userInput;
+        while (!(userInput = scanner.nextLine()).equalsIgnoreCase("n")) {
+            orderList.add(userInput);
         }
 
-        System.out.println("\nOrdered Food Items:");
-        orderList.printList();
+        System.out.println("\nYou have ordered the following menu:");
+        displayOrderList(orderList);
 
-        System.out.println("\nNumber of Orders: " + orderList.getSize());
+        int numOrders = orderList.size();
+        System.out.println("The number of items ordered is: " + numOrders);
 
-        // Replacing an item
-        System.out.print("\nEnter the food item to replace: ");
-        String oldFoodItem = scanner.nextLine();
-        System.out.print("Enter the new food item: ");
-        String newFoodItem = scanner.nextLine();
-        orderList.replace(oldFoodItem, newFoodItem);
+        System.out.println("Do you want to change your order? Enter 'y' for yes, 'n' to proceed.");
+        userInput = scanner.nextLine();
 
-        System.out.println("\nUpdated Food Items after Replacement:");
-        orderList.printList();
+        if (userInput.equalsIgnoreCase("y")) {
+            System.out.println("\nEnter the old menu item:");
+            String oldItem = scanner.nextLine();
 
-        // Deleting an item
-        System.out.print("\nEnter the food item to delete: ");
-        String foodItemToDelete = scanner.nextLine();
-        orderList.removeElement(foodItemToDelete);
+            System.out.println("\nEnter the new menu item:");
+            String newItem = scanner.nextLine();
 
-        System.out.println("\nUpdated Food Items after Deletion:");
-        orderList.printList();
+            replaceOrderItem(orderList, oldItem, newItem);
 
-        scanner.close();
+            System.out.println("\nThe new order list is:");
+            displayOrderList(orderList);
+        }
+
+        System.out.println("\nDo you want to remove any of your menu items? Enter 'y' for yes, 'n' to proceed.");
+        userInput = scanner.nextLine();
+
+        if (userInput.equalsIgnoreCase("y")) {
+            System.out.println("\nEnter a menu item to remove:");
+            String itemToRemove = scanner.nextLine();
+
+            boolean itemRemoved = removeOrderItem(orderList, itemToRemove);
+
+            if (itemRemoved) {
+                numOrders = orderList.size();
+                System.out.println("\nThe number of updated orders is: " + numOrders);
+                System.out.println("The updated order is:");
+                displayOrderList(orderList);
+            } else {
+                System.out.println("\nItem you want to remove is not in the existing order list.");
+                System.out.println("The number of updated orders is: " + numOrders);
+                System.out.println("The updated order is:");
+                displayOrderList(orderList);
+            }
+        }
+
+        System.out.println("\nYour order is complete. Thank you!");
+    }
+
+    private static void displayOrderList(ArrayList<String> orderList) {
+        for (String item : orderList) {
+            System.out.print(item + ", ");
+        }
+        System.out.println();
+    }
+
+    private static void replaceOrderItem(ArrayList<String> orderList, String oldItem, String newItem) {
+        for (int i = 0; i < orderList.size(); i++) {
+            if (orderList.get(i).equalsIgnoreCase(oldItem)) {
+                orderList.set(i, newItem);
+            }
+        }
+    }
+
+    private static boolean removeOrderItem(ArrayList<String> orderList, String itemToRemove) {
+        return orderList.removeIf(item -> item.equalsIgnoreCase(itemToRemove));
     }
 }
 ```
 
-In this program, the user can interact
-
- with the system by providing the number of food items to order, entering the food items one by one, and then specifying which items to replace or delete. The program will display the ordered food items, calculate the number of orders, replace the specified items, delete the specified items, and print the updated list of food items after each operation.
+You can run this Java program and interact with it in the console to demonstrate the functions you mentioned.
