@@ -31,7 +31,7 @@ Show by listing the sequence of sorting for the numbers given above. Sort the nu
 
 The given values are stored as arrays. Write a program to sort these values from largest to smallest using the type of sorting you named in Question 3(a). Given is the method signature.
 
-puh11c  s ta t 1c  vol  d   the So z t  ( in  t	[	) nu/n)
+puh11c  static  void   the Sort  ( int	[	) num)
 
 (5 markah/marks)
 
@@ -53,81 +53,61 @@ Number of repetition needed for sorting [Question 3(c)).
 (5 markah/marks)
 ================================================================================================================
 
-Apologies for the confusion. Here are the answers to the questions:
-
-a) The type of sorting used in this scenario is "Insertion Sort".
-
-b) The sequence of sorting for the given values in increasing order using Insertion Sort is as follows:
-
-54 82 71 86 43 99
-54 71 82 86 43 99
-54 71 82 86 43 99
-43 54 71 82 86 99
-43 54 71 82 86 99
-43 54 71 82 86 99
-
-c) The number of repetitions needed to sort the given values in increasing order using Insertion Sort is 5.
-
-Here's the complete program including the test program:
+Sure! Here's an example implementation in Java that sorts the given values in decreasing order using the insertion sort algorithm:
 
 ```java
-public class InsertionSort {
+import java.util.Arrays;
+
+public class CardSortingProgram {
     public static void main(String[] args) {
-        int[] numbers = {82, 54, 71, 86, 43, 99};
+        int[] nums = {82, 54, 71, 86, 43, 99};
 
-        System.out.println("Given values before sorting:");
-        displayArray(numbers);
+        System.out.println("Given values before sorting: ");
+        displayArray(nums);
 
-        insertionSort(numbers);
+        sort(nums);
 
         System.out.println("\nList of sequence for sorting:");
-        displayArray(numbers);
+        displayArray(nums);
 
-        System.out.println("Number of repetitions needed for sorting: " + getRepetitions(numbers));
+        int numRepetitions = getNumRepetitions(nums);
+        System.out.println("\nNumber of repetitions needed for sorting: " + numRepetitions);
     }
 
-    public static void insertionSort(int[] arr) {
-        int n = arr.length;
-        for (int i = 1; i < n; ++i) {
-            int key = arr[i];
+    public static void sort(int[] nums) {
+        for (int i = 1; i < nums.length; i++) {
+            int key = nums[i];
             int j = i - 1;
 
-            while (j >= 0 && arr[j] > key) {
-                arr[j + 1] = arr[j];
-                j = j - 1;
+            while (j >= 0 && nums[j] < key) {
+                nums[j + 1] = nums[j];
+                j--;
             }
-            arr[j + 1] = key;
+
+            nums[j + 1] = key;
         }
     }
 
-    public static void displayArray(int[] arr) {
-        for (int num : arr) {
+    public static void displayArray(int[] nums) {
+        for (int num : nums) {
             System.out.print(num + " ");
         }
         System.out.println();
     }
 
-    public static int getRepetitions(int[] arr) {
-        int repetitions = 0;
-        int n = arr.length;
-        for (int i = 1; i < n; ++i) {
-            int key = arr[i];
-            int j = i - 1;
+    public static int getNumRepetitions(int[] nums) {
+        int[] sortedNums = Arrays.copyOf(nums, nums.length);
+        sort(sortedNums);
 
-            while (j >= 0 && arr[j] > key) {
-                arr[j + 1] = arr[j];
-                j = j - 1;
-                repetitions++;
-            }
-            arr[j + 1] = key;
+        int numRepetitions = 0;
+        while (!Arrays.equals(nums, sortedNums)) {
+            sort(nums);
+            numRepetitions++;
         }
-        return repetitions;
+
+        return numRepetitions;
     }
 }
 ```
 
-Please note that the program assumes a console-based output for simplicity.
-
-
-
-
+You can run this Java program to see the output, which includes the given values before sorting, the list of sequences for sorting, and the number of repetitions needed for sorting. The program uses the insertion sort algorithm to sort the values in decreasing order.
