@@ -50,6 +50,9 @@ Index: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1D, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
 
 How many times will you enter a number: 0 (Please enter your number(s) between 0-26.) The entered numbers are §
 The deciphered values are -Cannot decipher. No value was entered.-
+
+
+Example Output 2.
 Queue: [a, b, c, d, e, f, g, h, i, j, k, I, m, n, o, p, q, r, s, t, u, v, w, x, y, z]
 Index: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
 26]
@@ -68,7 +71,7 @@ Enter number 11 >> 20 Enter number 12 » 1z Enter number 13 » 4
 The entered numbers are {3, 0, 19, D, 18, 19, t7, 20, 2, 19, 20, 17, 4] The deciphered values are data structure
 ========================================================================================================================
 
-Here's a Java program that uses the `Queue<E>` class to accept numbers and encode them into their corresponding words:
+Here's an example implementation in Java that fulfills the requirements:
 
 ```java
 import java.util.Scanner;
@@ -78,59 +81,36 @@ class Queue<E> {
     private int front;
     private int rear;
     private int size;
-    private int capacity;
 
     public Queue(E[] items) {
         this.items = items;
-        this.capacity = items.length;
         this.front = 0;
-        this.rear = -1;
-        this.size = 0;
+        this.rear = items.length - 1;
+        this.size = items.length;
     }
 
     public Queue() {
-        this(10); // Default capacity is 10
-    }
-
-    public Queue(int capacity) {
-        this.items = (E[]) new Object[capacity];
-        this.capacity = capacity;
+        this.items = null;
         this.front = 0;
         this.rear = -1;
         this.size = 0;
     }
 
     public void enqueue(E e) {
-        if (isFull()) {
-            System.out.println("Queue is full. Cannot enqueue element: " + e);
-            return;
-        }
-
-        rear = (rear + 1) % capacity;
+        rear = (rear + 1) % items.length;
         items[rear] = e;
         size++;
     }
 
     public E dequeue() {
-        if (isEmpty()) {
-            System.out.println("Queue is empty. Cannot dequeue element.");
-            return null;
-        }
-
-        E item = items[front];
-        front = (front + 1) % capacity;
+        E removedItem = items[front];
+        front = (front + 1) % items.length;
         size--;
-        return item;
+        return removedItem;
     }
 
     public E getElement(int i) {
-        if (isEmpty() || i < 0 || i >= size) {
-            System.out.println("Invalid index or empty queue.");
-            return null;
-        }
-
-        int index = (front + i) % capacity;
-        return items[index];
+        return items[i];
     }
 
     public int getSize() {
@@ -141,17 +121,12 @@ class Queue<E> {
         return size == 0;
     }
 
-    public boolean isFull() {
-        return size == capacity;
-    }
-
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Queue: [");
+        StringBuilder sb = new StringBuilder("Queue: [");
         for (int i = 0; i < size; i++) {
-            sb.append(items[(front + i) % capacity]);
-            if (i != size - 1) {
+            sb.append(items[(front + i) % items.length]);
+            if (i < size - 1) {
                 sb.append(", ");
             }
         }
@@ -161,43 +136,49 @@ class Queue<E> {
 }
 
 public class NumberEncoder {
-    private static final String[] ALPHABET = {
-        "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
-        "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
-    };
-
     public static void main(String[] args) {
-        Queue<String> alphabetQueue = new Queue<>(ALPHABET);
-        System.out.println("Queue: " + alphabetQueue);
+        Character[] alphabet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+                'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+
+        Queue<Character> queue = new Queue<>(alphabet);
+        Integer[] numbers = new Integer[27];
+
+        System.out.println(queue);
+        System.out.println("Index: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]");
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("How many times will you enter a number: ");
-        int numTimes = scanner.nextInt();
+        int count = scanner.nextInt();
 
-        if (numTimes <= 0) {
-            System.out.println("Cannot decipher. No value was entered.");
+        if (count == 0) {
+            System.out.println("The entered numbers are {}. The deciphered values are -Cannot decipher. No value was entered.-");
         } else {
-            System.out.println("Enter the numbers between 0 and 26:");
-
-            for (int i = 1; i <= numTimes; i++) {
+            System.out.println("Please enter your number(s) between 0-26.");
+            for (int i = 1; i <= count; i++) {
                 System.out.print("Enter number " + i + ": ");
-                int number = scanner.nextInt();
+                numbers[i - 1] = scanner.nextInt();
+            }
 
-                if (number >= 0 && number < ALPHABET.length) {
-                    alphabetQueue.enqueue(ALPHABET[number]);
+            System.out.print("The entered numbers are {");
+            for (int i = 0; i < count; i++) {
+                System.out.print(numbers[i]);
+                if (i < count - 1) {
+                    System.out.print(", ");
                 }
             }
+            System.out.println("}");
 
-            System.out
+            System.out.print("The deciphered values are ");
+            for (int i = 0; i < count; i++) {
+                int index = numbers[i];
+                if (index < 0 ||
 
-.println("The entered numbers are: " + alphabetQueue);
-            System.out.print("The deciphered values are: ");
-
-            for (int i = 0; i < alphabetQueue.getSize(); i++) {
-                System.out.print(alphabetQueue.getElement(i));
+ index > 26) {
+                    System.out.print("Invalid number ");
+                } else {
+                    System.out.print(queue.getElement(index));
+                }
             }
-
-            System.out.println();
         }
 
         scanner.close();
@@ -205,8 +186,4 @@ public class NumberEncoder {
 }
 ```
 
-In this program, we define the `Queue<E>` class to represent a generic queue. It provides methods to enqueue, dequeue, access elements by index, get the size, check if the queue is empty or full, and convert the queue to a string.
-
-The `NumberEncoder` class is the main class that uses the `Queue<E>` class to accept numbers from the user and encode them into corresponding words. It initializes a queue with the alphabet array and asks the user for the number of times they want to enter a number. It then prompts the user to enter the numbers and enqueues the corresponding alphabet values into the queue. Finally, it displays the entered numbers and the deciphered values.
-
-I hope this helps! Let me know if you have any further questions.
+When you run the `NumberEncoder` program, it displays the queue of alphabets and their indices. Then, it prompts you to enter the number of times you want to enter a number. If the count is 0, it prints a message indicating that no value was entered. Otherwise, it asks you to enter the numbers between 0 and 26. After entering the numbers, it prints the entered numbers and their corresponding deciphered values based on the alphabet queue.
