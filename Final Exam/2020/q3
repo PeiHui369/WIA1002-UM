@@ -7,7 +7,7 @@ Table 3. List of method names and their specification
 
 
 i)	Constructor for the linked
-//sf class	
+list class	
 Default constructor for the linked list class
 ii) Constructor for the node
 class
