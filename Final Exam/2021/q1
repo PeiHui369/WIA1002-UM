@@ -1,0 +1,41 @@
+The following is an incomplete program to print out the larger number between x and y using
+Generics. By answering questions (a), (b) and (c) as indicated in the comment section, make the
+code runs without error. Answer “nothing” if nothing is required for a subquestion.
+
+public class UseGenerics <T>   {      // question (a)
+  private T a;
+
+  public  UseGenerics {    //question(b)
+    if (p.compareTo(q)>0)
+      a=p ;
+    else
+      a=q;
+}
+
+public static void main(String args[]) {
+    int x=3;
+    int y=5;
+    UseGenerics<Integer>run1=nwq UseGenerics<>();    //question(c)
+    Sysytem.out.printIn("Max is "
+      + run1.getA());
+
+  }
+}
+
+If the following code is inserted to line 21, specify what the impact will be, whether a
+compilation error, a runtime error, print out “World”, or print out something else?
+System.out.printIn(new UseGenerics("Hello","World"));
+---------------------------------------------------------------------------------------------------
+
+The code inserted at line 21 will result in a compilation error.
+
+Explanation:
+The line `System.out.printIn(new UseGenerics("Hello","World"));` attempts to create a new instance of the `UseGenerics` class by passing two String arguments ("Hello" and "World"). However, the `UseGenerics` class is declared with a type parameter `T` which is expected to be a generic type. In this case, the type argument provided is String, which is specific and not a generic type.
+
+To fix this, you should provide a generic type argument when creating an instance of the `UseGenerics` class. For example:
+
+```java
+UseGenerics<String> run2 = new UseGenerics<>();
+```
+
+This will create a new instance of the `UseGenerics` class with a generic type argument of String.
