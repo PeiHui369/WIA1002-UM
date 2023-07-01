@@ -1,0 +1,41 @@
+To answer question (a), draw the answer on a paper, take photo and submit the image file. To
+answer question (b), type your answer to the field provided.
+Given a Binary Search Tree as shown in Figure 3.
+
+
+                      40
+                    /    \
+                   /      \
+                  26      45
+                 /         \
+                /           \
+               32           43
+              /                
+             /                  
+            34                   
+           
+A list of 3 nodes with the following values are inserted to the tree in order. Draw a tree after
+each insert operation.
+
+41, 38, 18
+
+
+                      40
+                    /    \
+                   /      \
+                  26      45
+                 /   \      \
+                /     \      \
+               32     18      43
+              /                \
+             /                  \
+            34                   41
+           /
+          /
+        38
+
+Give the preorder, inorder and postorder traversal of this tree after all the three nodes are
+inserted.
++12: 40 26 18 32 34 38 45 43 41
+1+2: 18 26 32 34 38 40 41 43 45
+12+: 18 36 34 32 26 41 43 45 40
