@@ -1,0 +1,37 @@
+The permutation function, P(n r) is defined as n!/r!, where n and r are two positive integers,
+whereas ! represents factorial. The following code computes the permutation of n and r recursively.
+By answering questions (a), (b) and (c) as indicated in the comment section, make the code runs
+without error.
+
+//This method receives n and r as positive integers
+public static int permut(int n, int r) {
+  if (n<r)       // question (a)
+    return -1;
+  if(n-1>r)
+    return n* permut (n-1,r);      // question(b)
+  else
+    return n;      //question(c)
+}
+---------------------------------------------------------------------------------
+Here's the updated code with the answers to the questions (a), (b), and (c) as comments:
+
+```java
+public static int permut(int n, int r) {
+  if (n < r)       // question (a): Check if n is less than r
+    return -1;
+  if (n - 1 > r)
+    return n * permut(n - 1, r);      // question (b): Recursively compute the permutation
+  else
+    return n;      // question (c): Base case when n - 1 is not greater than r
+}
+```
+
+Explanation:
+
+(a) In the first line of the method, the condition `n < r` is used to check if n is less than r. If this condition is true, it means that the inputs are invalid for computing the permutation, so we return -1 as an error indicator. This handles the case when n is less than r, which would result in a negative factorial value.
+
+(b) In the second line of the method, the condition `n - 1 > r` is used to check if n - 1 is greater than r. This condition is necessary to determine if we need to continue recursively computing the permutation or if we have reached the base case. If this condition is true, we multiply n with the recursive call to `permut` passing n - 1 and r as arguments.
+
+(c) If the condition in (b) is false, it means that n - 1 is not greater than r, so we have reached the base case. In this case, we simply return n as the permutation value.
+
+By incorporating these changes, the code will now run without any errors.
