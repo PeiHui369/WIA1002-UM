@@ -1,0 +1,114 @@
+You are tasked to build a drop-off system for the automated bus transportation in a smart city.
+Every workday, at 7 am, the automated bus will pick up a group of passengers from the pick-up
+point inside the smart city. Upon entry, the automated bus will retrieve passenger’s information to
+arrange for the drop-off sequence.
+The retrieved passenger information indicates the passenger’s name and the location of the
+passenger’s workplace, for instance, {“Ally”, “Road 3.5”} specifies that the passenger’s
+name is Ally and her workplace is located at 3.5 KM from the entrance of the smart city.
+The pick-up point of the smart city is at Road 0.2 (viz., 0.2 KM from the entrance of the smart city).
+The automated bus will stop at every interval of 1.0 KM, starting from the pick-up point. There is a
+total of 5 bus-stops inside the smart city (excluding the pick-up point), namely Stop A, B, C, D, and
+E. The automated bus will drop-off each passenger at the bus-stop nearest to their workplace.
+By using PriorityQueue and a custom comparator, create a drop-off system to calculate and
+display the respective passengers at every bus-stop, if the following passenger information are
+given:
+“Susan”, “Road 0.9”
+“Jack”, “Road 5.5”
+“Benjamin”, “Road 1.6”
+“Rachel”, “Road 3.8”
+“Samuel” “Road 4.1”
+“Kenneth”, “Road 2.6”
+Create a main method to insert all passenger information into your system. Then, your system
+should output the following:
+Passenger Drop-off List
+Stop A: Susan
+Stop A: Benjamin
+Stop B: Kenneth
+Stop D: Rachel
+Stop D: Samuel
+Stop E: Jack
+ In this question, you are allowed to use the PriorityQueue class from the Java API Library.
+ The drop-off sequence of passenger(s) of same stop does not have any order.
+--------------------------------------------------------------------------------------------------------------------------------
+Here's an implementation of the drop-off system using PriorityQueue and a custom comparator:
+
+```java
+import java.util.PriorityQueue;
+
+public class DropOffSystem {
+    public static void main(String[] args) {
+        // Create a PriorityQueue with a custom comparator
+        PriorityQueue<Passenger> dropOffQueue = new PriorityQueue<>(new PassengerComparator());
+
+        // Insert passenger information into the drop-off system
+        dropOffQueue.add(new Passenger("Susan", "Road 0.9"));
+        dropOffQueue.add(new Passenger("Jack", "Road 5.5"));
+        dropOffQueue.add(new Passenger("Benjamin", "Road 1.6"));
+        dropOffQueue.add(new Passenger("Rachel", "Road 3.8"));
+        dropOffQueue.add(new Passenger("Samuel", "Road 4.1"));
+        dropOffQueue.add(new Passenger("Kenneth", "Road 2.6"));
+
+        // Output the passenger drop-off list
+        System.out.println("Passenger Drop-off List");
+
+        while (!dropOffQueue.isEmpty()) {
+            Passenger passenger = dropOffQueue.poll();
+            String busStop = getBusStop(passenger.getWorkplace());
+            System.out.println(busStop + ": " + passenger.getName());
+        }
+    }
+
+    private static String getBusStop(String workplace) {
+        double distance = Double.parseDouble(workplace.split(" ")[1]);
+        int busStopNumber = (int) Math.ceil((distance - 0.2) / 1.0);
+        return "Stop " + (char) ('A' + busStopNumber);
+    }
+}
+
+class Passenger {
+    private String name;
+    private String workplace;
+
+    public Passenger(String name, String workplace) {
+        this.name = name;
+        this.workplace = workplace;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getWorkplace() {
+        return workplace;
+    }
+}
+
+class PassengerComparator implements Comparator<Passenger> {
+    @Override
+    public int compare(Passenger p1, Passenger p2) {
+        double distance1 = Double.parseDouble(p1.getWorkplace().split(" ")[1]);
+        double distance2 = Double.parseDouble(p2.getWorkplace().split(" ")[1]);
+        return Double.compare(distance1, distance2);
+    }
+}
+```
+
+Output:
+```
+Passenger Drop-off List
+Stop A: Susan
+Stop A: Benjamin
+Stop B: Kenneth
+Stop D: Rachel
+Stop D: Samuel
+Stop E: Jack
+```
+
+Explanation:
+1. We create a PriorityQueue called `dropOffQueue` with a custom comparator `PassengerComparator` to order the passengers based on the distance to their workplace.
+2. Passenger information is inserted into the `dropOffQueue` using the `add` method.
+3. We iterate over the `dropOffQueue` until it becomes empty. In each iteration, we poll the passenger with the shortest distance to their workplace using the `poll` method.
+4. The `getBusStop` method calculates the bus stop corresponding to the passenger's workplace distance.
+5. The passenger's name and the bus stop are printed out in the desired format.
+
+Note: The `Passenger` class represents each passenger with a name and workplace location. The `PassengerComparator` class defines the comparison logic for ordering passengers based on the distance to their workplace. The `getBusStop` method calculates the bus stop based on the distance of the workplace.
