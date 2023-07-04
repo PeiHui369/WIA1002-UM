@@ -1,0 +1,70 @@
+Write a program that contains a generic method that reverses the order of the elements
+within a stack data structure using recursion. In addition, write the main method to test
+the static method. Two sets of test data should be used in the main method: i) {“Switch”,
+“Motherboard”, “RAM”, “SSD”, “CPU”, “GPU”, “Router”}; and ii) {17, 21, 45, 23, 1, 99,
+16}. No marks will be awarded if the stack and recursion concepts are not applied in the
+program.
+
+================================================================================================
+Here's an example Java program that contains a generic method to reverse the order of elements within a stack using recursion:
+
+```java
+import java.util.Stack;
+
+public class StackReversal {
+    
+    public static <T> void reverseStack(Stack<T> stack) {
+        if (!stack.isEmpty()) {
+            T element = stack.pop();
+            reverseStack(stack);
+            insertAtBottom(stack, element);
+        }
+    }
+
+    private static <T> void insertAtBottom(Stack<T> stack, T element) {
+        if (stack.isEmpty()) {
+            stack.push(element);
+        } else {
+            T topElement = stack.pop();
+            insertAtBottom(stack, element);
+            stack.push(topElement);
+        }
+    }
+
+    public static void main(String[] args) {
+        // Test data 1
+        Stack<String> stringStack = new Stack<>();
+        stringStack.push("Switch");
+        stringStack.push("Motherboard");
+        stringStack.push("RAM");
+        stringStack.push("SSD");
+        stringStack.push("CPU");
+        stringStack.push("GPU");
+        stringStack.push("Router");
+        
+        System.out.println("Original stack: " + stringStack);
+        reverseStack(stringStack);
+        System.out.println("Reversed stack: " + stringStack);
+
+        // Test data 2
+        Stack<Integer> integerStack = new Stack<>();
+        integerStack.push(17);
+        integerStack.push(21);
+        integerStack.push(45);
+        integerStack.push(23);
+        integerStack.push(1);
+        integerStack.push(99);
+        integerStack.push(16);
+
+        System.out.println("Original stack: " + integerStack);
+        reverseStack(integerStack);
+        System.out.println("Reversed stack: " + integerStack);
+    }
+}
+```
+
+This program defines a `StackReversal` class with a generic `reverseStack()` method and a `main()` method to test it. The `reverseStack()` method uses recursion to reverse the order of elements within the stack. The `insertAtBottom()` method is a helper method that inserts an element at the bottom of the stack using recursion.
+
+In the `main()` method, two sets of test data are created: a stack of strings and a stack of integers. The original stacks are printed, then the `reverseStack()` method is called to reverse the order of elements within each stack. Finally, the reversed stacks are printed to verify the results.
+
+Note: The program assumes that the `Stack` class from the `java.util` package is imported.
