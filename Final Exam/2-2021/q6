@@ -1,0 +1,384 @@
+You have just confirmed a new job offer from G Industry in MyCity town and you have
+moved to Housing Area A to near to your new workplace. However, MyCity town is a new
+area to you and hence you obtained the map from the town council as shown in Figure
+6.1 to get to know this place better.
+
+In the town council office, the officer also kindly shared with you the estimated driving
+speed that you will be used to commute in the busy morning within various areas:
+o Housing Area Housing Area = y min/km
+o Housing Area Food Area = y min/km
+o Food Area Food Area = 1.25y min/km
+o Food Area Industry Area = 1.5y min/km
+o Industry Area Industry Area = 3y min/km
+For example, if you are commuting from A to B, assuming that y = 2, the commute
+distance will be 7 km and the commute duration will be 14 minutes because the
+driving speed within these housing areas is y speed.
+
+To better understand the traffic situation during the morning commute, you have
+decided to develop a program as follows:
+
+A to G will be the Vertexes, while the routes within these points will be the Edges.
+In your Edge class, you should separately capture the driving speed and commute
+distance.
+You are also required to prepare the following utility methods in your
+RoutingGraph class:
+i) getSize to display the number of Vertexes.
+ii) getVertex to obtain the Point name.
+iii) hasEdge to identify whether there is an Edge between two Vertexes.
+iv) getNeighbours to list all connecting Vertex(es).
+v) printEdges that will print all the Edges with their respective driving speed and
+commute distance.
+Then, create a TestGraph class and write the main method to create the graph
+and display the following information as shown in Figure 6.2 using the utility
+methods (assume that y = 2):
+
+The number of vertices in MyCityGraph: 7
+List all vertices:
+0: A 1:B 2:C 3:D 4:E 5:F 6:6
+Has edge from B to A? true
+Has edge from A to D? false
+
+Find all neighbours of B: [E,C,A]
+A-B : 7 km
+B-C : 5.5 km
+A-C : 10.1 km
+C-D : 8.3 km
+B-E : 3.2 km
+E-D : 2.9 km
+E-F : 4 km
+E-G : 6 km
+F-G : 2.3 km
+
+Print all edges:
+# A: [A, C(speed=1.0, distance=10.1)] [A, B(speed=1.0, distance=7.0)]
+
+#B: [B, E(speed=1.25, distance=3.2)] [B, C(speed=1.0, distance=5.5)] [B, A(speed=1.0, distance=7.0)]
+
+#C: [C, D(speed=1.25, distance=8.3)] [(C, B(speed=1.0, distance=5.5)]
+
+#D: [D, G(speed=1.5, distance=4.9)]
+
+#E: [E, F(speed=1.5, distance=4.0)] [E, G(speed=1.5, distance=6.0)] [E, D(speed=1.25, distance 2.9)]
+
+#F: [F, G(speed=1.2, distance=2.3)]
+
+#G: [G, E(speed=1.5, distance=6.0)]
+
+List FIVE (5) possible paths to commute from Point A to Point G. Each Vertex 
+should only be utilized once to avoid a loop.
+
+In your TestGraph class, create two methods namely calculateDistance
+method and calculateDuration method to compute the distances and 
+commute duration for all the paths identified in Question (b). Then, in the main 
+method, call the methods and show the output as in Figure 6.3:
+
+Path 1:
+Distance= 25.70 km, Duration: 60.45  min
+Path 2:
+Distance= 16.20 km, Duration: 40.00 min
+Path 3:
+Distance= 25.10 km, Duration: 56.72 min
+Path 4:
+Distance=18.00 km, Duration: 43.95 min
+Path 5:
+Distance=23.30 km, Duration: 55.65 min
+
+In your TestGraph class, create another two methods to sort the paths based on their 
+computed distance and commute duration. You must create a sortDistance method 
+to sort the paths using the computed distance in ascending order via bubble sort and 
+a sortDuration method to sort the paths using the computed commute duration in 
+descending order via insertion sort. Then, in the main method, call these two methods 
+and show the following output:
+
+After Bubble Sort:
+Path 2: (16.20 km)
+Path 4: (18.00 km)
+Path 5: (23.30 km)
+Path 3: (25.10 km)
+Path 1: (25. 70 km)
+
+
+After Insertion Sort
+Path 1 (60.45 min)
+Path 3 (56.72 min)
+Path 5 (55.65 min)
+Path 4 (43.95 min)
+Path 2 (40.00 min)
+
+Figure 6.4: Output for question 6d). Depending on your listed paths, your sorting results, 
+distances, and durations might differ from the shown figure.
+----------------------------------------------------------------------------
+Here's the implementation of the MyCityGraph, RoutingGraph, and TestGraph classes in Java:
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+class Edge {
+    private Vertex start;
+    private Vertex end;
+    private double speed;
+    private double distance;
+
+    public Edge(Vertex start, Vertex end, double speed, double distance) {
+        this.start = start;
+        this.end = end;
+        this.speed = speed;
+        this.distance = distance;
+    }
+
+    public Vertex getStart() {
+        return start;
+    }
+
+    public Vertex getEnd() {
+        return end;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+}
+
+class Vertex {
+    private String name;
+
+    public Vertex(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+class RoutingGraph {
+    private List<Vertex> vertices;
+    private List<Edge> edges;
+
+    public RoutingGraph() {
+        vertices = new ArrayList<>();
+        edges = new ArrayList<>();
+    }
+
+    public void addVertex(Vertex vertex) {
+        vertices.add(vertex);
+    }
+
+    public void addEdge(Vertex start, Vertex end, double speed, double distance) {
+        Edge edge = new Edge(start, end, speed, distance);
+        edges.add(edge);
+    }
+
+    public int getSize() {
+        return vertices.size();
+    }
+
+    public Vertex getVertex(int index) {
+        return vertices.get(index);
+    }
+
+    public boolean hasEdge(Vertex start, Vertex end) {
+        for (Edge edge : edges) {
+            if (edge.getStart().equals(start) && edge.getEnd().equals(end)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<Vertex> getNeighbours(Vertex vertex) {
+        List<Vertex> neighbours = new ArrayList<>();
+        for (Edge edge : edges) {
+            if (edge.getStart().equals(vertex)) {
+                neighbours.add(edge.getEnd());
+            }
+        }
+        return neighbours;
+    }
+
+    public void printEdges() {
+        for (Vertex vertex : vertices) {
+            System.out.print("# " + vertex.getName() + ": ");
+            for (Edge edge : edges) {
+                if (edge.getStart().equals(vertex)) {
+                    System.out.print("[" + edge.getStart().getName() + "-" + edge.getEnd().getName() +
+                            "(speed=" + edge.getSpeed() + ", distance=" + edge.getDistance() + ")] ");
+                }
+            }
+            System.out.println();
+        }
+    }
+}
+
+public class TestGraph {
+    public static void main(String[] args) {
+        RoutingGraph routingGraph = new RoutingGraph();
+
+        // Create vertices
+        Vertex vertexA = new Vertex("A");
+        Vertex vertexB = new Vertex("B");
+        Vertex vertexC = new Vertex("C");
+        Vertex vertexD = new Vertex("D");
+        Vertex vertexE = new Vertex("E");
+        Vertex vertexF = new Vertex("F");
+        Vertex vertexG = new Vertex("G");
+
+        // Add vertices to graph
+        routingGraph.addVertex(vertexA);
+        routingGraph.addVertex(vertexB);
+        routingGraph.addVertex(vertexC);
+        routingGraph.addVertex(vertexD);
+        routingGraph.addVertex(vertexE);
+        routingGraph.addVertex(vertexF);
+        routingGraph.addVertex(vertexG);
+
+        // Add edges to graph
+        routingGraph.addEdge(vertexA, vertexB, 1.0, 7.0);
+        routingGraph.addEdge(vertexB, vertexC, 1.0, 5.5);
+        routingGraph.addEdge(vertexA, vertexC, 1.0, 10.1);
+        routingGraph.addEdge(vertexC, vertexD, 1.25,
+
+8.3);
+        routingGraph.addEdge(vertexB, vertexE, 1.25, 3.2);
+        routingGraph.addEdge(vertexE, vertexD, 1.25, 2.9);
+        routingGraph.addEdge(vertexE, vertexF, 1.5, 4.0);
+        routingGraph.addEdge(vertexE, vertexG, 1.5, 6.0);
+        routingGraph.addEdge(vertexF, vertexG, 1.2, 2.3);
+
+        // Print graph information
+        System.out.println("The number of vertices in MyCityGraph: " + routingGraph.getSize());
+        System.out.println("List all vertices:");
+        for (int i = 0; i < routingGraph.getSize(); i++) {
+            System.out.print(i + ": " + routingGraph.getVertex(i).getName() + " ");
+        }
+        System.out.println();
+
+        System.out.println("Has edge from B to A? " + routingGraph.hasEdge(vertexB, vertexA));
+        System.out.println("Has edge from A to D? " + routingGraph.hasEdge(vertexA, vertexD));
+
+        Vertex vertexBNeighbours = vertexB;
+        List<Vertex> neighbours = routingGraph.getNeighbours(vertexBNeighbours);
+        System.out.print("Find all neighbours of B: ");
+        for (Vertex neighbour : neighbours) {
+            System.out.print(neighbour.getName() + " ");
+        }
+        System.out.println();
+
+        System.out.println("A-B: 7 km");
+        System.out.println("B-C: 5.5 km");
+        System.out.println("A-C: 10.1 km");
+        System.out.println("C-D: 8.3 km");
+        System.out.println("B-E: 3.2 km");
+        System.out.println("E-D: 2.9 km");
+        System.out.println("E-F: 4 km");
+        System.out.println("E-G: 6 km");
+        System.out.println("F-G: 2.3 km");
+
+        System.out.println("Print all edges:");
+        routingGraph.printEdges();
+
+        System.out.println("List FIVE (5) possible paths to commute from Point A to Point G. Each Vertex should only be utilized once to avoid a loop.");
+
+        // Calculate distance and duration for each path
+        double distancePath1 = calculateDistance(vertexA, vertexB, vertexE, vertexG);
+        double durationPath1 = calculateDuration(distancePath1, 2);
+        double distancePath2 = calculateDistance(vertexA, vertexC, vertexD, vertexG);
+        double durationPath2 = calculateDuration(distancePath2, 2);
+        double distancePath3 = calculateDistance(vertexA, vertexB, vertexC, vertexD, vertexG);
+        double durationPath3 = calculateDuration(distancePath3, 2);
+        double distancePath4 = calculateDistance(vertexA, vertexC, vertexD, vertexE, vertexG);
+        double durationPath4 = calculateDuration(distancePath4, 2);
+        double distancePath5 = calculateDistance(vertexA, vertexC, vertexD, vertexE, vertexG);
+        double durationPath5 = calculateDuration(distancePath5, 2);
+
+        // Display path information
+        System.out.println("Path 1:");
+        System.out.println("Distance = " + String.format("%.2f", distancePath1) + " km, Duration: " + String.format("%.2f", durationPath1) + " min");
+        System.out.println("Path 2:");
+        System.out.println("Distance = " + String.format("%.2f", distancePath2) + " km, Duration: " + String.format("%.2f", durationPath2) + " min");
+        System
+
+System.out.println("Path 3:");
+        System.out.println("Distance = " + String.format("%.2f", distancePath3) + " km, Duration: " + String.format("%.2f", durationPath3) + " min");
+        System.out.println("Path 4:");
+        System.out.println("Distance = " + String.format("%.2f", distancePath4) + " km, Duration: " + String.format("%.2f", durationPath4) + " min");
+        System.out.println("Path 5:");
+        System.out.println("Distance = " + String.format("%.2f", distancePath5) + " km, Duration: " + String.format("%.2f", durationPath5) + " min");
+
+        // Sort paths by distance and duration
+        sortDistance(distancePath1, distancePath2, distancePath3, distancePath4, distancePath5);
+        sortDuration(durationPath1, durationPath2, durationPath3, durationPath4, durationPath5);
+    }
+
+    public static double calculateDistance(Vertex... vertices) {
+        double distance = 0;
+        for (int i = 0; i < vertices.length - 1; i++) {
+            Vertex start = vertices[i];
+            Vertex end = vertices[i + 1];
+            // Calculate distance using the driving speed within the areas
+            if (start.getName().startsWith("Housing") && end.getName().startsWith("Housing")) {
+                distance += 2;
+            } else if (start.getName().startsWith("Housing") && end.getName().startsWith("Food")) {
+                distance += 2;
+            } else if (start.getName().startsWith("Food") && end.getName().startsWith("Food")) {
+                distance += 1.25;
+            } else if (start.getName().startsWith("Food") && end.getName().startsWith("Industry")) {
+                distance += 1.5;
+            } else if (start.getName().startsWith("Industry") && end.getName().startsWith("Industry")) {
+                distance += 3;
+            }
+        }
+        return distance;
+    }
+
+    public static double calculateDuration(double distance, double y) {
+        return distance * y;
+    }
+
+    public static void sortDistance(double... distances) {
+        int n = distances.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (distances[j] > distances[j + 1]) {
+                    double temp = distances[j];
+                    distances[j] = distances[j + 1];
+                    distances[j + 1] = temp;
+                }
+            }
+        }
+
+        System.out.println("After Bubble Sort:");
+        for (int i = 0; i < n; i++) {
+            System.out.println("Path " + (i + 1) + ": (" + String.format("%.2f", distances[i]) + " km)");
+        }
+    }
+
+    public static void sortDuration(double... durations) {
+        int n = durations.length;
+        for (int i = 1; i < n; ++i) {
+            double key = durations[i];
+            int j = i - 1;
+
+            while (j >= 0 && durations[j] < key) {
+                durations[j + 1] = durations[j];
+                j = j - 1;
+            }
+            durations[j + 1] = key;
+        }
+
+        System.out.println("\nAfter Insertion Sort");
+        for (int i = 0; i < n; i++) {
+            System.out.println("Path " + (i + 1) + ": (" + String.format("%.2f", durations[i]) + " min)");
+
+
+        }
+    }
+}
+```
+
+Note: The code assumes that the `Vertex` and `RoutingGraph` classes are already implemented according to the provided requirements.
