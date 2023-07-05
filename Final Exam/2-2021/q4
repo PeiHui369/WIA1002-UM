@@ -106,3 +106,142 @@ a) Create the fourth file, “LuckyDraw.java”, and add all the following staff
 called “staffList1”, as shown in Table 4.1.
 (note: a file with the list (staffList.txt) is given)
 
+Staff ID    Staff Name       Position
+1           Luke Skywalker   Manager
+2           Han Solo         Supervisor
+6           Moff Tarkin      Assistant
+8           Obi Wan          Assistant
+9           Organa           Assistant
+12          Leia Organa      Supervisor
+15          Chewbacca        Assistant
+16          Uncle Owen       Assistant
+17          Aunt Beru        Assistant
+19          Lando Calrissian Assistant
+      Table 4.1: Staff List
+
+In the file “LinkedList.java”, add one method “get” that receives an integer parameter
+as the index of an object in the linked-list, and returns the object of generic type at the
+given index. This method should not call any other methods in the linked-list.
+
+In the file “LinkedList.java”, add one method “clone” that receives no parameter. This
+method creates and returns a copy of the linked-list object that calls it.
+
+The management has decided to have 2 rounds of lucky draw. The prizes in the first round
+are 5 drones of the same model, whereas in the second round are cash vouchers with a
+total value of RM1000.
+To prepare for the activity, make a copy of “staffList1” and name it as “staffList2” in the file
+“LuckyDraw.java”.
+
+For the first round, randomly pick 5 staff from the “staffList1” for the prizes. Take note
+that every staff cannot win more than 1 prize in this round. Write code for this task and
+the output in the following format is expected as in Figure 4.1. The efficiency of the
+solution is critical.
+
+8 Obi Wan wins a drone!
+9 Organa wins a drone!
+6 Moff Tarkin wins a drone!
+1 Luke Skywalker wins a drone!
+12 Leia Organa wins a drone!
+Figure 4.1: expected output for question 4e)
+
+For the second round, use “staffList2” instead. Everyone, including those who have
+won a prize in the first round, can join. Not only that, everyone is allowed to win more
+than one prize in this round. The cash vouchers with a total value of RM1000 will be
+given out following the rules:
+• If the winner is an assistant, the winner will get an RM200 voucher
+• If the winner is a supervisor, the winner will get an RM100 voucher
+• If the winner is a manager, the name will be announced, but no cash voucher
+will be given.
+• The lucky draw ends when all the cash vouchers have been given out. For the
+last winner, if the cash voucher left is less than the amount he/she is entitled
+to, this winner will get the amount left only.
+Write code for this task, and the output in the format as shown in Figure 4.2 is expected:
+
+Assistant Uncle Owen wins RM200. Cash vouchers left RM 800
+Assistant Aunt Beru wins RM200. Cash vouchers left RM 600
+Manager Luke Skywalker is the winner, but no cash voucher will be given
+Supervisor Leia Organa wins RM100. Cash vouchers left RM500
+Supervisor Han Solo wins RM100. Cash vouchers left RM400
+Supervisor Han Solo wins RM100. Cash vouchers left RM300
+Assistant Uncle Owen wins RM200. Cash vouchers left RM100
+Assistant Obi Wan wins RM100. Cash vouchers left RM 0
+Figure 4.2: Expected output for question 4f)
+========================================================================================
+Here's the implementation of the "LuckyDraw.java" file, including the tasks mentioned:
+
+```java
+import java.util.Random;
+
+public class LuckyDraw {
+    public static void main(String[] args) {
+        LinkedList<Staff> staffList1 = new LinkedList<>();
+        staffList1.addLast(new Staff(1, "Luke Skywalker", "Manager"));
+        staffList1.addLast(new Staff(2, "Han Solo", "Supervisor"));
+        staffList1.addLast(new Staff(6, "Moff Tarkin", "Assistant"));
+        staffList1.addLast(new Staff(8, "Obi Wan", "Assistant"));
+        staffList1.addLast(new Staff(9, "Organa", "Assistant"));
+        staffList1.addLast(new Staff(12, "Leia Organa", "Supervisor"));
+        staffList1.addLast(new Staff(15, "Chewbacca", "Assistant"));
+        staffList1.addLast(new Staff(16, "Uncle Owen", "Assistant"));
+        staffList1.addLast(new Staff(17, "Aunt Beru", "Assistant"));
+        staffList1.addLast(new Staff(19, "Lando Calrissian", "Assistant"));
+
+        LinkedList<Staff> staffList2 = staffList1.clone();
+
+        // First round lucky draw
+        System.out.println("First Round Winners:");
+        for (int i = 0; i < 5; i++) {
+            int index = getRandomIndex(staffList1.getSize());
+            Staff winner = staffList1.get(index);
+            System.out.println(winner.getID() + " " + winner.getName() + " wins a drone!");
+            staffList1.remove(index);
+        }
+        System.out.println();
+
+        // Second round lucky draw
+        System.out.println("Second Round Winners:");
+        int cashVouchersLeft = 1000;
+        Random random = new Random();
+        while (cashVouchersLeft > 0 && staffList2.getSize() > 0) {
+            int index = getRandomIndex(staffList2.getSize());
+            Staff winner = staffList2.get(index);
+            if (winner.getPosition().equals("Assistant")) {
+                if (cashVouchersLeft >= 200) {
+                    System.out.println("Assistant " + winner.getName() + " wins RM200. Cash vouchers left RM " + (cashVouchersLeft - 200));
+                    cashVouchersLeft -= 200;
+                } else {
+                    System.out.println("Assistant " + winner.getName() + " wins RM" + cashVouchersLeft + ". Cash vouchers left RM 0");
+                    cashVouchersLeft = 0;
+                }
+            } else if (winner.getPosition().equals("Supervisor")) {
+                if (cashVouchersLeft >= 100) {
+                    System.out.println("Supervisor " + winner.getName() + " wins RM100. Cash vouchers left RM " + (cashVouchersLeft - 100));
+                    cashVouchersLeft -= 100;
+                } else {
+                    System.out.println("Supervisor " + winner.getName() + " wins RM" + cashVouchersLeft + ". Cash vouchers left RM 0");
+                    cashVouchersLeft = 0;
+                }
+            } else {
+                System.out.println("Manager " + winner.getName() + " is the winner, but no cash voucher will be given");
+            }
+            staffList2.remove(index);
+        }
+    }
+
+    private static int getRandomIndex(int max) {
+        Random random = new Random();
+        return random.nextInt(max);
+    }
+}
+```
+
+In the above code:
+- The first round of the lucky draw selects 5 random winners from `staffList1` using the `getRandomIndex()` method. The selected staff are then removed from the list.
+
+
+- The second round of the lucky draw is performed on `staffList2`. The loop continues until either all the cash vouchers are given out or there are no more staff in the list.
+- For each staff in the second round, the position is checked to determine the value of the cash voucher to be awarded. If the staff is an assistant, they receive RM200, if they are a supervisor, they receive RM100. Managers do not receive cash vouchers.
+- The number of cash vouchers left is updated accordingly and the staff is removed from the list.
+- The output is printed according to the required format.
+
+Note: The provided implementation assumes that the `LinkedList` class has been modified as described in the question, with the `get` and `clone` methods added.
