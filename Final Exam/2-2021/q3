@@ -1,0 +1,102 @@
+To prevent the spread of coronavirus, Maya Clinic only can handle 10 patient visits per
+day. The clinic wants to use a generic queue implemented using the Java ArrayList.
+According to the Chief Technology Officer of the clinic, one benefit of using ArrayList is
+that they can keep all the patient information until the end of the day. Figure 3.1 shows
+an incomplete implementation of the queue class:
+
+import java.util.ArrayList;
+public class ArrayListQueue<E> {
+  private int size=10;
+  private int front=0;
+  private int end=_______;  // subquestion (a)
+  private ArrayList<E> list = new ArrayList<E>(size);
+
+  public boolean enqueue (E o) (
+    boolean success=false;
+    if (end<size)
+      success=list.add(o);
+      ___________           // subquestion (b)
+    }
+    return success;
+}
+public E dequeue () {       // subquestion (c)
+}
+public String queueToString() {   // subquestion (d)
+}
+public String allToString() {
+  return "ALL : " + list.toString();
+}
+
+Figure 3.: An incomplete implementation of the queue class
+
+Complete the definition of variable “end”, which is the index of the last element in the
+queue.
+
+Write one line of code so that the method enqueue complete. The method should
+insert an object to an appropriate position in the ArrayList.
+
+Complete the dequeue method, which returns the first object which has not been
+referred to in the queue. Take note that after this method’s execution, the returned
+object should still be stored in the ArrayList list and can be accessed by the
+allToString method. If there is no object to return, this method returns a null.
+(2 markah/marks)
+
+Complete the queueToString method, which returns all the objects in the
+queue in sequence as a string. The objects which have been removed from the
+queue should not be returned.
+=========================================================================================
+
+Here's the complete implementation of the `ArrayListQueue` class with the requested modifications:
+
+```java
+import java.util.ArrayList;
+
+public class ArrayListQueue<E> {
+    private int size = 10;
+    private int front = 0;
+    private int end = 0;
+    private ArrayList<E> list = new ArrayList<>(size);
+
+    public boolean enqueue(E o) {
+        boolean success = false;
+        if (end < size) {
+            list.add(end, o);
+            end++;
+            success = true;
+        }
+        return success;
+    }
+
+    public E dequeue() {
+        if (front < end) {
+            E object = list.get(front);
+            front++;
+            return object;
+        }
+        return null;
+    }
+
+    public String queueToString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = front; i < end; i++) {
+            sb.append(list.get(i));
+            if (i < end - 1) {
+                sb.append(", ");
+            }
+        }
+        return sb.toString();
+    }
+
+    public String allToString() {
+        return "ALL: " + list.toString();
+    }
+}
+```
+
+In the modified code:
+- The `end` variable is initialized as 0, indicating the index of the last element in the queue.
+- In the `enqueue()` method, the object `o` is inserted at the `end` index of the `ArrayList`. The `end` variable is then incremented to point to the next available position.
+- The `dequeue()` method retrieves the object at the `front` index of the `ArrayList`, increments `front`, and returns the retrieved object.
+- The `queueToString()` method iterates over the elements between `front` and `end` (excluding `end`) in the `ArrayList` and builds a string representation of the queue elements.
+
+Please note that this implementation assumes a fixed size for the queue (10) as specified in the question.
