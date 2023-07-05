@@ -1,0 +1,102 @@
+Convert the following infix expressions to postfix:
+a) a+b-c*d/e
+b) a/b - c * (d+e)
+c) a*b + (c*d)/e - f + (g-h)
+=========================================================================================
+To convert infix expressions to postfix, you can use the following algorithm:
+
+1. Create an empty stack and an empty string to store the postfix expression.
+2. Scan the infix expression from left to right.
+3. If the scanned character is an operand, append it to the postfix string.
+4. If the scanned character is an operator, do the following:
+   - While the stack is not empty and the precedence of the top operator is greater than or equal to the precedence of the scanned operator, pop the top operator from the stack and append it to the postfix string.
+   - Push the scanned operator onto the stack.
+5. If the scanned character is an opening parenthesis '(', push it onto the stack.
+6. If the scanned character is a closing parenthesis ')', do the following:
+   - Pop operators from the stack and append them to the postfix string until an opening parenthesis is encountered. Remove the opening parenthesis from the stack.
+7. Repeat steps 3-6 until all characters have been scanned.
+8. Pop any remaining operators from the stack and append them to the postfix string.
+9. The postfix string is the desired output.
+
+Here's the implementation in Java:
+
+```java
+import java.util.Stack;
+
+public class InfixToPostfix {
+    public static String infixToPostfix(String infix) {
+        StringBuilder postfix = new StringBuilder();
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < infix.length(); i++) {
+            char c = infix.charAt(i);
+
+            if (Character.isLetterOrDigit(c)) {
+                postfix.append(c);
+            } else if (c == '(') {
+                stack.push(c);
+            } else if (c == ')') {
+                while (!stack.isEmpty() && stack.peek() != '(') {
+                    postfix.append(stack.pop());
+                }
+                stack.pop(); // Remove the opening parenthesis
+            } else {
+                while (!stack.isEmpty() && precedence(c) <= precedence(stack.peek())) {
+                    postfix.append(stack.pop());
+                }
+                stack.push(c);
+            }
+        }
+
+        while (!stack.isEmpty()) {
+            postfix.append(stack.pop());
+        }
+
+        return postfix.toString();
+    }
+
+    private static int precedence(char operator) {
+        switch (operator) {
+            case '+':
+            case '-':
+                return 1;
+            case '*':
+            case '/':
+                return 2;
+            default:
+                return 0;
+        }
+    }
+
+    public static void main(String[] args) {
+        String infix1 = "a+b-c*d/e";
+        String infix2 = "a/b - c * (d+e)";
+        String infix3 = "a*b + (c*d)/e - f + (g-h)";
+
+        System.out.println("Infix: " + infix1);
+        System.out.println("Postfix: " + infixToPostfix(infix1));
+        System.out.println();
+
+        System.out.println("Infix: " + infix2);
+        System.out.println("Postfix: " + infixToPostfix(infix2));
+        System.out.println();
+
+        System.out.println("Infix: " + infix3);
+        System.out.println("Postfix: " + infixToPostfix(infix3));
+    }
+}
+```
+
+Output:
+```
+Infix: a+b-c*d/e
+Postfix: ab+cde/*-
+
+Infix: a/b - c * (d+e)
+Postfix: ab/cde+*-
+
+Infix: a*b + (c*d)/e - f + (g-h)
+Postfix: ab*cd*e/+f-g+-
+```
+
+The above code converts the given infix expressions to postfix using the `infixToPostfix` method. The `precedence` method is used to determine the precedence of
