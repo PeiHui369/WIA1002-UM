@@ -1,0 +1,108 @@
+A company will have a lucky draw activity during its annual dinner. Currently, the company
+only has 10 staff and all are eligible to join the activity if they attend the dinner. However,
+the final list of joining the dinner is not confirmed yet.
+To ensure that the lucky draw is successful, the company wants to write a program so
+that lucky staff are selected randomly from a list provided. Given that the programmer in
+charge of the task already has the following three files:
+
+Staff.java
+public class Staff {
+  private int staffID;
+  private String staffName;
+  private String position;
+  public Staff() {
+  }
+  public Staff(int id, String name, String post) {
+    staffID= id;
+    staffName = name;
+    position = post;
+  }
+  public int getID () {
+    return staffID;
+  }
+  public String getName () {
+    return staffName;
+}
+  public String getPosition () {
+    return position;
+  }
+}
+
+Node.java
+public class Node<E> {
+  E element;
+  Node<E> next;
+  public Node(E element) {
+    this.element = element;
+  }
+}
+
+LinkedList.java
+public class LinkedList<E> {
+  private Node<E> head, tail;
+  private int size=0;
+
+  public LinkedList() { }
+
+  public int getSize() {
+  return size;
+}
+public void addLast(E e) {
+  if (tail == null) head = tail = new Node<>(e);
+  else {
+    tail.next = new Node<>(e);
+    tail = tail.next;
+  }
+  size++;
+}
+public E removeFirst() {
+  if (size == 0) return null;
+  else {
+    Node<E> temp = head;
+    head = head.next;
+    size--;
+    if (head == null) tail = null;
+    return temp.element;
+  }
+}
+public E removeLast() {
+  if (size == 0) return null;
+  else if (size == 1) {
+    Node<E> temp = head;
+    head = tail = null;
+    size = 0;
+    return temp.element;
+}
+else {
+  Node<E> current = head;
+  for (int i = 0; i < size - 2; i++)
+    current = current.next;
+  Node<E> temp = tail;
+  tail = current;
+  tail.next = null;
+  size--;
+  return temp.element;
+  }
+}
+public E remove(int index) {
+  if (index < 0 || index >= size) return null;
+  else if (index == 0) return removeFirst();
+  else if (index == size - 1) return removeLast();
+  else {
+    Node<E> previous = head;
+    for (int i = 1; i < index; i++)
+      previous = previous.next;
+  Node<E> current = previous.next;
+  previous.next = current.next;
+  size--;
+  return current.element;
+  }
+ }
+}
+
+To make sure that the lucky draw program is random and fair, you are appointed as an
+external programmer to complete the following tasks:
+a) Create the fourth file, “LuckyDraw.java”, and add all the following staff to a linked-list
+called “staffList1”, as shown in Table 4.1.
+(note: a file with the list (staffList.txt) is given)
+
