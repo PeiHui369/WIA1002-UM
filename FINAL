@@ -1,0 +1,182 @@
+Stack
+
+# Common Method
+
+
+-----------------------
+# Additional
+@ Balanced Bracket
+public static String checkBracketMatch(String inputString) {
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < inputString.length(); i++) {
+            char character = inputString.charAt(i);
+
+            if (isLeftBracket(character)) {
+                stack.push(character);
+            } else if (isRightBracket(character)) {
+                if (stack.isEmpty()) {
+                    return "Not all brackets are matched";
+                } else {
+                    char top = stack.peek();
+                    if (isMatchingBracket(top, character)) {
+                        stack.pop();
+                    } else {
+                        return "Not all brackets are matched";
+                    }
+                }
+            }
+        }
+
+        if (stack.isEmpty()) {
+            return "YES - all matched!";
+        } else {
+            return "Not all brackets are matched";
+        }
+    }
+
+
+
+===========================
+# FileReader
+ try {
+            BufferedReader reader = new BufferedReader(new FileReader("BracMatch.txt"));
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String result = checkBracketMatch(line);
+                System.out.println(result);
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        }
+
+##########################################################
+Queue
+
+# Array
+class GenericQueue<E> {
+//private IV
+E[] items;
+int front, rear, size, capacity;
+
+public GenericQueue(int capacity) {             //(E[] items)
+    this.items = (E[]) new Object[capacity];    //items;
+    this.capacity = capacity;                   //none
+    this.front = 0;                             //0
+    this.rear = -1;                             //items.length-1;
+    this.size = 0;                              //items.length
+}
+
+
+1. boolean isEmpty() {return size==0;}
+
+2. boolean isFull() {return size == capacity;}
+
+3. E peek() {
+        if (isEmpty(){return null;}
+      return items[front];
+    }
+
+4. void enqueue (E element) {
+        if (isFull()) {return;}
+      rear = (rear + 1) % capacity;
+      items[rear] = element;
+      size++;
+    }
+
+5. void enqueueMany (String elements) {
+      String[] splitElements = elements.split(",");
+      for (String element : splitElements) {
+            enqueue((E)element.trim());
+      }
+    }
+
+6. E dequeue() {
+            if (isEmpty()) {return null;}
+       E element = items[front];
+       front = (front + 1)%capacity; //%items.length
+       size--;
+       return element;
+    }
+
+7. void dequeueAll() {
+        while (!isEmpty()) {dequeue();}
+    }
+
+8. void display() {
+        for (int i = 0; i<size; i++) {
+            System.out.println (items[(front+i)%capacity]);
+        }
+    }
+
+9. void changeOrder (int k) { //ele at k become first
+            if (isEmpty() || k<0 || k>=size) {return;}
+        int count = 0;
+        while (count < k) {
+            T temp = dequeue();
+            enqueue(Temp);
+            count++;
+        }
+    }
+
+10. E getElement (int i) {return items[i];}
+
+11. int getSize() {return size;}
+
+}
+
+# LinkedList
+public class Queue<Item> {
+    private LinkedList<Item> queue;
+
+    public Queue() {queue = new LinkedList<>();}
+
+1. boolean isEmpty() {return queue.isEmpty();}
+
+2. int size() {return queue.size();}
+
+3. Item peek() {
+            if (isEmpty()) {throw new IllegalStateException("");}
+        return queue.peek();}
+   }
+
+4. void enqueue (Item item) {queue.addLast(item);}
+
+5. Item dequeue() {
+            if (isEmpty()) {throw new IllegalStateException("");}
+        return queue.poll(); //return queue.removeFirst();
+    }
+
+6. void changeOrder (int k) {
+        if (k<1 || k>queue.size()) {throw new IllegalArgumentException("");}
+        for (int i=0; i<k-1; i++) {
+            Item item = queue.poll();
+            queue.addLast(item);
+        }
+    }
+
+7. String toString() {return queue.toString;}
+}
+
+##########################################################
+Sorting
+
+
+============================================================
+# Additional
+public static int getNumRepetitions(int[] nums) {
+        int[] sortedNums = Arrays.copyOf(nums, nums.length);
+        sort(sortedNums);
+
+        int numRepetitions = 0;
+        while (!Arrays.equals(nums, sortedNums)) {
+            sort(nums);
+            numRepetitions++;
+        }
+
+        return numRepetitions;
+    }
+
