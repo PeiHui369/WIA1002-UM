@@ -177,6 +177,294 @@ public static int getNumRepetitions(int[] nums) {
             numRepetitions++;
         }
 
+#######################################################3
+Stack
+Sure! Here are the implementations of the 12 stack methods using LinkedList, ArrayList, and Array without using any pre-existing collection classes:
+
+**1. push(char)**
+```java
+// LinkedList
+public void push(char c) {
+    list.add(c);
+}
+
+// ArrayList
+public void push(char c) {
+    array.add(c);
+}
+
+// Array
+public void push(char c) {
+    if (top == array.length - 1) {
+        resizeArray();
+    }
+    array[++top] = c;
+}
+```
+
+**2. pop()**
+```java
+// LinkedList
+public char pop() {
+    if (!list.isEmpty()) {
+        return list.removeLast();
+    } else {
+        return '\0';
+    }
+}
+
+// ArrayList
+public char pop() {
+    if (!array.isEmpty()) {
+        return array.remove(array.size() - 1);
+    } else {
+        return '\0';
+    }
+}
+
+// Array
+public char pop() {
+    if (top >= 0) {
+        return array[top--];
+    } else {
+        return '\0';
+    }
+}
+```
+
+**3. peek()**
+```java
+// LinkedList
+public char peek() {
+    if (!list.isEmpty()) {
+        return list.getLast();
+    } else {
+        return '\0';
+    }
+}
+
+// ArrayList
+public char peek() {
+    if (!array.isEmpty()) {
+        return array.get(array.size() - 1);
+    } else {
+        return '\0';
+    }
+}
+
+// Array
+public char peek() {
+    if (top >= 0) {
+        return array[top];
+    } else {
+        return '\0';
+    }
+}
+```
+
+**4. isStackEmpty()**
+```java
+// LinkedList
+public boolean isStackEmpty() {
+    return list.isEmpty();
+}
+
+// ArrayList
+public boolean isStackEmpty() {
+    return array.isEmpty();
+}
+
+// Array
+public boolean isStackEmpty() {
+    return top == -1;
+}
+```
+
+**5. isStackFull()**
+```java
+// LinkedList (Not applicable as LinkedList doesn't have a fixed capacity)
+
+// ArrayList
+public boolean isStackFull() {
+    return false; // ArrayList can dynamically grow, so it's never full
+}
+
+// Array
+public boolean isStackFull() {
+    return top == array.length - 1;
+}
+```
+
+**6. popAll()**
+```java
+// LinkedList
+public void popAll() {
+    list.clear();
+}
+
+// ArrayList
+public void popAll() {
+    array.clear();
+}
+
+// Array
+public void popAll() {
+    top = -1;
+    array = new char[initialCapacity];
+}
+```
+
+**7. display()**
+```java
+// LinkedList
+public void display() {
+    for (char c : list) {
+        System.out.print(c + " ");
+    }
+    System.out.println();
+}
+
+// ArrayList
+public void display() {
+    for (char c : array) {
+        System.out.print(c + " ");
+    }
+    System.out.println();
+}
+
+// Array
+public void display() {
+    for (int i = 0; i <= top; i++) {
+        System.out.print(array[i] + " ");
+    }
+    System.out.println();
+}
+```
+
+**8. displayInReverse()**
+```java
+// LinkedList
+public void displayInReverse() {
+    ListIterator<Character> iterator = list.listIterator(list.size());
+    while (iterator.hasPrevious()) {
+        System.out.print(iterator.previous() + " ");
+    }
+    System.out.println();
+}
+
+// ArrayList
+public void displayInReverse() {
+    for (int i = array.size() - 1; i >= 0; i--) {
+        System.out.print(array.get(i) + " ");
+    }
+    System.out.println();
+}
+
+// Array
+public void displayInReverse() {
+    for (int i = top; i >= 0; i--) {
+        System.out.print(array[i] + " ");
+    }
+    System.out.println();
+}
+```
+
+**9. pushMany()**
+```java
+// LinkedList
+public void pushMany(char[] elements) {
+    for (char c : elements) {
+        list.add(c);
+    }
+}
+
+// ArrayList
+public void pushMany(char[] elements) {
+    for (char c : elements) {
+        array.add(c);
+    }
+}
+
+// Array
+public void pushMany(char[] elements) {
+    for (char c : elements) {
+        push(c);
+    }
+}
+```
+
+**10. popMiddle()**
+```java
+// LinkedList
+public char popMiddle() {
+    int middleIndex = list.size() / 2;
+    if (list.size() % 2 == 0) {
+        middleIndex--;
+    }
+    return list.remove(middleIndex);
+}
+
+// ArrayList
+public char popMiddle() {
+    int middleIndex = array.size() / 2;
+    if (array.size() % 2 == 0) {
+        middleIndex--;
+    }
+    return array.remove(middleIndex);
+}
+
+// Array
+public char popMiddle() {
+    if (top >= 0) {
+        int middleIndex = top / 2;
+        char middleElement = array[middleIndex];
+        System.arraycopy(array, middleIndex + 1, array, middleIndex, top - middleIndex);
+        top--;
+        return middleElement;
+    } else {
+        return '\0';
+    }
+}
+```
+
+**11. top()**
+```java
+// LinkedList
+public char top() {
+    return peek();
+}
+
+// ArrayList
+public char top() {
+    return peek();
+}
+
+// Array
+public char top() {
+    return peek();
+}
+```
+
+**12. size()**
+```java
+// LinkedList
+public int size() {
+    return list.size();
+}
+
+// ArrayList
+public int size() {
+    return array.size();
+}
+
+// Array
+public int size() {
+    return top + 1;
+}
+```
+
+These implementations provide the desired stack functionality using LinkedList, ArrayList, and Array without using any pre-existing collection classes from Java.
+
         return numRepetitions;
     }
 
