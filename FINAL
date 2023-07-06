@@ -1,6 +1,133 @@
+Recursion
+public class TowerOfHanoi {
+    public static void moveDiscs(int n, String source, String destination, String auxiliary) {
+        if (n == 1) {
+            System.out.println("Move disc 1 from " + source + " to " + destination);
+            return;
+        }
+
+        moveDiscs(n - 1, source, auxiliary, destination);
+        System.out.println("Move disc " + n + " from " + source + " to " + destination);
+        moveDiscs(n - 1, auxiliary, destination, source);
+    }
+
+    public static void main(String[] args) {
+        int numOfDiscs = 3;
+        moveDiscs(numOfDiscs, "Pole 1", "Pole 3", "Pole 2");
+    }
+}
+
+----------------
+public static <T> void reverseStack(Stack<T> stack) {
+        if (!stack.isEmpty()) {
+            T element = stack.pop();
+            reverseStack(stack);
+            insertAtBottom(stack, element);
+        }
+    }
+
+    private static <T> void insertAtBottom(Stack<T> stack, T element) {
+        if (stack.isEmpty()) {
+            stack.push(element);
+        } else {
+            T topElement = stack.pop();
+            insertAtBottom(stack, element);
+            stack.push(topElement);
+        }
+    }
+
+
+######
+
 Stack
 
 # Common Method
+@ Postfix to Infix
+public static boolean isOperator(char c) {
+        return c == '+' || c == '-' || c == '*' || c == '/';
+    }
+
+    public static String postfixToInfix(String postfix) {
+        Stack<String> stack = new Stack<>();
+
+        for (int i = 0; i < postfix.length(); i++) {
+            char c = postfix.charAt(i);
+
+            if (isOperator(c)) {
+                String operand2 = stack.pop();
+                String operand1 = stack.pop();
+                String infix = "(" + operand1 + c + operand2 + ")";
+                stack.push(infix);
+            } else {
+                stack.push(String.valueOf(c));
+            }
+        }
+
+        return stack.pop();
+    }
+
+@ TowerOfHanoi
+package Stack;
+
+import java.util.Scanner;
+import java.util.Stack;
+
+public class TowerOfHanoiUsingStacks {
+    public static int N;
+    public static Stack<Integer>[] tower = new Stack[4];
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        tower[1] = new Stack<Integer>();
+        tower[2] = new Stack<Integer>();
+        tower[3] = new Stack<Integer>();
+        /* Accepting number of disks */
+        System.out.println("Enter number of disks");
+        int num = scan.nextInt();
+        N = num;
+        toh(num);
+    }
+
+    //Recursive function to move disks
+    public static void move (int n, int a, int b, int c) {
+        if (n>0) {
+            move(n-1, a, c, b);
+            int d = tower[a].pop();
+            tower[c].push(d);
+            display();
+            move(n-1, b, a, c);
+        }
+    }
+
+    public static void display(){
+        System.out.println("A|B|C");
+        System.out.println("--------------");
+        for (int i = N-1; i>=0; i--) {
+            String d1 = "", d2 = "", d3 = "";
+
+            try {d1 = String.valueOf(tower[1].get(i));}
+            catch(Exception e){}
+
+            try {d2 = String.valueOf(tower[2].get(i));}
+            catch(Exception e){}
+
+            try {d3 = String.valueOf(tower[3].get(i));}
+            catch(Exception e){}
+
+            System.out.println(" " + d1 + " | " + d2 + " | " + d3);
+        }
+        System.out.println("\n");
+    }
+
+    //Function to push disks into stack
+    public static void toh (int n) {
+        for (int d = n; d > 0; d--) {
+            tower[1].push(d);
+        }
+        display();
+        move(n,1,2,3);
+    }
+}
 
 
 -----------------------
