@@ -1,0 +1,641 @@
+Generics
+
+//T2Q2
+- public static <T> void listAll(T[] arr){}
+arr must be reference type: "Character", cannot primitive "char"
+
+//T2Q5
+private instance variable, public method & constructor
+
+//T2Q7
+If one of the list is Object:
+    public static <T> void allTransportation(ArrayList<T> list1, ArrayList<? super T> list2)
+    or
+    public static <T> void allTransportation(ArrayList<? extends T> list1, ArrayList<T> list)
+
+//T2Q8
+Generic display:
+public static void print(ArrayList<?> list){
+        for (int i = 0; i<list.size(); i++){
+            System.out.println(list.get(i));
+        }
+    }
+
+==============================
+T2Q3
+Raw type: When use generic type without specifying an actual parameter
+- unsafe: some errors cannot be detected by the compiler
+- allowed in Java for backward compatibility
+
+T2Q4
+Erasure:
+Generic type information is used by the compiler to check whether the type is used safely
+Afterwards the type information is erased
+The type information is not available at runtime
+This approach enables the generic code to be backward-compatible with the legacy code that uses raw types
+
+T2Q9
+Compiler encounters generic class, interface, method with an unbound type parameter <T> // <E>
+Replaces all occurrences of type parameter with
+Object
+
+T2Q10
+Compiler encounters bound type parameter such as <T extends Number> or <E extends Comparable>
+Replaces all occurrences of type parameter with
+Bound that is applied to the parameter (e.g. Number, Comparable)
+
+###
+L2Q2
+-generic static method called maximum where generic type extends Comparable interface
+public static <T extends Comparable<T>> T maximum (T x, T y, T z) {
+        T max = x;
+        if (y.compareTo(max) > 0) {max = y;}
+        if (z.compareTo(max) > 0) {max = z;}
+        return max;
+    }
+
+L2Q3
+(b) Implement Comparable interface
+public class StorePairGeneric<E extends Comparable<E>> implements Comparable<StorePairGeneric<E>> {}
+
+@Override
+public boolean equals(Object o){
+            StorePairGeneric<E> other = (StorePairGeneric<E>) o;
+            return this.first.equals(other.first);
+   }
+
+@Override
+    public int compareTo(StorePairGeneric<E> o) {
+        return this.first.compareTo(o.first);
+    }
+
+L2Q4
+public static <E extends Comparable<E>> String minmax(E[] arr){
+        E max = arr[0];
+        E min = max;
+        for (E item: arr){
+            if (item.compareTo(max) > 0) {max = item;}
+            if (item.compareTo(min) < 0) {min = item;}
+        }
+        return "Min = " + min + " Max = " +max;
+    }
+
+Q5 & 6
+
+###
+Graph
+Tutorial
+Adjacency Matrix:
+int[][] matrix = {
+{0,0,1,1},
+{1,0,1,0},
+}
+
+L8Q1
+public boolean addUndirectedEdge (T v1, T v2, N w) {
+    boolean a, b;
+    a = addEdge (v1, v2, w);
+    b = addEdge (v2, v1, w);
+    return (a && b);
+}
+
+L8Q2
+public boolean removeEdge (T source, T destination) {
+    if (!hasEdge(source, destination) {return false;}
+    Vertex <T,N> temp = head;
+
+    while (temp != null) {
+        if (temp.vertexInfo.compareTo(source) == 0) {
+            Edge<T,N> currentEdge = temp.firstEdge;
+
+            if(currentEdge.toVertex.vertexInfo.compareTo(destination) == 0) {
+                temp.firstEdge = currentEdge.nextEdge;
+                currentEdge.nextEdge = null;
+            }
+            else{
+                Edge<T,N> previousEdge = currentEdge;
+                currentEdge = currentEdge.nextEdge;
+
+                while (currentEdge != null) {
+                    if (currentEdge.toVertex.vertexInfo.compareTo(destination) == 0) {
+                        previousEdge.nextEdge = currentEdge.nextEdge;
+                        currentEdge.nextEdge = null;
+                        break;
+                    }
+                    previousEdge = currentEdge;
+                    currentEdge = currentEdge.nextEdge;
+                }
+            }
+            temp.outdeg--;
+            currentEdge.toVertex.indeg--;
+            return true;
+        }
+        temp = temp.nextVertex;
+    }
+    return false
+}
+
+L8Q3
+- Unweighted graphs
+class Graph <T extends Comparable<T>> extends WeightedGraph<T,Integer> {
+    public boolean addEdge (T source, T destination) {
+        return super.addEdge(source, destination, 1);
+    }
+    public boolean addUndirectedEdge (T v1, T v2) {
+        boolean a, b;
+        a = addEdge(v1, v2, 1);
+        b = addEdge(v2, v1, 1);
+        return (a && b);
+    }
+}
+
+L8Q4
+- TestWeightedGraph.java for Unweighted Graphs
+Graph<String> graph1 = new Graph<>();
+System.out.println("add edge Kuching - Melaka: " + graph1.addEdge("Kuching", "Melaka") );
+System.out.println("add undirected edge Langkawi - Melaka: " + graph1.addUndirectedEdge("Langkawi", "Melaka") );
+
+###
+Queue
+Question3 Queue
+[1] Main
+[2] Main2, Simulator, Stock, StockQueue
+
+//Study MyQueue.java(using linked list) & Palindrome.java
+
+@ Priority Queue
+PriorityQueue<Integer> pq = new PriorityQueue<>(Arrays.asList(arr));
+1. Union
+PriorityQueue<String> union = new PriorityQueue<>(pq1);
+union.addAll(pq2);
+
+2. Difference
+PriorityQueue<String> difference = new PriorityQueue<>(pq1);
+difference.removeAll(pq2);
+
+3. Intersection
+PriorityQueue<String>intersection = new PriorityQueue<>(pq1);
+intersection.retainAll(pq2);
+
+- From main write ComparableBook class
+class ComparableBook implements Comparable<ComparableBook> {
+
+    private int id;
+    private String bookName;
+
+    // Constructor
+    public ComparableBook(int id, String bookName) {
+        this.id = id;
+        this.bookName = bookName;
+    }
+
+    // Methods
+    @Override
+    public String toString() {
+        return String.format("(%d) %s", this.id, this.bookName);
+    }
+    @Override
+    public int compareTo(ComparableBook cBook) {
+        return this.id - cBook.id;
+    }
+}
+
+@ ScoreRank
+import java.util.PriorityQueue;
+
+class ScoreRanker {
+
+    public String[] findRelativeRanks(int[] score) {
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> score[b] - score[a]);
+        String[] output = new String[score.length];
+        int rank = 1;
+
+        // Add index
+        for (int i = 0; i < score.length; i++) {
+            pq.add(i);
+        }
+
+        while (!pq.isEmpty()) {
+
+            int i = pq.poll();
+
+            if (rank == 1) {
+                output[i] = "Gold Medal";
+            } else if (rank == 2) {
+                output[i] = "Silver Medal";
+            } else if (rank == 3) {
+                output[i] = "Bronze Medal";
+            } else {
+                output[i] = String.valueOf(rank);
+            }
+
+            rank++;
+        }
+
+        return output;
+    }
+
+    public static void main(String[] args) {
+
+        int[] score = {5, 2, 3, 10, 7, 1};
+        String[] result = new ScoreRanker().findRelativeRanks(score);
+
+        for (String s : result) {
+            System.out.print(s + " ");
+        }
+    }
+}
+
+-----------------------------------------
+Certainly! Here's the Java code defining the `addAll`, `removeAll`, and `retainAll` methods:
+
+1. `addAll` method:
+```java
+public <E> boolean addAll(Collection<? extends E> c) {
+    boolean modified = false;
+    for (E e : c) {
+        if (add(e)) {
+            modified = true;
+        }
+    }
+    return modified;
+}
+```
+
+2. `removeAll` method:
+```java
+public boolean removeAll(Collection<?> c) {
+    boolean modified = false;
+    Iterator<?> iterator = iterator();
+    while (iterator.hasNext()) {
+        if (c.contains(iterator.next())) {
+            iterator.remove();
+            modified = true;
+        }
+    }
+    return modified;
+}
+```
+
+3. `retainAll` method:
+```java
+public boolean retainAll(Collection<?> c) {
+    boolean modified = false;
+    Iterator<E> iterator = iterator();
+    while (iterator.hasNext()) {
+        if (!c.contains(iterator.next())) {
+            iterator.remove();
+            modified = true;
+        }
+    }
+    return modified;
+}
+```
+
+These methods are defined within the `PriorityQueue` class and are responsible for adding all elements from a collection (`addAll`), removing all elements that exist in another collection (`removeAll`), and retaining only the elements that exist in another collection (`retainAll`).
+
+Note: The code provided is a simplified version for illustration purposes. The actual implementation in the Java library may have additional optimizations and error handling.
+
+-----------------------------------------------------------------
+The lambda expression `(a, b) -> score[b] - score[a]` is used as a comparator to define the ordering of elements in the `PriorityQueue`. It specifies how to compare two indices `a` and `b` based on the corresponding scores in the `score` array.
+
+Let's break down how this lambda expression works:
+
+1. `(a, b)` indicates the two elements to be compared. In this case, `a` and `b` represent the indices of the scores in the `score` array.
+
+2. `score[b] - score[a]` is the comparison logic. It subtracts the score at index `a` from the score at index `b`.
+
+   - If `score[b]` is greater than `score[a]`, the result will be positive, indicating that `b` has a higher score and should be placed before `a` in the priority queue.
+
+   - If `score[b]` is less than `score[a]`, the result will be negative, indicating that `a` has a higher score and should be placed before `b` in the priority queue.
+
+   - If `score[b]` is equal to `score[a]`, the result will be zero, indicating that `a` and `b` have the same score. In such cases, the order of the indices doesn't matter.
+
+By using this lambda expression as the comparator for the `PriorityQueue`, the indices are sorted in descending order based on the corresponding scores. As a result, when elements are polled from the priority queue, the indices with higher scores are retrieved first.
+
+This allows the `findRelativeRanks` method to assign the appropriate ranks to the scores by iterating through the sorted indices.
+###
+Recursion
+
+package Recursion;
+//Lab & Tutorial
+public class Recursion {
+    /**substitute "a" with "i"**/
+    public static String substituteAI (String str) {
+        //Base Case:
+        if(str.length() == 0) {
+            return str;
+            //Recursive Case:
+        }else if(str.charAt(0) == ('a')) {
+            return 'i' + substituteAI(str.substring(1));
+        }else{
+            return str.charAt(0) + substituteAI(str.substring(1));
+        }
+    }
+
+    /**String permutation**/
+    public static void permuteString (String beginningString, String endingString) {
+        if (endingString.length() <= 1) {
+            System.out.println(beginningString + endingString);
+        }else{
+            for (int i=0; i<endingString.length(); i++) {
+                String newString = endingString.substring(0,i) + endingString.substring(i + 1);
+                permuteString(beginningString + endingString.charAt(i), newString);
+            }
+        }
+    }
+
+    /**Exponent**/
+    public static long exponent (int x, int m) {
+        if (m==0) {return 1;}
+        if (m==1) {return x;}
+        return x * exponent(x ,m-1);
+    }
+
+    /**Recurrence relation: F(s,t) = F(s−1 ,t) + F(s,t−1)**/
+    public static long F(int s, int t) {
+        if (t == 1) {return s;}
+        else if (s ==1) {return 1;}
+        else {return F(s-1,t) + F(s,t-1);}
+    }
+
+    /**Binomial Expansion**/
+    // (x+y)^3 = 1x^3y^0 + 3x^2y^1 + 3x^1y^2 + 1x^0y^3.
+    public static int binomial (int n, int k) {
+        if (k==n || k==0) {return 1;}
+        else {return binomial(n-1, k-1) + binomial(n-1, k);}
+    }
+
+    /**Tower of Hanoi**/
+    public static int TOH(int n) {
+        if (n==1) {return 1;}
+        else {return 2 * TOH(n-1) +1;}
+    }
+
+    public static void towerOfHanoi(int n, String source, String destination, String auxiliary) {
+        if (n == 1) {
+            System.out.println("Move disc 1 from " + source + " to " + destination);
+            return;
+        }
+
+        towerOfHanoi(n - 1, source, auxiliary, destination);
+        System.out.println("Move disc " + n + " from " + source + " to " + destination);
+        towerOfHanoi(n - 1, auxiliary, destination, source);
+    }
+    /*
+    Consider the case of 3 discs (i.e., disc #1 -green, #2 -blue and #3 -red). Figure 2 illustrates the
+    steps needed to move all 3 discs from peg A to peg C. The steps performed are as follows:
+Step 1: Move disc #1 to Peg C
+Step 2: Move disc #2 to Peg B
+Step 3: Move disc #1 (from Peg C) to Peg B
+Step 4: Move disc #3 (from Peg A) to Peg C
+Step 5: Move disc #1 (from Peg B) to Peg A
+Step 6: Move disc #2 (from Peg B) to Peg C
+Step 7: Move disc #1 (from Peg A) to Peg C
+    Note that there are exactly 7 steps to move all 3 discs from Peg A to Peg B. Let n denote the
+    number of discs, and T (n ) be the number of steps required. Then, T (n )=7 when n=3.
+
+(a) Write a recurrence relation (i.e., mathematical expression) governing the number of steps
+involved in moving all n discs from one peg to another (say from Peg A to Peg C). Print your answer to the screen.
+T (n)= 2 × T(n−1)+1
+--
+The base case is when n = 1. In this case, we need 1 step to move the only disc from one peg to another.
+For n discs, the first step is to move n - 1 discs from Peg A to Peg B, using T(n - 1) steps.
+Then, we move the largest disc (disc #n) from Peg A to Peg C, requiring 1 additional step.
+Finally, we move the n - 1 discs from Peg B to Peg C, again using T(n - 1) steps.
+Therefore, the total number of steps required is 2 * T(n - 1) + 1.
+--
+
+(b) Write a recursive method that computes the number of steps T (n) required in moving all
+n discs from one peg to another (say from Peg A to Peg C). The value n should be input
+by the user (i.e., not hard coded). Note that you are NOT required to list the actual steps,
+but just return the value T (n ).
+     */
+
+    public static String reverse(String str) {
+        if ((null==str) || (str.length() <=1)) {return str;}
+        return reverse (str.substring(1)) + str.charAt(0);
+    }
+
+    public int sum (int num) {
+        int result;
+        if (num == 1) {result = 1;}
+        else { result = num + sum(num-1);}
+        return result;
+    }
+
+    public void printDigit(int n) {
+        if (n>10) {
+            printDigit(n/10);
+            System.out.print(n%10 + " ");
+        }else{
+            System.out.print(n%10 + " ");
+        }
+    }
+}
+
+###
+Stack
+
+- Finding factorial
+- Tower of Hanoi
+- Infix to Postfix
+
+L6Q1: MyStack.java (using ArrayList)
+
+L6Q3
+- An unknown no. of +ve integers stored in a stack S
+- using only stack ADT operations
+=> Find Sum of Every Element in S
+public static int sum(Stack<Integer> stack) {
+		int sum = 0;
+		while(!stack.isEmpty())
+			sum += stack.pop();
+		return sum;
+}
+1. Assuming that stack, s alreading has some values
+2. Access stack, s, by using while loop until stack is empty
+a. While stack is not empty, pop all values
+b. Declare integer variable
+c. Sum all values in (b)
+3. Display the final sum value
+
+-------------------------------------------------
+L6Q4
+- Palindrome string: spells same way forwards & backwards
+- Determine if string is palindrome
+- Max size: 15 chars
+1. Create a Stack class -consists of all standard stack methods
+2. In main class,
+    a. Create a stack object
+    b. Ask user to input max 15 characters
+    c. If input length is more than 15 characters, repeat asking user to enter another input/ stop program/ give error message
+       Otherwise push into stack object created in (a)
+    d. Create an empty string
+    e. Pop all values from the stack and keep all of them in (d)
+    f. Compare (e) with user input values
+    g. If same, input is palindrome
+    h. If not same, input is not palindrome
+
+public static boolean isPalindromicString(String str) {
+		// Time complexity: O(n)
+		Stack<Character> stack = new Stack<>();
+		int mid = str.length() >> 1; // Similar to str.length() / 2;
+
+		// Put the first half of the string into the stack
+		for(int i = 0; i < mid; i++) {
+			stack.push(str.charAt(i));
+		}
+
+		for(int i = mid + (mid & 1); i < str.length(); i++) {
+			// mid & 1 is similar to mid % 1
+			// Compare the second half of the string with stack
+			if(!(str.charAt(i) == stack.pop()))
+				return false;
+		}
+		return true;
+	}
+
+-------------------------------------------
+L6Q5: TOWER OF HANOI
+public static Stack<Integer>[] tower = new Stack[(StraightNeeded-1)]l
+tower[1] = new Stack<Integer>();
+N = num;
+toh (num);
+num: number of disks
+
+//PUSH***
+public static void toh(int n)
+ {
+ for (int d = n; d > 0; d‐‐)
+ tower[1].push(d);
+ display();
+ move(n, 1, 2, 3);
+ }
+
+ //MOVE
+ public static void move(int n, int a, int b, int c)
+  {
+  if (n > 0)
+  {
+  move(n‐1, a, c, b);
+  int d = tower[a].pop();
+  tower[c].push(d);
+  display();
+  move(n‐1, b, a, c);
+  }
+}
+
+//DISPLAY
+try{d1=String.valueOf(tower[1].get(i));}catch(Exception e) {}
+System.out.println(" A | B | C");
+System.out.println("‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐");
+System.out.println(" "+d1+" | "+d2+" | "+d3);
+
+
+-------------
+Without recursion
+public static void moveDisks() {
+        int totalMoves = (int) Math.pow(2, num) - 1; // Total number of moves required
+
+        int source = 0; // Source tower index
+        int auxiliary = 1; // Auxiliary tower index
+        int destination = 2; // Destination tower index
+
+        // Perform iterative tower of Hanoi algorithm
+        for (int i = 1; i <= totalMoves; i++) {
+            if (i % 3 == 1) {
+                moveDisk(source, destination);
+            } else if (i % 3 == 2) {
+                moveDisk(source, auxiliary);
+            } else {
+                moveDisk(auxiliary, destination);
+            }
+            display();
+        }
+    }
+
+    public static void moveDisk(int source, int destination) {
+        int disk = tower[source].pop();
+        tower[destination].push(disk);
+    }
+
+============================
+Complete Tower Of Hanoi using Stack without Recursion
+import java.util.Stack;
+
+public class TowerOfHanoi {
+    public static Stack<Integer>[] tower;
+    public static int num;
+
+    public static void main(String[] args) {
+        num = 3; // Number of disks
+
+        tower = new Stack[num];
+        for (int i = 0; i < num; i++) {
+            tower[i] = new Stack<>();
+        }
+
+        // Initialize the source tower with disks
+        for (int d = num; d > 0; d--) {
+            tower[0].push(d);
+        }
+
+        display();
+        moveDisks();
+    }
+
+    public static void moveDisks() {
+        int totalMoves = (int) Math.pow(2, num) - 1; // Total number of moves required
+
+        int source = 0; // Source tower index
+        int auxiliary = 1; // Auxiliary tower index
+        int destination = 2; // Destination tower index
+
+        // Perform iterative tower of Hanoi algorithm
+        for (int i = 1; i <= totalMoves; i++) {
+            if (i % 3 == 1) {
+                moveDisk(source, destination);
+            } else if (i % 3 == 2) {
+                moveDisk(source, auxiliary);
+            } else {
+                moveDisk(auxiliary, destination);
+            }
+            display();
+        }
+    }
+
+    public static void moveDisk(int source, int destination) {
+        int disk = tower[source].pop();
+        tower[destination].push(disk);
+    }
+
+    public static void display() {
+        String d1 = "", d2 = "", d3 = "";
+
+        for (int i = num - 1; i >= 0; i--) {
+            try {
+                d1 = String.valueOf(tower[0].get(i));
+            } catch (Exception e) {
+                d1 = " ";
+            }
+            try {
+                d2 = String.valueOf(tower[1].get(i));
+            } catch (Exception e) {
+                d2 = " ";
+            }
+            try {
+                d3 = String.valueOf(tower[2].get(i));
+            } catch (Exception e) {
+                d3 = " ";
+            }
+            System.out.println(" A | B | C");
+            System.out.println("‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐");
+            System.out.println(" " + d1 + " | " + d2 + " | " + d3);
+            System.out.println();
+        }
+    }
+}
+
+
