@@ -1,0 +1,41 @@
+sequence :
+45 -> 66 -> 82 -> 80
+45 -> 27 -> 39 -> 30 -> 28 
+45 -> 27 -> 39 -> 30 -> 33
+45 -> 27 -> 39 -> 42 -> 41
+45 ->27 -> 13 -> 25 -> 18
+        45
+       /  \
+      27   66
+     /   \    \
+    13   39   82
+   /    /   \   \
+  25   30    42  80
+ /    /   \   \
+18   28   33   41
+
+
+Write the sequence of the nodes if the tree is traversed with:
+inorder traversal
+postorder traversal
+Redraw the tree if nodes 66 and 27 are deleted.
+=======================================================================================================
+The sequence of nodes when the tree is traversed with different traversal methods and the redrawn tree after deleting nodes 66 and 27 are as follows:
+
+Inorder Traversal: 13 -> 25 -> 18 -> 28 -> 30 -> 27 -> 39 -> 33 -> 41 -> 42 -> 45 -> 66 -> 80 -> 82
+Postorder Traversal: 18 -> 28 -> 25 -> 30 -> 33 -> 41 -> 42 -> 39 -> 27 -> 66 -> 82 -> 80 -> 45 -> 13
+
+Redrawn Tree after deleting nodes 66 and 27:
+```
+        45
+       /  \
+      28   82
+     /   \    \
+    13   39   80
+   /    /   \     
+  25   30    42  
+ /            \
+18            41
+```
+
+I hope this provides the information you were looking for. Let me know if you have any further questions!
