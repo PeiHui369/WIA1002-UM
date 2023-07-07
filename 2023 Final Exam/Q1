@@ -1,3 +1,6 @@
+Based on the Java library java.util.LinkedList, develop ExamStack, a generic stack class. This class should have 4 methods only, i.e. peep, pop, push and getSize
+-------------------------------
+
 import java.util.LinkedList;
 
 public class ExamStack<E> {
