@@ -1,0 +1,25 @@
+import java.util.LinkedList;
+
+public class ExamStack<E> {
+    private LinkedList<E> stack;
+
+    public ExamStack() {
+        stack = new LinkedList<>();
+    }
+
+    public void push(E item) {
+        stack.addFirst(item);
+    }
+
+    public E pop() {
+        return stack.removeFirst();
+    }
+
+    public E peek() {
+        return stack.peekFirst();
+    }
+
+    public int getSize() {
+        return stack.size();
+    }
+}
