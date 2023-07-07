@@ -1,0 +1,99 @@
+Arithmetic is an elementary study in mathematics which involves operands and operators. Fundamental operations involving addition, subtraction, multiplication and division are taught in primary education to ensure students build a strong foundation for other topics in mathematics. To assist students in primary education, you are asked by their teachers to write a program that reads arithmetic expressions from user inputs and produces answers immediately. You are required to use only the ExamStack class developed in Question 1 to solve this problem, and no other data structures are allowed.
+You are also required to evaluate the expressions as given, do not convert them to Polish Notations, Reverse Polish Notations or other forms for evaluations. Since the program is developed for primary education, you only need to evaluate addition, subtraction, multiplication, division and braces. Furthermore, all the operands are single digit positive integers but the output can be real numbers. You can assume the inputs from the users are always valid arithmetic expressions, and users will not provide expressions that involve division by 0.
+
+Sample input and output:
+Enter expression to evaluate: 5-3+4 5-3+4 = 6.0
+
+===============================================
+import java.util.Scanner;
+
+public class ArithmeticEvaluator {
+    private static ExamStack<Double> operandStack;
+    private static ExamStack<Character> operatorStack;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter expression to evaluate: ");
+        String expression = scanner.nextLine();
+
+        double result = evaluateExpression(expression);
+        System.out.println(expression + " = " + result);
+
+        scanner.close();
+    }
+
+    public static double evaluateExpression(String expression) {
+        operandStack = new ExamStack<>();
+        operatorStack = new ExamStack<>();
+
+        for (int i = 0; i < expression.length(); i++) {
+            char ch = expression.charAt(i);
+
+            if (Character.isDigit(ch)) {
+                double operand = parseOperand(expression, i);
+                operandStack.push(operand);
+            } else if (ch == '+' || ch == '-' || ch == '*' || ch == '/') {
+                while (!operatorStack.isEmpty() && hasPrecedence(ch, operatorStack.peek())) {
+                    performOperation();
+                }
+                operatorStack.push(ch);
+            } else if (ch == '(') {
+                operatorStack.push(ch);
+            } else if (ch == ')') {
+                while (!operatorStack.isEmpty() && operatorStack.peek() != '(') {
+                    performOperation();
+                }
+                operatorStack.pop(); // Discard the '('
+            }
+        }
+
+        while (!operatorStack.isEmpty()) {
+            performOperation();
+        }
+
+        return operandStack.pop();
+    }
+
+    private static double parseOperand(String expression, int index) {
+        StringBuilder operandBuilder = new StringBuilder();
+        while (index < expression.length() && Character.isDigit(expression.charAt(index))) {
+            operandBuilder.append(expression.charAt(index));
+            index++;
+        }
+        return Double.parseDouble(operandBuilder.toString());
+    }
+
+    private static boolean hasPrecedence(char op1, char op2) {
+        if (op2 == '(' || op2 == ')') {
+            return false;
+        }
+        return (op1 != '*' && op1 != '/') || (op2 != '+' && op2 != '-');
+    }
+
+    private static void performOperation() {
+        double operand2 = operandStack.pop();
+        double operand1 = operandStack.pop();
+        char operator = operatorStack.pop();
+
+        double result;
+        switch (operator) {
+            case '+':
+                result = operand1 + operand2;
+                break;
+            case '-':
+                result = operand1 - operand2;
+                break;
+            case '*':
+                result = operand1 * operand2;
+                break;
+            case '/':
+                result = operand1 / operand2;
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid operator: " + operator);
+        }
+
+        operandStack.push(result);
+    }
+}
